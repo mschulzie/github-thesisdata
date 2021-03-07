@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 21.1) (preloaded format=pdflatex 2021.2.5)  7 MAR 2021 15:05
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 21.1) (preloaded format=pdflatex 2021.2.5)  7 MAR 2021 18:40
 entering extended mode
 **./Thesis.tex
 (Thesis.tex
@@ -1459,7 +1459,7 @@ Overfull \hbox (8.93951pt too wide) in paragraph at lines 95--96
 
 [3] [4 <./bilder/Stoll2020/antarctic_iron_global_co2.png (PNG copy)>] [5]
 LaTeX Font Info:    Trying to load font information for OT1+lmtt on input line 
-125.
+126.
 
 ("C:\Program Files\MiKTeX\tex/latex/lm\ot1lmtt.fd"
 File: ot1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
@@ -1481,7 +1481,7 @@ Package logreq Info: Writing requests to 'Thesis.run.xml'.
  ) 
 Here is how much of TeX's memory you used:
  30333 strings out of 479618
- 578992 string characters out of 2874863
+ 579172 string characters out of 2874863
  1548747 words of memory out of 3000000
  46939 multiletter control sequences out of 15000+200000
  457421 words of font info for 59 fonts, out of 3000000 for 9000
@@ -1500,7 +1500,7 @@ public/lm/lmr17.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C:
 m/lmss17.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmssbx10.pfb><C:/Pr
 ogram Files/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Program Files/MiKTeX/fo
 nts/type1/public/lm/lmtt12.pfb>
-Output written on Thesis.pdf (7 pages, 602736 bytes).
+Output written on Thesis.pdf (7 pages, 602788 bytes).
 PDF statistics:
  264 PDF objects out of 1000 (max. 8388607)
  46 named destinations out of 1000 (max. 500000)

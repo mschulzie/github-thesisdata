@@ -5,3 +5,14 @@ Thesis/Thesis.log
 Thesis/Thesis.log
 Thesis/Thesis.pdf
 Thesis/Thesis.synctex.gz
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.lof
+*.log
+*.lot
+*.out
+*.xml
+*.gz
+*.toc

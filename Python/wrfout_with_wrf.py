@@ -7,23 +7,17 @@ from cartopy.feature import NaturalEarthFeature
 from wrf import (to_np, getvar, smooth2d, get_cartopy, cartopy_xlim,
                  cartopy_ylim, latlon_coords)
 
-# Open the NetCDF file
-ncfile = Dataset("wrfout_d01_2016-10-07_00_00_00")
+ncfile = Dataset("D://thesisdata/wrf_dust/neu Sven/wrfout_d01_2009-09-18_00_00_00")
+varname = "WETDEP_ACC_1"
+i = 40
+#for i in range(ncfile.dimensions['Time'].size):
 
-# Get the sea level pressure
-slp = getvar(ncfile, "slp")
-
-# Smooth the sea level pressure since it tends to be noisy near the
-# mountains
-smooth_slp = smooth2d(slp, 3, cenweight=4)
-
-# Get the latitude and longitude points
-lats, lons = latlon_coords(slp)
+var = getvar(ncfile,varname, timeidx=i)
+lats, lons = latlon_coords(var)
 
 # Get the cartopy mapping object
-cart_proj = get_cartopy(slp)
+cart_proj = get_cartopy(var)
 
-# Create a figure
 fig = plt.figure(figsize=(12,6))
 # Set the GeoAxes to the projection used by WRF
 ax = plt.axes(projection=cart_proj)
@@ -37,26 +31,23 @@ ax.coastlines('50m', linewidth=0.8)
 
 # Make the contour outlines and filled contours for the smoothed sea level
 # pressure.
-plt.contour(to_np(lons), to_np(lats), to_np(smooth_slp), 10, colors="black",
-            transform=crs.PlateCarree())
-plt.contourf(to_np(lons), to_np(lats), to_np(smooth_slp), 10,
+plt.contourf(to_np(lons), to_np(lats), to_np(var),
              transform=crs.PlateCarree(),
-             cmap=get_cmap("jet"))
-
+             cmap=get_cmap("viridis"))
 # Add a color bar
-plt.colorbar(ax=ax, shrink=.98)
+plt.colorbar(ax=ax, shrink=.98, label=(var.description+' in '+var.units))
 
 # Set the map bounds
-ax.set_xlim(cartopy_xlim(smooth_slp))
-ax.set_ylim(cartopy_ylim(smooth_slp))
+ax.set_xlim(cartopy_xlim(var))
+ax.set_ylim(cartopy_ylim(var))
 
 # Add the gridlines
 ax.gridlines(color="black", linestyle="dotted")
 
-plt.title("TITEL")
+plt.title(str(var.coords['Time'].values)[:13])
 
 fig.savefig(
-            'C://Users/mschu/Documents/Studium/Bachelorarbeit/Python/pics/'
-            +str(dt.time.values)[:10]+'.png', dpi = 500
+            'D://thesisdata/bilder/Python/wrfout/'+varname+'/'
+            +str(var.coords['Time'].values)[:13]+'.png', dpi = 300
             )
 plt.show()

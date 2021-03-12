@@ -5,13 +5,14 @@ import cartopy.crs as crs
 from cartopy.feature import NaturalEarthFeature
 import numpy as np
 import xarray as xr
+import xtime
 
 from wrf import (to_np, getvar, smooth2d, get_cartopy, cartopy_xlim,
                  cartopy_ylim, latlon_coords, extract_vars)
 
 # Extract names of variables
 ds = xr.open_dataset("D://thesisdata/wrf_dust/neu Sven/wrfout_d01_2009-09-18_00_00_00")
-ds.data_vars
+slp = ds.DUSTLOAD_ACC_1
 # f = open('varnames_wrfout.txt','w+')
 # f.write('Insgesamt ' + str(len(ds.data_vars)) + ' Variablen: \n')
 # for line in ds.data_vars:
@@ -26,15 +27,14 @@ ds.data_vars
 #                 )
 # f.close()
 
-ncfile = Dataset("D://thesisdata/wrf_dust/neu Sven/wrfout_d01_2009-09-18_00_00_00")
+#ncfile = Dataset("D://thesisdata/wrf_dust/neu Sven/wrfout_d01_2009-09-18_00_00_00")
 
 # Get the sea level pressure
-slp = getvar(ncfile, "DUSTLOAD_ACC_5")
-slp.shape
-slp.coords
-slp.shape
-slp.dims
-slp.max()
+#slp = getvar(ncfile, "DUSTLOAD_ACC_1")
+#slp.coords
+#slp.shape
+#slp.dims
+#slp.min()
 
 # Smooth the sea level pressure since it tends to be noisy near the
 # mountains
@@ -46,7 +46,7 @@ cart_proj = get_cartopy(slp)
 # Create a figure
 fig = plt.figure(figsize=(12,6))
 # Set the GeoAxes to the projection used by WRF
-ax = plt.axes(projection=cart_proj)
+ax = plt.axes(projection=crs.PlateCarree(central_longitude=180.0))
 
 # Download and add the states and coastlines
 states = NaturalEarthFeature(category="cultural", scale="50m",

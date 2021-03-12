@@ -10,7 +10,8 @@ from wrf import (to_np, getvar, smooth2d, get_cartopy, cartopy_xlim,
                  cartopy_ylim, latlon_coords, extract_vars)
 
 # Extract names of variables
-# ds = xr.open_dataset("D://thesisdata/wrfout_d01_2009-09-18_00_00_00")
+ds = xr.open_dataset("D://thesisdata/wrf_dust/neu Sven/wrfout_d01_2009-09-18_00_00_00")
+ds.data_vars
 # f = open('varnames_wrfout.txt','w+')
 # f.write('Insgesamt ' + str(len(ds.data_vars)) + ' Variablen: \n')
 # for line in ds.data_vars:
@@ -25,9 +26,11 @@ from wrf import (to_np, getvar, smooth2d, get_cartopy, cartopy_xlim,
 #                 )
 # f.close()
 
-ncfile = Dataset("D://thesisdata/wrfout_d01_2009-09-18_00_00_00")
+ncfile = Dataset("D://thesisdata/wrf_dust/neu Sven/wrfout_d01_2009-09-18_00_00_00")
+
 # Get the sea level pressure
-slp = getvar(ncfile, "DUST_1")
+slp = getvar(ncfile, "DUSTLOAD_ACC_5")
+slp.shape
 slp.coords
 slp.shape
 slp.dims

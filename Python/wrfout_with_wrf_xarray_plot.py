@@ -14,19 +14,20 @@ ncfile = Dataset("D://thesisdata/wrf_dust/neu Sven/wrfout_d01_2009-09-18_00_00_0
 varname = "DUST_SOILFEDRYDEP_ACC_1"
 var = getvar(ncfile,varname,timeidx=ALL_TIMES)
 var = var.rename({"west_east": "lon", "south_north": "lat", "Time":"time"})
-
-
-#for i in range(ncfile.dimensions['Time'].size): # dann plt.show() rausnehmen
-
+cart_proj = get_cartopy(var)
 
 fig = plt.figure(dpi=200)
-ax1 = fig.add_subplot(1,1,1)
-im = var.plot(ax=ax1, cmap='viridis')
+ax = fig.add_subplot(1,1,1, projection=cart_proj)
+ax.coastlines(lw=.5, zorder=5)
+ax.add_feature(cfeature.BORDERS, lw=.5, zorder=4)
+ax.add_feature(cfeature.LAND, fc='lightgrey', zorder=3)
+im = var.sel(time='2009-09-19T00').plot(ax=ax, cmap='viridis',
+            transform=ccrs.PlateCarree())
 
-fig.savefig(
-            'D://thesisdata/bilder/Python/wrfout/'+varname+'/'
-            +str(var.coords['Time'].values)[:13]+'.png', dpi = 300
-            )
+# fig.savefig(
+#             'D://thesisdata/bilder/Python/wrfout/'+varname+'/'
+#             +str(var.coords['Time'].values)[:13]+'.png', dpi = 300
+#             )
 plt.show()
 plt.close()
 

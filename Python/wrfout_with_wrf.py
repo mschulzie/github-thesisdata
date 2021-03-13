@@ -11,6 +11,7 @@ from wrf import (to_np, getvar, get_cartopy, cartopy_xlim,
 ncfile = Dataset("D://thesisdata/wrf_dust/neu Sven/wrfout_d01_2009-09-18_00_00_00")
 varname = "DUST_SOILFEDRYDEP_ACC_1"
 
+var.coords
 
 #i = 40
 for i in range(ncfile.dimensions['Time'].size): # dann plt.show() rausnehmen

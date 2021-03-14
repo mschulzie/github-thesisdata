@@ -27,20 +27,14 @@ sns.set(
 		,'text.usetex':False
 		}
         )
-
 os.chdir("D://thesisdata/plankton/cds_daily_satellite-ocean-colour_2009/")
 os.getcwd()
 ds = xr.open_mfdataset('*.nc')
-x = ds.data_vars['chlor_a']
-x
 ds = ds.assign_coords(lon=(ds.lon % 360)).roll(lon=(ds.dims['lon'] // 2), roll_coords=True)
 ds = ds.chlor_a
 ds = ds.sel(lon=slice(110.3,189.7),lat=slice(-9.89,-57.06))
-
 extent = [ds.lon.min(),ds.lon.max(),ds.lat.max(),ds.lat.min()]
-
 sns.set_context('paper')
-
 #%%
 #for i in range(1,32):
 i = '01' # Tag im Monat

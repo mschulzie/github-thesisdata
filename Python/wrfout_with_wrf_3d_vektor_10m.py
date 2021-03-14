@@ -7,22 +7,6 @@ import cartopy.feature as cfeature
 import wrf
 
 ncfile = Dataset("D://thesisdata/wrf_dust/neu Sven/wrfout_d01_2009-09-18_00_00_00")
-# DAS HIER NUR AKTIVIEREN WENN WENN AUF BESTIMMTEN PLEVEL GEWÜNSCHT!
-# plevel = 950. # max 31
-# u_raw = wrf.getvar(ncfile,"ua",units="kt", timeidx=wrf.ALL_TIMES)
-# v_raw = wrf.getvar(ncfile,"va",units="kt", timeidx=wrf.ALL_TIMES)
-# wspd_raw = wrf.getvar(ncfile,"wspd_wdir",units="kts", timeidx=wrf.ALL_TIMES)[0,:]
-# p = wrf.getvar(ncfile,"pressure",timeidx=wrf.ALL_TIMES)
-#
-# #Computes the variables value at pressure level (interpolation):
-# u = wrf.interplevel(u_raw, p, plevel).isel(west_east=slice(0,143))
-# v = wrf.interplevel(v_raw, p, plevel).isel(west_east=slice(0,143))
-# wspd = wrf.interplevel(wspd_raw, p, plevel).isel(west_east=slice(0,143))
-
-
-
-#%%
-#FALLS NUR WIND IN 10m Höhe gewünscht
 uv = wrf.getvar(ncfile,"uvmet10",units="kt",timeidx=wrf.ALL_TIMES).isel(
                 west_east=slice(0,143))
 

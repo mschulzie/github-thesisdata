@@ -6,7 +6,7 @@ import numpy as np
 import cartopy.feature as cfeature
 import wrf
 import xarray as xr
-ncfile = Dataset("D://thesisdata/wrf_dust/neu Sven/wrfout_d01_2009-09-18_00_00_00")
+ncfile = Dataset("D://thesisdata/wrf_dust/wrfout_d01_2009-09-18_00_00_00")
 varname = "DUST_ACC_"
 binmax = 5
 vars = [None]*binmax
@@ -25,7 +25,7 @@ var = var.sum(axis=1)
 var = var.where(var>var.mean())
 #%%
 
-zeitpunkt = '2009-09-22T18'
+zeitpunkt = '2009-09-24T00'
 
 #for zeitpunkt in var.coords['Time'].values: # dann plt.show() rausnehmen
 

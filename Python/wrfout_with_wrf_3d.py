@@ -7,8 +7,10 @@ import cartopy.feature as cfeature
 
 from wrf import (to_np, getvar, get_cartopy, cartopy_xlim,
                  cartopy_ylim, latlon_coords, ALL_TIMES)
+import wrf
 
 ncfile = Dataset("D://thesisdata/wrf_dust/neu Sven/wrfout_d01_2009-09-18_00_00_00")
+
 varname = "DUSTLOAD_ACC_1"
 var = getvar(ncfile,varname, timeidx=ALL_TIMES)
 lats, lons = latlon_coords(var)

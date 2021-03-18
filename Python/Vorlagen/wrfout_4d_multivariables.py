@@ -7,7 +7,7 @@ import cartopy.feature as cfeature
 import wrf
 import xarray as xr
 ncfile = Dataset("D://thesisdata/wrf_dust/wrfout_d01_2009-09-18_00_00_00")
-varname = "DUSTLOAD_ACC_"
+varname = "DUST_ACC_"
 binmax = 5
 vars = [None]*binmax
 
@@ -20,6 +20,9 @@ cart_proj = wrf.get_cartopy(vars[0])
 
 var = vars[0]+vars[1]+vars[2]+vars[3]+vars[4]
 levels = np.linspace(1000,1e6,101).tolist()
+
+# Select height-level (or put together or interpolate):
+var = var[:,0,...]
 
 #%%
 
@@ -51,9 +54,6 @@ for zeitpunkt in var.coords['Time'].values: # dann plt.show() rausnehmen
         crs=crs.PlateCarree(), draw_labels=True,
         linewidth=1, color='gray', linestyle='dotted',
         xlocs=[120,135,150,165,180],zorder=6)
-
-
-
     gl.top_labels = False
     gl.right_labels = False
 

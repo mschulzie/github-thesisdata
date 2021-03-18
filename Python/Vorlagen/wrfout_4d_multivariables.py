@@ -6,7 +6,10 @@ import numpy as np
 import cartopy.feature as cfeature
 import wrf
 import xarray as xr
-ncfile = Dataset("D://thesisdata/wrf_dust/wrfout_d01_2009-09-18_00_00_00")
+import marcowhereareyou as mway
+
+wrfout, savepic = mway.gimmedirs()
+ncfile = Dataset(wrfout)
 varname = "DUST_ACC_"
 binmax = 5
 vars = [None]*binmax
@@ -28,43 +31,42 @@ var = var[:,0,...]
 
 zeitpunkt = '2009-09-24T00'
 
-for zeitpunkt in var.coords['Time'].values: # dann plt.show() rausnehmen
+#for zeitpunkt in var.coords['Time'].values: # dann plt.show() rausnehmen
 
-    fig = plt.figure(figsize=(12,6))
-    # Set the GeoAxes to the projection used by WRF
-    ax = plt.axes(projection=cart_proj)
-    # Download and add the states and coastlines
-    ax.coastlines(lw=.5, zorder=5)
-    ax.add_feature(cfeature.BORDERS, lw=.5, zorder=4)
-    ax.add_feature(cfeature.LAND, fc='lightgrey', zorder=3)
-    ax.add_feature(cfeature.STATES,lw=.2, zorder=3)
+fig = plt.figure(figsize=(12,6))
+# Set the GeoAxes to the projection used by WRF
+ax = plt.axes(projection=cart_proj)
+# Download and add the states and coastlines
+ax.coastlines(lw=.5, zorder=5)
+ax.add_feature(cfeature.BORDERS, lw=.5, zorder=4)
+ax.add_feature(cfeature.LAND, fc='lightgrey', zorder=3)
+ax.add_feature(cfeature.STATES,lw=.2, zorder=3)
 
-    plt.contourf(wrf.to_np(lons), wrf.to_np(lats),
-                    wrf.to_np(var.sel(Time=zeitpunkt)),
-                     zorder=4, transform=crs.PlateCarree(),
-                     cmap=get_cmap('plasma'),alpha=1,levels=levels,extend='max')
-    cb=plt.colorbar(ax=ax, shrink=.98,
-                        label=('Sum of '+vars[0].description[:-2]+'s 1-5 in '
-                        +vars[0].units))
-    #cb.set_ticks(cblevels)
-    ax.set_xlim(wrf.cartopy_xlim(vars[0]))
-    ax.set_ylim(wrf.cartopy_ylim(vars[0]))
-    # Add the gridlines
-    gl = ax.gridlines(
-        crs=crs.PlateCarree(), draw_labels=True,
-        linewidth=1, color='gray', linestyle='dotted',
-        xlocs=[120,135,150,165,180],zorder=6)
-    gl.top_labels = False
-    gl.right_labels = False
+plt.contourf(wrf.to_np(lons), wrf.to_np(lats),
+                wrf.to_np(var.sel(Time=zeitpunkt)),
+                 zorder=4, transform=crs.PlateCarree(),
+                 cmap=get_cmap('plasma'),alpha=1,levels=levels,extend='max')
+cb=plt.colorbar(ax=ax, shrink=.98,
+                    label=('Sum of '+vars[0].description[:-2]+'s 1-5 in '
+                    +vars[0].units))
+#cb.set_ticks(cblevels)
+ax.set_xlim(wrf.cartopy_xlim(vars[0]))
+ax.set_ylim(wrf.cartopy_ylim(vars[0]))
+# Add the gridlines
+gl = ax.gridlines(
+    crs=crs.PlateCarree(), draw_labels=True,
+    linewidth=1, color='gray', linestyle='dotted',
+    xlocs=[120,135,150,165,180],zorder=6)
+gl.top_labels = False
+gl.right_labels = False
 
-    plt.title(str(zeitpunkt)[:13]+' - DUSTLOAD_ACC_')
+plt.title(str(zeitpunkt)[:13]+' - DUSTLOAD_ACC_')
 
-    fig.savefig(
-                'D://thesisdata/bilder/Python/wrfout/'+varname+'/'
-                +str(zeitpunkt)[:13]+'.png', dpi = 300
-                )
-    #plt.show()
-    plt.close()
+fig.savefig(savepic+'Python/wrfout/'+varname+'/'
+            +str(zeitpunkt)[:13]+'.png', dpi = 300
+            )
+plt.show()
+plt.close()
 
 #SHAO's Variablenvorschläge:
 #

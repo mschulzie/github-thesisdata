@@ -5,7 +5,10 @@ import cartopy.crs as crs
 import numpy as np
 import cartopy.feature as cfeature
 import wrf
-ncfile = Dataset("D://thesisdata/wrf_dust/neu Sven/wrfout_d01_2009-09-18_00_00_00")
+import marcowhereareyou as mway
+
+wrfout, savepic = mway.gimmedirs()
+ncfile = Dataset(wrfout)
 varname = "T"
 plevel = 500.
 var3d = wrf.getvar(ncfile,varname, timeidx=wrf.ALL_TIMES)
@@ -49,10 +52,9 @@ gl.right_labels = False
 
 plt.title(str(zeitpunkt)[:13]+' - '+str(plevel)+' hPa')
 
-fig.savefig(
-            'D://thesisdata/bilder/Python/wrfout/'+varname+'/'+str(int(plevel))+'hPa/'
-            +str(zeitpunkt)[:13]+'.png', dpi = 300
-            )
+fig.savefig(savepic+'Python/wrfout/'+varname+'/'+str(int(plevel))+'hPa/'
+            +str(zeitpunkt)[:13]+'.png', dpi = 300)
+
 plt.show()
 plt.close()
 

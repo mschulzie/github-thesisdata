@@ -6,8 +6,11 @@ import numpy as np
 import cartopy.feature as cfeature
 import wrf
 import matplotlib.image as mpimg
+import marcowhereareyou as mway
 
-ncfile = Dataset("D://thesisdata/wrf_dust/neu Sven/wrfout_d01_2009-09-18_00_00_00")
+wrfout, savepic = mway.gimmedirs()
+ncfile = Dataset(wrfout)
+
 uv = wrf.getvar(ncfile,"uvmet10",units="kt",timeidx=wrf.ALL_TIMES).isel(
                 west_east=slice(0,143))
 
@@ -75,8 +78,7 @@ ax3 = fig.add_subplot(gs[0,2])
 imgplot2 = ax3.imshow(img[10:470,640:680])
 ax3.axis('off')
 
-fig.savefig(
-     'D://thesisdata/bilder/combinations/wind/'
+fig.savefig(savepic+'/combinations/wind/'
      +zeitstr[:13]+'.png', dpi = 500
      )
 #plt.show()

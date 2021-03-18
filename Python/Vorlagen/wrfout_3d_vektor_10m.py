@@ -5,8 +5,10 @@ import cartopy.crs as crs
 import numpy as np
 import cartopy.feature as cfeature
 import wrf
+import marcowhereareyou as mway
 
-ncfile = Dataset("D://thesisdata/wrf_dust/neu Sven/wrfout_d01_2009-09-18_00_00_00")
+wrfout, savepic = mway.gimmedirs()
+ncfile = Dataset(wrfout)
 uv = wrf.getvar(ncfile,"uvmet10",units="kt",timeidx=wrf.ALL_TIMES).isel(
                 west_east=slice(0,143))
 
@@ -56,8 +58,7 @@ gl.right_labels = False
 
 plt.title(str(zeitpunkt)[:13])#+' - '+str(plevel)+' hPa')
 
-fig.savefig(
-     'D://thesisdata/bilder/Python/wrfout/wind/10m/'
+fig.savefig(savepic+'Python/wrfout/wind/10m/'
      +str(zeitpunkt)[:13]+'.png', dpi = 300
      )
 plt.show()

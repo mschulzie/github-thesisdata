@@ -52,6 +52,8 @@ for zeitpunkt in var.coords['Time'].values: # dann plt.show() rausnehmen
         linewidth=1, color='gray', linestyle='dotted',
         xlocs=[120,135,150,165,180],zorder=6)
 
+
+
     gl.top_labels = False
     gl.right_labels = False
 
@@ -63,7 +65,6 @@ for zeitpunkt in var.coords['Time'].values: # dann plt.show() rausnehmen
                 )
     #plt.show()
     plt.close()
-
 
 #SHAO's Variablenvorschläge:
 #

@@ -7,11 +7,13 @@ import cartopy.feature as cfeature
 import wrf
 import xarray as xr
 ncfile = Dataset("D://thesisdata/wrf_dust/wrfout_d01_2009-09-18_00_00_00")
-varname = "DUST_ACC_"
+varname = "DUST_"
 binmax = 5
 vars = [None]*binmax
 vars_sum = vars.copy()
 im = [None]*binmax
+
+ncfile['DUST_ACC_5']
 
 for binsize in range(binmax):
     vars[binsize] = wrf.getvar(ncfile,varname+str(binsize+1),timeidx=wrf.ALL_TIMES)
@@ -21,11 +23,11 @@ lats, lons = wrf.latlon_coords(vars[0])
 cart_proj = wrf.get_cartopy(vars[0])
 
 var = vars[0]+vars[1]+vars[2]+vars[3]+vars[4]
-var = var.sum(axis=1)
-var = var.where(var>var.mean())
+var = var[:,0,:,:]
+#var = var.where(var>var.mean())
 #%%
 
-zeitpunkt = '2009-09-24T00'
+zeitpunkt = '2009-09-23T12'
 
 #for zeitpunkt in var.coords['Time'].values: # dann plt.show() rausnehmen
 
@@ -58,12 +60,10 @@ gl = ax.gridlines(
 gl.top_labels = False
 gl.right_labels = False
 
-vars[0].description[:-1]
-
-plt.title(str(zeitpunkt)[:13]+' - Summe über alle Höhenlevel (Konz. > Mittel)')
+plt.title(str(zeitpunkt)[:13]+' - 1. Höhenlevel (Konz. > Mittel)')
 
 fig.savefig(
-            'D://thesisdata/bilder/Python/wrfout/'+varname+'/sum-all-levels/'
+            'D://thesisdata/bilder/Python/wrfout/'+varname+'/'
             +str(zeitpunkt)[:13]+'.png', dpi = 300
             )
 plt.show()

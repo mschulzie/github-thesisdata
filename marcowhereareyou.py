@@ -3,7 +3,14 @@ import os
 os.getcwd()
 
 def gimmedirs():
-    #haboob:
+    """
+    Gibt Dir zwei Argumente zurück:
+    return wrfout, savepic
+    (Pfad der WRF-Datei auf deinem aktuellen Rechner
+    und Pfad an dem die Bilder
+    gespeichert werden sollen.)
+    """
+    #haboob (vergiss den Luder, der kannnix!):
     if (os.getcwd()=='/home/mschulz/atom'):
         print('Angemeldet auf haboob')
         wrfout = '/work/sulbrich/WRF-4.1.2/run/wrfout_d01_2009-09-18_00:00:00'

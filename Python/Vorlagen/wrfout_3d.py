@@ -1,13 +1,15 @@
+import marcowhereareyou as mway
 from netCDF4 import Dataset
 import matplotlib.pyplot as plt
 from matplotlib.cm import get_cmap
 import cartopy.crs as crs
 import numpy as np
 import cartopy.feature as cfeature
-
 import wrf
 
-ncfile = Dataset("D://thesisdata/wrf_dust/wrfout_d01_2009-09-18_00_00_00")
+wrfout, savepic = mway.gimmedirs()
+
+ncfile = Dataset(wrfout)
 
 varname = "DUSTLOAD_ACC_1"
 var = wrf.getvar(ncfile,varname, timeidx=wrf.ALL_TIMES)
@@ -48,9 +50,6 @@ gl.right_labels = False
 
 plt.title(str(zeitpunkt)[:13])
 
-fig.savefig(
-            'D://thesisdata/bilder/Python/wrfout/'+varname+'/'
-            +str(zeitpunkt)[:13]+'.png', dpi = 300
-            )
+fig.savefig(savepic+varname+'/'+str(zeitpunkt)[:13]+'.png', dpi = 300)
 plt.show()
 plt.close()

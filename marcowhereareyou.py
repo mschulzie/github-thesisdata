@@ -4,7 +4,7 @@ os.getcwd()
 
 def gimmedirs():
     #haboob:
-    if (os.getcwd()=='/home/mschulz/github/github-thesisdata'):
+    if (os.getcwd()=='/home/mschulz/atom'):
         print('Angemeldet auf haboob')
         wrfout = '/work/sulbrich/WRF-4.1.2/run/wrfout_d01_2009-09-18_00_00_00'
         savepic = '/home/mschulz/atom/pics/'

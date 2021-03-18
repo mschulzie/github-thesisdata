@@ -68,3 +68,6 @@ gl.right_labels = False
 ax1.set_title('September 2009')
 fig.savefig('Dein erste Bild.png', dpi = 500)
 plt.show()
+
+
+python -m pip list

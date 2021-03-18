@@ -19,7 +19,6 @@ lats, lons = wrf.latlon_coords(vars[0])
 cart_proj = wrf.get_cartopy(vars[0])
 
 var = vars[0]+vars[1]+vars[2]+vars[3]+vars[4]
-#var = var.where(var>1000)
 levels = np.linspace(1000,1e6,101).tolist()
 
 #%%
@@ -48,16 +47,13 @@ for zeitpunkt in var.coords['Time'].values: # dann plt.show() rausnehmen
     ax.set_xlim(wrf.cartopy_xlim(vars[0]))
     ax.set_ylim(wrf.cartopy_ylim(vars[0]))
     # Add the gridlines
-    #ax.gridlines(color="black", linestyle="dotted")
     gl = ax.gridlines(
         crs=crs.PlateCarree(), draw_labels=True,
         linewidth=1, color='gray', linestyle='dotted',
-        xlocs=[120,135,150,165,180], zorder=6
-        )
+        xlocs=[120,135,150,165,180],zorder=6)
+
     gl.top_labels = False
     gl.right_labels = False
-
-    vars[0].description[:-1]
 
     plt.title(str(zeitpunkt)[:13]+' - DUSTLOAD_ACC_')
 

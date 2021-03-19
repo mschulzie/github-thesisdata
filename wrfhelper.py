@@ -11,6 +11,15 @@ import wrf
 def wrfplot(wrffile,varname,time='2009-09-18T00',units="kt",ppfig=(1,1),
     save=False,savedir=None,show=True,cmap='RdBu_r', qmin=0.7,
     qmax=0.99, levels=50,limmax=None):
+    """
+    Just a wrapper to easily plot wrfout with given latitude and
+    longitude limits (Australia+Southern Ocean) for the purpose of
+    consistent plots of different variables.
+    """
+    #ADD: second variable (optionally) to compare (contour)
+
+    #ADD: interpolation at specific heightevel for 4D variables.
+
 
     windvars = ['uvmet10','ua','va','wa','uvmet','wspd_wdir']
 

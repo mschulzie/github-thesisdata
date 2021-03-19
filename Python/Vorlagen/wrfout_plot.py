@@ -6,10 +6,15 @@ wrfout, savedir = mway.gimmedirs()
 wrffile = Dataset(wrfout)
 
 
-wrfhelp.wrfplot(wrffile,'RAINC',
-                ppfig=(4,2),
-                time=slice('2009-09-23T12','2009-09-24T09'),
-                cmap='Blues',
+var = wrfhelp.wrfplot(wrffile,'DUSTLOAD_4',
+                ppfig=(1,1),
+                time='2009-09-23T12',
+                cmap='plasma',
                 show=True,
-                save=True,
-                savedir=savedir)
+                #save=True,
+                savedir=savedir,
+                qmin=0,
+                #qmax=0.95,
+                limmax=1001 #suppresses qmax!!!
+                #levels=11
+                )

@@ -10,13 +10,21 @@ import wrf
 
 def wrfplot(wrffile,varname,time='2009-09-18T00',units="kt",ppfig=(1,1),
     save=False,savedir=None,show=True,cmap='RdBu_r', qmin=0.7,
-    qmax=0.99, levels=50):
+    qmax=0.99, levels=50,limmax=None):
 
+    windvars = ['uvmet10','ua','va','wa','uvmet','wspd_wdir']
 
-
-
-    windvars = ['uvmet10','ua','va','wa','uvmet']
-    if (varname in windvars):
+    if (varname[-1] == '_'):
+        print('no explicit binsize, build sum over all binsizes 1-5!')
+        vars = [None]*5
+        for binsize in range(5):
+            vars[binsize] = wrf.getvar(wrffile,varname+str(binsize+1),
+                timeidx=wrf.ALL_TIMES)
+            vars[binsize] = vars[binsize].isel(west_east=slice(0,143))
+        var = vars[0].copy(deep=False)
+        var.values = vars[0]+vars[1]+vars[2]+vars[3]+vars[4]
+        var.attrs['description'] = var.description+'-5 (sum)'
+    elif (varname in windvars):
         var = wrf.getvar(wrffile,varname,units=units,
         timeidx=wrf.ALL_TIMES).isel(west_east=slice(0,143))
     else:
@@ -50,16 +58,22 @@ def wrfplot(wrffile,varname,time='2009-09-18T00',units="kt",ppfig=(1,1),
 
     #Computes the limits from which data should be shown by using quantiles
     limmin = cvar.quantile(qmin)
-    limmax = (int(np.round(cvar.quantile(qmax),
-        -len(str(int(cvar.quantile(qmax))))+2))) + 1
+    if (limmax==None):
+        limmax = (int(np.round(cvar.quantile(qmax),
+            -len(str(int(cvar.quantile(qmax))))+4))) + 1
     c_levels = np.linspace(limmin,limmax,levels)
 
     #Computes ticks for colorbar
-    cbar_min = int(np.round(limmin,-len(str(int(limmax)))+2))
+    cb_fontsize = 8
+    cbar_min = int(np.round(limmin,-len(str(int(limmax)))+4))
     cbar_max = limmax - 1
-    cbar_step = int(cbar_max/10)
+    if ((cbar_max-cbar_min) > 10):
+        cbar_step = int((cbar_max-cbar_min)/10)
+    else:
+        cbar_step = (cbar_max-cbar_min)/10
     cbarticks = np.arange(cbar_min, cbar_max+cbar_step,cbar_step)
-
+    if (len(cbarticks)>levels):
+        cbarticks = c_levels
     if (limmax < 99999):
         cbformat = '%d'
     else:
@@ -94,8 +108,9 @@ def wrfplot(wrffile,varname,time='2009-09-18T00',units="kt",ppfig=(1,1),
                 cb = plt.colorbar(cvar_contour, shrink=.98,
                     format=cbformat)
                 cb.set_ticks(cbarticks)
+                cb.ax.tick_params(labelsize=cb_fontsize)
                 cb.set_label(label=(var.description+' in '+var.units),
-                    fontsize=6)
+                    fontsize=cb_fontsize)
 
                 if vector:
                     each = 8
@@ -139,4 +154,4 @@ def wrfplot(wrffile,varname,time='2009-09-18T00',units="kt",ppfig=(1,1),
             plt.show()
         plt.close()
         t += ppfig[0]*ppfig[1]
-    return
+    return var

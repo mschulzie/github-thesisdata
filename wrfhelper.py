@@ -14,12 +14,25 @@ def loadvar(wrffile,varname,units="kt"):
     """
     windvars = ['uvmet10','ua','va','wa','uvmet','wspd_wdir']
     u,v = None,None
-    if (varname[-1] == '_'):
-        print('no explicit binsize, build sum over all binsizes 1-5!')
+    if (varname=='RAIN'):
+        print('RAIN is not a valid variable! \n'+
+            'However, i create it by adding (fill Nan with 0!)\n'+
+            'Total Cumulus Precipitation and Total Grid Scale Prec.\n'+
+            '(accumulated, RAINC+RAINNC)')
+        rainc = wrf.getvar(wrffile,varname+'C',
+            timeidx=wrf.ALL_TIMES).fillna(0)
+        rainnc = wrf.getvar(wrffile,varname+'NC',
+            timeidx=wrf.ALL_TIMES).fillna(0)
+        var = rainc.copy(deep=False)
+        var.values = rainc + rainnc
+        var.attrs['description'] = 'Accumulated total precipitation'
+    elif (varname[-1] == '_'):
+        print('no explicit binsize\n'+
+            'build sum over all binsizes 1-5! (fill NaN with 0!)')
         vars = [None]*5
         for binsize in range(5):
             vars[binsize] = wrf.getvar(wrffile,varname+str(binsize+1),
-                timeidx=wrf.ALL_TIMES)
+                timeidx=wrf.ALL_TIMES).fillna(0)
             vars[binsize] = vars[binsize].isel(west_east=slice(0,143))
         var = vars[0].copy(deep=False)
         var.values = vars[0]+vars[1]+vars[2]+vars[3]+vars[4]
@@ -55,8 +68,8 @@ def loadvar(wrffile,varname,units="kt"):
 
 
 def wrfplot(wrffile,varname,compare_var=None,time='2009-09-18T00',ppfig=(1,1),
-    save=False,savedir=None,show=True,cmap='RdBu_r', qmin=0.7,
-    qmax=0.99, levels=50,limmax=None):
+    save=False,savedir=None,show=True,cmap='RdBu_r', qmin=0,
+    qmax=1, levels=50,limmax=None):
     """
     Just a wrapper to easily plot wrfout with given latitude and
     longitude limits (Australia+Southern Ocean) for the purpose of
@@ -140,6 +153,8 @@ def wrfplot(wrffile,varname,compare_var=None,time='2009-09-18T00',ppfig=(1,1),
                         wrf.to_np(v_t[::each,::each]),
                         zorder=7, transform=crs.PlateCarree(), color="grey",
                         length=4)
+                zeitstr = str(cvar_t.Time.values)
+                title = zeitstr[:13]+' (WRF)'+' - '+ varname
                 if (compare_var!=None):
                     var2, cvar2, vector2, u2, v2 = loadvar(wrffile,compare_var,
                         units="kt")
@@ -155,7 +170,9 @@ def wrfplot(wrffile,varname,compare_var=None,time='2009-09-18T00',ppfig=(1,1),
                     compvar_contour = ax.contour(
                         wrf.to_np(lons), wrf.to_np(lats),
                         wrf.to_np(cvar2_t),
-                        zorder=5, transform=crs.PlateCarree())
+                        zorder=5, transform=crs.PlateCarree(),
+                        colors='blue',linewidths=.5,linestyles='dashdot')
+                    title=title+'-'+compare_var
                 ax.set_xlim(wrf.cartopy_xlim(var))
                 ax.set_ylim(wrf.cartopy_ylim(var))
                 gl = ax.gridlines(
@@ -164,9 +181,9 @@ def wrfplot(wrffile,varname,compare_var=None,time='2009-09-18T00',ppfig=(1,1),
                     xlocs=[120,135,150,165,180], zorder=6)
                 gl.top_labels = False
                 gl.right_labels = False
-                zeitstr = str(cvar_t.Time.values)
-                ax.set_title('WRF - '+varname+' - '+zeitstr[:13],
-                    fontsize=10)#+' - '+str(plevel)+' hPa')
+
+
+                ax.set_title(title,fontsize=10)
                 count += 1
                 if (t+count==var.Time.size):
                     break
@@ -174,12 +191,13 @@ def wrfplot(wrffile,varname,compare_var=None,time='2009-09-18T00',ppfig=(1,1),
                 continue
             break
         if save:
+            multi =''
             if (savedir==None):
                 print('Give path to save figures!!')
             if (ppfig[0]*ppfig[1] > 1):
-                zeitstr = 'multiple_'+str(ppfig[0])+'x'+str(ppfig[1])
-            fig.savefig(savedir+'Python/wrfout/'+varname+'/'+zeitstr[:13]
-                +'.png', dpi = 500)
+                multi = '_multi_'+str(ppfig[0])+'x'+str(ppfig[1])
+            fig.savefig(savedir+'Python/wrfout/'+title[22:]+'/'+title[:13]
+                +multi+'.png', dpi = 500)
         if show:
             plt.show()
         plt.close()

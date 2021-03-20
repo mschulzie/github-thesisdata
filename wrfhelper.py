@@ -8,21 +8,12 @@ import wrf
 
 #%%
 
-def wrfplot(wrffile,varname,time='2009-09-18T00',units="kt",ppfig=(1,1),
-    save=False,savedir=None,show=True,cmap='RdBu_r', qmin=0.7,
-    qmax=0.99, levels=50,limmax=None):
+def loadvar(wrffile,varname,units="kt"):
     """
-    Just a wrapper to easily plot wrfout with given latitude and
-    longitude limits (Australia+Southern Ocean) for the purpose of
-    consistent plots of different variables.
+    converts dataarrays from wrffile into right shape to plot with wrfplot()
     """
-    #ADD: second variable (optionally) to compare (contour)
-
-    #ADD: interpolation at specific heightevel for 4D variables.
-
-
     windvars = ['uvmet10','ua','va','wa','uvmet','wspd_wdir']
-
+    u,v = None,None
     if (varname[-1] == '_'):
         print('no explicit binsize, build sum over all binsizes 1-5!')
         vars = [None]*5
@@ -39,10 +30,6 @@ def wrfplot(wrffile,varname,time='2009-09-18T00',units="kt",ppfig=(1,1),
     else:
         var = wrf.getvar(wrffile,varname,
         timeidx=wrf.ALL_TIMES).isel(west_east=slice(0,143))
-
-    lats, lons = wrf.latlon_coords(var)
-    cart_proj = wrf.get_cartopy(var)
-
     if ((len(var.shape)==4) & (var.shape[0]==97)):
         print ('4d variable with '+str(var.shape[1])+' heightlevels')
         cvar = var
@@ -64,7 +51,25 @@ def wrfplot(wrffile,varname,time='2009-09-18T00',units="kt",ppfig=(1,1),
         print ('3d variable')
         cvar = var
         vector = False
+    return var, cvar, vector, u, v
 
+
+def wrfplot(wrffile,varname,compare_var=None,time='2009-09-18T00',ppfig=(1,1),
+    save=False,savedir=None,show=True,cmap='RdBu_r', qmin=0.7,
+    qmax=0.99, levels=50,limmax=None):
+    """
+    Just a wrapper to easily plot wrfout with given latitude and
+    longitude limits (Australia+Southern Ocean) for the purpose of
+    consistent plots of different variables.
+    """
+    #ADD: second variable (optionally) to compare (contour)
+
+    #ADD: interpolation at specific heightevel for 4D variables.
+
+    var, cvar, vector, u, v = loadvar(wrffile,varname,units="kt")
+
+    lats, lons = wrf.latlon_coords(var)
+    cart_proj = wrf.get_cartopy(var)
     #Computes the limits from which data should be shown by using quantiles
     limmin = cvar.quantile(qmin)
     if (limmax==None):
@@ -135,6 +140,22 @@ def wrfplot(wrffile,varname,time='2009-09-18T00',units="kt",ppfig=(1,1),
                         wrf.to_np(v_t[::each,::each]),
                         zorder=7, transform=crs.PlateCarree(), color="grey",
                         length=4)
+                if (compare_var!=None):
+                    var2, cvar2, vector2, u2, v2 = loadvar(wrffile,compare_var,
+                        units="kt")
+                    var2 = var2.sel(Time=time)
+                    cvar2 = cvar2.sel(Time=time)
+                    if vector:
+                        u2 = u2.sel(Time=time)
+                        v2 = v2.sel(Time=time)
+                    if (var.Time.size > 1):
+                        cvar2_t = cvar2.isel(Time=t+count)
+                    else:
+                        cvar2_t = cvar2
+                    compvar_contour = ax.contour(
+                        wrf.to_np(lons), wrf.to_np(lats),
+                        wrf.to_np(cvar2_t),
+                        zorder=5, transform=crs.PlateCarree())
                 ax.set_xlim(wrf.cartopy_xlim(var))
                 ax.set_ylim(wrf.cartopy_ylim(var))
                 gl = ax.gridlines(

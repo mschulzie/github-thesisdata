@@ -7,6 +7,7 @@ wrffile = Dataset(wrfout)
 
 
 var = wrfhelp.wrfplot(wrffile,'DUSTLOAD_4',
+                compare_var='RAINC',
                 ppfig=(1,1),
                 time='2009-09-23T12',
                 cmap='plasma',

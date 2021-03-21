@@ -1,14 +1,17 @@
 from netCDF4 import Dataset
 import matplotlib.pyplot as plt
 from matplotlib.cm import get_cmap
+import matplotlib.ticker as mticker
 import cartopy.crs as crs
+from cartopy.mpl.gridliner import LONGITUDE_FORMATTER
 import numpy as np
 import cartopy.feature as cfeature
 import wrf
+import os
 
 #%%
 
-def loadvar(wrffile,varname,units="kt"):
+def loadvar(wrffile,varname,units="kt",plevel=None,zlevel=None):
     """
     converts dataarrays from wrffile into right shape to plot with wrfplot()
     """
@@ -17,15 +20,15 @@ def loadvar(wrffile,varname,units="kt"):
     if (varname=='RAIN'):
         print('RAIN is not a valid variable! \n'+
             'However, i create it by adding (fill Nan with 0!)\n'+
-            'Total Cumulus Precipitation and Total Grid Scale Prec.\n'+
-            '(accumulated, RAINC+RAINNC)')
-        rainc = wrf.getvar(wrffile,varname+'C',
+            'Cumulus Precipitation and Grid Scale Prec.\n'+
+            '(PREC_ACC_C+PREC_ACC_NC)')
+        rainc = wrf.getvar(wrffile,'PREC_ACC_C',
             timeidx=wrf.ALL_TIMES).fillna(0)
-        rainnc = wrf.getvar(wrffile,varname+'NC',
+        rainnc = wrf.getvar(wrffile,'PREC_ACC_NC',
             timeidx=wrf.ALL_TIMES).fillna(0)
         var = rainc.copy(deep=False)
         var.values = rainc + rainnc
-        var.attrs['description'] = 'Accumulated total precipitation'
+        var.attrs['description'] = 'Total precipitation'
     elif (varname[-1] == '_'):
         print('no explicit binsize\n'+
             'build sum over all binsizes 1-5! (fill NaN with 0!)')
@@ -33,18 +36,33 @@ def loadvar(wrffile,varname,units="kt"):
         for binsize in range(5):
             vars[binsize] = wrf.getvar(wrffile,varname+str(binsize+1),
                 timeidx=wrf.ALL_TIMES).fillna(0)
-            vars[binsize] = vars[binsize].isel(west_east=slice(0,143))
         var = vars[0].copy(deep=False)
         var.values = vars[0]+vars[1]+vars[2]+vars[3]+vars[4]
         var.attrs['description'] = var.description+'-5 (sum)'
     elif (varname in windvars):
         var = wrf.getvar(wrffile,varname,units=units,
-        timeidx=wrf.ALL_TIMES).isel(west_east=slice(0,143))
+        timeidx=wrf.ALL_TIMES)
     else:
         var = wrf.getvar(wrffile,varname,
-        timeidx=wrf.ALL_TIMES).isel(west_east=slice(0,143))
+        timeidx=wrf.ALL_TIMES)
     if ((len(var.shape)==4) & (var.shape[0]==97)):
         print ('4d variable with '+str(var.shape[1])+' heightlevels')
+        if ((plevel!=None) & (zlevel==None)):
+            p = wrf.getvar(wrffile,"pressure",timeidx=wrf.ALL_TIMES)
+            var_temp = wrf.interplevel(var,p,plevel)
+            var = var[:,0,...].copy(deep=False)
+            var.values = var_temp
+            var.attrs['description'] = (var.description+'\n (at '
+                +str(plevel)+'hPa)')
+            cvar = var
+        elif ((plevel==None) & (zlevel!=None)):
+            var = var[:,zlevel,...]
+            var.attrs['description'] = (var.description+'\n (at zlevel '
+                +str(zlevel)+'/31)')
+            cvar = var
+        else:
+            raise ValueError(
+                '4D variable! Choose zlevel or interpolate to plevel')
         cvar = var
         vector=False
     elif ((len(var.shape)==4) & (var.shape[0]==2)):
@@ -69,7 +87,8 @@ def loadvar(wrffile,varname,units="kt"):
 
 def wrfplot(wrffile,varname,compare_var=None,time='2009-09-18T00',ppfig=(1,1),
     save=False,savedir=None,show=True,cmap='RdBu_r', qmin=0,
-    qmax=1, levels=50,limmax=None):
+    qmax=1, levels=50,limmax=None,zlevel=None,plevel=None,
+    contour_color='black', contour_levels=10):
     """
     Just a wrapper to easily plot wrfout with given latitude and
     longitude limits (Australia+Southern Ocean) for the purpose of
@@ -79,9 +98,20 @@ def wrfplot(wrffile,varname,compare_var=None,time='2009-09-18T00',ppfig=(1,1),
 
     #ADD: interpolation at specific heightevel for 4D variables.
 
-    var, cvar, vector, u, v = loadvar(wrffile,varname,units="kt")
+    var, cvar, vector, u, v = loadvar(
+        wrffile,varname,units="kt",plevel=plevel,zlevel=zlevel)
+
+    if (compare_var!=None):
+        var2, cvar2, vector2, u2, v2 = loadvar(wrffile,compare_var,
+            units="kt",plevel=plevel,zlevel=zlevel)
+        var2 = var2.sel(Time=time)
+        cvar2 = cvar2.sel(Time=time)
+        if vector:
+            u2 = u2.sel(Time=time)
+            v2 = v2.sel(Time=time)
 
     lats, lons = wrf.latlon_coords(var)
+    lons = np.mod(lons,360)
     cart_proj = wrf.get_cartopy(var)
     #Computes the limits from which data should be shown by using quantiles
     limmin = cvar.quantile(qmin)
@@ -114,16 +144,16 @@ def wrfplot(wrffile,varname,compare_var=None,time='2009-09-18T00',ppfig=(1,1),
     t=0
     while (t<var.Time.size):
     #for t in range(var.Time.size//(ppfig[0]*ppfig[1]+1)+1):
-        fig = plt.figure(figsize=(5*ppfig[1],4*ppfig[0]))
+        fig = plt.figure(figsize=(5*ppfig[1],3.5*ppfig[0]))
         gs = fig.add_gridspec(ppfig[0],ppfig[1],hspace=0.4)
         count = 0
         for i in range(ppfig[0]):
             for j in range(ppfig[1]):
                 ax = fig.add_subplot(gs[i,j], projection=cart_proj)
                 ax.coastlines(lw=.5, zorder=5)
-                ax.add_feature(cfeature.BORDERS, lw=.5, zorder=4)
+                ax.add_feature(cfeature.BORDERS, lw=.5, zorder=5)
                 ax.add_feature(cfeature.LAND, fc='lightgrey', zorder=3)
-                ax.add_feature(cfeature.STATES,lw=.2, zorder=3)
+                ax.add_feature(cfeature.STATES,lw=.2, zorder=5)
                 if (var.Time.size > 1):
                     cvar_t = cvar.isel(Time=t+count)
                 else:
@@ -156,13 +186,6 @@ def wrfplot(wrffile,varname,compare_var=None,time='2009-09-18T00',ppfig=(1,1),
                 zeitstr = str(cvar_t.Time.values)
                 title = zeitstr[:13]+' (WRF)'+' - '+ varname
                 if (compare_var!=None):
-                    var2, cvar2, vector2, u2, v2 = loadvar(wrffile,compare_var,
-                        units="kt")
-                    var2 = var2.sel(Time=time)
-                    cvar2 = cvar2.sel(Time=time)
-                    if vector:
-                        u2 = u2.sel(Time=time)
-                        v2 = v2.sel(Time=time)
                     if (var.Time.size > 1):
                         cvar2_t = cvar2.isel(Time=t+count)
                     else:
@@ -170,17 +193,31 @@ def wrfplot(wrffile,varname,compare_var=None,time='2009-09-18T00',ppfig=(1,1),
                     compvar_contour = ax.contour(
                         wrf.to_np(lons), wrf.to_np(lats),
                         wrf.to_np(cvar2_t),
-                        zorder=5, transform=crs.PlateCarree(),
-                        colors='blue',linewidths=.5,linestyles='dashdot')
+                        zorder=6, transform=crs.PlateCarree(),
+                        colors=contour_color,
+                        linewidths=.5,linestyles='solid',
+                        levels=contour_levels)
+                    #Update matplotlib to latest version!! else no clabel zorder
+                    clabels = compvar_contour.clabel(zorder=7, inline=True,
+                        fontsize=4,fmt='%d',inline_spacing=0)
+                    ax.text(lons.max()-1,lats.min()+1,'Contours: '+
+                        str(var2.description)+
+                        ' in '+str(var2.units),
+                        fontsize=4,zorder=8,transform=crs.PlateCarree(),
+                        ha='right',
+                        bbox={'facecolor': 'white', 'alpha': 0.8, 'pad': 1})
                     title=title+'-'+compare_var
                 ax.set_xlim(wrf.cartopy_xlim(var))
                 ax.set_ylim(wrf.cartopy_ylim(var))
                 gl = ax.gridlines(
-                    crs=crs.PlateCarree(), draw_labels=True,
+                    crs=crs.PlateCarree(),
+                    draw_labels=True,
                     linewidth=1, color='gray', linestyle='dotted',
-                    xlocs=[120,135,150,165,180], zorder=6)
+                    zorder=6)
                 gl.top_labels = False
                 gl.right_labels = False
+                gl.xlocator = mticker.FixedLocator([120,135,150,165,180])
+                gl.xformatter = LONGITUDE_FORMATTER
 
 
                 ax.set_title(title,fontsize=10)
@@ -196,6 +233,8 @@ def wrfplot(wrffile,varname,compare_var=None,time='2009-09-18T00',ppfig=(1,1),
                 print('Give path to save figures!!')
             if (ppfig[0]*ppfig[1] > 1):
                 multi = '_multi_'+str(ppfig[0])+'x'+str(ppfig[1])
+            if (title[22:] not in os.listdir(savedir+'Python/wrfout/')):
+                os.mkdir(savedir+'Python/wrfout/'+title[22:])
             fig.savefig(savedir+'Python/wrfout/'+title[22:]+'/'+title[:13]
                 +multi+'.png', dpi = 500)
         if show:

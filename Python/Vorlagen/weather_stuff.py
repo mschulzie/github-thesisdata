@@ -11,27 +11,18 @@ from cartopy.mpl.ticker import (LongitudeFormatter, LatitudeFormatter,
                                 LatitudeLocator)
 import os
 
-gray = '#2f2d2f'
-sns.set(
-	context 	= 'paper', #notebook, talk
-	style 		= 'ticks',
-	palette 	= 'muted',
-	color_codes = True,
-	font 		= 'sans-serif',
-	rc={
-		'axes.edgecolor'	: gray
-		,'text.color' 		: gray
-		,'axes.labelcolor' 	: gray
-		,'xtick.color' 		: gray
-		,'ytick.color' 		: gray
-		,'figure.figsize' 	: [8.3,5] # 8.3 is dina4 paper width
-		,'text.usetex':False
-		}
-        )
+ds = xr.open_dataset('D://thesisdata/weather_stuff/uv_t_msl_tp_slh.nc')
+ds = ds['tp']
+dt = ds[::3,...]
+dt = dt[1:,...]
+for t in reversed(range(1,7)):
+    dt.values[t+1::7,...]=dt.values[t+1::7,...]-dt.values[t::7,...]
 
-os.chdir("D://thesisdata/currents/")
-os.getcwd()
-ds = xr.open_mfdataset('*.nc')
+dt.shape
+
+ds.sel(time='2009-09-23T00').plot()
+
+ds.coords['longitude'].values
 
 cbarlabel = ds.attrs['VARIABLE']+' in ' +ds.u.attrs['units']
 

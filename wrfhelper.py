@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from matplotlib.cm import get_cmap
 import matplotlib.ticker as mticker
 import cartopy.crs as crs
-from cartopy.mpl.gridliner import LONGITUDE_FORMATTER
+from cartopy.mpl.gridliner import LONGITUDE_FORMATTER, LATITUDE_FORMATTER
 import numpy as np
 import cartopy.feature as cfeature
 import wrf
@@ -11,10 +11,13 @@ import os
 
 #%%
 
-def loadvar(wrffile,varname,units="kt",plevel=None,zlevel=None):
+def loadvar(wrffile,varname,lons=(110.3,-170),lats = (-57.06,-9.5),
+    units="kt",plevel=None,zlevel=None):
     """
     converts dataarrays from wrffile into right shape to plot with wrfplot()
     """
+    iselstart = wrf.ll_to_xy(wrffile,lats[0],lons[0]).values
+    iselend = wrf.ll_to_xy(wrffile,lats[1],lons[1]).values
     windvars = ['uvmet10','ua','va','wa','uvmet','wspd_wdir']
     u,v = None,None
     if (varname=='RAIN'):
@@ -23,32 +26,53 @@ def loadvar(wrffile,varname,units="kt",plevel=None,zlevel=None):
             'Cumulus Precipitation and Grid Scale Prec.\n'+
             '(PREC_ACC_C+PREC_ACC_NC)')
         rainc = wrf.getvar(wrffile,'PREC_ACC_C',
-            timeidx=wrf.ALL_TIMES).fillna(0)
+            timeidx=wrf.ALL_TIMES).isel(
+            west_east=slice(iselstart[0],iselend[0]),
+            south_north=slice(iselstart[1],iselend[1])
+            ).fillna(0)
         rainnc = wrf.getvar(wrffile,'PREC_ACC_NC',
-            timeidx=wrf.ALL_TIMES).fillna(0)
+            timeidx=wrf.ALL_TIMES).isel(
+            west_east=slice(iselstart[0],iselend[0]),
+            south_north=slice(iselstart[1],iselend[1])
+            ).fillna(0)
+
+        # isel EINFÜGEN!!!!!!!!!!
+
         var = rainc.copy(deep=False)
         var.values = rainc + rainnc
-        var.attrs['description'] = 'Total precipitation'
+        var.attrs['description'] = 'Total precipitation (acc. last 3h)'
     elif (varname[-1] == '_'):
         print('no explicit binsize\n'+
             'build sum over all binsizes 1-5! (fill NaN with 0!)')
         vars = [None]*5
         for binsize in range(5):
             vars[binsize] = wrf.getvar(wrffile,varname+str(binsize+1),
-                timeidx=wrf.ALL_TIMES).fillna(0)
+                timeidx=wrf.ALL_TIMES).isel(
+                west_east=slice(iselstart[0],iselend[0]),
+                south_north=slice(iselstart[1],iselend[1])
+                ).fillna(0)
         var = vars[0].copy(deep=False)
         var.values = vars[0]+vars[1]+vars[2]+vars[3]+vars[4]
         var.attrs['description'] = var.description+'-5 (sum)'
     elif (varname in windvars):
         var = wrf.getvar(wrffile,varname,units=units,
-        timeidx=wrf.ALL_TIMES)
+        timeidx=wrf.ALL_TIMES).isel(
+        west_east=slice(iselstart[0],iselend[0]),
+        south_north=slice(iselstart[1],iselend[1])
+        )
     else:
         var = wrf.getvar(wrffile,varname,
-        timeidx=wrf.ALL_TIMES)
+        timeidx=wrf.ALL_TIMES).isel(
+        west_east=slice(iselstart[0],iselend[0]),
+        south_north=slice(iselstart[1],iselend[1])
+        )
     if ((len(var.shape)==4) & (var.shape[0]==97)):
         print ('4d variable with '+str(var.shape[1])+' heightlevels')
         if ((plevel!=None) & (zlevel==None)):
-            p = wrf.getvar(wrffile,"pressure",timeidx=wrf.ALL_TIMES)
+            p = wrf.getvar(wrffile,"pressure",timeidx=wrf.ALL_TIMES).isel(
+            west_east=slice(iselstart[0],iselend[0]),
+            south_north=slice(iselstart[1],iselend[1])
+            )
             var_temp = wrf.interplevel(var,p,plevel)
             var = var[:,0,...].copy(deep=False)
             var.values = var_temp
@@ -87,8 +111,9 @@ def loadvar(wrffile,varname,units="kt",plevel=None,zlevel=None):
 
 def wrfplot(wrffile,varname,compare_var=None,time='2009-09-18T00',ppfig=(1,1),
     save=False,savedir=None,show=True,cmap='RdBu_r', qmin=0,
-    qmax=1, levels=50,limmax=None,zlevel=None,plevel=None,
-    contour_color='black', contour_levels=10):
+    qmax=1, levels=50,limmin=None,limmax=None,zlevel=None,plevel=None,
+    contour_color='black', contour_levels=10,
+    lons = (110.3,-170),lats = (-57.06,-9.5)):
     """
     Just a wrapper to easily plot wrfout with given latitude and
     longitude limits (Australia+Southern Ocean) for the purpose of
@@ -99,11 +124,12 @@ def wrfplot(wrffile,varname,compare_var=None,time='2009-09-18T00',ppfig=(1,1),
     #ADD: interpolation at specific heightevel for 4D variables.
 
     var, cvar, vector, u, v = loadvar(
-        wrffile,varname,units="kt",plevel=plevel,zlevel=zlevel)
+        wrffile,varname,units="kt",plevel=plevel,zlevel=zlevel,
+        lons=lons,lats=lats)
 
     if (compare_var!=None):
         var2, cvar2, vector2, u2, v2 = loadvar(wrffile,compare_var,
-            units="kt",plevel=plevel,zlevel=zlevel)
+            units="kt",plevel=plevel,zlevel=zlevel,lons=lons,lats=lats)
         var2 = var2.sel(Time=time)
         cvar2 = cvar2.sel(Time=time)
         if vector:
@@ -113,17 +139,25 @@ def wrfplot(wrffile,varname,compare_var=None,time='2009-09-18T00',ppfig=(1,1),
     lats, lons = wrf.latlon_coords(var)
     lons = np.mod(lons,360)
     cart_proj = wrf.get_cartopy(var)
+    cb_fontsize = 8
     #Computes the limits from which data should be shown by using quantiles
-    limmin = cvar.quantile(qmin)
+    if (limmin==None):
+        limmin = cvar.quantile(qmin)
     if (limmax==None):
-        limmax = (int(np.round(cvar.quantile(qmax),
-            -len(str(int(cvar.quantile(qmax))))+4))) + 1
+        if (cvar.quantile(qmax)>10):
+            limmax = (int(np.round(cvar.quantile(qmax),
+                -len(str(int(cvar.quantile(qmax))))+4)))
+        else:
+            limmax = (np.round(cvar.quantile(qmax),3))
+
     c_levels = np.linspace(limmin,limmax,levels)
 
     #Computes ticks for colorbar
-    cb_fontsize = 8
-    cbar_min = int(np.round(limmin,-len(str(int(limmax)))+4))
-    cbar_max = limmax - 1
+    if (limmin>1):
+        cbar_min = int(np.round(limmin,-len(str(int(limmax)))+4))
+    else:
+        cbar_min = np.round(limmin,3)
+    cbar_max = limmax
     if ((cbar_max-cbar_min) > 10):
         cbar_step = int((cbar_max-cbar_min)/10)
     else:
@@ -131,7 +165,9 @@ def wrfplot(wrffile,varname,compare_var=None,time='2009-09-18T00',ppfig=(1,1),
     cbarticks = np.arange(cbar_min, cbar_max+cbar_step,cbar_step)
     if (len(cbarticks)>levels):
         cbarticks = c_levels
-    if (limmax < 99999):
+    if (limmax < 10):
+        cbformat = '%.3f'
+    elif (limmax < 99999):
         cbformat = '%d'
     else:
         cbformat = '%.1E'
@@ -166,7 +202,15 @@ def wrfplot(wrffile,varname,compare_var=None,time='2009-09-18T00',ppfig=(1,1),
                     format=cbformat)
                 cb.set_ticks(cbarticks)
                 cb.ax.tick_params(labelsize=cb_fontsize)
-                cb.set_label(label=(var.description+' in '+var.units),
+                cblabel = var.description+' in '+var.units
+                if (len(cblabel) > 40):
+                    c = 0
+                    for letter in cblabel[35:]:
+                        if (letter == ' '):
+                            cblabel = cblabel[:35+c]+'\n'+cblabel[35+c:]
+                            break
+                        c += 1
+                cb.set_label(label=(cblabel),
                     fontsize=cb_fontsize)
 
                 if vector:
@@ -200,7 +244,7 @@ def wrfplot(wrffile,varname,compare_var=None,time='2009-09-18T00',ppfig=(1,1),
                     #Update matplotlib to latest version!! else no clabel zorder
                     clabels = compvar_contour.clabel(zorder=7, inline=True,
                         fontsize=4,fmt='%d',inline_spacing=0)
-                    ax.text(lons.max()-1,lats.min()+1,'Contours: '+
+                    ax.text(lons[0,-2],lats[1,0],'Contours: '+
                         str(var2.description)+
                         ' in '+str(var2.units),
                         fontsize=4,zorder=8,transform=crs.PlateCarree(),
@@ -217,7 +261,9 @@ def wrfplot(wrffile,varname,compare_var=None,time='2009-09-18T00',ppfig=(1,1),
                 gl.top_labels = False
                 gl.right_labels = False
                 gl.xlocator = mticker.FixedLocator([120,135,150,165,180])
+                gl.ylocator = mticker.FixedLocator([-10,-20,-30,-40,-50])
                 gl.xformatter = LONGITUDE_FORMATTER
+                gl.yformatter = LATITUDE_FORMATTER
 
 
                 ax.set_title(title,fontsize=10)

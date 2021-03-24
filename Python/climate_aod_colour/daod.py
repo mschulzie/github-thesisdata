@@ -5,6 +5,8 @@ from xmca.xarray import xMCA
 import cartopy.crs as crs
 import matplotlib.pyplot as plt
 
+# test #
+
 path = 'D://thesisdata/daod/monthly/'
 file = '2007_2020-C3S.._Australia.nc'
 

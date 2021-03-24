@@ -1,13 +1,29 @@
 import xarray as xr
-import os
-import pandas as pd
 import numpy as np
-from datetime import datetime
+import xmca
+from xmca.xarray import xMCA
+import cartopy.crs as crs
+import matplotlib.pyplot as plt
 
-file = '2007_2020-C3S-L3_AEROSOL-AER_PRODUCTS-IASI-METOPA-IMARS-MONTHLY-v7.0ALL.nc'
 path = 'D://thesisdata/daod/monthly/'
+file = '2007_2020-C3S.._Australia.nc'
 
-ds = xr.open_dataset(path+file)
-ds = ds['D_AOD550']
-ds.sel(time='2009-09-01').plot()
-ds = ds.transpose()
+daod = xr.open_dataset(path+file)
+daod = daod['D_AOD550']
+daod = daod.sel(time=slice('2007-01','2017-12'))
+daod = daod.transpose('time','lat','lon')
+daod = daod.sel(lon=slice(110,179))
+daod.sel(time='2007-05').plot()
+daod.attrs['long_name']
+#%%
+
+pca = xMCA(daod)
+pca.set_field_names(daod.attrs['long_name'])
+pca.solve(complexify=False)
+
+eigenvalues=pca.singular_values()
+pcs = pca.pcs()
+eofs = pca.eofs()
+
+pca.plot(mode=1)
+pca.save_plot(mode=4)

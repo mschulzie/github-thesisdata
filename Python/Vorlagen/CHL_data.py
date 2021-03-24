@@ -10,25 +10,6 @@ import seaborn as sns
 from cartopy.mpl.ticker import (LongitudeFormatter, LatitudeFormatter,
                                 LatitudeLocator)
 
-# Änderung von haboob
-
-gray = '#2f2d2f'
-sns.set(
-	context 	= 'paper', #notebook, talk
-	style 		= 'ticks',
-	palette 	= 'muted',
-	color_codes = True,
-	font 		= 'sans-serif',
-	rc={
-		'axes.edgecolor'	: gray
-		,'text.color' 		: gray
-		,'axes.labelcolor' 	: gray
-		,'xtick.color' 		: gray
-		,'ytick.color' 		: gray
-		,'figure.figsize' 	: [8.3,5] # 8.3 is dina4 paper width
-		,'text.usetex':False
-		}
-        )
 
 ds = xr.open_dataset("D://thesisdata/plankton/GMIS_A_CHLA_09_2009.nc")
 ds = ds.assign_coords(lon=(ds.lon % 360)).roll(lon=(ds.dims['lon'] // 2), roll_coords=True)
@@ -71,6 +52,3 @@ gl.right_labels = False
 ax1.set_title('September 2009')
 fig.savefig('Dein erste Bild.png', dpi = 500)
 plt.show()
-
-
-python -m pip list

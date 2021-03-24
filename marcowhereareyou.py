@@ -1,4 +1,6 @@
 import os
+import matplotlib.pyplot as plt
+import numpy as np
 
 #just a comment
 
@@ -39,3 +41,21 @@ def gimmedirs():
 
     else:
         print('Alter wo bist du denn? Am falschen PC?')
+
+def show_nan(data_array,time=slice('1990','2099')):
+    """
+    Plots a lon-lat contour to show the percentage of nan-values
+    values in a 3D xarray. Requires time.size > 1.
+    You may put in the desired time range as a slice object.
+    """
+    ds = data_array.sel(time=time)
+    nan_percentage = 100*(ds.time.size - ds.count(dim='time')) / ds.time.size
+    im = nan_percentage.plot(cmap='magma_r',levels=11,extend='max',
+        add_colorbar=False)
+    plt.title(str(ds.time.values[0])[:10]+' to '+
+        str(ds.time.values[-1])[:10]
+        +' ('+str(ds.time.size)+' timesteps)')
+    cb = plt.colorbar(im,label='Percentage of NaN Values')
+    cb.set_ticks(np.arange(0,110,10).tolist())
+    cb.set_ticklabels([str(x)+'%' for x in np.arange(0,110,10)])
+    return

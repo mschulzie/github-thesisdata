@@ -5,7 +5,7 @@ from xmca.xarray import xMCA
 
 file = '2007_2020_GMIS_A_CHLA_Australia.nc'
 path = 'D://thesisdata/plankton/monthly/'
-
+#test#
 pl = xr.open_dataset(path+file)
 pl = pl['Chl_a']
 pl = pl.sel(time=slice('2007-05','2017-12'),lon=slice(110,179))

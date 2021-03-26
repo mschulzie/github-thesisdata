@@ -1,6 +1,7 @@
 from netCDF4 import Dataset
 import matplotlib.pyplot as plt
 from matplotlib.cm import get_cmap
+from matplotlib.colors import LogNorm
 import matplotlib.ticker as mticker
 import cartopy.crs as crs
 from cartopy.mpl.gridliner import LONGITUDE_FORMATTER, LATITUDE_FORMATTER
@@ -35,9 +36,6 @@ def loadvar(wrffile,varname,lons=(110.3,-170),lats = (-57.06,-9.5),
             west_east=slice(iselstart[0],iselend[0]),
             south_north=slice(iselstart[1],iselend[1])
             ).fillna(0)
-
-        # isel EINFÜGEN!!!!!!!!!!
-
         var = rainc.copy(deep=False)
         var.values = rainc + rainnc
         var.attrs['description'] = 'Total precipitation (acc. last 3h)'
@@ -53,7 +51,10 @@ def loadvar(wrffile,varname,lons=(110.3,-170),lats = (-57.06,-9.5),
                 ).fillna(0)
         var = vars[0].copy(deep=False)
         var.values = vars[0]+vars[1]+vars[2]+vars[3]+vars[4]
-        var.attrs['description'] = var.description+'-5 (sum)'
+        if (varname=='DUST_'):
+            var.attrs['description'] = 'Dust concentration (all binsizes)'
+        else:
+            var.attrs['description'] = var.description+'-5 (sum)'
     elif (varname in windvars):
         var = wrf.getvar(wrffile,varname,units=units,
         timeidx=wrf.ALL_TIMES).isel(
@@ -142,36 +143,45 @@ def wrfplot(wrffile,varname,compare_var=None,time='2009-09-18T00',ppfig=(1,1),
     cart_proj = wrf.get_cartopy(var)
     cb_fontsize = 8
     #Computes the limits from which data should be shown by using quantiles
-    if (limmin==None):
-        limmin = cvar.quantile(qmin)
-    if (limmax==None):
-        if (cvar.quantile(qmax)>10):
-            limmax = (int(np.round(cvar.quantile(qmax),
-                -len(str(int(cvar.quantile(qmax))))+4)))
+
+    if (type(levels) == int):
+        if (limmin==None):
+            limmin = cvar.quantile(qmin)
+        if (limmax==None):
+            if (cvar.quantile(qmax)>10):
+                limmax = (int(np.round(cvar.quantile(qmax),
+                    -len(str(int(cvar.quantile(qmax))))+4)))
+            else:
+                limmax = (np.round(cvar.quantile(qmax),3))
+
+        c_levels = np.linspace(limmin,limmax,levels)
+
+        #Computes ticks for colorbar
+        if (limmin>1):
+            cbar_min = int(np.round(limmin,-len(str(int(limmax)))+4))
         else:
-            limmax = (np.round(cvar.quantile(qmax),3))
-
-    c_levels = np.linspace(limmin,limmax,levels)
-
-    #Computes ticks for colorbar
-    if (limmin>1):
-        cbar_min = int(np.round(limmin,-len(str(int(limmax)))+4))
-    else:
-        cbar_min = np.round(limmin,3)
-    cbar_max = limmax
-    if ((cbar_max-cbar_min) > 10):
-        cbar_step = int((cbar_max-cbar_min)/10)
-    else:
-        cbar_step = (cbar_max-cbar_min)/10
-    cbarticks = np.arange(cbar_min, cbar_max+cbar_step,cbar_step)
-    if (len(cbarticks)>levels):
-        cbarticks = c_levels
-    if (limmax < 10):
-        cbformat = '%.3f'
-    elif (limmax < 99999):
-        cbformat = '%d'
-    else:
+            cbar_min = np.round(limmin,3)
+        cbar_max = limmax
+        if ((cbar_max-cbar_min) > 10):
+            cbar_step = int((cbar_max-cbar_min)/10)
+        else:
+            cbar_step = (cbar_max-cbar_min)/10
+        cbarticks = np.arange(cbar_min, cbar_max+cbar_step,cbar_step)
+        if (len(cbarticks)>levels):
+            cbarticks = c_levels
+        if (limmax < 10):
+            cbformat = '%.3f'
+        elif (limmax < 99999):
+            cbformat = '%d'
+        else:
+            cbformat = '%.1E'
+        levelnorm = None
+    if (type(levels) == list):
         cbformat = '%.1E'
+        c_levels = levels
+        cbarticks = levels
+        levelnorm = LogNorm()
+
 
     var = var.sel(Time=time)
     cvar = cvar.sel(Time=time)
@@ -200,7 +210,8 @@ def wrfplot(wrffile,varname,compare_var=None,time='2009-09-18T00',ppfig=(1,1),
                 cvar_contour = ax.contourf(wrf.to_np(lons), wrf.to_np(lats),
                     wrf.to_np(cvar_t),
                     zorder=4, transform=crs.PlateCarree(),
-                    cmap=cmap,alpha=1,levels=c_levels,extend='max')
+                    cmap=cmap,alpha=1,levels=c_levels,extend='max',
+                    norm = levelnorm)
                 cb = plt.colorbar(cvar_contour, shrink=.98,
                     format=cbformat)
                 cb.set_ticks(cbarticks)
@@ -208,9 +219,9 @@ def wrfplot(wrffile,varname,compare_var=None,time='2009-09-18T00',ppfig=(1,1),
                 cblabel = var.description+' in '+var.units
                 if (len(cblabel) > 40):
                     c = 0
-                    for letter in cblabel[35:]:
+                    for letter in cblabel[40:]:
                         if (letter == ' '):
-                            cblabel = cblabel[:35+c]+'\n'+cblabel[35+c:]
+                            cblabel = cblabel[:40+c]+'\n'+cblabel[40+c:]
                             break
                         c += 1
                 cb.set_label(label=(cblabel),

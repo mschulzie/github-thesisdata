@@ -16,16 +16,26 @@ daod = daod.sel(time=slice('2007-01','2017-12'))
 daod = daod.transpose('time','lat','lon')
 daod = daod.sel(lon=slice(110,179))
 daod.sel(time='2007-05').plot()
-daod.attrs['long_name']
+
+plfile = '2007_2020_GMIS_A_CHLA_Australia.nc'
+plpath = 'D://thesisdata/plankton/monthly/'
+#test#
+pl = xr.open_dataset(plpath+plfile)
+pl = pl['Chl_a']
+pl = pl.sel(time=slice('2007-05','2017-12'),lon=slice(110,179))
+name = pl.attrs['long_name']
+pl = pl.coarsen(lon=10,lat=10,boundary='trim').mean()
+pl = pl.transpose('time','lat','lon')
+pl.sel(time='2007-05').plot()
 #%%
 
-pca = xMCA(daod)
-pca.set_field_names(daod.attrs['long_name'])
-pca.solve(complexify=False)
+mca = xMCA(daod,pl)
+mca.set_field_names('Dust AOD 550nm','log10(Chl_a)')
+mca.solve(complexify=True)
 
-eigenvalues=pca.singular_values()
-pcs = pca.pcs()
-eofs = pca.eofs()
+eigenvalues=mca.singular_values()
+mcs = mca.pcs()
+eofs = mca.eofs()
 
-pca.plot(mode=1)
-pca.save_plot(mode=4)
+mca.plot(mode=1,orientation='vertical',threshold=0.3)
+mca.save_plot(mode=5,path=path,threshold=0.3)

@@ -41,7 +41,7 @@ def loadvar(wrffile,varname,lons=(110.3,-170),lats = (-57.06,-9.5),
         var = rainc.copy(deep=False)
         var.values = rainc + rainnc
         var.attrs['description'] = 'Total precipitation (acc. last 3h)'
-    elif (varname[-1] == '_'):
+    elif ((varname[-1] == '_')|(varname=='DUST_EMIS_ACC')):
         print('no explicit binsize\n'+
             'build sum over all binsizes 1-5! (fill NaN with 0!)')
         vars = [None]*5
@@ -112,8 +112,9 @@ def loadvar(wrffile,varname,lons=(110.3,-170),lats = (-57.06,-9.5),
 def wrfplot(wrffile,varname,compare_var=None,time='2009-09-18T00',ppfig=(1,1),
     save=False,savedir=None,show=True,cmap='RdBu_r', qmin=0,
     qmax=1, levels=50,limmin=None,limmax=None,zlevel=None,plevel=None,
-    contour_color='black', contour_levels=10,
-    lons = (110.3,-170),lats = (-57.06,-9.5)):
+    contour_color='black', contour_levels=10, cities=None,
+    lons = (110.3,-170),lats = (-57.06,-9.5),
+    only_maxvals=False):
     """
     Just a wrapper to easily plot wrfout with given latitude and
     longitude limits (Australia+Southern Ocean) for the purpose of
@@ -180,7 +181,7 @@ def wrfplot(wrffile,varname,compare_var=None,time='2009-09-18T00',ppfig=(1,1),
     t=0
     while (t<var.Time.size):
     #for t in range(var.Time.size//(ppfig[0]*ppfig[1]+1)+1):
-        fig = plt.figure(figsize=(5*ppfig[1],3.5*ppfig[0]))
+        fig = plt.figure(figsize=(5*ppfig[1],3.2*ppfig[0]))
         gs = fig.add_gridspec(ppfig[0],ppfig[1],hspace=0.4)
         count = 0
         for i in range(ppfig[0]):
@@ -190,7 +191,9 @@ def wrfplot(wrffile,varname,compare_var=None,time='2009-09-18T00',ppfig=(1,1),
                 ax.add_feature(cfeature.BORDERS, lw=.5, zorder=5)
                 ax.add_feature(cfeature.LAND, fc='lightgrey', zorder=3)
                 ax.add_feature(cfeature.STATES,lw=.2, zorder=5)
-                if (var.Time.size > 1):
+                if only_maxvals:
+                    cvar_t = cvar.max(dim='Time')
+                elif (var.Time.size > 1):
                     cvar_t = cvar.isel(Time=t+count)
                 else:
                     cvar_t = cvar
@@ -227,7 +230,11 @@ def wrfplot(wrffile,varname,compare_var=None,time='2009-09-18T00',ppfig=(1,1),
                         wrf.to_np(v_t[::each,::each]),
                         zorder=7, transform=crs.PlateCarree(), color="grey",
                         length=4)
-                zeitstr = str(cvar_t.Time.values)
+                if only_maxvals:
+                    zeitstr = str(time.start)[5:10]+' - '+str(time.stop)[5:10]
+                    t = var.Time.size - 1
+                else:
+                    zeitstr = str(cvar_t.Time.values)
                 title = zeitstr[:13]+' (WRF)'+' - '+ varname
                 if (compare_var!=None):
                     if (var.Time.size > 1):
@@ -264,9 +271,20 @@ def wrfplot(wrffile,varname,compare_var=None,time='2009-09-18T00',ppfig=(1,1),
                 gl.ylocator = mticker.FixedLocator([-10,-20,-30,-40,-50])
                 gl.xformatter = LONGITUDE_FORMATTER
                 gl.yformatter = LATITUDE_FORMATTER
-
-
-                ax.set_title(title,fontsize=10)
+                if cities!=None:
+                    transa = crs.PlateCarree()._as_mpl_transform(ax)
+                    for city in cities:
+                        ax.text(cities[city][0]+.1,cities[city][1]+.1,
+                            city,fontsize=2,
+                            zorder=8,transform=crs.PlateCarree(),ha='left')
+                        ax.plot(cities[city][0],cities[city][1],color='red',
+                            zorder=7,transform=crs.PlateCarree(),
+                            marker='o',markersize=.2)
+                if only_maxvals:
+                    ax.set_title(title+ '\n maximum values each grid point',
+                        fontsize=10)
+                else:
+                    ax.set_title(title,fontsize=10)
                 count += 1
                 if (t+count==var.Time.size):
                     break

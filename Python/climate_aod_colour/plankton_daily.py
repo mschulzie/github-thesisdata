@@ -11,12 +11,11 @@ pl = xr.open_dataset(path+file)
 pl = pl['chlor_a']
 pl = pl.sel(lon=slice(110,179))#,lat=slice(-30,-60))
 mway.show_nan(pl)
-pl.shape
 
 #%%
 
-pl = pl.interpolate_na(dim='time',method='spline')
 pl = pl.coarsen(lon=20,lat=20,boundary='trim').mean()
+pl = pl.interpolate_na(dim='time')
 pl = np.log10(pl)
 pl = pl.sel(time=slice('2009-09-01','2009-10-31'))
 
@@ -30,6 +29,6 @@ eigenvalues=pca.singular_values()
 pcs = pca.pcs()
 eofs = pca.eofs()
 
-pca.plot(mode=1)
-pca.save_plot(mode=5,path=path)
-pca.save_analysis(path=path)
+pca.plot(mode=3,threshold=0.5)
+#pca.save_plot(mode=5,path=path)
+#pca.save_analysis(path=path)

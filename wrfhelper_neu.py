@@ -14,40 +14,90 @@ import numpy as np
 # import cartopy.feature as cfeature
 # import os
 
-class Warfy:
-    def __init__(self):
-        self._vars = {}
-
-    def load_var(self, file, var, plevel=None, zlevel=None):
-        ds = wrf.getvar(netCDF4.Dataset(file),var,timeidx=wrf.ALL_TIMES)
-        ds = ds.assign_coords({'lon': ds.XLONG.isel(south_north=0), 'lat':
-            ds.XLAT.isel(west_east=0)})
-        ds = ds.rename({'south_north':'lat', 'west_east':'lon', 'Time':'time'})
-        ds.attrs['coordinates'] = 'time lat lon'
-        ds = ds.drop('XTIME')
-
-        self._vars[var] = ds
-
-    def get_vars(self):
-        return self._vars
-
-    def set_xlim(self,lon_start,lon_end):
-        variables = self._vars
-        for var in variables:
-            variables[var] = variables[var].sel(lon=slice(lon_start,lon_end))
-
-
-test = Warfy()
-test.load_var(file,'DUST_1')
-test.set_xlim(110,150)
-test.get_vars()['DUST_1'].lon['lon']
-
-var = 'DUST_1'
-
-
-# wrf.getvar(netCDF4.Dataset(file),'DUST_1',timeidx=wrf.ALL_TIMES)
+check = wrf.getvar(netCDF4.Dataset(file),'uvmet10',timeidx=wrf.ALL_TIMES)
+check.coords['u_v'].values
+che
 
 file = 'D://thesisdata/wrf_dust/wrfout_d01_2009-09-18_00_00_00'
+var = 'uvmet'
+#%%
+class Warfy:
+    def __init__(self, file=None, var=None):
+        self._vars = {}
+
+        if (file is not None) and (var is not None):
+            self.load_var(file, var)
+
+
+    def load_var(self, file, *vars, plevel=None, zlevel=0):
+        dataset = netCDF4.Dataset(file)
+
+        for var_name in vars:
+            ds = wrf.getvar(dataset,var_name,timeidx=wrf.ALL_TIMES)
+            lons = ds.XLONG.isel(south_north=0).values
+            dims = ['time','lat','lon']
+            coords = {
+                'time'  : ds.Time.values,
+                'lat'   : ds.XLAT.isel(west_east=0).values,
+                'lon'   : np.mod(lons, 360)
+                }
+            attrs = ds.attrs
+            # select a zlevel
+            try:
+                ds = ds.sel(bottom_top=zlevel)
+                attrs['description'] += ' at zlevel {:}'.format(zlevel)
+            except ValueError:
+                pass
+
+            # add u_v coordinate for wind fields
+            try:
+                uv = ['u','v']
+                dims.insert(0,'u_v')
+                coords['u_v'] = uv
+            except KeyError:
+                pass
+
+            new_ds = xr.DataArray(
+                ds.values,
+                dims = dims,
+                coords = coords,
+                attrs = attrs
+                )
+
+            self._vars[var_name] = new_ds
+
+    def get_var(self, var=None):
+        try:
+            return self._vars[var]
+        except KeyError:
+            return self._vars
+
+    def remove_var(self, *vars):
+        for v in vars:
+            self._vars.pop(v)
+
+    def sum_vars(self, vars, new, drop=True, keep_attrs=False):
+        temp = self.get_var(vars[0]).fillna(0)
+        attrs = self.get_var(vars[0]).attrs
+        for v in vars[1:]:
+            temp += self.get_var(v).fillna(0)
+
+        if keep_attrs:
+            temp.attrs = attrs
+
+        self._vars[new] = temp
+
+        if drop:
+            self.remove_var(*vars)
+
+#%%
+test.sum_vars(['PREC_ACC_C','PREC_ACC_NC'], 'RAIN_ACC', drop=True)
+
+test.load_var(file,'DUST_1','DUST_2','DUST_3','DUST_4','DUST_5')
+test.sum_vars(['DUST_1','DUST_2','DUST_3','DUST_4','DUST_5'], 'DUST', drop=True)
+test.get_var().keys()
+
+
 
 #%%
 

@@ -1,9 +1,10 @@
 import pandas as pd
 import numpy as np
 
-path = 'D://thesisdata/air_quality/New South Wales/PM_visibility.xls'
+
+#path = 'D://thesisdata/air_quality/New South Wales/PM_visibility.xls'
+path = '/home/julchen/Studium/air_quality/New South Wales/PM_visibility.xls'
 aq = pd.read_excel(path,header=2)
-aq
 parameters = ['PM2.5','NEPH','PM10']
 for p in parameters:
     stations = []
@@ -41,6 +42,11 @@ aq = aq.set_index('datetime')
 aq
 aq['2009-09-23':'2009-09-27']['RANDWICK']['PM10'].plot(title='Test')
 
-var = pd.read_json('./Python/air_quality/get_SiteDetails.json')
+stations = pd.read_json('./Python/air_quality/get_SiteDetails.json')
 
-var[var['SiteName']=='LIVERPOOL'].Longitude.values
+fullarray = np.array([[pd.to_datetime('2009'),50],[pd.to_datetime('2010'),10]])
+collis = ['datetime','values']
+full = pd.DataFrame(data = fullarray[:,1],index=fullarray[:,0],columns=collis)
+full
+full.set_index('datetime')
+aq.columns

@@ -14,13 +14,14 @@ import numpy as np
 # import cartopy.feature as cfeature
 # import os
 
-check = wrf.getvar(netCDF4.Dataset(file),'uvmet10',timeidx=wrf.ALL_TIMES)
-check.coords['u_v'].values
-che
+check = wrf.getvar(netCDF4.Dataset(file),'uvmet',timeidx=wrf.ALL_TIMES,units='kt')
 
-file = 'D://thesisdata/wrf_dust/wrfout_d01_2009-09-18_00_00_00'
-var = 'uvmet'
+file = '/home/julchen/Studium/wrfout_d01_2009-09-18_00_00_00'
+#file = 'D://thesisdata/wrf_dust/wrfout_d01_2009-09-18_00_00_00'
+var = 'DUST_1'
+
 #%%
+
 class Warfy:
     def __init__(self, file=None, var=None):
         self._vars = {}
@@ -28,10 +29,13 @@ class Warfy:
         if (file is not None) and (var is not None):
             self.load_var(file, var)
 
+        self.vars = self._vars.keys()
 
-    def load_var(self, file, *vars, plevel=None, zlevel=0):
+    def load_var(self, file, vars, plevel=None, zlevel=0):
         dataset = netCDF4.Dataset(file)
 
+        if (type(vars)==str):
+            vars = [vars]
         for var_name in vars:
             ds = wrf.getvar(dataset,var_name,timeidx=wrf.ALL_TIMES)
             lons = ds.XLONG.isel(south_north=0).values
@@ -51,6 +55,7 @@ class Warfy:
 
             # add u_v coordinate for wind fields
             try:
+                ds.coords['u_v']
                 uv = ['u','v']
                 dims.insert(0,'u_v')
                 coords['u_v'] = uv
@@ -76,7 +81,8 @@ class Warfy:
         for v in vars:
             self._vars.pop(v)
 
-    def sum_vars(self, vars, new, drop=True, keep_attrs=False):
+    def sum_vars(self, vars, new, drop=True, keep_attrs=True,
+        description=None):
         temp = self.get_var(vars[0]).fillna(0)
         attrs = self.get_var(vars[0]).attrs
         for v in vars[1:]:
@@ -85,118 +91,23 @@ class Warfy:
         if keep_attrs:
             temp.attrs = attrs
 
+        if (description != None):
+            temp.attrs['description'] = description
+
         self._vars[new] = temp
 
         if drop:
             self.remove_var(*vars)
 
+test = Warfy()
+test.vars
+test.load_var(file,['DUST_2','DUST_3'])
+test.sum_vars(['DUST_1','DUST_2','DUST_3'],'DUST_1-3',description='Summe über mehrere Bins')
+test.get_var('DUST_1-3').attrs
+test.load_var(file,'DUST_1')
+
+
 #%%
-test.sum_vars(['PREC_ACC_C','PREC_ACC_NC'], 'RAIN_ACC', drop=True)
-
-test.load_var(file,'DUST_1','DUST_2','DUST_3','DUST_4','DUST_5')
-test.sum_vars(['DUST_1','DUST_2','DUST_3','DUST_4','DUST_5'], 'DUST', drop=True)
-test.get_var().keys()
-
-
-
-#%%
-
-def loadvar(wrffile,varname,lons=(110.3,-170),lats = (-57.06,-9.5),
-    units="kt",plevel=None,zlevel=None):
-    """
-    converts dataarrays from wrffile into right shape to plot with wrfplot()
-    """
-    iselstart = wrf.ll_to_xy(wrffile,lats[0],lons[0]).values
-    iselend = wrf.ll_to_xy(wrffile,lats[1],lons[1]).values
-    windvars = ['uvmet10','ua','va','wa','uvmet','wspd_wdir']
-    u,v = None,None
-    if (varname=='RAIN'):
-        print('RAIN is not a valid variable! \n'+
-            'However, i create it by adding (fill Nan with 0!)\n'+
-            'Cumulus Precipitation and Grid Scale Prec.\n'+
-            '(PREC_ACC_C+PREC_ACC_NC)')
-        rainc = wrf.getvar(wrffile,'PREC_ACC_C',
-            timeidx=wrf.ALL_TIMES).isel(
-            west_east=slice(iselstart[0],iselend[0]),
-            south_north=slice(iselstart[1],iselend[1])
-            ).fillna(0)
-        rainnc = wrf.getvar(wrffile,'PREC_ACC_NC',
-            timeidx=wrf.ALL_TIMES).isel(
-            west_east=slice(iselstart[0],iselend[0]),
-            south_north=slice(iselstart[1],iselend[1])
-            ).fillna(0)
-        var = rainc.copy(deep=False)
-        var.values = rainc + rainnc
-        var.attrs['description'] = 'Total precipitation (acc. last 3h)'
-    elif ((varname[-1] == '_')|(varname=='DUST_EMIS_ACC')):
-        print('no explicit binsize\n'+
-            'build sum over all binsizes 1-5! (fill NaN with 0!)')
-        vars = [None]*5
-        for binsize in range(5):
-            vars[binsize] = wrf.getvar(wrffile,varname+str(binsize+1),
-                timeidx=wrf.ALL_TIMES).isel(
-                west_east=slice(iselstart[0],iselend[0]),
-                south_north=slice(iselstart[1],iselend[1])
-                ).fillna(0)
-        var = vars[0].copy(deep=False)
-        var.values = vars[0]+vars[1]+vars[2]+vars[3]+vars[4]
-        if (varname=='DUST_'):
-            var.attrs['description'] = 'Dust concentration (all binsizes)'
-        else:
-            var.attrs['description'] = var.description+'-5 (sum)'
-    elif (varname in windvars):
-        var = wrf.getvar(wrffile,varname,units=units,
-        timeidx=wrf.ALL_TIMES).isel(
-        west_east=slice(iselstart[0],iselend[0]),
-        south_north=slice(iselstart[1],iselend[1])
-        )
-    else:
-        var = wrf.getvar(wrffile,varname,
-        timeidx=wrf.ALL_TIMES).isel(
-        west_east=slice(iselstart[0],iselend[0]),
-        south_north=slice(iselstart[1],iselend[1])
-        )
-    if ((len(var.shape)==4) & (var.shape[0]==97)):
-        print ('4d variable with '+str(var.shape[1])+' heightlevels')
-        if ((plevel!=None) & (zlevel==None)):
-            p = wrf.getvar(wrffile,"pressure",timeidx=wrf.ALL_TIMES).isel(
-            west_east=slice(iselstart[0],iselend[0]),
-            south_north=slice(iselstart[1],iselend[1])
-            )
-            var_temp = wrf.interplevel(var,p,plevel)
-            var = var[:,0,...].copy(deep=False)
-            var.values = var_temp
-            var.attrs['description'] = (var.description+'\n (at '
-                +str(plevel)+'hPa)')
-            cvar = var
-        elif ((plevel==None) & (zlevel!=None)):
-            var = var[:,zlevel,...]
-            var.attrs['description'] = (var.description+'\n (at zlevel '
-                +str(zlevel)+'/31)')
-            cvar = var
-        else:
-            raise ValueError(
-                '4D variable! Choose zlevel or interpolate to plevel')
-        cvar = var
-        vector=False
-    elif ((len(var.shape)==4) & (var.shape[0]==2)):
-        print ('3d variable as vector with u,v')
-        u = var[0,:]
-        v = var[1,:]
-        cvar= np.sqrt(u**2+v**2)
-        vector = True
-    elif ((len(var.shape)==5) & (var.shape[0]==2)):
-        print ('4d variable as vector with u,v and '+str(var.shape[2])+
-        ' heightlevels')
-        u = var[0,:]
-        v = var[1,:]
-        cvar= np.sqrt(u**2+v**2)
-        vector = True
-    elif ((len(var.shape)==3) & (var.shape[0]==97)):
-        print ('3d variable')
-        cvar = var
-        vector = False
-    return var, cvar, vector, u, v
 
 
 def wrfplot(wrffile,varname,compare_var=None,time='2009-09-18T00',ppfig=(1,1),

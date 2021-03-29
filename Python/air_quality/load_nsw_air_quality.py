@@ -2,8 +2,8 @@ import pandas as pd
 import numpy as np
 
 
-#path = 'D://thesisdata/air_quality/New South Wales/PM_visibility.xls'
-path = '/home/julchen/Studium/air_quality/New South Wales/PM_visibility.xls'
+path = 'D://thesisdata/air_quality/New South Wales/PM_visibility.xls'
+#path = '/home/julchen/Studium/air_quality/New South Wales/PM_visibility.xls'
 aq = pd.read_excel(path,header=2)
 parameters = ['PM2.5','NEPH','PM10']
 for p in parameters:
@@ -37,16 +37,21 @@ for i in range(aq.shape[0]):
         + pd.DateOffset(days=offset))
 del aq['Time']
 del aq['Date']
-aq = aq.set_index('datetime')
-
-aq
-aq['2009-09-23':'2009-09-27']['RANDWICK']['PM10'].plot(title='Test')
-
+#aq = aq.set_index('datetime')
 stations = pd.read_json('./Python/air_quality/get_SiteDetails.json')
+new_aq = pd.DataFrame(columns=['value','time','variable','station','lon',
+    'lat','region','site-id'])
 
-fullarray = np.array([[pd.to_datetime('2009'),50],[pd.to_datetime('2010'),10]])
-collis = ['datetime','values']
-full = pd.DataFrame(data = fullarray[:,1],index=fullarray[:,0],columns=collis)
-full
-full.set_index('datetime')
-aq.columns
+for col in aq.columns[:-1]:
+    temp = pd.DataFrame(aq[col].values,columns=['value'])
+    temp['time'] = aq['datetime'].values
+    temp['variable'] = col[1]
+    temp['station'] = col[0]
+    temp['lon'] = stations[stations.SiteName == col[0]]['Longitude'].values[0]
+    temp['lat'] = stations[stations.SiteName == col[0]]['Latitude'].values[0]
+    temp['region']= stations[stations.SiteName == col[0]]['Region'].values[0]
+    temp['site-id']= stations[stations.SiteName == col[0]]['Site_Id'].values[0]
+    new_aq = new_aq.append(temp)
+
+new_aq = new_aq.set_index('time')
+new_aq.to_csv('./Python/air_quality/NSW_clean.csv')

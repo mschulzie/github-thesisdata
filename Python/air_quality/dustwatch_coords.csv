@@ -1,0 +1,52 @@
+Site ID;Site Type;Location Detail;Latitude;Longitude;Location Dataset (homogenized);;added
+100;DT;Bourke;-30,0362;145,9521;Bourke___________.txt;;
+101;DT;Bidura Station;-34,1547;143,352;Bidura_Station___.txt;;
+102;DT;Gunnedah;-31,0261;150,2686;Gunnedah_________.txt;;
+103;DT;Buronga;-34,1747;142,2008;Buronga__________.txt;;
+104;DT;Cobar;-31,4837;145,8293;Cobar____________.txt;;
+105;DT;Condobolin;-33,0665;147,2283;Condobolin_______.txt;;
+106;DT;Tibooburra;-29,4448;142,0568;Tibooburra_______.txt;;
+108;DT;Dubbo;-32,2196;148,5777;Dubbo____________.txt;;
+109;DT;Ivanhoe;-33,0548;144,154;Ivanhoe__________.txt;;
+110;DT;Woolcunda Station;-32,9786;141,489;Woolcunda_Station.txt;;
+111;DT;Bennington;-34,443;142,889;Bennington_______.txt;;
+112;DT;Kulkurna;-34,0485;141,0633;Kulkurna_________.txt;;
+113;DT;Hay;-34,5348;144,8291;Hay______________.txt;;
+114;DT;Lethero;-33,6016;142,5308;Lethero__________.txt;;
+115;DT;Moolawatana;-29,9072;139,7369;Moolawatana______.txt;;
+116;DT;Hillston;-33,491;145,5242;Hillston_________.txt;;
+119;DT;Genoe;-35,0368;143,4895;Genoe____________.txt;;
+120;DT;Temora;-34,4278;147,5117;Temora___________.txt;;
+121;DT;Parkes;-33,1277;148,2439;Parkes___________.txt;;
+122;DT;West Wyalong;-33,9384;147,1965;West_Wyalong_____.txt;;
+123;DT;Broken Hill;-32,0012;141,4694;Broken_Hill______.txt;;
+125;DT;White Cliffs;-30,8517;143,0742;White_Cliffs_____.txt;;
+126;DT;Moree;-29,4897;149,8473;Moree____________.txt;;
+127;DT;Menindee;-32,3902;142,4165;Menindee_________.txt;;
+129;DT2;Coonamble;-30,9776;148,3798;Coonamble________.txt;;
+130;DT2;Fis;-33,8861;151,19;Fis______________.txt;;added
+130;DT2;Hor;-33,6549;151,0998;Hor______________.txt;;added
+130;DT2;LC1;-33,6314;147,4151;LC1______________.txt;;added
+130;DT2;LC2;-33,6303;147,4255;LC2______________.txt;;added
+130;DT2;LC3;-33,627;147,4512;LC3______________.txt;;added
+130;DT2;LC4;-33,6263;147,4931;LC4______________.txt;;added
+130;DT2;LC5;-33,5901;147,3878;LC5______________.txt;;added
+130;DT2;LC6;-33,6332;147,2987;LC6______________.txt;;added
+130;DT2;Org;-33,2844;149,0258;Org______________.txt;;added
+130;DT2;Rand;-35,6296;146,4752;Rand_____________.txt;;
+130;DT2;StP;-33,9088;151,1803;StP______________.txt;;added
+132;DRX;Wagga Wagga;-35,1032;147,3598;Wagga_Wagga______.txt;;
+133;DW2;Loddon Plains;-36,4538;144,3186;Loddon_Plains____.txt;;
+134;DW2;Walpeup;-35,1202;142,004;Walpeup__________.txt;;
+135;DW2;Wycheproof;-36,0971;143,3548;Wycheproof_______.txt;;
+137;DW2;Lameroo;-35,0485;140,5378;Lameroo__________.txt;;
+139;DT;Cowra;-33,8447;148,65;Cowra____________.txt;;
+140;DW;Birdsville;-25,8984;139,3516;Birdsville_______.txt;;
+141;DW2;Griffifth;-34,2487;146,0695;Griffith_________.txt;;
+142;DW2;Narrandera;-34,705;146,514;Narrandera_______.txt;;
+143;DT;Junee;-34,8254;147,5099;Junee____________.txt;;
+144;DT;Lake George;-35,0915;149,468;Lake_George______.txt;;
+145;DW2;Willandra;-33,3396;143,3987;Willandra________.txt;;
+146;DT;Deniliquin;-35,5575;144,9458;Deniliquin_______.txt;;
+152;DW2;Lidcombe;-33,8916;151,0461;no file;;
+153;DW2;Chullora;-33,8916;151,0461;no file;;

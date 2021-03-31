@@ -14,7 +14,7 @@ timestamp = '2009-09-23T00'
 var = 'PM10'
 
 
-daterange = pd.date_range('2009-09-23T05','2009-09-23T12',freq='1H')
+daterange = pd.date_range(timestamp,timestamp,freq='1H')
 
 for timestamp in daterange:
     timestr = str(timestamp)[:13]
@@ -66,7 +66,16 @@ for timestamp in daterange:
     # plt.colorbar(im2,label='DustWatch (???) PM10 concentrations in ug/m3',
     #     orientation='horizontal',shrink=.2)
 
-
+    for stat in of.station:
+        ax.text(of[of.station==stat].lon.values+.2,
+            of[of.station==stat].lat.values+.2,
+            stat,fontsize=4,
+            zorder=4,transform=crs.PlateCarree(),ha='left')
+    for stat in dw.station:
+        ax.text(dw[dw.station==stat].lon.values+.2,
+            dw[dw.station==stat].lat.values+.2,
+            stat,fontsize=4,
+            zorder=4,transform=crs.PlateCarree(),ha='left')
     coba = mpl.colorbar.ColorbarBase(ax=cb,cmap=cmap,orientation='vertical',
         spacing='uniform',boundaries=bounds,
         label =r'measured concentrations in $\mu$g / m$^3$')
@@ -84,5 +93,5 @@ for timestamp in daterange:
     ax.legend()
 
     # fig.savefig('D://thesisdata/bilder/Python/dustwatch/'+
-    #     timestr+'.png',dpi=300)
+    #      timestr+'.png',dpi=300)
     # plt.close()

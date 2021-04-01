@@ -11,7 +11,6 @@ def loadcities():
       'Albion Park': [150.78,-34.58],
       #'Bathurst' : [149.58,-33.42],
       'Wagga Wagga': [147.36,-35.11],
-      'Kati Thanda-Lake Eyre': [137.95,-28.3],
-      'Darling Riverine Plain':
+      'Kati Thanda-Lake Eyre': [137.95,-28.3]
     }
     return cities

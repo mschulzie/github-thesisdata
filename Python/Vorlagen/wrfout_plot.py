@@ -8,7 +8,7 @@ wrffile = Dataset(wrfout)
 
 cities=loadcities()
 
-var = wrfhelp.wrfplot(wrffile,'uvmet10',
+var = wrfhelp.wrfplot(wrffile,'DUSTSOURCE',
                 #compare_var='DUST_EMIS_ACC',
                 #lons = (0,155),
                 #lats = (-40,0),

@@ -13,12 +13,8 @@ import numpy as np
 # import numpy as np
 # import cartopy.feature as cfeature
 # import os
-
-check = wrf.getvar(netCDF4.Dataset(file),'uvmet',timeidx=wrf.ALL_TIMES,units='kt')
-
 file = '/home/julchen/Studium/wrfout_d01_2009-09-18_00_00_00'
 #file = 'D://thesisdata/wrf_dust/wrfout_d01_2009-09-18_00_00_00'
-var = 'DUST_1'
 
 #%%
 
@@ -98,14 +94,6 @@ class Warfy:
 
         if drop:
             self.remove_var(*vars)
-
-test = Warfy()
-test.vars
-test.load_var(file,['DUST_2','DUST_3'])
-test.sum_vars(['DUST_1','DUST_2','DUST_3'],'DUST_1-3',description='Summe über mehrere Bins')
-test.get_var('DUST_1-3').attrs
-test.load_var(file,'DUST_1')
-
 
 #%%
 

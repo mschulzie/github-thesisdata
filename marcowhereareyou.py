@@ -37,8 +37,10 @@ def gimmedirs():
 
     #Laptop Julchen:
     elif (os.getcwd()=='/home/julchen/github/github-thesisdata'):
-        print('Auf dem Laptop sind keine Daten du Troll!!!')
-
+        print('Auf dem Laptop sind jetzt Daten du Troll!!!')
+        wrfout = "/home/julchen/Studium/wrfout_d01_2009-09-18_00_00_00"
+        savepic = '/home/julchen/Bilder/'
+        return wrfout, savepic
     else:
         print('Alter wo bist du denn? Am falschen PC?')
 

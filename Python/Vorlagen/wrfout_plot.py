@@ -1,12 +1,11 @@
 from netCDF4 import Dataset
-import marcowhereareyou as mway
+import helperlies as mway
 import wrfhelper as wrfhelp
-from cities import loadcities
 
 wrfout, savedir = mway.gimmedirs()
 wrffile = Dataset(wrfout)
 
-cities=loadcities()
+cities=mway.loadcities()
 
 var = wrfhelp.wrfplot(wrffile,'DUST_EMIS_ACC',
                 #compare_var='DUST_EMIS_ACC',

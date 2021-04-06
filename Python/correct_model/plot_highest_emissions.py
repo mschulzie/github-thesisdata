@@ -2,15 +2,15 @@ import wrf
 import xarray as xr
 import netCDF4
 import numpy as np
-import wrfhelper_neu as wh
+import warfy as wh
 import matplotlib.pyplot as plt
 import cartopy.crs as crs
 import cartopy.feature as cfeature
 from cartopy.mpl.gridliner import LONGITUDE_FORMATTER, LATITUDE_FORMATTER
 import matplotlib.ticker as mticker
 
-file = '/home/julchen/Studium/wrfout_d01_2009-09-18_00_00_00'
-#file = 'D://thesisdata/wrf_dust/wrfout_d01_2009-09-18_00_00_00'
+#file = '/home/julchen/Studium/wrfout_d01_2009-09-18_00_00_00'
+file = 'D://thesisdata/wrf_dust/wrfout_d01_2009-09-18_00_00_00'
 var = ['DUST_EMIS_ACC1','DUST_EMIS_ACC2','DUST_EMIS_ACC3','DUST_EMIS_ACC4','DUST_EMIS_ACC5']
 
 test = wh.Warfy()

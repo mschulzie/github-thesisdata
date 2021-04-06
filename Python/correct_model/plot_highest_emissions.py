@@ -32,6 +32,9 @@ widths = [5,5]
 fig = plt.figure(figsize=(5,2*N),constrained_layout=True)
 gs = fig.add_gridspec(N, 2,width_ratios=widths,wspace=0.05)
 
+highest_lon = []
+highest_lat = []
+
 for i in range(N):
     ax = fig.add_subplot(gs[i,0])
     map = fig.add_subplot(gs[i,1], projection=crs.Mercator(central_longitude=150.0))
@@ -39,6 +42,8 @@ for i in range(N):
     ilat = maxvals.argmax(dim=('lon','lat'))['lat'].values
     lon = maxvals[maxvals.argmax(dim=('lon','lat'))].lon.values
     lat = maxvals[maxvals.argmax(dim=('lon','lat'))].lat.values
+    highest_lon.append(lon)
+    highest_lat.append(lat)
     wind[maxvals.argmax(dim=('lon','lat'))].plot(ax=ax,
         label='1st level wind in km/h', color='red')
     varr[maxvals.argmax(dim=('lon','lat'))].plot(ax=ax,
@@ -85,3 +90,16 @@ plt.tight_layout()
 plt.show()
 
 fig.savefig('high_emissions_20.pdf')
+
+for i in highest_lat:
+    print(i)
+highest_lon
+len(highest_lat)
+
+high= ([-25.154457,-23.379456,-23.825523,-23.379456,
+    -23.825523,-24.27005,-23.379456,-23.825523,
+    -24.713036,-23.825523,-28.198704,-27.768837,
+    -24.713036,-31.574299,-27.337261,-24.713036,
+    -24.27005,-27.337261,-24.27005,-23.379456])
+
+    len(high)

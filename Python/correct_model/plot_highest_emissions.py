@@ -89,7 +89,7 @@ fig.suptitle('Times series of first '+str(N)+
 plt.tight_layout()
 plt.show()
 
-fig.savefig('high_emissions_20.pdf')
+fig.savefig('D://thesisdata/high_emissions_20.pdf')
 
 for i in highest_lat:
     print(i)

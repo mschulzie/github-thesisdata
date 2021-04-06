@@ -16,10 +16,10 @@ var = ['DUST_EMIS_ACC1','DUST_EMIS_ACC2','DUST_EMIS_ACC3','DUST_EMIS_ACC4','DUST
 test = wh.Warfy()
 test.load_var(file,var)
 test.sum_vars(var,'DUST_EMIS_ACC_SUM')
-test.load_var(file,'uvmet10')
+test.load_var(file,'uvmet')
 test.load_var(file,'ROUGH_COR')
 rough = test.get_var('ROUGH_COR')
-wind = test.get_var('uvmet10')
+wind = test.get_var('uvmet')
 varr = test.get_var('DUST_EMIS_ACC_SUM')
 maxvals = varr.max('time')
 maxvals.argmax(dim=('lon','lat'))['lon']
@@ -40,7 +40,7 @@ for i in range(N):
     lon = maxvals[maxvals.argmax(dim=('lon','lat'))].lon.values
     lat = maxvals[maxvals.argmax(dim=('lon','lat'))].lat.values
     wind[maxvals.argmax(dim=('lon','lat'))].plot(ax=ax,
-        label='10m wind in km/h', color='red')
+        label='1st level wind in km/h', color='red')
     varr[maxvals.argmax(dim=('lon','lat'))].plot(ax=ax,
         label='DUST_EMIS_ACC_1-5 in ug/m2/s', color='black')
     rough[maxvals.argmax(dim=('lon','lat'))].plot(ax=ax,

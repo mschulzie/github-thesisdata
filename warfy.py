@@ -17,7 +17,6 @@ import copy as cp
 file = 'D://thesisdata/wrf_dust/wrfout_d01_2009-09-18_00_00_00'
 
 #%%
-
 class Warfy:
     def __init__(self, file=None, var=None):
         self._vars = {}
@@ -28,7 +27,7 @@ class Warfy:
         self.vars = self._vars.keys()
         self.check_dims()
 
-    def load_var(self, file, vars, plevel=None, zlevel=0):
+    def load_var(self, file, vars, slevel=0, zlevel=0):
         dataset = netCDF4.Dataset(file)
         if (type(vars)==str):
             vars = [vars]
@@ -48,7 +47,11 @@ class Warfy:
                 attrs['description'] += ' at zlevel {:}'.format(zlevel)
             except ValueError:
                 pass
-
+            try:
+                ds = ds.sel(soil_layers_stag=slevel)
+                attrs['description'] += ' at slevel {:}'.format(slevel)
+            except ValueError:
+                pass
             # add u_v coordinate for wind fields
             try:
                 ds.coords['u_v']
@@ -110,14 +113,44 @@ class Warfy:
         if drop:
             self.remove_var(*vars)
 
-        # def set_grid(*vars,timesteps=1):
-        #     fig = plt.figure(figsize=(5*timesteps,3.2*len(vars)))
-        #     gs = fig.add_gridspec(len(vars),timesteps,hspace=0.4)
+    def windspeed(self,drop=True,unit='kt'):
+        units = {'km/h': 3.6, 'm/s':1,'kt':1.94384}
+        new_vars = {}
+        for v in self._vars:
+            if ('u_v' in self._vars[v].dims):
+                attrs = self._vars[v].attrs
+                coords = {
+                    'time'  : self._vars[v].time.values,
+                    'lat'   : self._vars[v].lat.values,
+                    'lon'   : self._vars[v].lon.values
+                    }
+                new_ds = xr.DataArray(
+                    (np.sqrt(self._vars[v].values[0,...]**2+
+                        self._vars[v].values[1,...]**2)
+                        * units[unit]) ,
+                    dims = ['time','lat','lon'],
+                    coords = coords,
+                    attrs = attrs
+                    )
+                new_ds.attrs['units'] = unit
+                new_vars[v+'_speed'] = new_ds
+        self._vars.update(new_vars)
+        if drop:
+            for v in list(self._vars):
+                if ('u_v' in self._vars[v].dims):
+                    self._vars.pop(v)
 
     def sel(self,**kwargs):
         temp = Warfy()
         for v in self._vars:
             temp._vars[v] = self._vars[v].sel(kwargs)
+        temp.check_dims()
+        return temp
+
+    def isel(self,**kwargs):
+        temp = Warfy()
+        for v in self._vars:
+            temp._vars[v] = self._vars[v].isel(kwargs)
         temp.check_dims()
         return temp
 

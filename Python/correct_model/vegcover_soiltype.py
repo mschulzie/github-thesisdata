@@ -12,7 +12,7 @@ import matplotlib.ticker as mticker
 #file = '/home/julchen/Studium/wrfout_d01_2009-09-18_00_00_00'
 file = 'D://thesisdata/wrf_dust/wrfout_d01_2009-09-18_00_00_00'
 constvar = ['VEGFRA','IVGTYP','ISLTYP','ROUGH_COR',
-    'LAI','SMOIS']
+    'LAI','HGT']
 timevar = ['uvmet','SMOIS_COR','UST','UST_T']
 # only  SMOIS_COR, UST and UST_T variable in time!!
 test = wh.Warfy()
@@ -22,6 +22,17 @@ test.load_var(file,timevar)
 emis = ['DUST_EMIS_ACC1','DUST_EMIS_ACC2','DUST_EMIS_ACC3','DUST_EMIS_ACC4','DUST_EMIS_ACC5']
 test.load_var(file,emis)
 test.sum_vars(emis,'DUST_EMIS_ACC_SUM')
+#%%
+#TEST
+lo = 62
+la = 92
+test.get_var('UST').isel(lon=lo,lat=la).plot(label='UST')
+test.get_var('UST_T').isel(lon=lo,lat=la).plot(label='UST_T')
+(test.get_var('DUST_EMIS_ACC_SUM')/100).isel(lon=lo,lat=la).plot(label='DUST_EMIS_ACC_SUM / 100')
+#test.get_var('uvmet_speed').isel(lon=lo,lat=la).plot(label='wind')
+plt.legend()
+plt.savefig('gridcell_no_emission.png')
+#%%
 
 test = test.isel(lon=slice(50,70),lat=slice(80,100))
 test.windspeed(unit='km/h')

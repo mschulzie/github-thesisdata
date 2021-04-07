@@ -12,7 +12,7 @@ import matplotlib.ticker as mticker
 #file = '/home/julchen/Studium/wrfout_d01_2009-09-18_00_00_00'
 file = 'D://thesisdata/wrf_dust/wrfout_d01_2009-09-18_00_00_00'
 constvar = ['VEGFRA','IVGTYP','ISLTYP','ROUGH_COR',
-    'DUSTSOURCE','SMOIS']
+    'LAI','SMOIS']
 timevar = ['uvmet','SMOIS_COR','UST','UST_T']
 # only  SMOIS_COR, UST and UST_T variable in time!!
 test = wh.Warfy()
@@ -80,7 +80,7 @@ wind.attrs
 # ax.set_xticklabels(['19.09.','21.09.','23.09.','25.09.','27.09.',
 #     '29.09.'])
 
-cmaps = ['Greens','tab20','tab20','jet','binary_r','Blues']
+cmaps = ['Greens','tab20','tab20','jet','Greens','Blues']
 
 # number of different values..:
 list(set(test.get_var('ISLTYP').values[0,...].flatten().tolist()))

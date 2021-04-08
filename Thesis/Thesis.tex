@@ -11,6 +11,7 @@
 \usepackage{lmodern}
 \usepackage{mathtools}
 \usepackage{graphicx}
+\usepackage{grffile} % to allow underscores in filenames
 \usepackage{subfig}
 \usepackage{caption, booktabs}
 \usepackage{paralist}
@@ -45,7 +46,7 @@
 \newcommand*\mytitle{Arbeitstitel: Eisenhypothese Dust-Event 2009}
 \newcommand*\mysubtitle{Bachelorarbeit}
 \newcommand*\myauthor{Marco Schulz}
-\newcommand*\mydate{05.03.2021}
+\newcommand*\mydate{08.04.2021}
 \newcommand{\cotwo}{CO\textsubscript{2}}
 
 \begin{document}
@@ -66,9 +67,10 @@
 \vspace{4cm}
 \\
 \end{center}
-\noindent Erstgutachter: Prof. Yaping Shao (yshao@meteo.uni-koeln.de)
-\bigskip \\
-Zweitgutachter: Prof. Joachim Saur (saur@geo.uni-koeln.de)
+\begin{tabbing}
+Erstgutachter: \quad  \= Prof. Yaping Shao (yshao@meteo.uni-koeln.de) \\[2ex]
+Zweitgutachter:  \>  Dr. Hendrik Elbern (he@eurad.uni-koeln.de)
+\end{tabbing}
 \end{titlepage}
 \setcounter{page}{2}
 \ofoot{\pagemark}
@@ -193,6 +195,8 @@ nur kurze Vorstellung, da grundsätzlich nur der Output verwendet werden soll. V
 \end{tabularx}
 \caption{Die Staubpartikel wurden in verschiedene Korngrößen unterteilt} \label{table:binsizes}
 \end{table}
+\subsubsection{Emissions Schema}
+Zur Modellierung der Staubemissionen wurde das Schema von \citet{Shao.2004} verwendet.
 \subsection{Phytoplankton}
 Climate Data Store \nocite{*}
 \\\\

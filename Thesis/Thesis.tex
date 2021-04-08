@@ -202,6 +202,63 @@ Messungen des Chlorphyll-$\alpha$ geben Rückschluss auf Phytoplankton \citep{RY
 \subsection{Riegers Principal Components?}
 
 \section{Auswertung und Diskussion}
+\subsection{Anpassungen nach der ersten Simulation}
+Die Ergebnisse der WRF-Simulation sollten in einem ersten Schritt durch eine grobe Übersicht auf Plausibilität, d.h. der wahrscheinlichen Abweichung von der Realität überprüft werden. Da ein relativ langer Zeitraum von 12 Tagen simuliert wird, sind auch größere Abweichungen wahrscheinlich. Ganz allgemein sind Wetterprognosen i.d.R. nur für die ersten Tage wirklich präzise. Die Wahrscheinlichkeit, dass das berechnete Wetter eintritt nimmt dann aufgrund des chaotischen Verhaltens der Atmosphäre und den beschränkt zur Verfügung stehenden diskreten Startwerten stark ab \textbf{(Quelle ergänzen)}. Beobachtungs- bzw. Reanalysedaten werden dem Modell zum Startzeitpunkt und an den Rändern geliefert. Die Zustände der zeitlich und räumlich dazwischen liegenden Gitterpunkte sind dann (ausschließlich) vom Modell simuliert (\textbf{Quelle Sven, nochmal checken}). Für den Großteil des untersuchten Gebietes liegen ohnehin keine Beobachtungsdaten vor. Der australische Kontinent ist relativ dünn mit Wetterstationen besetzt und Beobachtungen durch Satelliten sind hinsichtlich  zeitlicher und räumlicher Auflösung ebenfalls häufig relativ grob. Darüber hinaus können die interessanten Parameter meist nur indirekt ermittelt werden. 
+\\
+
+Dennoch können einfache Vergleiche einen ersten Eindruck von der Qualität der Simulation vermitteln. Hierzu wurden die simulierten Staubkonzentrationen und Emissionen mit Satellitenbildern, Beobachtungsdaten und Schätzungen aus der diesbezüglichen Literatur verglichen. Der Abgleich mit den (Echt-Farben-) Satellitenbildern zeigt, dass die Fortbewegung und Ausdehnung der Staubwolke vom Modell grundsätzlich erfasst wird. Auf Abbildung \ref{fig:wrf_sat} ist jedoch ebenfalls gut sichtbar, dass das Modell zu späteren Zeiten eine deutlich höhere Staubkonzentration im Nordwesten Australiens simuliert, als von den Satellitenbildern direkt ableitbar wäre. Dabei ist zu beachten, dass die (Echt-Farben-) Satellitenbilder keine direkten Rückschlüsse auf die Staubkonzentration zulassen. Es können durchaus höhere Staubkonzentrationen vorliegen, die auf Satellitenbildern nicht erkannt werden können (\textbf{Behauptung Shao, Quelle ergänzen}). Aufgrund der dort simulierten sehr hohen Konzentrationen wird allerdings vermutet, dass entsprechende Emissionen überschätzt werden.
+
+\begin{figure}[H]
+	\begin{minipage}[c]{0.35\textwidth}
+		\includegraphics[width=\textwidth]{bilder/wrf/20T00_sat.png}
+	\end{minipage}\hfill	
+	\begin{minipage}[c]{0.35\textwidth}
+		 \includegraphics[width=\textwidth]{bilder/wrf/20T00_wrf.png}
+	\end{minipage}\hfill
+	\begin{minipage}[c]{0.29\textwidth}
+		 \includegraphics[width=\textwidth]{bilder/wrf/20T00_obs.png}
+	\end{minipage}\hfill
+	\begin{minipage}[c]{0.35\textwidth}
+		\includegraphics[width=\textwidth]{bilder/wrf/23T06_sat.png}
+	\end{minipage}\hfill	
+	\begin{minipage}[c]{0.35\textwidth}
+		 \includegraphics[width=\textwidth]{bilder/wrf/23T06_wrf.png}
+	\end{minipage}\hfill
+	\begin{minipage}[c]{0.29\textwidth}
+		 \includegraphics[width=\textwidth]{bilder/wrf/23T06_obs.png}
+	\end{minipage}\hfill
+	\begin{minipage}[c]{0.35\textwidth}
+		\includegraphics[width=\textwidth]{bilder/wrf/25T06_sat.png}
+	\end{minipage}\hfill	
+	\begin{minipage}[c]{0.35\textwidth}
+		 \includegraphics[width=\textwidth]{bilder/wrf/25T06_wrf.png}
+	\end{minipage}\hfill
+	\begin{minipage}[c]{0.29\textwidth}
+		 \includegraphics[width=\textwidth]{bilder/wrf/25T06_obs.png}
+	\end{minipage}\hfill
+	\begin{minipage}[c]{\textwidth}
+		\captionsetup{format=hang, indention=0.0cm}
+		\caption{Das muss ich irgendwie noch schöner machen....}
+		\label{fig:wrf_sat}
+	\end{minipage}
+\end{figure}
+Der Großteil des Staubs wird laut WRF-Modell aus der Region \textit{Channel Country} im Westen Queensland in der Nähe der \textit{Diamantina Lakes} emittiert. Diese Region wird grundsätzlich als Quelle für das Red-Dawn-Event vermutet (sh. Kapitel \textbf{XY}, \cite{Leys.2011}), allerdings bislang nicht als dominierende. Auf Abbildung \ref{fig:max_emis} wird deutlich, dass diese im Modell aber deutlich dominiert. Die Vermutung liegt nahe, dass ebendiese Emissionen zu den erhöhten (möglicherweise unrealistischen) modellierten Staubkonzentrationen im Nordwesten führen. Die Staubemissionen können im Modell aus verschiedenen Gründen überschätzt werden. Ein offensichtlicher Nachteil des im Modell implementierten Schemas zur Staubemission ist, dass nicht berücksichtigt wird, wie viel Staub am jeweiligen Gitterpunkt maximal emittiert werden kann. Ist eine Region also einmal als Staubquelle mit einer entsprechenden Größenordnung definiert, kann bei entsprechenden Windstärken theoretisch beliebig viel Staub emittiert werden. Dies soll in späteren Versionen durch eine \textit{Budgetierung} des maximal \textit{emissionsfähigen} Staubs an der Oberfläche implementiert werden, sodass die Emission stoppt, nachdem das Budget aufgebraucht ist. Durch neue Ablagerungen von Staub (Deposition) kann das Budget dann wieder aufgefüllt werden. Anschließend wären die Emissionen \textit{zeitlich} limitiert.
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{bilder/wrf/max_emis.png}
+\caption{Darstellung der maximalen Staubemissionen über alle Zeiten je Gitterpunkt. Die Variablen DUST_EMIS_ACC1..5 beschreiben die über den letzten Zeitschritt (hier 3 Stunden) gemittelten Werte der Staubemissionen und wurden hier aufsummiert.} \label{fig:max_emis}
+\end{figure}
+Neben der zeitlichen Beschränkung beeinflussen verschiedene Parameter die zeitunabhängige Größenordnung der Emissionen. Insbesondere entscheidend für das Emissionspotential ist die Rauheit des Geländes. Dies stellt in Simulationen stets ein Problem dar, da die räumliche Auflösung eines diskreten Modells nie alle beliebig kleinen Elemente abdecken kann. Stattdessen wird jedem Gitterpunkt ein Parameter zugeordnet, der die Rauheit repräsentiert und die Emissionen stellvertretend regulieren soll. Im vorliegenden WRF-Modell werden dazu die Vegetationsparameter angepasst \textbf{LAI oder VEGFRA?}, da Vegetation einen vergleichbaren Einfluss nimmt wie Rauheit, bzw. ebenfalls eine gewisse Rauheit darstellt. Diese Informationen, welche Größe die Parameter an welchem Gitterpunkt annehmen, werden durch Geogrid-Daten in das WRF-Modell gegeben. In Abbildung \label{fig:emis_ctrl} sind einige der relevanten Parameter dargestellt. Es wird deutlich, dass die Zelle mit den höchsten Emissionen (\textit{1}) im Vergleich zu den Nachbarzellen etwas andere Werte erreicht, was zu verstärkten Emissionen führt. Da angenommen wird, dass die sehr hohen Emissionen unrealistisch sind, wurde der Blattflächenindex (LAI) an den 10 Gitterpunkten mit den höchsten Emissionen gezielt korrigiert. Dies führt zu einer veränderten Rauheit und soll die Emissionen auf ein adäquates Level limitieren.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{bilder/wrf/emis_ctrl.png}
+\caption{Absolute Werte einiger konstanter Parameter im WRF-Modell für die Region mit hohen Emissionen, die die Staubemissionen regulieren können. Die Zahlenwerte 1 bis 20 geben die Rangordnung der Staubemissionen an. Das heißt, Gitterpunkt 1 erreicht die höchste Emission, 2 die zweithöchste usw.}
+
+\end{figure}
+
+
+
 \subsection{Staubkonzentrationen}
 - Hohe Konzentrationen an der Oberfläche werden durch Modell ungenügend beschrieben (siehe DUST_ACC_ auf zlevel 0 (geländefolgend)). DUSTLOAD über ganze Atmosphärensäule allerdings schon eher. Sehr sehr hohe Konzentrationen  ($>$ 10kg pro qm) später im Norden. 
 \section{Staubquellen und Emissionen}

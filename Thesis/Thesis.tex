@@ -196,7 +196,14 @@ nur kurze Vorstellung, da grundsätzlich nur der Output verwendet werden soll. V
 \caption{Die Staubpartikel wurden in verschiedene Korngrößen unterteilt} \label{table:binsizes}
 \end{table}
 \subsubsection{Emissions Schema}
-Zur Modellierung der Staubemissionen wurde das Schema von \citet{Shao.2004} verwendet.
+Zur Modellierung der Staubemissionen wurde das Schema von \citet{Shao.2004} verwendet und in WRF implementiert. Als Auslöser für Emissionen werden grundsätzlich zwei Mechanismen erwogen: Beschuss durch Salz und der Zerfall von Aggregaten. Zusammengefasst setzt sich das Emissionsschema \citep{Shao.2004} aus folgenden Gleichungen zusammen:
+\begin{align}
+\tilde{F} (d_i,d_s) &= c_y \eta_{fi} \left[\left(1-\gamma\right) + \gamma
+\sigma_p \right] \left(1+\sigma_m \right) \frac{g \cdot Q}{u^2_*} \\
+\gamma &= \exp \left[-\left(u_* - u_{*t} \right)^3\right] \\ 
+\sigma_m &= 12 \cdot u_*^2 \frac{\rho_b}{p} \left(1 +14 \cdot u_* \sqrt{\frac{\rho_b}{p}} \right)
+\end{align}
+Dabei ist $\tilde{F}(d_i,d_s)$ die Emissionsrate für die Staubpartikelgröße $d_i$ und das Salz der Partikelgröße $d_s$; $c_y$ ein dimensionsloser Koeffizient; $\eta_{fi}$ der Anteil des insgesamt emittierbaren Staubs; $\sigma_p = \frac{\eta_{mi}}{\eta_{fi}} = \frac{p_{m}(d_i)}{p_{f}(d_i)}$ das Verhältnis zwischen der Massenverteilung freien Staubs $\eta_{mi}$ zu der des ingesamt emissionsfähigen Staubs $\eta_{fi}$ pro Einheitsbodenmasse für die Partikelgrößenklasse $i$ bzw. den entsprechenden Verteilungen für die Partikelgrößenverteilungen $p_{m}(d_i)$ und $p_{f}(d_i)$;  $\sigma_m= \frac{m_\Omega}{m}$ das Verhältnis zwischen der Masse  $m$ des einschlagenden Partikels und der durch \textit{Bombardement} ausgeworfenen Masse $m_\Omega$; $g$ die Erdschwerebeschleunigung; $Q$ der stromweise Salzfluss; $u_*^2$ die Reibungsgeschwindigkeit; $u_{*t}^2$ der Schwellenwert für die Reibungsgeschwindigkeit; $\rho_b$ die Bodenschüttdichte und $p$ der plastische Bodendruck.
 \subsection{Phytoplankton}
 Climate Data Store \nocite{*}
 \\\\

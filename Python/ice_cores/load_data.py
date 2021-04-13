@@ -8,5 +8,5 @@ url = ('https://www.ncei.noaa.gov/pub/data/paleo/icecore/'+
     'antarctica/talos/')
 data = 'taldice2013fe.txt'
 
-r = requests.get(url, allow_redirects=True)
+r = requests.get(url+data, allow_redirects=True)
 open(savedir+data, 'wb').write(r.content)

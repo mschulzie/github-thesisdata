@@ -26,7 +26,7 @@ dome_temp = pd.read_csv(path+'edc3deuttemp2007_clean.txt',
     columns=['ztop','Bag','Deuterium'])
 dome_temp['time'] = dome_temp['Age'] * 1e-3
 
-fig = plt.figure(figsize=(8,8))
+fig = plt.figure(figsize=(16,8))
 ax1 = fig.add_subplot(411)
 ax2 = fig.add_subplot(414)
 ax3 = fig.add_subplot(413)

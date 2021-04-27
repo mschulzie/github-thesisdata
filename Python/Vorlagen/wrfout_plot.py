@@ -7,13 +7,13 @@ wrffile = Dataset(wrfout)
 
 cities=mway.loadcities()
 
-var = wrfhelp.wrfplot(wrffile,'DUSTLOAD_',
+var = wrfhelp.wrfplot(wrffile,'uvmet10',
                 #compare_var='DUST_EMIS_ACC',
                 #lons = (140,141.5),
                 #lats = (-25,-22),
                 #ppfig=(4,4),
-                #time='2009-09-18T12',
-                time=slice('2009-09-18T00','2009-09-30T00'),
+                time='2009-09-22T12',
+                #time=slice('2009-09-22T00','2009-09-23T00'),
                 cmap='jet',
                 show=True,
                 #save=True,

@@ -1,4 +1,5 @@
 import xarray as xr
+import helperlies as mway
 import numpy as np
 import cartopy.crs as ccrs
 import cartopy.feature as cfeature
@@ -10,8 +11,10 @@ import seaborn as sns
 from cartopy.mpl.ticker import (LongitudeFormatter, LatitudeFormatter,
                                 LatitudeLocator)
 
-
-ds = xr.open_dataset("D://thesisdata/plankton/GMIS_A_CHLA_09_2009.nc")
+ds = xr.open_dataset("D://thesisdata/plankton/cds_daily_2009/2009_08-11_Australia.nc")
+ds = ds['chlor_a']
+# mway.show_nan(ds,time=slice('2009-08','2009-11'))
+# plt.savefig('NaN.png',dpi=500)
 ds = ds.assign_coords(lon=(ds.lon % 360)).roll(lon=(ds.dims['lon'] // 2), roll_coords=True)
 ds = ds.Chl_a
 ds = 10**ds

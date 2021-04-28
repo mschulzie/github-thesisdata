@@ -11,31 +11,28 @@ import seaborn as sns
 from cartopy.mpl.ticker import (LongitudeFormatter, LatitudeFormatter,
                                 LatitudeLocator)
 
-ds = xr.open_dataset("D://thesisdata/plankton/cds_daily_2009/2009_08-11_Australia.nc")
-ds = ds['chlor_a']
-# mway.show_nan(ds,time=slice('2009-08','2009-11'))
-# plt.savefig('NaN.png',dpi=500)
-ds = ds.assign_coords(lon=(ds.lon % 360)).roll(lon=(ds.dims['lon'] // 2), roll_coords=True)
-ds = ds.Chl_a
+ds = xr.open_dataset("D://thesisdata/plankton/monthly/2007_2020_GMIS_A_CHLA_Australia.nc")
+ds = ds['Chl_a']
+ds = ds.sel(time='2009-10-01')
+ds.shape
+#ds = ds.assign_coords(lon=(ds.lon % 360)).roll(lon=(ds.dims['lon'] // 2), roll_coords=True)
 ds = 10**ds
-ds = ds.sel(lon=slice(110.3,189.7),lat=slice(-9.89,-57.06))
 #ds = ds.where(ds>0)
-ds.coords
-ds.lon.max()
 
-extent = [ds.lon.min(),ds.lon.max(),ds.lat.max(),ds.lat.min()]
+
+extent = [ds.lon.min(),ds.lon.max(),ds.lat.min(),ds.lat.max()]
 
 sns.set_context('paper')
 
 fig = plt.figure(dpi=200)
-ax1 = fig.add_subplot(1,1,1, projection=ccrs.PlateCarree(central_longitude=180.0))
+ax1 = fig.add_subplot(1,1,1, projection=ccrs.Mercator(central_longitude=150.0))
 ax1.coastlines(lw=.5, zorder=5)
 ax1.add_feature(cfeature.BORDERS, lw=.5, zorder=4)
 ax1.add_feature(cfeature.LAND, fc='lightgrey', zorder=3)
 levels1 = [0.1, 0.2, 0.5,1, 2,3]
 levels = list(np.logspace(-1,np.log10(3),100))
 
-
+ds.coords
 im = ds.plot(
     ax=ax1, cmap='viridis', add_colorbar=False,
     levels=levels,
@@ -52,6 +49,6 @@ gl = ax1.gridlines(
     )
 gl.top_labels = False
 gl.right_labels = False
-ax1.set_title('September 2009')
+ax1.set_title('Oktober 2009')
 fig.savefig('Dein erste Bild.png', dpi = 500)
 plt.show()

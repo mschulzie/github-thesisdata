@@ -1,5 +1,6 @@
 import os
 import matplotlib.pyplot as plt
+from matplotlib.colors import LinearSegmentedColormap
 import numpy as np
 
 #just a comment
@@ -78,3 +79,14 @@ def loadcities():
       'Kati Thanda-Lake Eyre': [137.95,-28.3]
     }
     return cities
+
+def make_segmented_cmap(*colors):
+    if len(colors)==0:
+        colors =  ('#000303','#750b2e','#f7f7f7','#066479','#000303')
+    anglemap = LinearSegmentedColormap.from_list(
+        'anglemap', np.array(colors), N=256, gamma=1
+        )
+    return anglemap
+
+phase = make_segmented_cmap(
+    '#d62323','#b4622d','#1473c1','#471d70','#d62323')

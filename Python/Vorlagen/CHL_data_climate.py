@@ -11,14 +11,14 @@ import seaborn as sns
 from cartopy.mpl.ticker import (LongitudeFormatter, LatitudeFormatter,
                                 LatitudeLocator)
 
-ds = xr.open_mfdataset("D://thesisdata/plankton/cds_daily_2009/full_globe/*.nc")
+ds = xr.open_mfdataset("D://thesisdata/plankton/marine_copernicus/climatology/*.nc")
 ds = ds.assign_coords(lon=(ds.lon % 360)).roll(lon=(ds.dims['lon'] // 2), roll_coords=True)
-ds = ds['chlor_a']
+ds = ds['CHL_mean']
 ds = ds.sel(lon=slice(80,250),lat=slice(-10,-70))
 extent = [ds.lon.min(),ds.lon.max(),ds.lat.min(),ds.lat.max()]
 sns.set_context('paper')
 #%%
-for time in pd.date_range('2009-09-01','2009-09-19',freq='d'):
+for time in pd.date_range('1998-09-23','1998-09-23',freq='d'):
 
     dt = ds.sel(time=time).squeeze()
 
@@ -46,7 +46,7 @@ for time in pd.date_range('2009-09-01','2009-09-19',freq='d'):
         )
     gl.top_labels = False
     gl.right_labels = False
-    ax1.set_title(str(time)[:10]+' daily observed')
-    path = 'D://thesisdata/bilder/python/chl_a/cds/'
+    ax1.set_title(str(time)[5:10]+' climatology mean')
+    path = 'D://thesisdata/bilder/python/chl_a/marine_cds_clima/'
     fig.savefig(path+str(time)[:10]+'.png', dpi = 500)
     plt.show()

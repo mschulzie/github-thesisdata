@@ -1,0 +1,689 @@
+Insgesamt 688 Variablen: 
+Times
+AOD_OUT;Aerosol Optical Depth;0.0;4;(97, 32, 124, 164);
+AOD2D_OUT;Aerosol Optical Depth, 2d;0.0;3;(97, 124, 164);
+ATOP2D_OUT;Aerosol Optical Depth, top;0.0;3;(97, 124, 164);
+ICN_DIAG;Some chem thing, ICN_DIAG;0.0;4;(97, 32, 124, 164);
+NC_DIAG;Some chem thing, NC_DIAG;0.0;4;(97, 32, 124, 164);
+CLDFRA2;CLOUD FRACTION;0.0;4;(97, 32, 124, 164);-
+RAINPROD;TOTAL RAIN PRODUCTION RATE;0.0;4;(97, 32, 124, 164);s-1
+EVAPPROD;RAIN EVAPORATION RATE;0.0;4;(97, 32, 124, 164);s-1
+UST_T;Threshold Friction Velocity;2.478898;3;(97, 124, 164);m s-1
+ROUGH_COR;roughness elements correction;4.436133;3;(97, 124, 164);
+SMOIS_COR;soil moisture correction;3.8529437;3;(97, 124, 164);
+DRYDEPVEL;dust dry deposition velocity;0.0020132784;3;(97, 124, 164);m/s
+DRY_DEP_LEN;dry deposition velocity;0.0;4;(97, 41, 124, 164);cm/s
+LAI_VEGMASK;MODIS LAI vegetation mask for this date; 0=no dust produced (vegetation);0.0;3;(97, 124, 164);none
+DUST_1;dust size bin 1: 0.5um effective radius;1704.6016;4;(97, 32, 124, 164);ug/kg-dryair
+DUST_2;dust size bin 2: 1.4um effective radius;3028.68;4;(97, 32, 124, 164);ug/kg-dryair
+DUST_3;dust size bin 3: 2.4um effective radius;3365.452;4;(97, 32, 124, 164);ug/kg-dryair
+DUST_4;dust size bin 4: 4.5um effective radius;6929.262;4;(97, 32, 124, 164);ug/kg-dryair
+DUST_5;dust size bin 5: 8.0um effective radius;7811.1885;4;(97, 32, 124, 164);ug/kg-dryair
+SOILFE_1;soilFe conc bin 1;68.898575;4;(97, 32, 124, 164);ug/kg-dryair
+SOILFE_2;soilFe conc bin 2;74.83009;4;(97, 32, 124, 164);ug/kg-dryair
+SOILFE_3;soilFe conc bin 3;81.410126;4;(97, 32, 124, 164);ug/kg-dryair
+SOILFE_4;soilFe conc bin 4;158.63432;4;(97, 32, 124, 164);ug/kg-dryair
+SOILFE_5;soilFe conc bin 5;152.40736;4;(97, 32, 124, 164);ug/kg-dryair
+SOILS_1;soilS conc bin 1;13.707002;4;(97, 32, 124, 164);ug/kg-dryair
+SOILS_2;soilS conc bin 2;24.074373;4;(97, 32, 124, 164);ug/kg-dryair
+SOILS_3;soilS conc bin 3;26.20674;4;(97, 32, 124, 164);ug/kg-dryair
+SOILS_4;soilS conc bin 4;51.064922;4;(97, 32, 124, 164);ug/kg-dryair
+SOILS_5;soilS conc bin 5;57.27238;4;(97, 32, 124, 164);ug/kg-dryair
+SOILN_1;soilN conc bin 1;13.707002;4;(97, 32, 124, 164);ug/kg-dryair
+SOILN_2;soilN conc bin 2;24.074373;4;(97, 32, 124, 164);ug/kg-dryair
+SOILN_3;soilN conc bin 3;26.20674;4;(97, 32, 124, 164);ug/kg-dryair
+SOILN_4;soilN conc bin 4;51.064922;4;(97, 32, 124, 164);ug/kg-dryair
+SOILN_5;soilN conc bin 5;57.27238;4;(97, 32, 124, 164);ug/kg-dryair
+SOILP_1;soilP conc bin 1;13.707002;4;(97, 32, 124, 164);ug/kg-dryair
+SOILP_2;soilP conc bin 2;24.074373;4;(97, 32, 124, 164);ug/kg-dryair
+SOILP_3;soilP conc bin 3;26.20674;4;(97, 32, 124, 164);ug/kg-dryair
+SOILP_4;soilP conc bin 4;51.064922;4;(97, 32, 124, 164);ug/kg-dryair
+SOILP_5;soilP conc bin 5;57.27238;4;(97, 32, 124, 164);ug/kg-dryair
+SOILK_1;soilK conc bin 1;13.707002;4;(97, 32, 124, 164);ug/kg-dryair
+SOILK_2;soilK conc bin 2;24.074373;4;(97, 32, 124, 164);ug/kg-dryair
+SOILK_3;soilK conc bin 3;26.20674;4;(97, 32, 124, 164);ug/kg-dryair
+SOILK_4;soilK conc bin 4;51.064922;4;(97, 32, 124, 164);ug/kg-dryair
+SOILK_5;soilK conc bin 5;57.27238;4;(97, 32, 124, 164);ug/kg-dryair
+SOILCC_1;soilCC conc bin 1;13.707002;4;(97, 32, 124, 164);ug/kg-dryair
+SOILCC_2;soilCC conc bin 2;24.074373;4;(97, 32, 124, 164);ug/kg-dryair
+SOILCC_3;soilCC conc bin 3;26.20674;4;(97, 32, 124, 164);ug/kg-dryair
+SOILCC_4;soilCC conc bin 4;51.064922;4;(97, 32, 124, 164);ug/kg-dryair
+SOILCC_5;soilCC conc bin 5;57.27238;4;(97, 32, 124, 164);ug/kg-dryair
+PV;Potential Vorticity;0.0;4;(97, 32, 124, 164);pvu
+EROD;fraction of erodible surface in each grid cell (0-1);0.31765;4;(97, 3, 124, 164);none
+DUSTSOURCE;Dust source area;1.0;3;(97, 124, 164);
+DUSTSOILFE;SOIL FE FRACTION;0.0404;4;(97, 5, 124, 164);
+DUSTSOILS;SOIL SALT FRACTION;0.01;4;(97, 5, 124, 164);
+DUSTSOILN;SOIL NUTROGEN FRACTION;0.01;4;(97, 5, 124, 164);
+DUSTSOILP;SOIL PROSPHOROUS FRACTION;0.01;4;(97, 5, 124, 164);
+DUSTSOILK;SOIL POTASIUM FRACTION;0.01;4;(97, 5, 124, 164);
+DUSTSOILCC;SOIL CARBON FRACTION;0.01;4;(97, 5, 124, 164);
+DUSTLOAD_1;dust loading for size 1;1561742.5;3;(97, 124, 164);ug/m2
+DUSTLOAD_2;dust loading for size 2;2645018.0;3;(97, 124, 164);ug/m2
+DUSTLOAD_3;dust loading for size 3;3050256.8;3;(97, 124, 164);ug/m2
+DUSTLOAD_4;dust loading for size 4;6292434.5;3;(97, 124, 164);ug/m2
+DUSTLOAD_5;total dust loading;7295075.0;3;(97, 124, 164);ug/m2
+SOILFELOAD_1;soilFe load bin 1;82721.87;3;(97, 124, 164);ug/m2
+SOILFELOAD_2;soilFe load bin 2;88519.375;3;(97, 124, 164);ug/m2
+SOILFELOAD_3;soilFe load bin 3;91466.47;3;(97, 124, 164);ug/m2
+SOILFELOAD_4;soilFe load bin 4;169163.72;3;(97, 124, 164);ug/m2
+SOILFELOAD_5;soilFe load bin 5;160656.31;3;(97, 124, 164);ug/m2
+SOILSLOAD_1;soilS load bin 1;12443.268;3;(97, 124, 164);ug/m2
+SOILSLOAD_2;soilS load bin 2;21040.873;3;(97, 124, 164);ug/m2
+SOILSLOAD_3;soilS load bin 3;22316.074;3;(97, 124, 164);ug/m2
+SOILSLOAD_4;soilS load bin 4;47498.547;3;(97, 124, 164);ug/m2
+SOILSLOAD_5;soilS load bin 5;57342.707;3;(97, 124, 164);ug/m2
+SOILNLOAD_1;soilN load bin 1;12443.268;3;(97, 124, 164);ug/m2
+SOILNLOAD_2;soilN load bin 2;21040.873;3;(97, 124, 164);ug/m2
+SOILNLOAD_3;soilN load bin 3;22316.074;3;(97, 124, 164);ug/m2
+SOILNLOAD_4;soilN load bin 4;47498.547;3;(97, 124, 164);ug/m2
+SOILNLOAD_5;soilN load bin 5;57342.707;3;(97, 124, 164);ug/m2
+SOILPLOAD_1;soilP load bin 1;12443.268;3;(97, 124, 164);ug/m2
+SOILPLOAD_2;soilP load bin 2;21040.873;3;(97, 124, 164);ug/m2
+SOILPLOAD_3;soilP load bin 3;22316.074;3;(97, 124, 164);ug/m2
+SOILPLOAD_4;soilP load bin 4;47498.547;3;(97, 124, 164);ug/m2
+SOILPLOAD_5;soilP load bin 5;57342.707;3;(97, 124, 164);ug/m2
+SOILKLOAD_1;soilK load bin 1;12443.268;3;(97, 124, 164);ug/m2
+SOILKLOAD_2;soilK load bin 2;21040.873;3;(97, 124, 164);ug/m2
+SOILKLOAD_3;soilK load bin 3;22316.074;3;(97, 124, 164);ug/m2
+SOILKLOAD_4;soilK load bin 4;47498.547;3;(97, 124, 164);ug/m2
+SOILKLOAD_5;soilK load bin 5;57342.707;3;(97, 124, 164);ug/m2
+SOILCCLOAD_1;soilCC load bin 1;12443.268;3;(97, 124, 164);ug/m2
+SOILCCLOAD_2;soilCC load bin 2;21040.873;3;(97, 124, 164);ug/m2
+SOILCCLOAD_3;soilCC load bin 3;22316.074;3;(97, 124, 164);ug/m2
+SOILCCLOAD_4;soilCC load bin 4;47498.547;3;(97, 124, 164);ug/m2
+SOILCCLOAD_5;soilCC load bin 5;57342.707;3;(97, 124, 164);ug/m2
+EDUST1;DUST emissions bin1;548.0973;4;(97, 1, 124, 164);
+EDUST2;DUST emissions bin2;1174.5885;4;(97, 1, 124, 164);
+EDUST3;DUST emissions bin3;1398.666;4;(97, 1, 124, 164);
+EDUST4;DUST emissions bin4;2811.2363;4;(97, 1, 124, 164);
+EDUST5;DUST emissions bin5;3089.995;4;(97, 1, 124, 164);
+ESOILFE1;SOILFE emission rate bin1;21.21515;4;(97, 1, 124, 164);ug/m2/s
+ESOILFE2;SOILFE emission rate bin2;21.489965;4;(97, 1, 124, 164);ug/m2/s
+ESOILFE3;SOILFE emission rate bin3;21.042633;4;(97, 1, 124, 164);ug/m2/s
+ESOILFE4;SOILFE emission rate bin4;36.40093;4;(97, 1, 124, 164);ug/m2/s
+ESOILFE5;SOILFE emission rate bin5;33.59352;4;(97, 1, 124, 164);ug/m2/s
+ESOILS1;SOILS emission rate bin1;4.20102;4;(97, 1, 124, 164);ug/m2/s
+ESOILS2;SOILS emission rate bin2;8.22212;4;(97, 1, 124, 164);ug/m2/s
+ESOILS3;SOILS emission rate bin3;9.790662;4;(97, 1, 124, 164);ug/m2/s
+ESOILS4;SOILS emission rate bin4;19.678654;4;(97, 1, 124, 164);ug/m2/s
+ESOILS5;SOILS emission rate bin5;21.629965;4;(97, 1, 124, 164);ug/m2/s
+ESOILN1;SOILN emission rate bin1;4.20102;4;(97, 1, 124, 164);ug/m2/s
+ESOILN2;SOILN emission rate bin2;8.22212;4;(97, 1, 124, 164);ug/m2/s
+ESOILN3;SOILN emission rate bin3;9.790662;4;(97, 1, 124, 164);ug/m2/s
+ESOILN4;SOILN emission rate bin4;19.678654;4;(97, 1, 124, 164);ug/m2/s
+ESOILN5;SOILN emission rate bin5;21.629965;4;(97, 1, 124, 164);ug/m2/s
+ESOILP1;SOILP emission rate bin1;4.20102;4;(97, 1, 124, 164);ug/m2/s
+ESOILP2;SOILP emission rate bin2;8.22212;4;(97, 1, 124, 164);ug/m2/s
+ESOILP3;SOILP emission rate bin3;9.790662;4;(97, 1, 124, 164);ug/m2/s
+ESOILP4;SOILP emission rate bin4;19.678654;4;(97, 1, 124, 164);ug/m2/s
+ESOILP5;SOILP emission rate bin5;21.629965;4;(97, 1, 124, 164);ug/m2/s
+ESOILK1;SOILK emission rate bin1;4.20102;4;(97, 1, 124, 164);ug/m2/s
+ESOILK2;SOILK emission rate bin2;8.22212;4;(97, 1, 124, 164);ug/m2/s
+ESOILK3;SOILK emission rate bin3;9.790662;4;(97, 1, 124, 164);ug/m2/s
+ESOILK4;SOILK emission rate bin4;19.678654;4;(97, 1, 124, 164);ug/m2/s
+ESOILK5;SOILK emission rate bin5;21.629965;4;(97, 1, 124, 164);ug/m2/s
+ESOILCC1;SOILCC emission rate bin1;4.20102;4;(97, 1, 124, 164);ug/m2/s
+ESOILCC2;SOILCC emission rate bin2;8.22212;4;(97, 1, 124, 164);ug/m2/s
+ESOILCC3;SOILCC emission rate bin3;9.790662;4;(97, 1, 124, 164);ug/m2/s
+ESOILCC4;SOILCC emission rate bin4;19.678654;4;(97, 1, 124, 164);ug/m2/s
+ESOILCC5;SOILCC emission rate bin5;21.629965;4;(97, 1, 124, 164);ug/m2/s
+DRYDEP_1;dust dry deposition for size 1;0.0;3;(97, 124, 164);ug/m2/s
+DRYDEP_2;dust dry deposition for size 2;0.0;3;(97, 124, 164);ug/m2/s
+DRYDEP_3;dust dry deposition for size 3;0.0;3;(97, 124, 164);ug/m2/s
+DRYDEP_4;dust dry deposition for size 4;0.0;3;(97, 124, 164);ug/m2/s
+DRYDEP_5;dust dry deposition for size 5;0.0;3;(97, 124, 164);ug/m2/s
+DRYDEP_SOILFE_1;soilFe dry deposition rate bin 1;0.0;3;(97, 124, 164);ug/m2/s
+DRYDEP_SOILFE_2;soilFe dry deposition rate bin 2;0.0;3;(97, 124, 164);ug/m2/s
+DRYDEP_SOILFE_3;soilFe dry deposition rate bin 3;0.0;3;(97, 124, 164);ug/m2/s
+DRYDEP_SOILFE_4;soilFe dry deposition rate bin 4;0.0;3;(97, 124, 164);ug/m2/s
+DRYDEP_SOILFE_5;soilFe dry deposition rate bin 5;0.0;3;(97, 124, 164);ug/m2/s
+DRYDEP_SOILS_1;soilS dry deposition rate bin 1;0.0;3;(97, 124, 164);ug/m2/s
+DRYDEP_SOILS_2;soilS dry deposition rate bin 2;0.0;3;(97, 124, 164);ug/m2/s
+DRYDEP_SOILS_3;soilS dry deposition rate bin 3;0.0;3;(97, 124, 164);ug/m2/s
+DRYDEP_SOILS_4;soilS dry deposition rate bin 4;0.0;3;(97, 124, 164);ug/m2/s
+DRYDEP_SOILS_5;soilS dry deposition rate bin 5;0.0;3;(97, 124, 164);ug/m2/s
+DRYDEP_SOILN_1;soilN dry deposition rate bin 1;0.0;3;(97, 124, 164);ug/m2/s
+DRYDEP_SOILN_2;soilN dry deposition rate bin 2;0.0;3;(97, 124, 164);ug/m2/s
+DRYDEP_SOILN_3;soilN dry deposition rate bin 3;0.0;3;(97, 124, 164);ug/m2/s
+DRYDEP_SOILN_4;soilN dry deposition rate bin 4;0.0;3;(97, 124, 164);ug/m2/s
+DRYDEP_SOILN_5;soilN dry deposition rate bin 5;0.0;3;(97, 124, 164);ug/m2/s
+DRYDEP_SOILP_1;soilP dry deposition rate bin 1;0.0;3;(97, 124, 164);ug/m2/s
+DRYDEP_SOILP_2;soilP dry deposition rate bin 2;0.0;3;(97, 124, 164);ug/m2/s
+DRYDEP_SOILP_3;soilP dry deposition rate bin 3;0.0;3;(97, 124, 164);ug/m2/s
+DRYDEP_SOILP_4;soilP dry deposition rate bin 4;0.0;3;(97, 124, 164);ug/m2/s
+DRYDEP_SOILP_5;soilP dry deposition rate bin 5;0.0;3;(97, 124, 164);ug/m2/s
+DRYDEP_SOILK_1;soilK dry deposition rate bin 1;0.0;3;(97, 124, 164);ug/m2/s
+DRYDEP_SOILK_2;soilK dry deposition rate bin 2;0.0;3;(97, 124, 164);ug/m2/s
+DRYDEP_SOILK_3;soilK dry deposition rate bin 3;0.0;3;(97, 124, 164);ug/m2/s
+DRYDEP_SOILK_4;soilK dry deposition rate bin 4;0.0;3;(97, 124, 164);ug/m2/s
+DRYDEP_SOILK_5;soilK dry deposition rate bin 5;0.0;3;(97, 124, 164);ug/m2/s
+DRYDEP_SOILCC_1;soilCC dry deposition rate bin 1;0.0;3;(97, 124, 164);ug/m2/s
+DRYDEP_SOILCC_2;soilCC dry deposition rate bin 2;0.0;3;(97, 124, 164);ug/m2/s
+DRYDEP_SOILCC_3;soilCC dry deposition rate bin 3;0.0;3;(97, 124, 164);ug/m2/s
+DRYDEP_SOILCC_4;soilCC dry deposition rate bin 4;0.0;3;(97, 124, 164);ug/m2/s
+DRYDEP_SOILCC_5;soilCC dry deposition rate bin 5;0.0;3;(97, 124, 164);ug/m2/s
+GRASET_1;dust gravitational settling bin 1;0.0;3;(97, 124, 164);ug/m2/s
+GRASET_2;dust gravitational settling bin 2;0.0;3;(97, 124, 164);ug/m2/s
+GRASET_3;dust gravitational settling bin 3;0.0;3;(97, 124, 164);ug/m2/s
+GRASET_4;dust gravitational settling bin 4;0.0;3;(97, 124, 164);ug/m2/s
+GRASET_5;dust gravitational settling bin 5;0.0;3;(97, 124, 164);ug/m2/s
+GRASET_SOILFE_1;soilFe gravitational settling  bin 1;0.0;3;(97, 124, 164);ug/m2/s
+GRASET_SOILFE_2;soilFe gravitational settling  bin 2;0.0;3;(97, 124, 164);ug/m2/s
+GRASET_SOILFE_3;soilFe gravitational settling  bin 3;0.0;3;(97, 124, 164);ug/m2/s
+GRASET_SOILFE_4;soilFe gravitational settling  bin 4;0.0;3;(97, 124, 164);ug/m2/s
+GRASET_SOILFE_5;soilFe gravitational settling  bin 5;0.0;3;(97, 124, 164);ug/m2/s
+GRASET_SOILS_1;soilS gravitational settling  bin 1;0.0;3;(97, 124, 164);ug/m2/s
+GRASET_SOILS_2;soilS gravitational settling  bin 2;0.0;3;(97, 124, 164);ug/m2/s
+GRASET_SOILS_3;soilS gravitational settling  bin 3;0.0;3;(97, 124, 164);ug/m2/s
+GRASET_SOILS_4;soilS gravitational settling  bin 4;0.0;3;(97, 124, 164);ug/m2/s
+GRASET_SOILS_5;soilS gravitational settling  bin 5;0.0;3;(97, 124, 164);ug/m2/s
+GRASET_SOILN_1;soilN gravitational settling  bin 1;0.0;3;(97, 124, 164);ug/m2/s
+GRASET_SOILN_2;soilN gravitational settling  bin 2;0.0;3;(97, 124, 164);ug/m2/s
+GRASET_SOILN_3;soilN gravitational settling  bin 3;0.0;3;(97, 124, 164);ug/m2/s
+GRASET_SOILN_4;soilN gravitational settling  bin 4;0.0;3;(97, 124, 164);ug/m2/s
+GRASET_SOILN_5;soilN gravitational settling  bin 5;0.0;3;(97, 124, 164);ug/m2/s
+GRASET_SOILP_1;soilP gravitational settling  bin 1;0.0;3;(97, 124, 164);ug/m2/s
+GRASET_SOILP_2;soilP gravitational settling  bin 2;0.0;3;(97, 124, 164);ug/m2/s
+GRASET_SOILP_3;soilP gravitational settling  bin 3;0.0;3;(97, 124, 164);ug/m2/s
+GRASET_SOILP_4;soilP gravitational settling  bin 4;0.0;3;(97, 124, 164);ug/m2/s
+GRASET_SOILP_5;soilP gravitational settling  bin 5;0.0;3;(97, 124, 164);ug/m2/s
+GRASET_SOILK_1;soilK gravitational settling  bin 1;0.0;3;(97, 124, 164);ug/m2/s
+GRASET_SOILK_2;soilK gravitational settling  bin 2;0.0;3;(97, 124, 164);ug/m2/s
+GRASET_SOILK_3;soilK gravitational settling  bin 3;0.0;3;(97, 124, 164);ug/m2/s
+GRASET_SOILK_4;soilK gravitational settling  bin 4;0.0;3;(97, 124, 164);ug/m2/s
+GRASET_SOILK_5;soilK gravitational settling  bin 5;0.0;3;(97, 124, 164);ug/m2/s
+GRASET_SOILCC_1;soilCC gravitational settling  bin 1;0.0;3;(97, 124, 164);ug/m2/s
+GRASET_SOILCC_2;soilCC gravitational settling  bin 2;0.0;3;(97, 124, 164);ug/m2/s
+GRASET_SOILCC_3;soilCC gravitational settling  bin 3;0.0;3;(97, 124, 164);ug/m2/s
+GRASET_SOILCC_4;soilCC gravitational settling  bin 4;0.0;3;(97, 124, 164);ug/m2/s
+GRASET_SOILCC_5;soilCC gravitational settling  bin 5;0.0;3;(97, 124, 164);ug/m2/s
+WETDEP_1;dust wet deposition rate for size 1;4.1500225;3;(97, 124, 164);ug/m2/s
+WETDEP_2;dust wet deposition rate for size 2;6.7755623;3;(97, 124, 164);ug/m2/s
+WETDEP_3;dust wet deposition rate for size 3;6.5625916;3;(97, 124, 164);ug/m2/s
+WETDEP_4;dust wet deposition rate for size 4;12.957706;3;(97, 124, 164);ug/m2/s
+WETDEP_5;dust wet deposition rate for size 5;13.048883;3;(97, 124, 164);ug/m2/s
+WETDEP_SOILFE_1;soilFe wet deposition rate bin 1;1e-16;3;(97, 124, 164);ug/m2/s
+WETDEP_SOILFE_2;soilFe wet deposition rate bin 2;1e-16;3;(97, 124, 164);ug/m2/s
+WETDEP_SOILFE_3;soilFe wet deposition rate bin 3;1e-16;3;(97, 124, 164);ug/m2/s
+WETDEP_SOILFE_4;soilFe wet deposition rate bin 4;1e-16;3;(97, 124, 164);ug/m2/s
+WETDEP_SOILFE_5;soilFe wet deposition rate bin 5;1e-16;3;(97, 124, 164);ug/m2/s
+WETDEP_SOILS_1;soilS wet deposition rate bin 1;0.033211756;3;(97, 124, 164);ug/m2/s
+WETDEP_SOILS_2;soilS wet deposition rate bin 2;0.0539997;3;(97, 124, 164);ug/m2/s
+WETDEP_SOILS_3;soilS wet deposition rate bin 3;0.05775278;3;(97, 124, 164);ug/m2/s
+WETDEP_SOILS_4;soilS wet deposition rate bin 4;0.11406199;3;(97, 124, 164);ug/m2/s
+WETDEP_SOILS_5;soilS wet deposition rate bin 5;0.11513424;3;(97, 124, 164);ug/m2/s
+WETDEP_SOILN_1;soilN wet deposition rate bin 1;0.033211756;3;(97, 124, 164);ug/m2/s
+WETDEP_SOILN_2;soilN wet deposition rate bin 2;0.0539997;3;(97, 124, 164);ug/m2/s
+WETDEP_SOILN_3;soilN wet deposition rate bin 3;0.05775278;3;(97, 124, 164);ug/m2/s
+WETDEP_SOILN_4;soilN wet deposition rate bin 4;0.11406199;3;(97, 124, 164);ug/m2/s
+WETDEP_SOILN_5;soilN wet deposition rate bin 5;0.11513424;3;(97, 124, 164);ug/m2/s
+WETDEP_SOILP_1;soilP wet deposition rate bin 1;0.033211756;3;(97, 124, 164);ug/m2/s
+WETDEP_SOILP_2;soilP wet deposition rate bin 2;0.0539997;3;(97, 124, 164);ug/m2/s
+WETDEP_SOILP_3;soilP wet deposition rate bin 3;0.05775278;3;(97, 124, 164);ug/m2/s
+WETDEP_SOILP_4;soilP wet deposition rate bin 4;0.11406199;3;(97, 124, 164);ug/m2/s
+WETDEP_SOILP_5;soilP wet deposition rate bin 5;0.11513424;3;(97, 124, 164);ug/m2/s
+WETDEP_SOILK_1;soilK wet deposition rate bin 1;0.033211756;3;(97, 124, 164);ug/m2/s
+WETDEP_SOILK_2;soilK wet deposition rate bin 2;0.0539997;3;(97, 124, 164);ug/m2/s
+WETDEP_SOILK_3;soilK wet deposition rate bin 3;0.05775278;3;(97, 124, 164);ug/m2/s
+WETDEP_SOILK_4;soilK wet deposition rate bin 4;0.11406199;3;(97, 124, 164);ug/m2/s
+WETDEP_SOILK_5;soilK wet deposition rate bin 5;0.11513424;3;(97, 124, 164);ug/m2/s
+WETDEP_SOILCC_1;soilCC wet deposition rate bin 1;0.033211756;3;(97, 124, 164);ug/m2/s
+WETDEP_SOILCC_2;soilCC wet deposition rate bin 2;0.0539997;3;(97, 124, 164);ug/m2/s
+WETDEP_SOILCC_3;soilCC wet deposition rate bin 3;0.05775278;3;(97, 124, 164);ug/m2/s
+WETDEP_SOILCC_4;soilCC wet deposition rate bin 4;0.11406199;3;(97, 124, 164);ug/m2/s
+WETDEP_SOILCC_5;soilCC wet deposition rate bin 5;0.11513424;3;(97, 124, 164);ug/m2/s
+DUSTWD_1;dust loss by wet deposition for size 1;271.67203;4;(97, 32, 124, 164);ug/kg-dryair
+DUSTWD_2;dust loss by wet deposition for size 2;461.31708;4;(97, 32, 124, 164);ug/kg-dryair
+DUSTWD_3;dust loss by wet deposition for size 3;291.46735;4;(97, 32, 124, 164);ug/kg-dryair
+DUSTWD_4;dust loss by wet deposition for size 4;602.27673;4;(97, 32, 124, 164);ug/kg-dryair
+DUSTWD_5;dust loss by wet deposition for size 5;505.07794;4;(97, 32, 124, 164);ug/kg-dryair
+SOILFEWD_1;soilFe loss by wet deposition bin 1;1e-16;4;(97, 32, 124, 164);ug/kg-dryair
+SOILFEWD_2;soilFe loss by wet deposition bin 2;1e-16;4;(97, 32, 124, 164);ug/kg-dryair
+SOILFEWD_3;soilFe loss by wet deposition bin 3;1e-16;4;(97, 32, 124, 164);ug/kg-dryair
+SOILFEWD_4;soilFe loss by wet deposition bin 4;1e-16;4;(97, 32, 124, 164);ug/kg-dryair
+SOILFEWD_5;soilFe loss by wet deposition bin 5;1e-16;4;(97, 32, 124, 164);ug/kg-dryair
+SOILSWD_1;soilS loss by wet deposition bin 1;2.177018;4;(97, 32, 124, 164);ug/kg-dryair
+SOILSWD_2;soilS loss by wet deposition bin 2;3.698842;4;(97, 32, 124, 164);ug/kg-dryair
+SOILSWD_3;soilS loss by wet deposition bin 3;2.335363;4;(97, 32, 124, 164);ug/kg-dryair
+SOILSWD_4;soilS loss by wet deposition bin 4;4.676142;4;(97, 32, 124, 164);ug/kg-dryair
+SOILSWD_5;soilS loss by wet deposition bin 5;4.0509415;4;(97, 32, 124, 164);ug/kg-dryair
+SOILNWD_1;soilN loss by wet deposition bin 1;2.177018;4;(97, 32, 124, 164);ug/kg-dryair
+SOILNWD_2;soilN loss by wet deposition bin 2;3.698842;4;(97, 32, 124, 164);ug/kg-dryair
+SOILNWD_3;soilN loss by wet deposition bin 3;2.335363;4;(97, 32, 124, 164);ug/kg-dryair
+SOILNWD_4;soilN loss by wet deposition bin 4;4.676142;4;(97, 32, 124, 164);ug/kg-dryair
+SOILNWD_5;soilN loss by wet deposition bin 5;4.0509415;4;(97, 32, 124, 164);ug/kg-dryair
+SOILPWD_1;soilP loss by wet deposition bin 1;2.177018;4;(97, 32, 124, 164);ug/kg-dryair
+SOILPWD_2;soilP loss by wet deposition bin 2;3.698842;4;(97, 32, 124, 164);ug/kg-dryair
+SOILPWD_3;soilP loss by wet deposition bin 3;2.335363;4;(97, 32, 124, 164);ug/kg-dryair
+SOILPWD_4;soilP loss by wet deposition bin 4;4.676142;4;(97, 32, 124, 164);ug/kg-dryair
+SOILPWD_5;soilP loss by wet deposition bin 5;4.0509415;4;(97, 32, 124, 164);ug/kg-dryair
+SOILKWD_1;soilK loss by wet deposition bin 1;2.177018;4;(97, 32, 124, 164);ug/kg-dryair
+SOILKWD_2;soilK loss by wet deposition bin 2;3.698842;4;(97, 32, 124, 164);ug/kg-dryair
+SOILKWD_3;soilK loss by wet deposition bin 3;2.335363;4;(97, 32, 124, 164);ug/kg-dryair
+SOILKWD_4;soilK loss by wet deposition bin 4;4.676142;4;(97, 32, 124, 164);ug/kg-dryair
+SOILKWD_5;soilK loss by wet deposition bin 5;4.0509415;4;(97, 32, 124, 164);ug/kg-dryair
+SOILCCWD_1;soilCC loss by wet deposition bin 1;2.177018;4;(97, 32, 124, 164);ug/kg-dryair
+SOILCCWD_2;soilCC loss by wet deposition bin 2;3.698842;4;(97, 32, 124, 164);ug/kg-dryair
+SOILCCWD_3;soilCC loss by wet deposition bin 3;2.335363;4;(97, 32, 124, 164);ug/kg-dryair
+SOILCCWD_4;soilCC loss by wet deposition bin 4;4.676142;4;(97, 32, 124, 164);ug/kg-dryair
+SOILCCWD_5;soilCC loss by wet deposition bin 5;4.0509415;4;(97, 32, 124, 164);ug/kg-dryair
+DUSTWDLOAD_1;dustload loss by wet deposition for size 1;183845.03;3;(97, 124, 164);ug/m2
+DUSTWDLOAD_2;dustload loss by wet deposition for size 2;312565.72;3;(97, 124, 164);ug/m2
+DUSTWDLOAD_3;dustload loss by wet deposition for size 3;232626.69;3;(97, 124, 164);ug/m2
+DUSTWDLOAD_4;dustload loss by wet deposition for size 4;288395.47;3;(97, 124, 164);ug/m2
+DUSTWDLOAD_5;dustload loss by wet deposition for size 5;274769.44;3;(97, 124, 164);ug/m2
+SOILFEWDLOAD_1;soilFe-load loss by wet deposition bin 1;5.8139686e-13;3;(97, 124, 164);ug/m2
+SOILFEWDLOAD_2;soilFe-load loss by wet deposition bin 2;5.8139686e-13;3;(97, 124, 164);ug/m2
+SOILFEWDLOAD_3;soilFe-load loss by wet deposition bin 3;5.8139686e-13;3;(97, 124, 164);ug/m2
+SOILFEWDLOAD_4;soilFe-load loss by wet deposition bin 4;5.8139686e-13;3;(97, 124, 164);ug/m2
+SOILFEWDLOAD_5;soilFe-load loss by wet deposition bin 5;5.8139686e-13;3;(97, 124, 164);ug/m2
+SOILSWDLOAD_1;soilS-load loss by wet deposition bin 1;1473.2244;3;(97, 124, 164);ug/m2
+SOILSWDLOAD_2;soilS-load loss by wet deposition bin 2;2506.1375;3;(97, 124, 164);ug/m2
+SOILSWDLOAD_3;soilS-load loss by wet deposition bin 3;1867.4161;3;(97, 124, 164);ug/m2
+SOILSWDLOAD_4;soilS-load loss by wet deposition bin 4;2313.8452;3;(97, 124, 164);ug/m2
+SOILSWDLOAD_5;soilS-load loss by wet deposition bin 5;2213.6714;3;(97, 124, 164);ug/m2
+SOILNWDLOAD_1;soilN-load loss by wet deposition bin 1;1473.2244;3;(97, 124, 164);ug/m2
+SOILNWDLOAD_2;soilN-load loss by wet deposition bin 2;2506.1375;3;(97, 124, 164);ug/m2
+SOILNWDLOAD_3;soilN-load loss by wet deposition bin 3;1867.4161;3;(97, 124, 164);ug/m2
+SOILNWDLOAD_4;soilN-load loss by wet deposition bin 4;2313.8452;3;(97, 124, 164);ug/m2
+SOILNWDLOAD_5;soilN-load loss by wet deposition bin 5;2213.6714;3;(97, 124, 164);ug/m2
+SOILPWDLOAD_1;soilP-load loss by wet deposition bin 1;1473.2244;3;(97, 124, 164);ug/m2
+SOILPWDLOAD_2;soilP-load loss by wet deposition bin 2;2506.1375;3;(97, 124, 164);ug/m2
+SOILPWDLOAD_3;soilP-load loss by wet deposition bin 3;1867.4161;3;(97, 124, 164);ug/m2
+SOILPWDLOAD_4;soilP-load loss by wet deposition bin 4;2313.8452;3;(97, 124, 164);ug/m2
+SOILPWDLOAD_5;soilP-load loss by wet deposition bin 5;2213.6714;3;(97, 124, 164);ug/m2
+SOILKWDLOAD_1;soilK-load loss by wet deposition bin 1;1473.2244;3;(97, 124, 164);ug/m2
+SOILKWDLOAD_2;soilK-load loss by wet deposition bin 2;2506.1375;3;(97, 124, 164);ug/m2
+SOILKWDLOAD_3;soilK-load loss by wet deposition bin 3;1867.4161;3;(97, 124, 164);ug/m2
+SOILKWDLOAD_4;soilK-load loss by wet deposition bin 4;2313.8452;3;(97, 124, 164);ug/m2
+SOILKWDLOAD_5;soilK-load loss by wet deposition bin 5;2213.6714;3;(97, 124, 164);ug/m2
+SOILCCWDLOAD_1;soilCC-load loss by wet deposition bin 1;1473.2244;3;(97, 124, 164);ug/m2
+SOILCCWDLOAD_2;soilCC-load loss by wet deposition bin 2;2506.1375;3;(97, 124, 164);ug/m2
+SOILCCWDLOAD_3;soilCC-load loss by wet deposition bin 3;1867.4161;3;(97, 124, 164);ug/m2
+SOILCCWDLOAD_4;soilCC-load loss by wet deposition bin 4;2313.8452;3;(97, 124, 164);ug/m2
+SOILCCWDLOAD_5;soilCC-load loss by wet deposition bin 5;2213.6714;3;(97, 124, 164);ug/m2
+DUST_ACC_1;Ave dust concentration bin 1;1398.2599;4;(97, 32, 124, 164);ug/kg-dryair
+DUST_ACC_2;Ave dust concentration bin 2;2296.22;4;(97, 32, 124, 164);ug/kg-dryair
+DUST_ACC_3;Ave dust concentration bin 3;2564.8115;4;(97, 32, 124, 164);ug/kg-dryair
+DUST_ACC_4;Ave dust concentration bin 4;5237.747;4;(97, 32, 124, 164);ug/kg-dryair
+DUST_ACC_5;Ave dust concentration bin 5;5877.0156;4;(97, 32, 124, 164);ug/kg-dryair
+DUST_SOILFE_ACC_1;Ave soilFe (iron) concentration bin 1;56.238678;4;(97, 32, 124, 164);ug/kg-dryair
+DUST_SOILFE_ACC_2;Ave soilFe (iron) concentration bin 2;57.02908;4;(97, 32, 124, 164);ug/kg-dryair
+DUST_SOILFE_ACC_3;Ave soilFe (iron) concentration bin 3;60.55848;4;(97, 32, 124, 164);ug/kg-dryair
+DUST_SOILFE_ACC_4;Ave soilFe (iron) concentration bin 4;119.20836;4;(97, 32, 124, 164);ug/kg-dryair
+DUST_SOILFE_ACC_5;Ave soilFe (iron) concentration bin 5;116.28495;4;(97, 32, 124, 164);ug/kg-dryair
+DUST_SOILS_ACC_1;Ave soilS (salt) concentration bin 1;11.166709;4;(97, 32, 124, 164);ug/kg-dryair
+DUST_SOILS_ACC_2;Ave soilS (salt) concentration bin 2;18.33674;4;(97, 32, 124, 164);ug/kg-dryair
+DUST_SOILS_ACC_3;Ave soilS (salt) concentration bin 3;19.361341;4;(97, 32, 124, 164);ug/kg-dryair
+DUST_SOILS_ACC_4;Ave soilS (salt) concentration bin 4;38.098633;4;(97, 32, 124, 164);ug/kg-dryair
+DUST_SOILS_ACC_5;Ave soilS (salt) concentration bin 5;41.770817;4;(97, 32, 124, 164);ug/kg-dryair
+DUST_SOILN_ACC_1;Ave soilN (N) concentration bin 1;11.166709;4;(97, 32, 124, 164);ug/kg-dryair
+DUST_SOILN_ACC_2;Ave soilN (N) concentration bin 2;18.33674;4;(97, 32, 124, 164);ug/kg-dryair
+DUST_SOILN_ACC_3;Ave soilN (N) concentration bin 3;19.361341;4;(97, 32, 124, 164);ug/kg-dryair
+DUST_SOILN_ACC_4;Ave soilN (N) concentration bin 4;38.098633;4;(97, 32, 124, 164);ug/kg-dryair
+DUST_SOILN_ACC_5;Ave soilN (N) concentration bin 5;41.770817;4;(97, 32, 124, 164);ug/kg-dryair
+DUST_SOILP_ACC_1;Ave soilP (P) concentration bin 1;11.166709;4;(97, 32, 124, 164);ug/kg-dryair
+DUST_SOILP_ACC_2;Ave soilP (P) concentration bin 2;18.33674;4;(97, 32, 124, 164);ug/kg-dryair
+DUST_SOILP_ACC_3;Ave soilP (P) concentration bin 3;19.361341;4;(97, 32, 124, 164);ug/kg-dryair
+DUST_SOILP_ACC_4;Ave soilP (P) concentration bin 4;38.098633;4;(97, 32, 124, 164);ug/kg-dryair
+DUST_SOILP_ACC_5;Ave soilP (P) concentration bin 5;41.770817;4;(97, 32, 124, 164);ug/kg-dryair
+DUST_SOILK_ACC_1;Ave soilK (K) concentration bin 1;11.166709;4;(97, 32, 124, 164);ug/kg-dryair
+DUST_SOILK_ACC_2;Ave soilK (K) concentration bin 2;18.33674;4;(97, 32, 124, 164);ug/kg-dryair
+DUST_SOILK_ACC_3;Ave soilK (K) concentration bin 3;19.361341;4;(97, 32, 124, 164);ug/kg-dryair
+DUST_SOILK_ACC_4;Ave soilK (K) concentration bin 4;38.098633;4;(97, 32, 124, 164);ug/kg-dryair
+DUST_SOILK_ACC_5;Ave soilK (K) concentration bin 5;41.770817;4;(97, 32, 124, 164);ug/kg-dryair
+DUST_SOILCC_ACC_1;Ave soilCC (CC) concentration bin 1;11.166709;4;(97, 32, 124, 164);ug/kg-dryair
+DUST_SOILCC_ACC_2;Ave soilCC (CC) concentration bin 2;18.33674;4;(97, 32, 124, 164);ug/kg-dryair
+DUST_SOILCC_ACC_3;Ave soilCC (CC) concentration bin 3;19.361341;4;(97, 32, 124, 164);ug/kg-dryair
+DUST_SOILCC_ACC_4;Ave soilCC (CC) concentration bin 4;38.098633;4;(97, 32, 124, 164);ug/kg-dryair
+DUST_SOILCC_ACC_5;Ave soilCC (CC) concentration bin 5;41.770817;4;(97, 32, 124, 164);ug/kg-dryair
+DUSTLOAD_ACC_1;Ave dust load bin 1;1240994.6;3;(97, 124, 164);ug/m2
+DUSTLOAD_ACC_2;Ave dust load bin 2;2104241.2;3;(97, 124, 164);ug/m2
+DUSTLOAD_ACC_3;Ave dust load bin 3;2458885.0;3;(97, 124, 164);ug/m2
+DUSTLOAD_ACC_4;Ave dust load bin 4;5139505.5;3;(97, 124, 164);ug/m2
+DUSTLOAD_ACC_5;Ave dust load bin 5;5933724.5;3;(97, 124, 164);ug/m2
+DUST_SOILFELOAD_ACC_1;Ave soilFe load bin 1;147891.42;3;(97, 124, 164);ug/kg-dryair
+DUST_SOILFELOAD_ACC_2;Ave soilFe load bin 2;155145.55;3;(97, 124, 164);ug/kg-dryair
+DUST_SOILFELOAD_ACC_3;Ave soilFe load bin 3;162219.2;3;(97, 124, 164);ug/kg-dryair
+DUST_SOILFELOAD_ACC_4;Ave soilFe load bin 4;305493.6;3;(97, 124, 164);ug/kg-dryair
+DUST_SOILFELOAD_ACC_5;Ave soilFe load bin 5;297105.28;3;(97, 124, 164);ug/kg-dryair
+DUST_SOILSLOAD_ACC_1;Ave soilS load bin 1;19587.74;3;(97, 124, 164);ug/kg-dryair
+DUST_SOILSLOAD_ACC_2;Ave soilS load bin 2;33175.78;3;(97, 124, 164);ug/kg-dryair
+DUST_SOILSLOAD_ACC_3;Ave soilS load bin 3;35282.37;3;(97, 124, 164);ug/kg-dryair
+DUST_SOILSLOAD_ACC_4;Ave soilS load bin 4;74338.516;3;(97, 124, 164);ug/kg-dryair
+DUST_SOILSLOAD_ACC_5;Ave soilS load bin 5;87026.24;3;(97, 124, 164);ug/kg-dryair
+DUST_SOILNLOAD_ACC_1;Ave soilN load bin 1;19587.74;3;(97, 124, 164);ug/kg-dryair
+DUST_SOILNLOAD_ACC_2;Ave soilN load bin 2;33175.78;3;(97, 124, 164);ug/kg-dryair
+DUST_SOILNLOAD_ACC_3;Ave soilN load bin 3;35282.37;3;(97, 124, 164);ug/kg-dryair
+DUST_SOILNLOAD_ACC_4;Ave soilN load bin 4;74338.516;3;(97, 124, 164);ug/kg-dryair
+DUST_SOILNLOAD_ACC_5;Ave soilN load bin 5;87026.24;3;(97, 124, 164);ug/kg-dryair
+DUST_SOILPLOAD_ACC_1;Ave soilP load bin 1;19587.74;3;(97, 124, 164);ug/kg-dryair
+DUST_SOILPLOAD_ACC_2;Ave soilP load bin 2;33175.78;3;(97, 124, 164);ug/kg-dryair
+DUST_SOILPLOAD_ACC_3;Ave soilP load bin 3;35282.37;3;(97, 124, 164);ug/kg-dryair
+DUST_SOILPLOAD_ACC_4;Ave soilP load bin 4;74338.516;3;(97, 124, 164);ug/kg-dryair
+DUST_SOILPLOAD_ACC_5;Ave soilP load bin 5;87026.24;3;(97, 124, 164);ug/kg-dryair
+DUST_SOILKLOAD_ACC_1;Ave soilK load bin 1;19587.74;3;(97, 124, 164);ug/kg-dryair
+DUST_SOILKLOAD_ACC_2;Ave soilK load bin 2;33175.78;3;(97, 124, 164);ug/kg-dryair
+DUST_SOILKLOAD_ACC_3;Ave soilK load bin 3;35282.37;3;(97, 124, 164);ug/kg-dryair
+DUST_SOILKLOAD_ACC_4;Ave soilK load bin 4;74338.516;3;(97, 124, 164);ug/kg-dryair
+DUST_SOILKLOAD_ACC_5;Ave soilK load bin 5;87026.24;3;(97, 124, 164);ug/kg-dryair
+DUST_SOILCCLOAD_ACC_1;Ave soilCC load bin 1;9898.608;3;(97, 124, 164);ug/kg-dryair
+DUST_SOILCCLOAD_ACC_2;Ave soilCC load bin 2;16764.941;3;(97, 124, 164);ug/kg-dryair
+DUST_SOILCCLOAD_ACC_3;Ave soilCC load bin 3;17753.377;3;(97, 124, 164);ug/kg-dryair
+DUST_SOILCCLOAD_ACC_4;Ave soilCC load bin 4;37406.44;3;(97, 124, 164);ug/kg-dryair
+DUST_SOILCCLOAD_ACC_5;Ave soilCC load bin 5;43796.12;3;(97, 124, 164);ug/kg-dryair
+DUST_EMIS_ACC1;Ave dust emission rate bin1;19.879622;3;(97, 124, 164);ug/m2/s
+DUST_EMIS_ACC2;Ave dust emission rate bin2;20.101143;3;(97, 124, 164);ug/m2/s
+DUST_EMIS_ACC3;Ave dust emission rate bin3;19.17798;3;(97, 124, 164);ug/m2/s
+DUST_EMIS_ACC4;Ave dust emission rate bin4;32.015;3;(97, 124, 164);ug/m2/s
+DUST_EMIS_ACC5;Ave dust emission rate bin5;29.55499;3;(97, 124, 164);ug/m2/s
+DUST_SOILFEEMIS_ACC_1;Ave soilFe emission rate bin 1;20.01864;3;(97, 124, 164);ug/m2/s
+DUST_SOILFEEMIS_ACC_2;Ave soilFe emission rate bin 2;20.240217;3;(97, 124, 164);ug/m2/s
+DUST_SOILFEEMIS_ACC_3;Ave soilFe emission rate bin 3;19.308031;3;(97, 124, 164);ug/m2/s
+DUST_SOILFEEMIS_ACC_4;Ave soilFe emission rate bin 4;32.223312;3;(97, 124, 164);ug/m2/s
+DUST_SOILFEEMIS_ACC_5;Ave soilFe emission rate bin 5;29.734425;3;(97, 124, 164);ug/m2/s
+DUST_SOILSEMIS_ACC_1;Ave soilS emission rate bin 1;3.9640872;3;(97, 124, 164);ug/m2/s
+DUST_SOILSEMIS_ACC_2;Ave soilS emission rate bin 2;6.476868;3;(97, 124, 164);ug/m2/s
+DUST_SOILSEMIS_ACC_3;Ave soilS emission rate bin 3;6.1785703;3;(97, 124, 164);ug/m2/s
+DUST_SOILSEMIS_ACC_4;Ave soilS emission rate bin 4;12.095808;3;(97, 124, 164);ug/m2/s
+DUST_SOILSEMIS_ACC_5;Ave soilS emission rate bin 5;13.0622635;3;(97, 124, 164);ug/m2/s
+DUST_SOILNEMIS_ACC_1;Ave soilN emission rate bin 1;3.9640872;3;(97, 124, 164);ug/m2/s
+DUST_SOILNEMIS_ACC_2;Ave soilN emission rate bin 2;6.476868;3;(97, 124, 164);ug/m2/s
+DUST_SOILNEMIS_ACC_3;Ave soilN emission rate bin 3;6.1785703;3;(97, 124, 164);ug/m2/s
+DUST_SOILNEMIS_ACC_4;Ave soilN emission rate bin 4;12.095808;3;(97, 124, 164);ug/m2/s
+DUST_SOILNEMIS_ACC_5;Ave soilN emission rate bin 5;13.0622635;3;(97, 124, 164);ug/m2/s
+DUST_SOILPEMIS_ACC_1;Ave soilP emission rate bin 1;3.9640872;3;(97, 124, 164);ug/m2/s
+DUST_SOILPEMIS_ACC_2;Ave soilP emission rate bin 2;6.476868;3;(97, 124, 164);ug/m2/s
+DUST_SOILPEMIS_ACC_3;Ave soilP emission rate bin 3;6.1785703;3;(97, 124, 164);ug/m2/s
+DUST_SOILPEMIS_ACC_4;Ave soilP emission rate bin 4;12.095808;3;(97, 124, 164);ug/m2/s
+DUST_SOILPEMIS_ACC_5;Ave soilP emission rate bin 5;13.0622635;3;(97, 124, 164);ug/m2/s
+DUST_SOILKEMIS_ACC_1;Ave soilK emission rate bin 1;3.9640872;3;(97, 124, 164);ug/m2/s
+DUST_SOILKEMIS_ACC_2;Ave soilK emission rate bin 2;6.476868;3;(97, 124, 164);ug/m2/s
+DUST_SOILKEMIS_ACC_3;Ave soilK emission rate bin 3;6.1785703;3;(97, 124, 164);ug/m2/s
+DUST_SOILKEMIS_ACC_4;Ave soilK emission rate bin 4;12.095808;3;(97, 124, 164);ug/m2/s
+DUST_SOILKEMIS_ACC_5;Ave soilK emission rate bin 5;13.0622635;3;(97, 124, 164);ug/m2/s
+DUST_SOILCCEMIS_ACC_1;Ave soilCC emission rate bin 1;3.9640872;3;(97, 124, 164);ug/m2/s
+DUST_SOILCCEMIS_ACC_2;Ave soilCC emission rate bin 2;6.476868;3;(97, 124, 164);ug/m2/s
+DUST_SOILCCEMIS_ACC_3;Ave soilCC emission rate bin 3;6.1785703;3;(97, 124, 164);ug/m2/s
+DUST_SOILCCEMIS_ACC_4;Ave soilCC emission rate bin 4;12.095808;3;(97, 124, 164);ug/m2/s
+DUST_SOILCCEMIS_ACC_5;Ave soilCC emission rate bin 5;13.0622635;3;(97, 124, 164);ug/m2/s
+DRYDEP_ACC_1;Ave dust dry deposition rate bin 1;0.0;3;(97, 124, 164);ug/m2/s
+DRYDEP_ACC_2;Ave dust dry deposition rate bin 2;0.0;3;(97, 124, 164);ug/m2/s
+DRYDEP_ACC_3;Ave dust dry deposition rate bin 3;0.0;3;(97, 124, 164);ug/m2/s
+DRYDEP_ACC_4;Ave dust dry deposition rate bin 4;0.0;3;(97, 124, 164);ug/m2/s
+DRYDEP_ACC_5;Ave dust dry deposition rate bin 5;0.0;3;(97, 124, 164);ug/m2/s
+DUST_SOILFEDRYDEP_ACC_1;Ave soilFe dry deposition rate bin 1;0.0;3;(97, 124, 164);ug/m2/s
+DUST_SOILFEDRYDEP_ACC_2;Ave soilFe dry deposition rate bin 2;0.0;3;(97, 124, 164);ug/m2/s
+DUST_SOILFEDRYDEP_ACC_3;Ave soilFe dry deposition rate bin 3;0.0;3;(97, 124, 164);ug/m2/s
+DUST_SOILFEDRYDEP_ACC_4;Ave soilFe dry deposition rate bin 4;0.0;3;(97, 124, 164);ug/m2/s
+DUST_SOILFEDRYDEP_ACC_5;Ave soilFe dry deposition rate bin 5;0.0;3;(97, 124, 164);ug/m2/s
+DUST_SOILSDRYDEP_ACC_1;Ave soilS dry deposition rate bin 1;0.0;3;(97, 124, 164);ug/m2/s
+DUST_SOILSDRYDEP_ACC_2;Ave soilS dry deposition rate bin 2;0.0;3;(97, 124, 164);ug/m2/s
+DUST_SOILSDRYDEP_ACC_3;Ave soilS dry deposition rate bin 3;0.0;3;(97, 124, 164);ug/m2/s
+DUST_SOILSDRYDEP_ACC_4;Ave soilS dry deposition rate bin 4;0.0;3;(97, 124, 164);ug/m2/s
+DUST_SOILSDRYDEP_ACC_5;Ave soilS dry deposition rate bin 5;0.0;3;(97, 124, 164);ug/m2/s
+DUST_SOILNDRYDEP_ACC_1;Ave soilN dry deposition rate bin 1;0.0;3;(97, 124, 164);ug/m2/s
+DUST_SOILNDRYDEP_ACC_2;Ave soilN dry deposition rate bin 2;0.0;3;(97, 124, 164);ug/m2/s
+DUST_SOILNDRYDEP_ACC_3;Ave soilN dry deposition rate bin 3;0.0;3;(97, 124, 164);ug/m2/s
+DUST_SOILNDRYDEP_ACC_4;Ave soilN dry deposition rate bin 4;0.0;3;(97, 124, 164);ug/m2/s
+DUST_SOILNDRYDEP_ACC_5;Ave soilN dry deposition rate bin 5;0.0;3;(97, 124, 164);ug/m2/s
+DUST_SOILPDRYDEP_ACC_1;Ave soilP dry deposition rate bin 1;0.0;3;(97, 124, 164);ug/m2/s
+DUST_SOILPDRYDEP_ACC_2;Ave soilP dry deposition rate bin 2;0.0;3;(97, 124, 164);ug/m2/s
+DUST_SOILPDRYDEP_ACC_3;Ave soilP dry deposition rate bin 3;0.0;3;(97, 124, 164);ug/m2/s
+DUST_SOILPDRYDEP_ACC_4;Ave soilP dry deposition rate bin 4;0.0;3;(97, 124, 164);ug/m2/s
+DUST_SOILPDRYDEP_ACC_5;Ave soilP dry deposition rate bin 5;0.0;3;(97, 124, 164);ug/m2/s
+DUST_SOILKDRYDEP_ACC_1;Ave soilK dry deposition rate bin 1;0.0;3;(97, 124, 164);ug/m2/s
+DUST_SOILKDRYDEP_ACC_2;Ave soilK dry deposition rate bin 2;0.0;3;(97, 124, 164);ug/m2/s
+DUST_SOILKDRYDEP_ACC_3;Ave soilK dry deposition rate bin 3;0.0;3;(97, 124, 164);ug/m2/s
+DUST_SOILKDRYDEP_ACC_4;Ave soilK dry deposition rate bin 4;0.0;3;(97, 124, 164);ug/m2/s
+DUST_SOILKDRYDEP_ACC_5;Ave soilK dry deposition rate bin 5;0.0;3;(97, 124, 164);ug/m2/s
+DUST_SOILCCDRYDEP_ACC_1;Ave soilCC dry deposition rate bin 1;0.0;3;(97, 124, 164);ug/m2/s
+DUST_SOILCCDRYDEP_ACC_2;Ave soilCC dry deposition rate bin 2;0.0;3;(97, 124, 164);ug/m2/s
+DUST_SOILCCDRYDEP_ACC_3;Ave soilCC dry deposition rate bin 3;0.0;3;(97, 124, 164);ug/m2/s
+DUST_SOILCCDRYDEP_ACC_4;Ave soilCC dry deposition rate bin 4;0.0;3;(97, 124, 164);ug/m2/s
+DUST_SOILCCDRYDEP_ACC_5;Ave soilCC dry deposition rate bin 5;0.0;3;(97, 124, 164);ug/m2/s
+GRASET_ACC_1;Ave dust gravitational settling rate bin 1;0.0;3;(97, 124, 164);ug/m2/s
+GRASET_ACC_2;Ave dust gravitational settling rate bin 2;0.0;3;(97, 124, 164);ug/m2/s
+GRASET_ACC_3;Ave dust gravitational settling rate bin 3;0.0;3;(97, 124, 164);ug/m2/s
+GRASET_ACC_4;Ave dust gravitational settling rate bin 4;0.0;3;(97, 124, 164);ug/m2/s
+GRASET_ACC_5;Ave dust gravitational settling rate bin 5;0.0;3;(97, 124, 164);ug/m2/s
+DUST_SOILFEGRASET_ACC_1;Ave soilFe gravitation settling bin 1;0.0;3;(97, 124, 164);ug/m2/s
+DUST_SOILFEGRASET_ACC_2;Ave soilFe gravitation settling bin 2;0.0;3;(97, 124, 164);ug/m2/s
+DUST_SOILFEGRASET_ACC_3;Ave soilFe gravitation settling bin 3;0.0;3;(97, 124, 164);ug/m2/s
+DUST_SOILFEGRASET_ACC_4;Ave soilFe gravitation settling bin 4;0.0;3;(97, 124, 164);ug/m2/s
+DUST_SOILFEGRASET_ACC_5;Ave soilFe gravitation settling bin 5;0.0;3;(97, 124, 164);ug/m2/s
+DUST_SOILSGRASET_ACC_1;Ave soilS gravitation settling bin 1;0.0;3;(97, 124, 164);ug/m2/s
+DUST_SOILSGRASET_ACC_2;Ave soilS gravitation settling bin 2;0.0;3;(97, 124, 164);ug/m2/s
+DUST_SOILSGRASET_ACC_3;Ave soilS gravitation settling bin 3;0.0;3;(97, 124, 164);ug/m2/s
+DUST_SOILSGRASET_ACC_4;Ave soilS gravitation settling bin 4;0.0;3;(97, 124, 164);ug/m2/s
+DUST_SOILSGRASET_ACC_5;Ave soilS gravitation settling bin 5;0.0;3;(97, 124, 164);ug/m2/s
+DUST_SOILNGRASET_ACC_1;Ave soilN gravitation settling bin 1;0.0;3;(97, 124, 164);ug/m2/s
+DUST_SOILNGRASET_ACC_2;Ave soilN gravitation settling bin 2;0.0;3;(97, 124, 164);ug/m2/s
+DUST_SOILNGRASET_ACC_3;Ave soilN gravitation settling bin 3;0.0;3;(97, 124, 164);ug/m2/s
+DUST_SOILNGRASET_ACC_4;Ave soilN gravitation settling bin 4;0.0;3;(97, 124, 164);ug/m2/s
+DUST_SOILNGRASET_ACC_5;Ave soilN gravitation settling bin 5;0.0;3;(97, 124, 164);ug/m2/s
+DUST_SOILPGRASET_ACC_1;Ave soilP gravitation settling bin 1;0.0;3;(97, 124, 164);ug/m2/s
+DUST_SOILPGRASET_ACC_2;Ave soilP gravitation settling bin 2;0.0;3;(97, 124, 164);ug/m2/s
+DUST_SOILPGRASET_ACC_3;Ave soilP gravitation settling bin 3;0.0;3;(97, 124, 164);ug/m2/s
+DUST_SOILPGRASET_ACC_4;Ave soilP gravitation settling bin 4;0.0;3;(97, 124, 164);ug/m2/s
+DUST_SOILPGRASET_ACC_5;Ave soilP gravitation settling bin 5;0.0;3;(97, 124, 164);ug/m2/s
+DUST_SOILKGRASET_ACC_1;Ave soilK gravitation settling bin 1;0.0;3;(97, 124, 164);ug/m2/s
+DUST_SOILKGRASET_ACC_2;Ave soilK gravitation settling bin 2;0.0;3;(97, 124, 164);ug/m2/s
+DUST_SOILKGRASET_ACC_3;Ave soilK gravitation settling bin 3;0.0;3;(97, 124, 164);ug/m2/s
+DUST_SOILKGRASET_ACC_4;Ave soilK gravitation settling bin 4;0.0;3;(97, 124, 164);ug/m2/s
+DUST_SOILKGRASET_ACC_5;Ave soilK gravitation settling bin 5;0.0;3;(97, 124, 164);ug/m2/s
+DUST_SOILCCGRASET_ACC_1;Ave soilCC gravitation settling bin 1;0.0;3;(97, 124, 164);ug/m2/s
+DUST_SOILCCGRASET_ACC_2;Ave soilCC gravitation settling bin 2;0.0;3;(97, 124, 164);ug/m2/s
+DUST_SOILCCGRASET_ACC_3;Ave soilCC gravitation settling bin 3;0.0;3;(97, 124, 164);ug/m2/s
+DUST_SOILCCGRASET_ACC_4;Ave soilCC gravitation settling bin 4;0.0;3;(97, 124, 164);ug/m2/s
+DUST_SOILCCGRASET_ACC_5;Ave soilCC gravitation settling bin 5;0.0;3;(97, 124, 164);ug/m2/s
+WETDEP_ACC_1;Ave dust wet deposition rate bin 1;24.300169;3;(97, 124, 164);ug/m2/s
+WETDEP_ACC_2;Ave dust wet deposition rate bin 2;40.534298;3;(97, 124, 164);ug/m2/s
+WETDEP_ACC_3;Ave dust wet deposition rate bin 3;44.00978;3;(97, 124, 164);ug/m2/s
+WETDEP_ACC_4;Ave dust wet deposition rate bin 4;85.27339;3;(97, 124, 164);ug/m2/s
+WETDEP_ACC_5;Ave dust wet deposition rate bin 5;82.854294;3;(97, 124, 164);ug/m2/s
+DUST_SOILFEWETDEP_ACC_1;Ave soilFe wet deposition rate bin 1;1.00000074e-16;3;(97, 124, 164);ug/m2/s
+DUST_SOILFEWETDEP_ACC_2;Ave soilFe wet deposition rate bin 2;1.00000074e-16;3;(97, 124, 164);ug/m2/s
+DUST_SOILFEWETDEP_ACC_3;Ave soilFe wet deposition rate bin 3;1.00000074e-16;3;(97, 124, 164);ug/m2/s
+DUST_SOILFEWETDEP_ACC_4;Ave soilFe wet deposition rate bin 4;1.00000074e-16;3;(97, 124, 164);ug/m2/s
+DUST_SOILFEWETDEP_ACC_5;Ave soilFe wet deposition rate bin 5;1.00000074e-16;3;(97, 124, 164);ug/m2/s
+DUST_SOILSWETDEP_ACC_1;Ave soilS wet deposition rate bin 1;0.21384194;3;(97, 124, 164);ug/m2/s
+DUST_SOILSWETDEP_ACC_2;Ave soilS wet deposition rate bin 2;0.35670468;3;(97, 124, 164);ug/m2/s
+DUST_SOILSWETDEP_ACC_3;Ave soilS wet deposition rate bin 3;0.38729757;3;(97, 124, 164);ug/m2/s
+DUST_SOILSWETDEP_ACC_4;Ave soilS wet deposition rate bin 4;0.7505588;3;(97, 124, 164);ug/m2/s
+DUST_SOILSWETDEP_ACC_5;Ave soilS wet deposition rate bin 5;0.730299;3;(97, 124, 164);ug/m2/s
+DUST_SOILNWETDEP_ACC_1;Ave soilN wet deposition rate bin 1;0.21384194;3;(97, 124, 164);ug/m2/s
+DUST_SOILNWETDEP_ACC_2;Ave soilN wet deposition rate bin 2;0.35670468;3;(97, 124, 164);ug/m2/s
+DUST_SOILNWETDEP_ACC_3;Ave soilN wet deposition rate bin 3;0.38729757;3;(97, 124, 164);ug/m2/s
+DUST_SOILNWETDEP_ACC_4;Ave soilN wet deposition rate bin 4;0.7505588;3;(97, 124, 164);ug/m2/s
+DUST_SOILNWETDEP_ACC_5;Ave soilN wet deposition rate bin 5;0.730299;3;(97, 124, 164);ug/m2/s
+DUST_SOILPWETDEP_ACC_1;Ave soilP wet deposition rate bin 1;0.21384194;3;(97, 124, 164);ug/m2/s
+DUST_SOILPWETDEP_ACC_2;Ave soilP wet deposition rate bin 2;0.35670468;3;(97, 124, 164);ug/m2/s
+DUST_SOILPWETDEP_ACC_3;Ave soilP wet deposition rate bin 3;0.38729757;3;(97, 124, 164);ug/m2/s
+DUST_SOILPWETDEP_ACC_4;Ave soilP wet deposition rate bin 4;0.7505588;3;(97, 124, 164);ug/m2/s
+DUST_SOILPWETDEP_ACC_5;Ave soilP wet deposition rate bin 5;0.730299;3;(97, 124, 164);ug/m2/s
+DUST_SOILKWETDEP_ACC_1;Ave soilK wet deposition rate bin 1;0.21384194;3;(97, 124, 164);ug/m2/s
+DUST_SOILKWETDEP_ACC_2;Ave soilK wet deposition rate bin 2;0.35670468;3;(97, 124, 164);ug/m2/s
+DUST_SOILKWETDEP_ACC_3;Ave soilK wet deposition rate bin 3;0.38729757;3;(97, 124, 164);ug/m2/s
+DUST_SOILKWETDEP_ACC_4;Ave soilK wet deposition rate bin 4;0.7505588;3;(97, 124, 164);ug/m2/s
+DUST_SOILKWETDEP_ACC_5;Ave soilK wet deposition rate bin 5;0.730299;3;(97, 124, 164);ug/m2/s
+DUST_SOILCCWETDEP_ACC_1;Ave soilCC wet deposition rate bin 1;0.21384194;3;(97, 124, 164);ug/m2/s
+DUST_SOILCCWETDEP_ACC_2;Ave soilCC wet deposition rate bin 2;0.35670468;3;(97, 124, 164);ug/m2/s
+DUST_SOILCCWETDEP_ACC_3;Ave soilCC wet deposition rate bin 3;0.38729757;3;(97, 124, 164);ug/m2/s
+DUST_SOILCCWETDEP_ACC_4;Ave soilCC wet deposition rate bin 4;0.7505588;3;(97, 124, 164);ug/m2/s
+DUST_SOILCCWETDEP_ACC_5;Ave soilCC wet deposition rate bin 5;0.730299;3;(97, 124, 164);ug/m2/s
+XLAT;LATITUDE, SOUTH IS NEGATIVE;-9.890366;3;(97, 124, 164);degree_north
+XLONG;LONGITUDE, WEST IS NEGATIVE;179.93732;3;(97, 124, 164);degree_east
+LU_INDEX;LAND USE CATEGORY;19.0;3;(97, 124, 164);
+ZNU;eta values on half (mass) levels;0.99690735;2;(97, 32);
+ZNW;eta values on full (w) levels;1.0;2;(97, 33);
+ZS;DEPTHS OF CENTERS OF SOIL LAYERS;1.5;2;(97, 4);m
+DZS;THICKNESSES OF SOIL LAYERS;1.0;2;(97, 4);m
+VAR_SSO;variance of subgrid-scale orography;22514.842;3;(97, 124, 164);m2
+U;x-wind component;89.3947;4;(97, 32, 124, 165);m s-1
+V;y-wind component;74.7294;4;(97, 32, 125, 164);m s-1
+W;z-wind component;1.4294544;4;(97, 33, 124, 164);m s-1
+PH;perturbation geopotential;8672.344;4;(97, 33, 124, 164);m2 s-2
+PHB;base-state geopotential;195240.92;4;(97, 33, 124, 164);m2 s-2
+T;perturbation potential temperature theta-t0;237.60046;4;(97, 32, 124, 164);K
+THM;either 1) pert moist pot temp=(1+Rv/Rd Qv)*(theta)-T0, or 2) pert dry pot temp=t;237.60272;4;(97, 32, 124, 164);K
+HFX_FORCE;SCM ideal surface sensible heat flux;0.0;1;(97,);W m-2
+LH_FORCE;SCM ideal surface latent heat flux;0.0;1;(97,);W m-2
+TSK_FORCE;SCM ideal surface skin temperature;0.0;1;(97,);W m-2
+HFX_FORCE_TEND;SCM ideal surface sensible heat flux tendency;0.0;1;(97,);W m-2 s-1
+LH_FORCE_TEND;SCM ideal surface latent heat flux tendency;0.0;1;(97,);W m-2 s-1
+TSK_FORCE_TEND;SCM ideal surface skin temperature tendency;0.0;1;(97,);W m-2 s-1
+MU;perturbation dry air mass in column;3184.9094;3;(97, 124, 164);Pa
+MUB;base state dry air mass in column;95000.0;3;(97, 124, 164);Pa
+NEST_POS;-;0.0;3;(97, 124, 164);-
+P;perturbation pressure;3281.125;4;(97, 32, 124, 164);Pa
+PB;BASE STATE PRESSURE;99706.2;4;(97, 32, 124, 164);Pa
+FNM;upper weight for vertical stretching;0.5437416;2;(97, 32);
+FNP;lower weight for vertical stretching;0.55974525;2;(97, 32);
+RDNW;inverse d(eta) values between full (w) levels;-19.983284;2;(97, 32);
+RDN;inverse d(eta) values between half (mass) levels;0.0;2;(97, 32);
+DNW;d(eta) values between full (w) levels;-0.006185293;2;(97, 32);
+DN;d(eta) values between half (mass) levels;0.0;2;(97, 32);
+CFN;extrapolation constant;1.4562591;1;(97,);
+CFN1;extrapolation constant;-0.4562591;1;(97,);
+THIS_IS_AN_IDEAL_RUN;T/F flag: this is an ARW ideal simulation;0;1;(97,);-
+P_HYD;hydrostatic pressure;102989.78;4;(97, 32, 124, 164);Pa
+Q2;QV at 2 M;0.022222128;3;(97, 124, 164);kg kg-1
+T2;TEMP at 2 M;311.47736;3;(97, 124, 164);K
+TH2;POT TEMP at 2 M;311.78265;3;(97, 124, 164);K
+PSFC;SFC PRESSURE;103295.17;3;(97, 124, 164);Pa
+U10;U at 10 M;23.599195;3;(97, 124, 164);m s-1
+V10;V at 10 M;23.75879;3;(97, 124, 164);m s-1
+RDX;INVERSE X GRID LENGTH;2e-05;1;(97,);
+RDY;INVERSE Y GRID LENGTH;2e-05;1;(97,);
+RESM;TIME WEIGHT CONSTANT FOR SMALL STEPS;0.0;1;(97,);
+ZETATOP;ZETA AT MODEL TOP;0.0;1;(97,);
+CF1;2nd order extrapolation constant;1.8286586;1;(97,);
+CF2;2nd order extrapolation constant;-1.1352139;1;(97,);
+CF3;2nd order extrapolation constant;0.3065553;1;(97,);
+ITIMESTEP;;5760;1;(97,);
+XTIME;minutes since 2009-09-18 00:00:00;17280.0;1;(97,);minutes since 2009-09-18 00:00:00
+QVAPOR;Water vapor mixing ratio;0.02093524;4;(97, 32, 124, 164);kg kg-1
+QCLOUD;Cloud water mixing ratio;0.0010745632;4;(97, 32, 124, 164);kg kg-1
+QRAIN;Rain water mixing ratio;0.0014732862;4;(97, 32, 124, 164);kg kg-1
+QICE;Ice mixing ratio;0.00026051165;4;(97, 32, 124, 164);kg kg-1
+QSNOW;Snow mixing ratio;0.00062466355;4;(97, 32, 124, 164);kg kg-1
+QGRAUP;Graupel mixing ratio;0.001126476;4;(97, 32, 124, 164);kg kg-1
+SHDMAX;ANNUAL MAX VEG FRACTION;98.99999;3;(97, 124, 164);
+SHDMIN;ANNUAL MIN VEG FRACTION;77.64087;3;(97, 124, 164);
+SNOALB;ANNUAL MAX SNOW ALBEDO IN FRACTION;0.69;3;(97, 124, 164);
+TSLB;SOIL TEMPERATURE;318.94553;4;(97, 4, 124, 164);K
+SMOIS;SOIL MOISTURE;1.0;4;(97, 4, 124, 164);m3 m-3
+SH2O;SOIL LIQUID WATER;1.0;4;(97, 4, 124, 164);m3 m-3
+SMCREL;RELATIVE SOIL MOISTURE;1.0;4;(97, 4, 124, 164);
+SEAICE;SEA ICE FLAG;0.0;3;(97, 124, 164);
+XICEM;SEA ICE FLAG (PREVIOUS STEP);0.0;3;(97, 124, 164);
+SFROFF;SURFACE RUNOFF;17.604782;3;(97, 124, 164);mm
+UDROFF;UNDERGROUND RUNOFF;179.56883;3;(97, 124, 164);mm
+IVGTYP;DOMINANT VEGETATION CATEGORY;19;3;(97, 124, 164);
+ISLTYP;DOMINANT SOIL CATEGORY;14;3;(97, 124, 164);
+VEGFRA;VEGETATION FRACTION;98.99999;3;(97, 124, 164);
+GRDFLX;GROUND HEAT FLUX;157.04198;3;(97, 124, 164);W m-2
+ACGRDFLX;ACCUMULATED GROUND HEAT FLUX;6633819.5;3;(97, 124, 164);J m-2
+ACSNOM;ACCUMULATED MELTED SNOW;13.410002;3;(97, 124, 164);kg m-2
+SNOW;SNOW WATER EQUIVALENT;14.865033;3;(97, 124, 164);kg m-2
+SNOWH;PHYSICAL SNOW DEPTH;0.08402162;3;(97, 124, 164);m
+CANWAT;CANOPY WATER;0.5;3;(97, 124, 164);kg m-2
+SSTSK;SKIN SEA SURFACE TEMPERATURE;0.0;3;(97, 124, 164);K
+COSZEN;COS of SOLAR ZENITH ANGLE;0.9941944;3;(97, 124, 164);dimensionless
+LAI;LEAF AREA INDEX;6.4702024;3;(97, 124, 164);m-2/m-2
+DTAUX3D;LOCAL U GWDO STRESS;0.08372936;4;(97, 32, 124, 164);m s-1
+DTAUY3D;LOCAL V GWDO STRESS;0.03820923;4;(97, 32, 124, 164);m s-1
+DUSFCG;COLUMN-INTEGRATED U GWDO STRESS;7.750864;3;(97, 124, 164);Pa m s-1
+DVSFCG;COLUMN-INTEGRATED V GWDO STRESS;5.407251;3;(97, 124, 164);Pa m s-1
+VAR;OROGRAPHIC VARIANCE;479.935;3;(97, 124, 164);
+CON;OROGRAPHIC CONVEXITY;2.04375;3;(97, 124, 164);
+OA1;OROGRAPHIC DIRECTION ASYMMETRY FUNCTION;0.47915;3;(97, 124, 164);
+OA2;OROGRAPHIC DIRECTION ASYMMETRY FUNCTION;0.48819998;3;(97, 124, 164);
+OA3;OROGRAPHIC DIRECTION ASYMMETRY FUNCTION;0.296725;3;(97, 124, 164);
+OA4;OROGRAPHIC DIRECTION ASYMMETRY FUNCTION;0.38762498;3;(97, 124, 164);
+OL1;OROGRAPHIC DIRECTION ASYMMETRY FUNCTION;1.0;3;(97, 124, 164);
+OL2;OROGRAPHIC DIRECTION ASYMMETRY FUNCTION;1.0;3;(97, 124, 164);
+OL3;OROGRAPHIC DIRECTION ASYMMETRY FUNCTION;1.0;3;(97, 124, 164);
+OL4;OROGRAPHIC DIRECTION ASYMMETRY FUNCTION;0.90832496;3;(97, 124, 164);
+MAPFAC_M;Map scale factor on mass grid;1.6989048;3;(97, 124, 164);
+MAPFAC_U;Map scale factor on u-grid;1.6989048;3;(97, 124, 165);
+MAPFAC_V;Map scale factor on v-grid;1.7049764;3;(97, 125, 164);
+MAPFAC_MX;Map scale factor on mass grid, x direction;1.6989048;3;(97, 124, 164);
+MAPFAC_MY;Map scale factor on mass grid, y direction;1.6989048;3;(97, 124, 164);
+MAPFAC_UX;Map scale factor on u-grid, x direction;1.6989048;3;(97, 124, 165);
+MAPFAC_UY;Map scale factor on u-grid, y direction;1.6989048;3;(97, 124, 165);
+MAPFAC_VX;Map scale factor on v-grid, x direction;1.7049764;3;(97, 125, 164);
+MF_VX_INV;Inverse map scale factor on v-grid, x direction;1.0670749;3;(97, 125, 164);
+MAPFAC_VY;Map scale factor on v-grid, y direction;1.7049764;3;(97, 125, 164);
+F;Coriolis sine latitude term;-2.504998e-05;3;(97, 124, 164);s-1
+E;Coriolis cosine latitude term;0.00014367256;3;(97, 124, 164);s-1
+SINALPHA;Local sine of map rotation;-0.0;3;(97, 124, 164);
+COSALPHA;Local cosine of map rotation;1.0;3;(97, 124, 164);
+HGT;Terrain Height;1341.3398;3;(97, 124, 164);m
+TSK;SURFACE SKIN TEMPERATURE;328.7888;3;(97, 124, 164);K
+P_TOP;PRESSURE TOP OF THE MODEL;5000.0;1;(97,);Pa
+T00;BASE STATE TEMPERATURE;290.0;1;(97,);K
+P00;BASE STATE PRESURE;100000.0;1;(97,);Pa
+TLP;BASE STATE LAPSE RATE;50.0;1;(97,);
+TISO;TEMP AT WHICH THE BASE T TURNS CONST;200.0;1;(97,);K
+TLP_STRAT;BASE STATE LAPSE RATE (DT/D(LN(P)) IN STRATOSPHERE;-11.0;1;(97,);K
+P_STRAT;BASE STATE PRESSURE AT BOTTOM OF STRATOSPHERE;0.0;1;(97,);Pa
+MAX_MSTFX;Max map factor in domain;0.0;1;(97,);
+MAX_MSTFY;Max map factor in domain;0.0;1;(97,);
+RAINC;ACCUMULATED TOTAL CUMULUS PRECIPITATION;158.09158;3;(97, 124, 164);mm
+RAINSH;ACCUMULATED SHALLOW CUMULUS PRECIPITATION;0.0;3;(97, 124, 164);mm
+RAINNC;ACCUMULATED TOTAL GRID SCALE PRECIPITATION;202.70038;3;(97, 124, 164);mm
+SNOWNC;ACCUMULATED TOTAL GRID SCALE SNOW AND ICE;2.6826358;3;(97, 124, 164);mm
+GRAUPELNC;ACCUMULATED TOTAL GRID SCALE GRAUPEL;57.89876;3;(97, 124, 164);mm
+HAILNC;ACCUMULATED TOTAL GRID SCALE HAIL;0.0;3;(97, 124, 164);mm
+CLDFRA;CLOUD FRACTION;1.0;4;(97, 32, 124, 164);
+SWDOWN;DOWNWARD SHORT WAVE FLUX AT GROUND SURFACE;1093.5942;3;(97, 124, 164);W m-2
+GLW;DOWNWARD LONG WAVE FLUX AT GROUND SURFACE;466.55072;3;(97, 124, 164);W m-2
+SWNORM;NORMAL SHORT WAVE FLUX AT GROUND SURFACE (SLOPE-DEPENDENT);0.0;3;(97, 124, 164);W m-2
+OLR;TOA OUTGOING LONG WAVE;365.1324;3;(97, 124, 164);W m-2
+XLAT_U;LATITUDE, SOUTH IS NEGATIVE;-9.890366;3;(97, 124, 165);degree_north
+XLONG_U;LONGITUDE, WEST IS NEGATIVE;179.69394;3;(97, 124, 165);degree_east
+XLAT_V;LATITUDE, SOUTH IS NEGATIVE;-9.650505;3;(97, 125, 164);degree_north
+XLONG_V;LONGITUDE, WEST IS NEGATIVE;179.93732;3;(97, 125, 164);degree_east
+ALBEDO;ALBEDO;0.5367423;3;(97, 124, 164);-
+CLAT;COMPUTATIONAL GRID LATITUDE, SOUTH IS NEGATIVE;-9.890366;3;(97, 124, 164);degree_north
+ALBBCK;BACKGROUND ALBEDO;0.38;3;(97, 124, 164);
+EMISS;SURFACE EMISSIVITY;0.985;3;(97, 124, 164);
+NOAHRES;RESIDUAL OF THE NOAH SURFACE ENERGY BUDGET;7.776976;3;(97, 124, 164);W m{-2}
+TMN;SOIL TEMPERATURE AT LOWER BOUNDARY;307.422;3;(97, 124, 164);K
+XLAND;LAND MASK (1 FOR LAND, 2 FOR WATER);2.0;3;(97, 124, 164);
+UST;U* IN SIMILARITY THEORY;2.0224862;3;(97, 124, 164);m s-1
+PBLH;PBL HEIGHT;4406.478;3;(97, 124, 164);m
+HFX;UPWARD HEAT FLUX AT THE SURFACE;716.5195;3;(97, 124, 164);W m-2
+QFX;UPWARD MOISTURE FLUX AT THE SURFACE;0.00058550865;3;(97, 124, 164);kg m-2 s-1
+LH;LATENT HEAT FLUX AT THE SURFACE;1463.7716;3;(97, 124, 164);W m-2
+ACHFX;ACCUMULATED UPWARD HEAT FLUX AT THE SURFACE;184755680.0;3;(97, 124, 164);J m-2
+ACLHF;ACCUMULATED UPWARD LATENT HEAT FLUX AT THE SURFACE;727975360.0;3;(97, 124, 164);J m-2
+SNOWC;FLAG INDICATING SNOW COVERAGE (1 FOR SNOW COVER);0.6472181;3;(97, 124, 164);
+SR;fraction of frozen precipitation;1.0;3;(97, 124, 164);-
+SAVE_TOPO_FROM_REAL;1=original topo from real/0=topo modified by WRF;0;1;(97,);flag
+PREC_ACC_C;ACCUMULATED CUMULUS PRECIPITATION OVER prec_acc_dt PERIODS OF TIME;20.49288;3;(97, 124, 164);mm
+PREC_ACC_NC;ACCUMULATED GRID SCALE  PRECIPITATION OVER prec_acc_dt PERIODS OF TIME;32.429874;3;(97, 124, 164);mm
+SNOW_ACC_NC;ACCUMULATED SNOW WATER EQUIVALENT OVER prec_acc_dt PERIODS OF TIME;1.4849751;3;(97, 124, 164);mm
+ISEEDARR_SPPT;Array to hold seed for restart, SPPT;0;2;(97, 8);
+ISEEDARR_SKEBS;Array to hold seed for restart, SKEBS;0;2;(97, 8);
+ISEEDARR_RAND_PERTURB;Array to hold seed for restart, RAND_PERT;0;2;(97, 8);
+ISEEDARRAY_SPP_CONV;Array to hold seed for restart, RAND_PERT2;0;2;(97, 8);
+ISEEDARRAY_SPP_PBL;Array to hold seed for restart, RAND_PERT3;0;2;(97, 8);
+ISEEDARRAY_SPP_LSM;Array to hold seed for restart, RAND_PERT4;0;2;(97, 8);
+C1H;half levels, c1h = d bf / d eta, using znw;1.6775818;2;(97, 32);Dimensionless
+C2H;half levels, c2h = (1-c1h)*(p0-pt);95000.0;2;(97, 32);Pa
+C1F;full levels, c1f = d bf / d eta, using znu;1.6750472;2;(97, 33);Dimensionless
+C2F;full levels, c2f = (1-c1f)*(p0-pt);95000.0;2;(97, 33);Pa
+C3H;half levels, c3h = bh;0.9968657;2;(97, 32);Dimensionless
+C4H;half levels, c4h = (eta-bh)*(p0-pt)+pt, using znu;26639.914;2;(97, 32);Pa
+C3F;full levels, c3f = bf;1.0;2;(97, 33);Dimensionless
+C4F;full levels, c4f = (eta-bf)*(p0-pt)+pt, using znw;26801.484;2;(97, 33);Pa
+PCB;base state dry air mass in column;0.0;3;(97, 124, 164);Pa
+PC;perturbation dry air mass in column;0.0;3;(97, 124, 164);Pa
+LANDMASK;LAND MASK (1 FOR LAND, 0 FOR WATER);1.0;3;(97, 124, 164);
+LAKEMASK;LAKE MASK (1 FOR LAND, 0 FOR WATER);0.0;3;(97, 124, 164);
+SST;SEA SURFACE TEMPERATURE;307.422;3;(97, 124, 164);K
+SST_INPUT;SEA SURFACE TEMPERATURE FROM WRFLOWINPUT FILE;0.0;3;(97, 124, 164);K

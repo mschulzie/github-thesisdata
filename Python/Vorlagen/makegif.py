@@ -9,7 +9,7 @@ variable = 'DUSTLOAD_-DUST_EMIS_ACC'
 path = savedir+'Python/wrfout/'+variable+'/'
 filenames = os.listdir(path)
 
-with imageio.get_writer(path+'Dustload_Emis.gif', mode='I',
+with imageio.get_writer(path+'Dustload_Emis_neu.gif', mode='I',
     duration=0.1) as writer:
     for filename in filenames:
         if filename.endswith(('.png')):

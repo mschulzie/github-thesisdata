@@ -7,6 +7,7 @@ import cartopy.feature as cfeature
 from cartopy.mpl.gridliner import LONGITUDE_FORMATTER, LATITUDE_FORMATTER
 import matplotlib.ticker as mticker
 from matplotlib.colors import LogNorm
+import helperlies as mway
 
 wetdep = ['WETDEP_1','WETDEP_ACC_1','DUSTWDLOAD_1']
 drydep = ['DRYDEP_1','DRYDEP_ACC_1']
@@ -40,8 +41,8 @@ for var in options:
     data.load_var(var)
     data.sum_vars(var, sum_name)
     dep = data.get_var(sum_name)
+    dep.values = dep.values * 3 * 60 * 60 #acc over 3h
     dep = dep.sum(dim='time',keep_attrs=True)
-    dep.values = dep.values * 3 * 60 * 60 #/ 1000 # sekunde zu gesamt, ug zu mg
     dep.values[dep.values<0] = dep.values[dep.values<0] * -1
     #dep.attrs['units'] = 'mg/m2'
     ax = fig.add_subplot(gs[row,col], projection=crs.Mercator(
@@ -59,10 +60,11 @@ for var in options:
 
     cb = plt.colorbar(cont, shrink=.98)
 
-    cb.set_label(dep.description+' in '+dep.units,fontsize=8)
+    cb.set_label(r'Total deposition in $\mu$g/m$^2$',fontsize=8)
 
     ax.set_extent([110,189,-9,-57],crs=crs.PlateCarree())
-    title = 'WRF - '+sum_name + ' Total ACC'
+    total = (dep.values * mway.calc_qm(dep)).sum() *1e-15 # in thousand tons
+    title = 'WRF - '+sum_name +' insg. {:.1f} tausend Tonnen'.format(total)
     ax.set_title(title,fontsize=10)
     #ax.set_ylim(wrf.cartopy_ylim(var))
     gl = ax.gridlines(

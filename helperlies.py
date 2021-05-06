@@ -90,3 +90,18 @@ def make_segmented_cmap(*colors):
 
 phase = make_segmented_cmap(
     '#d62323','#b4622d','#1473c1','#471d70','#d62323')
+
+
+def calc_qm(xarray):
+    f = (6378.137e3-6356.752314e3)/6378.137e3 # Abplattung
+    diffphi = np.radians(np.append(np.diff(xarray['lon'].values),np.diff(xarray['lon'].values)[-1]))
+    difftheta = np.radians(np.append(np.diff(xarray['lat'].values),np.diff(xarray['lat'].values)[-1]))
+
+    LON,LAT = np.meshgrid(xarray['lon'].values,xarray['lat'].values)
+    PHI = np.radians(LON)
+    THETA = np.radians((LAT - 90)*-1)
+    DIFFPHI,DIFFTHETA = np.meshgrid(diffphi,difftheta)
+    R = 6378.137e3*(1-f*np.cos(DIFFTHETA)**2)
+    QM = R**2 * (DIFFPHI *(np.cos(THETA-DIFFTHETA/2)-np.cos(THETA+DIFFTHETA/2)))
+
+    return QM

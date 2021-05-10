@@ -26,7 +26,7 @@ dome_temp = pd.read_csv(path+'edc3deuttemp2007_clean.txt',
     columns=['ztop','Bag','Deuterium'])
 dome_temp['time'] = dome_temp['Age'] * 1e-3
 
-fig = plt.figure(figsize=(16,8))
+fig = plt.figure(figsize=(8,4))
 ax1 = fig.add_subplot(411)
 ax2 = fig.add_subplot(414)
 ax3 = fig.add_subplot(413)
@@ -47,10 +47,10 @@ ax1.axes.set_xticklabels(''), ax4.axes.set_xticklabels('')
 ax3.axes.set_xticklabels('')
 labelsize = 10
 legendsize = 8
-ax1.set_ylabel('CO2(ppmv)',fontsize=labelsize,labelpad=11)
-ax4.set_ylabel('Temperature',fontsize=labelsize,labelpad=8)
-ax3.set_ylabel('CH4 (ppbv)',fontsize=labelsize,labelpad=9)
-ax2.set_ylabel('CCDust(ng/g)',fontsize=labelsize,labelpad=3)
+ax1.set_ylabel('CO2\nppmv',fontsize=labelsize,labelpad=11)
+ax4.set_ylabel('Temp.',fontsize=labelsize,labelpad=8)
+ax3.set_ylabel('CH4\nppbv',fontsize=labelsize,labelpad=9)
+ax2.set_ylabel('CCDust\nng/g',fontsize=labelsize,labelpad=3)
 #plt.tight_layout()
 ax1.legend(fontsize=legendsize)
 ax2.legend(fontsize=legendsize)

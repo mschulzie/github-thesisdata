@@ -27,7 +27,7 @@ class Warfy:
         self.vars = self._vars.keys()
         self.check_dims()
 
-    def load_var(self, vars, file=file, slevel=0, zlevel=0):
+    def load_var(self, vars, file=file, slevel=0, zlevel='all'):
         dataset = netCDF4.Dataset(file)
         if (type(vars)==str):
             vars = [vars]
@@ -45,8 +45,15 @@ class Warfy:
             try:
                 ds = ds.sel(bottom_top=zlevel)
                 attrs['description'] += ' at zlevel {:}'.format(zlevel)
+
             except ValueError:
                 pass
+            except KeyError:
+                if zlevel != 'all':
+                    raise KeyError('Select integer for zlevel or "all"')
+                dims.insert(1,'zlevel')
+                coords['zlevel'] = np.arange(0,ds.bottom_top.size)
+
             try:
                 ds = ds.sel(soil_layers_stag=slevel)
                 attrs['description'] += ' at slevel {:}'.format(slevel)
@@ -61,6 +68,7 @@ class Warfy:
             except KeyError:
                 pass
 
+            # fill dataarray
             new_ds = xr.DataArray(
                 ds.values,
                 dims = dims,

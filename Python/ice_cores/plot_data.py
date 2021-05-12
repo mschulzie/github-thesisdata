@@ -38,7 +38,7 @@ ax4.plot(dome_temp['time'],dome_temp['Temperature'],
     color='indianred',label='Estimate (diff. average of last 1000 years)')
 ax3.plot(dome_ch4['time'],dome_ch4['CH4_mean'],
     color='cornflowerblue',label='mean')
-ax2.plot(dome_dust['time'],dome_dust['LaserDust(ng/g)'],
+ax2.plot(dome_dust['time'],np.log10(dome_dust['LaserDust(ng/g)']),
     color='darkorange',label='EDC Coulter Counter dust mass concentration')
 
 fig.suptitle('EPICA Dome C Ice Core 800KYr')
@@ -50,7 +50,7 @@ legendsize = 8
 ax1.set_ylabel('CO2\nppmv',fontsize=labelsize,labelpad=11)
 ax4.set_ylabel('Temp.',fontsize=labelsize,labelpad=8)
 ax3.set_ylabel('CH4\nppbv',fontsize=labelsize,labelpad=9)
-ax2.set_ylabel('CCDust\nng/g',fontsize=labelsize,labelpad=3)
+ax2.set_ylabel('log10\nCCDust\nng/g',fontsize=labelsize,labelpad=10)
 #plt.tight_layout()
 ax1.legend(fontsize=legendsize)
 ax2.legend(fontsize=legendsize)

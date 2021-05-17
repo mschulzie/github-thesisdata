@@ -1,38 +1,37 @@
 \documentclass[12pt,a4paper,onecolumn,draft]{scrartcl}
 \usepackage[utf8]{inputenc}
-\usepackage{amsmath}
+\usepackage{adjustbox}
 \usepackage{amsfonts}
+\usepackage{amsmath}
 \usepackage{amssymb}
+\usepackage{array}
 \usepackage[ngerman]{babel}
-\usepackage[left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm,head=14.5pt]{geometry}
-\usepackage{scrlayer-scrpage} % Zur Anpassung der Kopf- und Fußzeilen
-\usepackage{graphicx}
+\usepackage[backend=biber,natbib=true,hyperref=true,
+			style=draft,maxnames=2,maxbibnames=2, isbn=false]{biblatex} % STYLE draft SPÄTER NOCH GEGEN authoryear TAUSCHEN!!!!!!
+\usepackage{caption, booktabs}
+\usepackage{chngcntr} % Damit Zählungen von Abb und Co innerhalb sections mögl
+\usepackage{csquotes}
 \usepackage{float}
-\usepackage{lmodern}
-\usepackage{mathtools}
+\usepackage[left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm,head=14.5pt]{geometry}
+\usepackage[toc,acronym,nonumberlist,translate=babel]{glossaries}
 \usepackage{graphicx}
 \usepackage{grffile} % to allow underscores in filenames (pics&co)
-\usepackage{subfig}
-\usepackage{caption, booktabs}
-\usepackage{paralist}
-\usepackage[toc,acronym,nonumberlist,translate=babel]{glossaries}
-\usepackage{underscore}
-\usepackage{float}
-\usepackage{wrapfig}
-\usepackage{array}
-\usepackage{adjustbox}
-\usepackage{makecell}
-\usepackage{pdfpages}
-\usepackage{csquotes}
 \usepackage{hyperref}
+\usepackage{lmodern}
+\usepackage{makecell}
+\usepackage{mathtools}
+\usepackage{paralist}
+\usepackage{pdfpages}
+\usepackage[section]{placeins} % to keep figures in section
+\usepackage{scrlayer-scrpage} % Zur Anpassung der Kopf- und Fußzeilen
+\usepackage{subfig}
 \usepackage{tabularx}
-\usepackage{chngcntr} % Damit Zählungen von Abb und Co innerhalb sections mögl
 %\usepackage[scaled]{uarial} % Schriftart
+\usepackage{underscore}
 \usepackage{url}
+\usepackage{wrapfig}
 
-\usepackage[backend=biber,natbib=true,hyperref=true,
-			style=draft,maxnames=2,maxbibnames=2, isbn=false]{biblatex}
-% STYLE draft SPÄTER NOCH GEGEN authoryear TAUSCHEN!!!!!!
+
 \addbibresource{literatur.bib} %% Einbinden der bib-Datei
 \DefineBibliographyStrings{ngerman}{
 	andothers = {{et\,al\adddot}},}
@@ -93,7 +92,7 @@ Abschließend werden die Ergebnisse präsentiert und bei Berücksichtigung vergl
 \section{Theoretischer Kontext} \label{sec:Theorie}
 Staub nimmt auf verschiedene Weisen Einfluss auf das Klima. Der möglicherweise direkteste Einfluss wirkt auf die Energiebilanz. Staub ist mobil und kann vielfältige Strukturen und Formen annehmen. Durch die Ablagerung auf Oberflächen werden deren Albedo und Absorptionseigenschaften verändert. Während des Transports in der Atmosphäre kann Staub Strahlung auf noch komplexere Weise absorbieren, reflektieren, brechen, streuen oder emittieren \citep{Shao.2011} und somit Temperaturverteilung und -gradienten beeinflussen. Einen deutlich indirekteren und verzögerten, aber nicht minder wichtigen Einfluss nimmt Staub auf den Kohlenstoffkreislauf, welcher wiederum wichtige Auswirkungen auf das Klima hat. In diesem Abschnitt soll einer dieser Treiber mit den entsprechenden Zwischenschritten in umgekehrter Reihenfolge der Wirkungskette (Staubsturm$\rightarrow$Eisen$\rightarrow$Phytoplankton$\rightarrow$\cotwo $\rightarrow$Klima) erläutert werden. Jedes Unterkapitel erläutert die jeweilige Verbindung zum vorangegangenen Kapitel und beinhaltet wichtige Aspekte, die bei der späteren Interpretation des Zusammenhangs zwischen Staubsturm und Phytoplanktonproduktion berücksichtigt werden müssen. Im ersten Kapitel \ref{sec:Klima} wird an den dafür grundlegenden Zusammenhang zwischen dem Treibhausgas \cotwo \ und den erdgeschichtlichen sowie aktuellen Temperaturentwicklungen erinnert. Daraufhin beschreibt \ref{sec:Eisenhypothese} die für diese Arbeit fundamentale Eisenhypothese mit der besonderen Rolle des südlichen Ozeans. Zentrales Objekt dieser Hypothese ist das Phytoplankton und dessen mögliche Limitierung durch das Element Eisen sowie die Fähigkeit der sogenannten \textit{Biologischen Pumpe} Kohlenstoff dauerhaft aus dem Kreislauf zu entfernen (\ref{sec:Phytoplankton}). Zum Abschluss wird das eigentliche Staubereignis in einem für den australischen Kontinent allgemeinen Kontext beschrieben. Zusammen bieten die Kapitel eine grundsätzliche Übersicht des aktuellen Stands der Wissenschaft zur potentiellen Wirkung eines Staubereignisses auf den Kohlenstoffkreislauf.
 \subsection{Kohlenstoffdioxid und die Klimageschichte} \label{sec:Klima}
-Dass Treibhausgase wie \cotwo \ einen Einfluss auf die Temperaturverteilung in der Atmosphäre haben, ist allgemein bekannt und bereits seit langer Zeit mithilfe verschiedenster Beobachtungen, Modelle und theoretischen Konzepten wissenschaftlich hinreichend belegt. Dies und der aktuelle Einfluss des Menschen durch die Erhöhung der \cotwo \ Konzentrationen durch Emission fossiler Brennstoffe wurde schon 1990 im ersten Assessment Report des \textit{Intergovernmental Panel on Climate Change} (IPCC) auf Basis einer Zusammenstellung der damals aktuellen Kenntnisse kondensiert, dokumentiert und entsprechend politischen Entscheidungsträgern verfügbar gemacht. Aufgrund der massiven potentiellen Auswirkungen von abrupten Klimaveränderungen \citep{IPPCpol.2018} ist es von besonderer Bedeutung, die Prozesse genau zu verstehen und bestmöglich zu quantifizieren. Da das Klima auf geologischen Zeitskalen von jeher eine Veränderung durchläuft und die entsprechenden treibenden Prozesse teilweise auch heute noch präsent sind, ist der Blick in die Vergangenheit dabei von unschätzbarem Wert. Derartige Rückblicke sind insbesondere mithilfe von Eisbohrkernen möglich, in welchen mit zunehmender Tiefe die Atmosphären der jeweiligen weiter zurückliegenden Zeiten archiviert wurden. Dies erlaubt direkte Rückschlüsse auf die Konzentrationen von Gasen als auch indirekte Berechnungen von bspw. der Temperaturentwicklung. In Abbildung \ref{fig:icecore} sind entsprechend aus einem Bohrkern aus der Antarktis Zeitreihen für die (nach Wasser) beiden ausschlaggebendsten Treibhausgase \cotwo \ und Methan (CH$_4$) zusammen mit der Temperaturanomalie und den Staubkonzentrationen dargestellt. Bereits ohne weitere statistische Analysen ist auffällig, dass die drei ersten Größen \cotwo , CH$_4$ und Temperatur miteinander korrelieren. In regelmäßigen Abständen von etwa 100.000 Jahren erreichen alle drei Zeitreihen praktisch gleichzeitig vergleichsweise kurze lokale Maxima, auf welche etwas längere Phasen mit geringen Konzentrationen/Temperaturen folgen. Diese Periode repräsentiert genau einen Zyklus des aktuellen Eiszeitalters, in welchem sich Warmzeiten (Interglaziale) und Kaltzeiten (Glaziale bzw. ugs. Eiszeiten) abwechseln. Aktuell befinden wir uns in einer Warmzeit mit hohen Treibhausgaskonzentrationen. Entgegen der Abbildung liegen die derzeitigen (März 2021) \cotwo \ Konzentrationen aufgrund der anthropogenen Emissionen bei etwa 416 parts per million (ppm) \citep{NASA.06.05.2021}; das dortige Jahr 0 liegt mehrere Jahrzehnte in der Vergangenheit \citep{Luthi.2008}. Der statistische Zusammenhang zwischen Kohlenstoffdioxidkonzentrationen und der mittleren Temperatur an der Erdoberfläche ist also klar.  Trotz dieser Indizien ist es allerdings weiterhin schwierig, aus den verfügbaren Zeitreihen rein statistisch eine klare Kausalität zu beweisen. Dies impliziert, dass die beobachtete Korrelation theoretisch auch aufgrund eines anderen externen Treibers verursacht sein könnte, der beide Größen \cotwo -Konzentration und mittlere Temperaturen beeinflusst. Allerdings geben neuere statistische Methoden \citep{Stips.2016} weitere Indizien für die durch Beobachtungen und Experimente ohnehin bestätigte Annahme , dass beide Variablen kausal zusammenhängen. Für die jüngere Vergangenheit seit Beginn des Industriezeitalters gilt als praktisch sicher, dass die anthropogenen Emissionen von Treibhausgasen zu der gemessenen Erhöhung der globalen Durchschnittstemperatur geführt haben.  \\
+Dass Treibhausgase wie \cotwo \ einen Einfluss auf die Temperaturverteilung in der Atmosphäre haben, ist allgemein bekannt und bereits seit langer Zeit mithilfe verschiedenster Beobachtungen, Modelle und theoretischen Konzepten wissenschaftlich hinreichend belegt. Dies und der aktuelle Einfluss des Menschen durch die Erhöhung der \cotwo \ Konzentrationen durch Emission fossiler Brennstoffe wurde schon 1990 im ersten Assessment Report des \textit{Intergovernmental Panel on Climate Change} (IPCC) auf Basis einer Zusammenstellung der damals aktuellen Kenntnisse kondensiert, dokumentiert und entsprechend politischen Entscheidungsträgern verfügbar gemacht. Aufgrund der massiven potentiellen Auswirkungen von abrupten Klimaveränderungen \citep{IPCCpol.2018} ist es von besonderer Bedeutung, die Prozesse genau zu verstehen und bestmöglich zu quantifizieren. Da das Klima auf geologischen Zeitskalen von jeher eine Veränderung durchläuft und die entsprechenden treibenden Prozesse teilweise auch heute noch präsent sind, ist der Blick in die Vergangenheit dabei von unschätzbarem Wert. Derartige Rückblicke sind insbesondere mithilfe von Eisbohrkernen möglich, in welchen mit zunehmender Tiefe die Atmosphären der jeweiligen weiter zurückliegenden Zeiten archiviert wurden. Dies erlaubt direkte Rückschlüsse auf die Konzentrationen von Gasen als auch indirekte Berechnungen von bspw. der Temperaturentwicklung. In Abbildung \ref{fig:icecore} sind entsprechend aus einem Bohrkern aus der Antarktis Zeitreihen für die (nach Wasser) beiden ausschlaggebendsten Treibhausgase \cotwo \ und Methan (CH$_4$) zusammen mit der Temperaturanomalie und den Staubkonzentrationen dargestellt. Bereits ohne weitere statistische Analysen ist auffällig, dass die drei ersten Größen \cotwo , CH$_4$ und Temperatur miteinander korrelieren. In regelmäßigen Abständen von etwa 100.000 Jahren erreichen alle drei Zeitreihen praktisch gleichzeitig vergleichsweise kurze lokale Maxima, auf welche etwas längere Phasen mit geringen Konzentrationen/Temperaturen folgen. Diese Periode repräsentiert genau einen Zyklus des aktuellen Eiszeitalters, in welchem sich Warmzeiten (Interglaziale) und Kaltzeiten (Glaziale bzw. ugs. Eiszeiten) abwechseln. Aktuell befinden wir uns in einer Warmzeit mit hohen Treibhausgaskonzentrationen. Entgegen der Abbildung liegen die derzeitigen (März 2021) \cotwo \ Konzentrationen aufgrund der anthropogenen Emissionen bei etwa 416 parts per million (ppm) \citep{NASA.06.05.2021}; das dortige Jahr 0 liegt mehrere Jahrzehnte in der Vergangenheit \citep{Luthi.2008}. Der statistische Zusammenhang zwischen Kohlenstoffdioxidkonzentrationen und der mittleren Temperatur an der Erdoberfläche ist also klar.  Trotz dieser Indizien ist es allerdings weiterhin schwierig, aus den verfügbaren Zeitreihen rein statistisch eine klare Kausalität zu beweisen. Dies impliziert, dass die beobachtete Korrelation theoretisch auch aufgrund eines anderen externen Treibers verursacht sein könnte, der beide Größen \cotwo -Konzentration und mittlere Temperaturen beeinflusst. Allerdings geben neuere statistische Methoden \citep{Stips.2016} weitere Indizien für die durch Beobachtungen und Experimente ohnehin bestätigte Annahme , dass beide Variablen kausal zusammenhängen. Für die jüngere Vergangenheit seit Beginn des Industriezeitalters gilt als praktisch sicher, dass die anthropogenen Emissionen von Treibhausgasen zu der gemessenen Erhöhung der globalen Durchschnittstemperatur geführt haben.  \\
 
 Weitere Analysen von \citet{Stips.2016} geben Hinweise darauf, dass der kausale Zusammenhang über größere Zeiträume in der Vergangenheit umgekehrt gewesen sein könnte, dass also steigende oder sinkende Temperaturen zu einer Zu- bzw. Abnahme der \cotwo Konzentrationen geführt haben. Dies impliziert einen wechselseitigen Zusammenhang, wobei der Einfluss von Temperaturen auf Treibhausgaskonzentrationen wesentlich träger, also auf geologischen Zeitskalen funktioniert, andersherum aber \textit{kurzfristige} Reaktionen möglich sind.  Auf sehr großen Zeitskalen (10-100 Millionen Jahre) soll insbesondere die Plattentektonik und die damit verbundenen veränderten Verwitterungsprozesse zu Veränderungen in der \cotwo \ -Bilanz geführt haben. Die jüngeren und regelmäßigen Veränderungen von \cotwo \ und Temperatur auf Zeitskalen von eher 10 bis 100.000 Jahren, welche aus den Untersuchungen der Eisbohrkerne abgleitet werden konnten, werden hingegen auf kurzfristigere Prozesse aufgrund von Modifikationen in der Ozeanzirkulation und biologischen Prozessen (an Land und in Meer) zurückgeführt \citep{Emerson.2009}. Hierzu gibt auch die vierte Variable der abgeleiteten Staubkonzentrationen in Abbildung \ref{fig:icecore} weitere Hinweise. Diese Zeitreihe der Staubkonzentrationen hat genau dort Maxima, wo die übrigen Variablen geringe Werte aufweisen. Dies impliziert, dass Emission, Transport und Ablagerung von Staub möglicherweise ebenfalls von Klimaveränderungen beeinflusst werden. Analysen der Zeitreihen zeigen genauer, dass der Staubfluss und die Temperatur während der Glaziale korrelieren, was während der Interglaziale nicht beschrieben werden kann \citep{Lambert.2008}. Eine mögliche Erklärung für diesen Zusammenhang des beispielhaften Bohrkerns aus der Ostantarktis ist, dass die südamerikanischen Staubquellen während der Kaltphasen verstärkt wurden und gleichzeitig die Aufenthaltszeit der Staubpartikel in der Atmosphäre aufgrund des schwächeren Wasserkreislaufs zugenommen hat, was letztlich zu stärkeren Ablagerungen während dieser Zeiten führte \citep{Lambert.2008}. Entscheidend ist, dass zwischen Staub und Klima offenbar ein Zusammenhang besteht. Ein solcher Zusammenhang führte schließlich zu John Martin's Formulierung der Eisenhypothese. Allgemein wird angenommen, dass
 die (inter)glazialen \cotwo -Schwankungen durch eine Kombination aus \textit{Eisendüngung}, Veränderungen bei den Karbonatkompensationen (Auflösung von Calcit und Aragonit mit  \cotwo \ zu Calcium und Bikarbonat in der Tiefsee) und Ventilation des südlichen Ozeans \citep{Lambert.2012} gesteuert werden. Die Analyse der Phasenverschiebung zwischen Staubflüssen und \cotwo -Konzentrationen von \citet{Lambert.2012} zeigen allerdings, dass die Eisendüngung des südlichen Ozeans durch Staub jedenfalls gegen \textit{Ende} der letzten 9 Glaziale offenbar nicht der dominante Faktor für den Anstieg der \cotwo -Konzentrationen war. Der Staubfluss erreicht stets etwa 4.000 Jahre früher die für Interglaziale typischerweise  geringen Werte während sich \cotwo \ und Temperatur noch verändern (ansteigen) können. Offen bleibt, wie hoch der Beitrag tatsächlich ist und ob ggf. umgekehrt die Eisendüngung zu \textit{Beginn} der Glaziale dennoch ein dominanter Faktor zur \textit{Reduzierung} der Konzentrationen sein kann. \citet{MartinezGarcia.2009} folgern hierzu anhand der zeitlichen Eintretens der Effekte allerdings ebenfalls , dass der ursächliche Anstoß des starken Abfalls der \cotwo -Konzentrationen eher durch physikalische Prozesse erfolgte, wie Veränderungen der antarktischen Meereisausdehnung, Stratifizierung des Oberflächenwassers und die geographische Ausdehnung der sogenannten \textit{Westerlies}. Dennoch wird der Eisendüngung weiterhin ein maßgeblicher Anteil zugeschrieben.
@@ -109,56 +108,22 @@ Der Austausch von Staub und \cotwo \ hat insbesondere rund um die Antarktis eine
 
 Grundsätzlich ist der südliche Ozean ein nährstoffreiches Gebiet. Der durch den zyklonalen ACC angetriebene Ekman-Transport befördert das durch die \textit{Westerlies} initial angetriebene Oberflächenwasser nordwärts. Dieser Export wird südlich ausgeglichen, indem Wasser aus größeren Tiefen aufsteigt. Dieses an die Oberfläche beförderte Tiefenwasser ist i.d.R. nährstoffreicher als das Oberflächenwasser, da dessen Nährstoffe nicht permanent von der in der euphotischen Zone üppigeren Fauna konsumiert werden. Trotz dieses sehr effektiven Nährstofftransports sind die dortigen Konzentrationen des Phytoplanktons im Mittel geringer, als man ursprünglich erwartet hatte. Derartige Zonen mit hohem Nährstoffgehalt aber geringem Aufkommen von chlorophyllhaltigem Phytoplankton werden allgemein als HNLC (high nutrient low chlorophyll) Regionen bezeichnet. Es wurde bereits früh vermutet, dass unterschiedlicher Bedarf und Verfügbarkeit an Nährstoffen die Ursache für das gehemmte Wachstum ist. Bis heute sind diese komplexen Zusammenhänge noch nicht bis in jedes Detail verstanden (sh. Kapitel \ref{sec:Phytoplankton}). Einer dieser Nährstoffe mit besonders zahlreichen Abhängigkeiten ist Eisen. Spätestens nachdem Ende der 1980'er im Nordosten des subarktischen Pazifiks gezeigt werden konnte, dass die künstliche \textit{Düngung} von Wasserproben mit Eisen zu einem deutlichen Anstieg der Phytoplanktonproduktion führen kann, war evident, dass Eisen ein wichtiger Nährstoff für Phytoplankton ist und dessen Wachstum limitieren kann \citep{Martin.1988}. Dieser Tatbestand war nicht überraschend, da der Zusammenhang zwischen Eisen und lebenden Organismen bereits hinreichend bekannt war. Bis dahin war der Nachweis für Phytoplankton allerdings methodisch schwierig \citep{Martin.1988}. Insbesondere auf Basis dieses neuen Nachweises wird schließlich die Eisenhypothese formuliert. \\
 
-Wie weiter oben beschrieben, übernimmt der südliche Ozean in der globalen Klimadynamik eine wichtige Rolle. Klimatische Änderungen in dieser Region korrelieren stark mit den natürlichen \cotwo -Konzentrationen der letzten 800.000 Jahre \citep{Fischer.2010}. In diesem Rahmen übt Phytoplankton direkt Einfluss aus, da im Rahmen der Photosynthese \cotwo \ konsumiert, also der Atmosphäre / dem Ozean entzogen, und dabei in organische Kohlenstoffverbindungen (Glukose) und Sauerstoff umgesetzt wird. Während dieser \textit{Wachstumsphase} werden die umgebenden \cotwo \ Konzentrationen demnach reduziert. Sorgen nun weitere Prozesse wie die \textit{Biologische Pumpe} (sh. Kapitel \ref{sec:biopump}) dafür, dass der organisch gebundene Kohlenstoff dauerhaft von der Atmosphäre separiert wird, können die \cotwo \ Konzentrationen durch erhöhte Phytoplanktonproduktionen langfristig reduziert werden. Potential für erhöhte Produktionsraten hat speziell der südliche Ozean als größte HNLC-Region. Können die überschüssigen Nährstoffe in großen Teilen dieser Region komplett durch Phytoplankton konsumiert werden, würde dies die globalen atmosphärischen \cotwo \ Konzentrationen erheblich reduzieren \citep{Martin.1990}. \citet{Martin.1990} argumentiert, dass das Wachstum von Phytoplankton im heutigen südlichen Ozean mangels biologisch verfügbarem Eisen limitiert ist. Ferner wird postuliert, dass ein nennenswerter Anteil der in Abb. \ref{fig:icecore} beschriebenen Variationen der \cotwo \ Konzentrationen zwischen Glazialen und Interglazialen aus der jeweilig unterschiedlichen Verfügbarkeit von Eisen resultiert. Der während der Glaziale höhere Staubeintrag (sh. Abb. \ref{fig:icecore}) soll entsprechend höhere Menge an Eisen in den Ozean eingebracht und so die Produktion von Phytoplankton verstärkt haben. Die dadurch wiederum erhöhten \textit{Archivierungsraten} von organischem Kohlenstoff hätten schließlich zu reduzierten \cotwo-Konzentrationen geführt. Entscheiden für diese Hypothese ist, dass im Gegensatz zu den meisten anderen Nährstoffen, äolischer Staub für küstenferne Gebiete als die dominante Hauptquelle von Eisen angenommen wird. Der Großteil der Hauptnährstoffe wird durch Flüsse in den Ozean eingetragen, welche die Produkte der Verwitterungsprozesse von den Landmassen abtransportieren \citep{Emerson.2009}. \citet{Tagliabue.2017} fassen zusammen, dass neben dem Eintrag von eisenhaltigen Staub inzwischen weitere Prozesse für die Verteilung des biolgisch verfügbaren Eisens (sh. Kapitel \ref{sec:Phytoplankton}) im Ozean anerkannt sind und insbesondere in höheren Breiten gegenüber dem Staubeintrag dominieren können.\\
+Wie weiter oben beschrieben, übernimmt der südliche Ozean in der globalen Klimadynamik eine wichtige Rolle. Klimatische Änderungen in dieser Region korrelieren stark mit den natürlichen \cotwo -Konzentrationen der letzten 800.000 Jahre \citep{Fischer.2010}. In diesem Rahmen übt Phytoplankton direkt Einfluss aus, da im Rahmen der Photosynthese \cotwo \ konsumiert, also der Atmosphäre / dem Ozean entzogen, und dabei in organische Kohlenstoffverbindungen (Glukose) und Sauerstoff umgesetzt wird. Während dieser \textit{Wachstumsphase} werden die umgebenden \cotwo \ Konzentrationen demnach reduziert. Sorgen nun weitere Prozesse wie die \textit{Biologische Pumpe} (sh. Kapitel \ref{sec:biopump}) dafür, dass der organisch gebundene Kohlenstoff dauerhaft von der Atmosphäre separiert wird, können die \cotwo \ Konzentrationen durch erhöhte Phytoplanktonproduktionen langfristig reduziert werden. Potential für erhöhte Produktionsraten hat speziell der südliche Ozean als größte HNLC-Region. Können die überschüssigen Nährstoffe in großen Teilen dieser Region komplett durch Phytoplankton konsumiert werden, würde dies die globalen atmosphärischen \cotwo \ Konzentrationen erheblich reduzieren \citep{Martin.1990}. \citet{Martin.1990} argumentiert, dass das Wachstum von Phytoplankton im heutigen südlichen Ozean mangels biologisch verfügbarem Eisen limitiert ist. Ferner wird postuliert, dass ein nennenswerter Anteil der in Abb. \ref{fig:icecore} beschriebenen Variationen der \cotwo \ Konzentrationen zwischen Glazialen und Interglazialen aus der jeweilig unterschiedlichen Verfügbarkeit von Eisen resultiert. Der während der Glaziale höhere Staub- bzw. Eiseneintrag (sh. Abb. \ref{fig:co2iron}) soll entsprechend höhere Menge an Eisen in den Ozean eingebracht und so die Produktion von Phytoplankton verstärkt haben. Die dadurch wiederum erhöhten \textit{Archivierungsraten} von organischem Kohlenstoff hätten schließlich zu reduzierten \cotwo-Konzentrationen geführt. Entscheiden für diese Hypothese ist, dass im Gegensatz zu den meisten anderen Nährstoffen, äolischer Staub für küstenferne Gebiete als die dominante Hauptquelle von Eisen angenommen wird. Der Großteil der Hauptnährstoffe wird durch Flüsse in den Ozean eingetragen, welche die Produkte der Verwitterungsprozesse von den Landmassen abtransportieren \citep{Emerson.2009}. \citet{Tagliabue.2017} fassen zusammen, dass neben dem Eintrag von eisenhaltigen Staub inzwischen weitere Prozesse für die Verteilung des biolgisch verfügbaren Eisens (sh. Kapitel \ref{sec:Phytoplankton}) im Ozean anerkannt sind und insbesondere in höheren Breiten gegenüber dem Staubeintrag dominieren können.\\
 
-Die Eisenhypothese wurde inzwischen in mehreren Experimenten getestet. Es konnte tatsächlich gezeigt werden, dass die Zufuhr von Eisen die Produktin steigern kann. Beispielsweise im Experiment SOIREE (Southern Ocean Iron Release Experiment) wurden Reaktionen auf die Düngung nach etwa 5 Tagen beobachtet, hauptsächlich wurde dadurch das Wachstum größerer Kieselalgen gefördert \citep{Trull.2001}. Es konnte allerdings nicht gezeigt werden, dass dadurch der Export durch die \textit{Biologische Pumpe} erhöht wurde. In vielen Regionen scheint dieser zusätzlich durch die Verfügbarkeit von Silicium limitiert. Sog. \textit{Siliciumpumpe} arbeitet bereits am Limit. Obwohl geschätzt wird, dass bei etwa 40 \% des ozeanischen Oberflächenwassers Eisen ein limitierender Faktor für die Produktion von Phytoplankton sein kann \citep{Emerson.2009}, wird der Beitrag des durch äolischen Eisens (durch Staub) inzwischen geringer eingeschätzt \citep{Tagliabue.2017}. 
+Die Eisenhypothese wurde inzwischen in mehreren Experimenten getestet. Es konnte tatsächlich gezeigt werden, dass die Zufuhr von Eisen die Produktin steigern kann. Beispielsweise im Experiment SOIREE (Southern Ocean Iron Release Experiment) wurden Reaktionen auf die Düngung nach etwa 5 Tagen beobachtet, hauptsächlich wurde dadurch das Wachstum größerer Kieselalgen gefördert \citep{Trull.2001}. Es konnte allerdings nicht gezeigt werden, dass dadurch der Export durch die \textit{Biologische Pumpe} erhöht wurde. In vielen Regionen scheint dieser zusätzlich durch die Verfügbarkeit von Silicium limitiert. Die sogenannte \textit{Siliciumpumpe} arbeitet bereits am Limit. Obwohl geschätzt wird, dass bei etwa 40 \% des ozeanischen Oberflächenwassers Eisen ein limitierender Faktor für die Produktion von Phytoplankton sein kann \citep{Emerson.2009}, wird der Beitrag des durch äolischen Eisens (durch Staub) inzwischen geringer eingeschätzt \citep{Tagliabue.2017}. \citet{Vallelonga.2013} schätzen diesen Beitrag zur Variabilität nach dem letzten glazialen Maximum (LGM) auf maximal 20 ppmv \cotwo .
 
+\begin{figure}[ht]
+\centering
+\includegraphics[width=\textwidth]{bilder/co2_iron.png}
+\caption{ Zeitreihe der letzten 314.000 Jahre für die abgeleiteten Größen \cotwo (dunkelrot) und den Eisenfluss, die zur Eisenhypothese inspirierte. Die Größen weisen insbesondere während der kälteren Glaziale eine starke Antikorrelation auf. Abnehmende \cotwo -Konzentrationen gehen mit erhöhtem Eisenfluss einher. Erstellt aus den Datensätzen von \cite{Bereiter.2015} und \cite{Vallelonga.2013}, zur Verfügung gestellt über das \textit{National Climatic Data Center (NCDC) }  }   \label{fig:co2iron}
+\end{figure}
+
+\subsubsection{Wind und Oberflächenströmungen}
+Verkleinerung der Tiefe der Oceanic Mixed Layer von September auf Oktober \citep{Tilburg.2002} (abchecken, dass der Bloom nicht daher kommt!). Einteilung in \textit{nördlich der Tasmanischen Front} und \textit{südlich der tasmanischen Front}? Phytoplanktonproduktion hängt von Up- und downwelling-Prozessen durch mesoskalige Wirbel ab \citep{Tilburg.2002} $\Rightarrow$ Vorticity der Ozeanströmungen berechnen?Besser sea surface height (SSH) Anonmalien angucken. Was, wenn Blüte bei \citet{Gabric.2016} aufgrund von tieferen mixed-layer aufgrund des Sturms? $\Rightarrow$ Winddaten vergleichen.
 
 \subsection{Eigenschaften und Abhängigkeiten von Phytoplankton} \label{sec:Phytoplankton}
-\subsubsection{Wachstum von Phytoplankton}
-\subsubsection{Biologische Pumpe} \label{sec:biopump}
-\subsection{Staub in Australien} \label{sec:Staub}
- \section{Methoden und Daten} \label{sec:Methoden}
-
-
-
-
-\section{Gabric.2016}
-
-\begin{itemize}
-\item Tasman Sea $25^\circ$ S bis $40^\circ$ S Untersuchungsareal
-\item data: Chl + aeorosol optical depth (AOD)
-\begin{itemize}
-\item chl data: daily + 8 day MODIS-AQUA
-\item AOD data: 550 nm, 4km resolution
-\end{itemize}
-\item divided into $5^\circ$ lattitude band
-\item DVR kumulativ
-\item Hovmoller Plots (x: zeit, y: latidude, longitude)
-\item cloud processing / wet deposition wichtig
-\item Response hauptsächlich südlich der tasmanischen Front ($\approx 32^\circ$ S)
-\item Staubdeposition weiter im Norden
-
-\end{itemize}
-
-\section{Theorie}
-\subsection{Kohlendioxid und Klima}
-
-\subsection{Der südliche Ozean}
-Schätzungsweise 45-62 \% der gesamten Wärmezunahme zwischen 2005 und 2017 in den oberen 2000m des globalen Ozeans entfielen auf den südlichen Ozean \citep{IPCCpol.2019}. Auch im tiefen Ozean $>2000m$ fand wahrscheinlich eine Erwärmung statt. Zusammen mit dem steigenden Eintrag von Süßwasser durch abschmelzende Eisschilde führt diese Erwärmung zu  einer zunehmenden Stratifizierung der oberen Ozeanschichten. Durch diese höhere hydrodynamische Stabilität wird  der Austausch von Nährstoffen in lichtdurchflutete Schichten erschwert, sodass die dortige Produktion von Phytoplankton beeinträchtigt ist. In der Arktis führten die Veränderungen in der Eisbedeckung zu einer erhöhten Nettoprimärproduktion, Phytoplankton-Blüten treten früher im Jahr auf. Rund um die Antarktis kann dies allerdings nicht pauschal beobachtet werden \citep{IPCCpol.2019}. Allerdings wird eine Südwärtsverlagerung des antarktischen Krillvorkommens vermutet. Derzeitige Klimaprognosen deuten daraufhin, dass die Nettoprimärproduktion in Arktis und Antarktis erhöhen , aber gleichzeitig in tropischen Gewässer deutlich sinken wird. Grundsätzlich bietet der südliche bzw. antarktische Ozean ein hohes Potential für die Produktion von Phytoplankton. Im (südhemisphärischen) Sommer sind große Teile der oberen Ozeanschichten ausreichend lichtdurchflutet und Nährstoffe (mit Ausnahme von löslichem Eisen) können durch das allgemeine Aufströmen aus der Tiefe an die Oberfläche transportiert werden \citep{Martin.1990}. -  Der antarkische Zirkumpolarstrom kann je nach Zone verschiedene chemikalische Eigenschaften aufweisen:
-
-\begin{enumerate}
-\item Subtropische Front
-\item Subantarktische Zone
-\item Subantarktische Front
-\item polare Frontzone
-\item Polarfront
-\item Antarktische Zone
-\item südliche Front des antarktischen Zirkumpolarstroms
-\item südliche Grenze des antarktischen Zirkumpolarstroms
-\end{enumerate}
-
-\subsection{Wachstum von Phytoplankton}
+Bis hierhin wurde Phytoplankton bereits umfangreich erwähnt und diskutiert, tatsächlich aber noch nicht angemessen vorgestellt. Aufgrund der enormen Bedeutung sollen in diesem Abschnitt die grundsätzlichen Eigenschaften und einige der besonderen komplexen Zusammenhänge separat aufgezeigt werden. Eine seriöse Analyse der Entwicklung der Phytoplankton Konzentrationen ist ohne diese entsprechende Berücksichtigung kaum möglich.
+\subsubsection{Allgemeines zu Phytoplankton} \label{sec:Phytobasics}
 Durchschnittlich ungefähr 10 $\mu$g pro Liter bzw. $10^{-6}$ Prozent des Oberflächenwassers bestehen aus lebenden Organismen \citep{Emerson.2009}. Diese Konzentration ist weitaus schwächer als an Land. Die Lebenserwartung von Phytoplankton beträgt gerade einmal Stunden bis hin zu Tagen. Dieses Mikroleben entspricht aufgrund der sehr kurzen Zeitspanne in der Zusammensetzung praktisch ausschließlich dem Zustand des lokalen Ozeanwassers und kann besser durch die hinterlassenen chemischen Spuren beobachtet werden als durch direkte Untersuchung. - Phytoplankton sind Einzeller. - Die das Picophytoplankton ($<2\mu$m) in vielen Teilen des Ozeans dominierenden Cyanobakterien \textit{Synechococcus}  und \textit{Prochlorococcus} enthalten vermutlich am meisten der grünen, Licht absorbierenden Pigmente (Chlorophyll) \citep{Emerson.2009}. Kieselalgen dominieren in Regionen, wo aufsteigendes Wasser nennenswerten Einfluss nimmt, wie bspw. im südlichen Ozean. Dort besteht das Sediment größtenteils aus den \textit{Frusteln} der Kieselalgen. - Organische Meerwasser-Bestandteile werden der Größe nach in zwei verschiedene Klassen eingeteilt: feste Materie in Form von Partikeln und im Meerwasser  gelöste organische Materie. I.d.R. liegt die Grenze für die experimentelle Unterscheidung bei $0.5 \mu$m. Kleinere Partikel werden durch die Schwerebeschleunigung nur so schwach beeinflusst, dass sie (wie die tatsächlich gelöste Materie) ohne weitere Einflüsse praktisch nicht absinken. Phytoplankton liegt allerdings praktisch ausschließlich in Form von Partikeln oberhalb dieser Grenze vor \citep{Emerson.2009}.
 Wachstumsbeeinflussende Faktoren sind \citep{Falkowski.1998}):
 \begin{enumerate}
@@ -179,22 +144,13 @@ Diese Komposition beinhaltet noch keine Spurenelemente wie Mangan, Eisen, Kobalt
 \begin{equation}
 \text{(C}_{106} \text{N}_{16} \text{P)}_{1000} \text{Fe}_8\text{Mn}_4\text{Zn}_{0.8}\text{Cu}_{0.4}\text{Co}_{0.2} \text{Cd}_{0.2}
 \end{equation}
-
-\subsection{Eisenhypothese}
 - Es wird geschätzt, dass bei etwa 40 \% des ozeanischen Oberflächenwassers Eisen ein limitierender Faktor für die Produktion von Phytoplankton sein kann \citep{Emerson.2009}, Sekundärquelle. - Eisen und andere Nährstoffe sind an der Ozeanoberfläche häufig im Vergleich zu tieferen Schichten reduziert \citep{Martin.1990}. - Andere Nährstoffe für Phytoplankton können durch aufsteigendes Tiefenwasser bereitgestellt werden. Eisen und Mangan werden hingegen hauptsächlich durch äolischen Staub eingebracht. Ansonsten sind grundsätzlich Flüsse die Hauptquelle für gelösten Eintrag von Elementen \citep{Emerson.2009} Die Konzentrationen des Elements Eisen im Meerwasser sind verglichen mit den häufigsten Stoffen wie Natrium, Chlorid, Sulfat und Magnesium sehr gering. Dennoch ist es das dritthäufigste Element in marinen Sedimenten. \citep{Emerson.2009} - Verweildauer von etwa 6 Monaten in oberflächennahem Wasser bis ca. 150m Tiefe \citep{Hayes.2015}. Nitrogenase (Enzymkomplex) kann N$_2$ reduzieren und Stickstoff somit biologisch verfügbar machen. Laut \citet{Emerson.2009} ist dies das extremste Beispiel, für die Limitierung durch Eisen, da diese Enzyme zu einem großen Teil aus Eisen bestehen. Nitrogenase selbst benötigt (bzw. besteht aus) Eisen. Meistens Trichdesmiumspp., das N$_2$ bindet \citep{Falkowski.1998}.  In nährstoffarmen Gewässern haben extrem kleine Phytoplankton-Organisamen bei der Verarbeitung von Nährstoffen (Exkrementen der Verbraucher) einen Wettbewerbsvorteil, da großes Oberflächen zu Volumen- Verhältnis \citep{Falkowski.1998}.Wenn hingegen \textit{neue} Nährstoffe bspw. durch Upwelling nach oben gelangen, hat größeres Phytoplankton, insbesondere Kieselalgen einen Wettbewerbsvorteil (aufgrund Vakuole, schnellere Aufahme). -Dementsprechend wurde beobachtet, dass in mit löslichem Eisen \textit{gedüngten} Arealen  Kieselalgen im Vergleich zu anderem Phytoplankton besonders stark reagieren, also wachsen. Die Zugabe von Eisen fördert, dass Nitrate (NO$_3^-$) zu Ammonium-Ionen (NH$_4^+$) reduziert werden, welche bei der Fotosynthese von Plankton mit hohem Bedarf an Nitraten besonders schnell verwendet werden können.  \citep{Emerson.2009}. -Das Plankton, das sich wiederum von diesen ernährt, ist typischerweise größer, benötigt für Entwicklung (Larvenstadium) mehr Zeit; dadurch im gegensatz zu obigen Arealen Blooms möglich und stärkere biologische Pumpe.
 \\\\ Insbesondere im südlichen Ozean kann auch Mangan limitierender Faktor sein \citep{Browning.2021}. Bisher wurde Mangan diesbezüglich nicht verdächtigt. Die Besonderheit bei Mangan ist, dass dieses Spurenmetall im Gegensatz zu Eisen kaum durch Liganden besetzt wird und damit wesentlich mehr biologisch verfügbar ist \citep{Emerson.2009}. Untersuchungen von Eisbohrkernen zeigen, dass Eisenzufuhr durch äolischen Staub in glazialen Perioden um eine Größenordnung größer war als in Interglazialen \citep{Falkowski.1998}. - Es gab großskalige Experimente, in denen in Phosphor- und Nitratreichen Gewässern Eisen hinzugefügt wurde \citep{Emerson.2009}. -
-\begin{figure}[ht]
-\centering
-\includegraphics[width=0.7\textwidth]{bilder/Stoll2020/antarctic-iron-global-co2.png}
-\caption{Antikorrelation von \textbf{a} globaler \cotwo \ Konzentration und \textbf{b} Eisendeposition in der Antarktis \citep{Stoll.2020}}
-\end{figure}
+\subsubsection{Biologische Pumpe} \label{sec:biopump}
+- Der Export von organischer Materie aus der euphotischen Zone ist für den Hauptteil der chemischen Prozesse in der Tiefsee verantwortlich \citep{Emerson.2009}. - Niedriger Sauerstoffgehalt in der Tiefsee weist auf starke biologische Pumpe hin (dortige durch mehr absinkendes Plankton angereicherte Organismen verbrauchen mehr Sauerstoff?). Im aktuellen Ozean beträgt der (Sink)Fluss ca. 16 Pg Kohlenstoff pro Jahr \citep{Falkowski.1998} (laut \citet{Emerson.2009} Größenordnung 5  Pg??). In Küstengebieten (Upwelling) sehr deutlich $\Rightarrow$ Fischerei profitiert. Hoher Sauerstoffgehalt führt zu oxidiertem Eisen; oxidiertes Eisen ist nicht löslich und sinkt $\Rightarrow$ geringer Eisengehalt \citep{Falkowski.1998}. Es wird angenommen , dass die Leistung der biologischen Pumpe aufgrund der Klimaveränderungen insgesamt global abnehmen wird. - Aufgrund der höheren Dichte von Mineralen ( vereinfachend angenommen ca. $2.5$ g cm$^{-3}$) im Gegensatz zu organischer Materie (ca. $1.1$ g cm$^{-3}$)  und Meerwasser (ca. $1$ g cm$^{-3}$) kann abgeschätzt werden, dass anorganische Partikel etwa 15 mal schneller sinken als rein organische. Entsprechend kann abgeleitet werden, dass Organismen ohne zusätzlichen mineralischen Ballast aufgrund der geringen Sinkgeschwindigkeit die euphotische Zone praktisch kaum verlassen können. Zusätzlich bietet eine mineralische Hülle entsprechenden Schutz vor Oxidation der organischen Materie, die ansonsten bereits innerhalb der ersten 2000m während des Sinkens einsetzen würde\citep{Emerson.2009}.
 \subsubsection{Düngung funktioniert nicht}
 verschiedene Ursachen. Verweilzeit in Oberflächenwasser \citep{Hayes.2015}. Aufnahmefähigkeit / Rezeptivität ist saisonal variabel \citep{Gabric.2016}, Sekundärquelle.\citep{Falkowski.1998}. Zeitreihen für Messungen der Ozeanbiologie sind im Vergleich zu Land sehr kurz, wodurch Schätzen auch unzuverlässiger sein können \citep{Falkowski.1998}. Häufigste Beschränkung ist durch Verfügbarkeit von gebundenem anorganischem Stickstoff \citep{Falkowski.1998}. Daneben wurde aber auch für viele weitere Metalle wie Ni, Zn, Co, Cd, Cu ein messbarer Einfluss auf die Phytoplanktonproduktion bzw. die dafür erforderlichen Enzyme beobachtet.
-\subsubsection{Biologische Pumpe}
-- Der Export von organischer Materie aus der euphotischen Zone ist für den Hauptteil der chemischen Prozesse in der Tiefsee verantwortlich \citep{Emerson.2009}. - Niedriger Sauerstoffgehalt in der Tiefsee weist auf starke biologische Pumpe hin (dortige durch mehr absinkendes Plankton angereicherte Organismen verbrauchen mehr Sauerstoff?). Im aktuellen Ozean beträgt der (Sink)Fluss ca. 16 Pg Kohlenstoff pro Jahr \citep{Falkowski.1998} (laut \citet{Emerson.2009} Größenordnung 5  Pg??). In Küstengebieten (Upwelling) sehr deutlich $\Rightarrow$ Fischerei profitiert. Hoher Sauerstoffgehalt führt zu oxidiertem Eisen; oxidiertes Eisen ist nicht löslich und sinkt $\Rightarrow$ geringer Eisengehalt \citep{Falkowski.1998}. Es wird angenommen , dass die Leistung der biologischen Pumpe aufgrund der Klimaveränderungen insgesamt global abnehmen wird. - Aufgrund der höheren Dichte von Mineralen ( vereinfachend angenommen ca. $2.5$ g cm$^{-3}$) im Gegensatz zu organischer Materie (ca. $1.1$ g cm$^{-3}$)  und Meerwasser (ca. $1$ g cm$^{-3}$) kann abgeschätzt werden, dass anorganische Partikel etwa 15 mal schneller sinken als rein organische. Entsprechend kann abgeleitet werden, dass Organismen ohne zusätzlichen mineralischen Ballast aufgrund der geringen Sinkgeschwindigkeit die euphotische Zone praktisch kaum verlassen können. Zusätzlich bietet eine mineralische Hülle entsprechenden Schutz vor Oxidation der organischen Materie, die ansonsten bereits innerhalb der ersten 2000m während des Sinkens einsetzen würde\citep{Emerson.2009}.
-
-
-\subsection{Staubkreislauf}
+\subsection{Staub in Australien} \label{sec:Staub}
 Wichtige Verbindung zu Energie- und Kohlenstoffkreislauf \citep{Shao.2011} - Staub entstammt nicht nur ariden Wüstengebieten. Ein nennenswerter Anteil ($>$ 5\%) entsteht in kalten/glazialen Regionen hauptsächlich durch die Bewegungen von Gletschermassen und den damit verbundenen Abreibungen. Verwitterungsprozesse spielen im Gegensatz zu ariden Gebieten eine untergeordnete Rolle \citep{Marx.2018}. -
 \subsubsection{Staubquellen in Australien}
 Staub, der durch entsprechende Quellen emittiert wird, entstammt häufig einem anderen Ort. Dies sind i.d.R. benachbarte Regionen höherer Feuchte, in denen chemische und physikalische Verwitterung stattfindet. Während des Transports zur Region der Emission wird die Partikelgröße weiter reduziert (zermahlen, Separation durch Wind). Dementsprechend kann die Verfügbarkeit von Staub paradoxerweise von einem ausreichend hohen (Feuchte)Fluss in die Region abhängen. Dies trifft insbesondere auf die endorheischen Systeme rund um das Lakre Eyre Becken in Australien zu \citep{Marx.2018}. - größte Teil Zentralaustralien \citep{Shao.2011} siehe auch Lake Eyre basin. \\\\
@@ -214,43 +170,35 @@ Nicht jede Form von Eisen kann als Dünger dienen. Muss entsprechend gelöstes (
 \end{tabularx}
 \caption{Beschreibung} \label{table:eisenoxid}
 \end{table}
-\subsubsection{Emissions- und Depositionsmodelle}
-ggf. lieber in Kapitel Methoden
+
 \subsubsection{Deposition}
 Hauptursache für die Deposition/Ablagerung von weit transportiertem Staub ist das \textit{Auswaschen} durch Regen \citep{Marx.2018}, Sekundärquelle. -
 
-\subsection{Wind und Oberflächenströmungen}
-Verkleinerung der Tiefe der Oceanic Mixed Layer von September auf Oktober \citep{Tilburg.2002} (abchecken, dass der Bloom nicht daher kommt!). Einteilung in \textit{nördlich der Tasmanischen Front} und \textit{südlich der tasmanischen Front}? Phytoplanktonproduktion hängt von Up- und downwelling-Prozessen durch mesoskalige Wirbel ab \citep{Tilburg.2002} $\Rightarrow$ Vorticity der Ozeanströmungen berechnen?Besser sea surface height (SSH) Anonmalien angucken. Was, wenn Blüte bei \citet{Gabric.2016} aufgrund von tieferen mixed-layer aufgrund des Sturms? $\Rightarrow$ Winddaten vergleichen.
-\section{Beschreibung des Staubsturms in September 2009}
-stärkstes (in Bezug auf Sichtweitenreduzierung) Staubevent über Sydney seit es verlässliche Aufzeichnungen gibt (1940, \citet{Leys.2011}). Staubstürme üblich im ariden Inland. Vorangegangen sind Monate und Jahre mit im Vergleich zum Durchschnitt höheren Temperaturen und unterdurchschnittlichem Niederschlag; dadurch schwache Vegetation und trockene Erdböden \citep{Leys.2011}. Aufgrund der hohen Intensität wird dieser Zeitraum \textit{Millenium Drought} getauft \citep{Deckker.2014}, Sekundärquelle.
-\section{Wetter}
 
-\section{Staubtransport}
+\subsubsection{Beschreibung des Staubsturms in September 2009} \label{sec:reddawn}
+stärkstes (in Bezug auf Sichtweitenreduzierung) Staubevent über Sydney seit es verlässliche Aufzeichnungen gibt (1940, \citet{Leys.2011}). Staubstürme üblich im ariden Inland. Vorangegangen sind Monate und Jahre mit im Vergleich zum Durchschnitt höheren Temperaturen und unterdurchschnittlichem Niederschlag; dadurch schwache Vegetation und trockene Erdböden \citep{Leys.2011}. Aufgrund der hohen Intensität wird dieser Zeitraum \textit{Millenium Drought} getauft \citep{Deckker.2014}, Sekundärquelle.
+
+\subsubsection{Staubtransport}
 Wird Staub über mehrere tausend Kilometer transportiert, verleiben i.d.R. nur Staubpartikel mit Größen von $<$20$\mu$m \citep{Marx.2018}, Sekundärquelle.
 
+\section{Methoden und Daten} \label{sec:Methoden}
+Um testen zu können, ob ein extremes Staubereignis Auswirkungen auf die Phytoplanktonproduktion in einer bestimmten Region hat, ist eine geeignete Datenbasis erforderlich. Grundsätzlich müssen hierzu zwei Variablen räumlich und zeitlich quantifiziert werden: Staub- und Phytoplankton-Konzentrationen. In beiden Fällen ist die Auflösung in jeder dieser Dimensionen stark beschränkt. Speziell Ausdehnung und Trajektorien von Staubstürmen müssen aufgrund der spärlichen Beobachtungsdaten (siehe Kapitel  \ref{sec:reddawn}) größtenteils geschätzt werden. Simulationen leistungsfähiger Modelle können die Auswertungen deutlich verbessern. In Rahmen dieser Arbeit wird eine spezielle WRF-Simulation (sh. Kapitel \ref{sec:wrf}) verwendet, um genauere Aussagen über das Verhalten der Staubwolke treffen zu können. Die Konzentrationen des Phytoplanktons werden (wie üblich) aus satellitengestützten täglichen Messungen der Chlorophyll a Konzentrationen abgeleitet (sh. Kapitel \ref{sec:chla}). Für den finalen Test eines möglichen Zusammenhangs werden die in Kapitel \ref{sec:stats} vorgestellten statistischen Methoden angewendet.
 
-
-\section{Methoden}
-hole Zeitreihe Chlorophyll alpha Entwicklung von September bis Oktober (bzw. falls saisonale Veränderung, den Zeitraum, welcher der Kurve Dust-Event-Zeitraums entspricht) gemittelt über bspw. 10 Jahre. Berechne daraus Anomalie 2009 und vergleiche diese mit Staubdeposition.
-\subsection{iron residence time modell}
-\subsection{phytoplankton response time modell}
-turn-over time ist von Größenordnung einer Woche oder weniger \citep{Falkowski.1998}: abgeleitet durch: 45 bis 50 Pg Kohlenstoff produzieren Phytoplankton pro Jahr, aktuell im Ozean sind aber immer nur ca. 1 Pg, das heißt dass das jeweils aktuelle Phytoplankton immer nach ca. einer Woche \textit{umgesetzt} wurde. Die Proben von \citet{Martin.1988} zeigten an Tag 4 des Experiments eine signifikante Reaktion auf die Zugabe von Eisen (im Vergleich zu den unbehandelten Kontrollen).
-
-\subsection{WRF Modell}
-nur kurze Vorstellung, da grundsätzlich nur der Output verwendet werden soll. Vergleich mit von \cite{Gabric.2016} genutzem Modell CEMSYS
+\subsection{WRF Modell} \label{sec:wrf}
+Das \textit{Weather Research and Forecasting} (WRF) Modell ist ein mesoskaliges System zur numerischen Wettersimulation. Es findet in der Atmosphärenforschung breite Anwendung und kann für verschiedene Zwecke mit Auflösungen von weniger als einem Meter bis hin zu mehreren tausend Kilometern eingesetzt werden \citep{NCAR.2021}. Das ursprüngliche Modelle wurde um ein Modul ergänzt, dass neben den \textit{üblichen} meteorologischen Größen auch Staub-Emission, -Transport und -Deposition berücksichtigt. Im Rahmen dieser Arbeit wird der Output eines WRF-Modells der Version 4.1.2 verwendet, welcher zusätzlich die modellierten Konzentrationen des Elements Eisen enthält. Als Staub-Emissionsschema wurde jenes von \citet{Shao.2004} verwendet. Das Modell berechnet die Staubkonzentrationen für 5 verschiedene Korngrößenklassen, welche in Tabelle \ref{table:wrf} dargestellt sind. Simuliert wurde der Zeitraum vom 18.09.2009 um 0 Uhr UTC bis zum 30.09.2009 um 0 Uhr UTC. Die verfügbaren Variablen werden in der Ausgabedatei in einem Intervall von drei Stunden gespeichert, wodurch sich insgesamt 97 auswertbare Zeitschritte ergeben. Zum Startzeitpunkt werden dem Modell keine atmosphärischen Staubkonzentrationen übergeben. Etwaige Emissionen zu früheren Zeitpunkten werden demnach vernachlässigt. Räumlich deckt das Modell von 110.3° Ost bis 170.3° West und von 57.06° S bis 9.89° S den gesamten australischen Kontinent, das tasmanische Meer, Neuseeland und Teile des südlichen Ozeans und Pazifiks ab. Dieses Gebiet wird mit 164$\times$124 (Ost-West$\times$Süd-Nord) Gitterpunkten abgedeckt. Ein Gitterpunkt repräsentiert damit ein Gebiet von etwa 53.3 km$\times$29.5 km (am nördlichsten Punkt in der Domäne, im Süden sind es entsprechend 29.4 km$\times$53.3 km). Mehrere Größen, die für Emission, Transport und Deposition wichtig sind (bspw. lokale Form des Geländes, steile Topographie, Rauheit, Turbulenzen), können nicht aufgelöst werden und müssen im Modell parametrisiert werden. Die vertikale Verteilung wird auf 32 Höhenlevel simuliert. Das unterste Höhenlevel ist (entsprechend der Auflösung) geländefolgend, das oberste liegt oberhalb der Troposphäre zwischen 19.044 m und 20.230 m über Meeresniveau.
 \begin{table}[H]
 \begin{tabularx}{\textwidth}{X X}
 		\toprule
-			\thead{Kategorie} & \thead{Größe}\\
+			\thead{Kategorie} & \thead{Effektiver Radius}\\
 		\midrule
-		1 & $0.5 \ \mu$m effektiver Radius \\
-		2 & $1.4 \ \mu$m effektiver Radius \\
-		3 & $2.4 \ \mu$m effektiver Radius \\
-		4 & $4.5 \ \mu$m effektiver Radius \\
-		5 & $8.0 \ \mu$m effektiver Radius \\
+		1 & $0.5 \ \mu$m \\
+		2 & $1.4 \ \mu$m \\
+		3 & $2.4 \ \mu$m  \\
+		4 & $4.5 \ \mu$m \\
+		5 & $8.0 \ \mu$m  \\
 		\bottomrule
 \end{tabularx}
-\caption{Die Staubpartikel wurden in verschiedene Korngrößen unterteilt} \label{table:binsizes}
+\caption{Die Staubpartikel wurden in verschiedene Korngrößen unterteilt} \label{table:wrf}
 \end{table}
 \subsubsection{Emissions Schema}
 Zur Modellierung der Staubemissionen wurde das Schema von \citet{Shao.2004} verwendet und in WRF implementiert. Als Auslöser für Emissionen werden grundsätzlich zwei Mechanismen erwogen: Beschuss durch Salz und der Zerfall von Aggregaten. Zusammengefasst setzt sich das Emissionsschema \citep{Shao.2004} aus folgenden Gleichungen zusammen:
@@ -261,13 +209,54 @@ Zur Modellierung der Staubemissionen wurde das Schema von \citet{Shao.2004} verw
 \sigma_m &= 12 \cdot u_*^2 \frac{\rho_b}{p} \left(1 +14 \cdot u_* \sqrt{\frac{\rho_b}{p}} \right)
 \end{align}
 Dabei ist $\tilde{F}(d_i,d_s)$ die Emissionsrate für die Staubpartikelgröße $d_i$ und das Salz der Partikelgröße $d_s$; $c_y$ ein dimensionsloser Koeffizient; $\eta_{fi}$ der Anteil des insgesamt emittierbaren Staubs; $\sigma_p = \frac{\eta_{mi}}{\eta_{fi}} = \frac{p_{m}(d_i)}{p_{f}(d_i)}$ das Verhältnis zwischen der Massenverteilung freien Staubs $\eta_{mi}$ zu der des ingesamt emissionsfähigen Staubs $\eta_{fi}$ pro Einheitsbodenmasse für die Partikelgrößenklasse $i$ bzw. den entsprechenden Verteilungen für die Partikelgrößenverteilungen $p_{m}(d_i)$ und $p_{f}(d_i)$;  $\sigma_m= \frac{m_\Omega}{m}$ das Verhältnis zwischen der Masse  $m$ des einschlagenden Partikels und der durch \textit{Bombardement} ausgeworfenen Masse $m_\Omega$; $g$ die Erdschwerebeschleunigung; $Q$ der stromweise Salzfluss; $u_*^2$ die Reibungsgeschwindigkeit; $u_{*t}^2$ der Schwellenwert für die Reibungsgeschwindigkeit; $\rho_b$ die Bodenschüttdichte und $p$ der plastische Bodendruck.
-\subsection{Phytoplankton}
+\subsection{Chlorophyll a} \label{sec:chla}
 Climate Data Store \nocite{*}
 \\\\
 Messungen des Chlorphyll-$\alpha$ geben Rückschluss auf Phytoplankton \citep{RYTHER.1957}(muss ich noch lesen)
 
-\subsection{EOF?}
+\subsection{Statistische Methoden} \label{sec:stats}
 \subsection{Riegers Principal Components?}
+\subsection{iron residence time modell}
+\subsection{phytoplankton response time modell}
+turn-over time ist von Größenordnung einer Woche oder weniger \citep{Falkowski.1998}: abgeleitet durch: 45 bis 50 Pg Kohlenstoff produzieren Phytoplankton pro Jahr, aktuell im Ozean sind aber immer nur ca. 1 Pg, das heißt dass das jeweils aktuelle Phytoplankton immer nach ca. einer Woche \textit{umgesetzt} wurde. Die Proben von \citet{Martin.1988} zeigten an Tag 4 des Experiments eine signifikante Reaktion auf die Zugabe von Eisen (im Vergleich zu den unbehandelten Kontrollen).
+
+
+
+\section{Gabric.2016}
+
+\begin{itemize}
+\item Tasman Sea $25^\circ$ S bis $40^\circ$ S Untersuchungsareal
+\item data: Chl + aeorosol optical depth (AOD)
+\begin{itemize}
+\item chl data: daily + 8 day MODIS-AQUA
+\item AOD data: 550 nm, 4km resolution
+\end{itemize}
+\item divided into $5^\circ$ lattitude band
+\item DVR kumulativ
+\item Hovmoller Plots (x: zeit, y: latidude, longitude)
+\item cloud processing / wet deposition wichtig
+\item Response hauptsächlich südlich der tasmanischen Front ($\approx 32^\circ$ S)
+\item Staubdeposition weiter im Norden
+\end{itemize}
+
+
+
+\subsection{Der südliche Ozean}
+Schätzungsweise 45-62 \% der gesamten Wärmezunahme zwischen 2005 und 2017 in den oberen 2000m des globalen Ozeans entfielen auf den südlichen Ozean \citep{IPCCpol.2019}. Auch im tiefen Ozean $>2000m$ fand wahrscheinlich eine Erwärmung statt. Zusammen mit dem steigenden Eintrag von Süßwasser durch abschmelzende Eisschilde führt diese Erwärmung zu  einer zunehmenden Stratifizierung der oberen Ozeanschichten. Durch diese höhere hydrodynamische Stabilität wird  der Austausch von Nährstoffen in lichtdurchflutete Schichten erschwert, sodass die dortige Produktion von Phytoplankton beeinträchtigt ist. In der Arktis führten die Veränderungen in der Eisbedeckung zu einer erhöhten Nettoprimärproduktion, Phytoplankton-Blüten treten früher im Jahr auf. Rund um die Antarktis kann dies allerdings nicht pauschal beobachtet werden \citep{IPCCpol.2019}. Allerdings wird eine Südwärtsverlagerung des antarktischen Krillvorkommens vermutet. Derzeitige Klimaprognosen deuten daraufhin, dass die Nettoprimärproduktion in Arktis und Antarktis erhöhen , aber gleichzeitig in tropischen Gewässer deutlich sinken wird. Grundsätzlich bietet der südliche bzw. antarktische Ozean ein hohes Potential für die Produktion von Phytoplankton. Im (südhemisphärischen) Sommer sind große Teile der oberen Ozeanschichten ausreichend lichtdurchflutet und Nährstoffe (mit Ausnahme von löslichem Eisen) können durch das allgemeine Aufströmen aus der Tiefe an die Oberfläche transportiert werden \citep{Martin.1990}. -  Der antarkische Zirkumpolarstrom kann je nach Zone verschiedene chemikalische Eigenschaften aufweisen:
+
+\begin{enumerate}
+\item Subtropische Front
+\item Subantarktische Zone
+\item Subantarktische Front
+\item polare Frontzone
+\item Polarfront
+\item Antarktische Zone
+\item südliche Front des antarktischen Zirkumpolarstroms
+\item südliche Grenze des antarktischen Zirkumpolarstroms
+\end{enumerate}
+
+
+
 
 \section{Auswertung und Diskussion}
 \subsection{Anpassungen nach der ersten Simulation}

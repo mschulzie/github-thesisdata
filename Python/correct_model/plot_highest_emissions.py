@@ -14,10 +14,10 @@ file = 'D://thesisdata/wrf_dust/wrfout_d01_2009-09-18_00_00_00'
 var = ['DUST_EMIS_ACC1','DUST_EMIS_ACC2','DUST_EMIS_ACC3','DUST_EMIS_ACC4','DUST_EMIS_ACC5']
 
 test = wh.Warfy()
-test.load_var(file,var)
+test.load_var(var)
 test.sum_vars(var,'DUST_EMIS_ACC_SUM')
-test.load_var(file,'uvmet')
-test.load_var(file,'ROUGH_COR')
+test.load_var('uvmet')
+test.load_var('ROUGH_COR')
 rough = test.get_var('ROUGH_COR')
 wind = test.get_var('uvmet')
 varr = test.get_var('DUST_EMIS_ACC_SUM')
@@ -89,17 +89,17 @@ fig.suptitle('Times series of first '+str(N)+
 plt.tight_layout()
 plt.show()
 
-fig.savefig('D://thesisdata/high_emissions_20.pdf')
+fig.savefig('D://thesisdata/high_emissions_20_new.pdf')
 
-for i in highest_lat:
-    print(i)
-highest_lon
-len(highest_lat)
-
-high= ([-25.154457,-23.379456,-23.825523,-23.379456,
-    -23.825523,-24.27005,-23.379456,-23.825523,
-    -24.713036,-23.825523,-28.198704,-27.768837,
-    -24.713036,-31.574299,-27.337261,-24.713036,
-    -24.27005,-27.337261,-24.27005,-23.379456])
-
-    len(high)
+# for i in highest_lat:
+#     print(i)
+# highest_lon
+# len(highest_lat)
+#
+# high= ([-25.154457,-23.379456,-23.825523,-23.379456,
+#     -23.825523,-24.27005,-23.379456,-23.825523,
+#     -24.713036,-23.825523,-28.198704,-27.768837,
+#     -24.713036,-31.574299,-27.337261,-24.713036,
+#     -24.27005,-27.337261,-24.27005,-23.379456])
+#
+#     len(high)

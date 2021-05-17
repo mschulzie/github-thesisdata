@@ -74,17 +74,28 @@ ax2.set_xlabel('Zeit in tausend Jahren vor heute ')
 plt.tight_layout()
 plt.savefig('D://thesisdata/bilder/Python/epica_icecore.png',dpi=500)
 plt.show()
-
+plt.close()
 #%%
+fig = plt.figure(figsize=(7,2))
+ax = fig.add_subplot(111)
 
 iron_log = np.log10(iron['Fe flux'])
 iron_norm = normalize(iron_log)
-co2_norm = normalize(co2_2015['co2_ppm'])
+co2_2015_red = co2_2015[co2_2015['time']>0]
+co2_2015_red = co2_2015_red[co2_2015_red['time']<314]
+co2_2015_red
+co2_norm = normalize(co2_2015_red['co2_ppm'])
 
-#plt.plot(iron['time'],iron_norm,label='log 10 iron flux')
-plt.plot(co2_2015['time'],co2_norm,label='co2')
+ax.plot(iron['time'],iron_norm,label='Eisen Fluss (log10)',color='darkred')
+ax.plot(co2_2015_red['time'],co2_norm,label='CO2 Konz.',color='black')
 #plt.plot(dome_dust['time'],normalize((dome_dust['LaserDust(ng/g)'])),label='dust')
 #plt.plot(iron['time'],normalize(iron['Fe flux']),label='iron flux')
-plt.xlim(25,120)
-plt.legend()
+ax.set_xlabel('Zeit in tausend Jahren vor heute ')
+ax.set_ylabel('Normalisierte Skala')
+ax.legend(loc='upper right',framealpha=.5)
+ax.grid(axis='x')
+ax.set_xlim(-1,314)
+ax.set_yticklabels('')
+fig.suptitle('CO2 Komposit vs. Eisen Fluss Talos Dome Eiskern')
+fig.savefig('D://thesisdata/bilder/Python/co2_iron.png',dpi=300)
 plt.show()

@@ -10,8 +10,8 @@ from cartopy.mpl.gridliner import LONGITUDE_FORMATTER, LATITUDE_FORMATTER
 import matplotlib.ticker as mticker
 savepath = 'D://thesisdata/'
 #file = '/home/julchen/Studium/wrfout_d01_2009-09-18_00_00_00'
-file = 'D://thesisdata/wrf_dust/wrfout_d01_2009-09-18_00_00_00'
-old_file = 'D://thesisdata/wrf_dust/01-2021/wrfout_d01_2009-09-18_00_00_00'
+file = 'D://thesisdata/wrf_dust/2021-05-20/wrfout_d01_2009-09-18_00_00_00'
+old_file = 'D://thesisdata/wrf_dust/2021-01/wrfout_d01_2009-09-18_00_00_00'
 constvar = ['VEGFRA','ROUGH_COR','LAI']
 timevar = ['uvmet','SMOIS_COR','UST','UST_T']
 # only  SMOIS_COR, UST and UST_T variable in time!!
@@ -102,10 +102,10 @@ for c in constvar:
     gl.xformatter = LONGITUDE_FORMATTER
     gl.yformatter = LATITUDE_FORMATTER
 
-    for k in range(len(highest_lon)):
+    for k in range(len(hlon)):
         if ((area[0]<hlon[k]<area[1])&
             (area[3]<hlat[k]<area[2])):
-            map.text(highest_lon[k],highest_lat[k],str(k+1),transform=
+            map.text(hlon[k],hlat[k],str(k+1),transform=
                 crs.PlateCarree(), ha='center',va='center',zorder=3,
                 fontsize=8)
     map.set_extent(area,crs=crs.PlateCarree())
@@ -131,10 +131,10 @@ for c in constvar:
     gl.xformatter = LONGITUDE_FORMATTER
     gl.yformatter = LATITUDE_FORMATTER
 
-    for k in range(len(highest_lon)):
+    for k in range(len(hlon)):
         if ((area[0]<hlon[k]<area[1])&
             (area[3]<hlat[k]<area[2])):
-            map2.text(highest_lon[k],highest_lat[k],str(k+1),transform=
+            map2.text(hlon[k],hlat[k],str(k+1),transform=
                 crs.PlateCarree(), ha='center',va='center',zorder=3,
                 fontsize=8)
     map2.set_extent(area,crs=crs.PlateCarree())

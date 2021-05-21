@@ -3,9 +3,7 @@ import helperlies as mway
 import wrfhelper as wrfhelp
 
 wrfout, savedir = mway.gimmedirs()
-wrfout ='D://thesisdata/wrf_dust/wrfout_d01_2009-09-18_00_00_00_49ptsmean_top10'
 wrffile = Dataset(wrfout)
-wrffile
 cities=mway.loadcities()
 
 var = wrfhelp.wrfplot(wrffile,'DUSTLOAD_',

@@ -12,8 +12,8 @@ import helperlies as mway
 path, savepath = mway.gimmedirs()
 time = '2009-09-22T15'
 
-varname = 'DUST_SOILFELOAD_ACC'
-savename = 'test'
+varname = 'DUSTLOAD_ACC_'
+savename = 'DUSTLOAD'
 var = [varname] * 5
 var = [var[i]+'_'+str(i+1) for i in range(5)]
 var2 = ['PREC_ACC_C','PREC_ACC_NC']

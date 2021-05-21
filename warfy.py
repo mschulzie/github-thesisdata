@@ -13,8 +13,7 @@ import copy as cp
 # import numpy as np
 # import cartopy.feature as cfeature
 # import os
-#file = '/home/julchen/Studium/wrfout_d01_2009-09-18_00_00_00'
-file = 'D://thesisdata/wrf_dust/wrfout_d01_2009-09-18_00_00_00'
+file = 'D://thesisdata/wrf_dust/2021-05-20/wrfout_d01_2009-09-18_00_00_00'
 
 #%%
 class Warfy:

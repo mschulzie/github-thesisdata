@@ -17,6 +17,7 @@ ds = ds['CHL']
 ds = ds.sel(lon=slice(80,250),lat=slice(-10,-70))
 extent = [ds.lon.min(),ds.lon.max(),ds.lat.min(),ds.lat.max()]
 sns.set_context('paper')
+
 #%%
 for time in pd.date_range('2009-09-23','2009-09-23',freq='d'):
 

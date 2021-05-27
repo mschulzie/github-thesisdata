@@ -23,7 +23,7 @@ def gimmedirs():
     #Desktop-PC:
     elif (os.getcwd()=='C:\\Users\\mschu\\Documents\\Studium\\Bachelorarbeit\\github-thesisdata'):
         print('Angemeldet am Desktop-PC')
-        wrfout = "D://thesisdata/wrf_dust/2021-05-20/wrfout_d01_2009-09-18_00_00_00"
+        wrfout = "D://thesisdata/wrf_dust/2021-05-22/wrfout_d01_2009-09-18_00_00_00"
         savepic = 'D://thesisdata/bilder/'
         return wrfout, savepic
 

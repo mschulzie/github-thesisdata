@@ -224,10 +224,17 @@ Um die Taxonomie und die genauen Konzentrationen des Phytoplanktons im Meerwasse
 
 \subsection{Modell für den Hypothesentest} \label{sec:hypotest}
 Wie in den vorangegangenen Kapiteln aufgezeigt wurde, können verschiedenste Faktoren dazu führen, dass trotz des gemeinhin bekannten \textit{düngenden} Effektes von Eisen auf Phytoplankton kein Zusammenhang zum Staubsturm in Form des erhöhten Eintrags von Staub bzw. Eisen in den Ozean beobachtet werden kann. Im Rahmen dieser Arbeit soll die einfache Hypothese getestet werden, dass eine mögliche Reaktion des Phytoplanktons vordergründig dadurch limitiert ist, dass die eingetragenen Nährstoffe, insbesondere Eisen, nicht ausreichend lange im Oberflächenwasser verweilen um von den Organismen konsumiert zu werden. Aufgrund der vergleichsweise hohen Sinkgeschwindigkeit des Formats, in dem Eisen hauptsächlich eingetragen wird, entzieht sich dieser Nährstoff der euphotischen Zone. Um diese Hypothese zu testen, werden vereinfachende Annahmen zur Reaktionszeit des Phytoplanktons $T_{Phy}$, der Sinkgeschwindigkeit $v_i$ der jeweiligen Korngröße $i$ , der Tiefe der aktiven euphotischen Zone (bzw. MLD) $h$ und der damit verbundenen Verweilzeit $T_{i}$ der zusätzlichen Nährstoffe gemacht. In Regionen, in denen die Verweilzeit $T_{i}$ größer als die Reaktionszeit $T_{Phy}$ ist, sollten unter der Annahme sonst unveränderter Bedingungen Reaktionen beobachtet werden können. Da der Staub nicht nur einmalig zu einem bestimmten Zeitpunkt eingetragen wird, sondern an unterschiedlichen Orten über unterschiedliche Zeiträume, ist es erforderlich, für jeden Modellpunkt ein Budget zu betrachten. Der Hypothese folgend können Orte mit kontinuierlichem Eintrag über einen längeren Zeitraum eine stärkere Reaktion zeigen. Diese Lokationen sollen mithilfe der WRF-Simulation identifiziert und anschließend mit den Chlorphyll a Daten verglichen werden. Um auszuschließen, dass die Reaktionen aus einem anderen, vom Staubsturm unabhängigen, Faktor resultieren, sollten diese über der Standardabweichung des klimatischen Mittels liegen.
+Sigmoidfunktion zur Aktivierung:
+\begin{equation}
+\text{sig}(x) = \frac{1}{1+e^{-x}} = \frac{1}{2} \cdot \left(1 + \tanh \frac{x}{2} \right)
+\end{equation}
+\begin{align}
+R(t) &= \sum\limits_{i=1}^5 \text{sig} ( T_{i} - T_{Phy}) \\
+&= \sum\limits_{i=1}^5 \text{sig} (\frac{h}{v_i} - T_{Phy})
+\end{align}
 
-\subsection{Riegers Principal Components?}
-\subsection{iron residence time modell}
-\subsection{phytoplankton response time modell}
+\subsubsection{Evaluierung der Parameter}
+Zur Berechnung der Sinkgeschwindigkeit Stokes?
 turn-over time ist von Größenordnung einer Woche oder weniger \citep{Falkowski.1998}: abgeleitet durch: 45 bis 50 Pg Kohlenstoff produzieren Phytoplankton pro Jahr, aktuell im Ozean sind aber immer nur ca. 1 Pg, das heißt dass das jeweils aktuelle Phytoplankton immer nach ca. einer Woche \textit{umgesetzt} wurde. Die Proben von \citet{Martin.1988} zeigten an Tag 4 des Experiments eine signifikante Reaktion auf die Zugabe von Eisen (im Vergleich zu den unbehandelten Kontrollen).
 
 
@@ -265,10 +272,13 @@ Schätzungsweise 45-62 \% der gesamten Wärmezunahme zwischen 2005 und 2017 in d
 \item südliche Grenze des antarktischen Zirkumpolarstroms
 \end{enumerate}
 
-
-
-
 \section{Auswertung und Diskussion}
+\subsection{Eintrag von Staub und Eisen}
+\begin{figure}[ht]
+\includegraphics[width=\textwidth]{bilder/deposition.png}
+\caption{Ergebnis des WRF-Modells: Der kumulierte Eintrag von Staub (oben) und Eisen (unten) über den gesamten Simulationszeitraum. Der Gesamteintrag ergibt sich als Summe von nassem Eintrag (links, Auswaschung durch Regen), Ablagerung durch Gravitation (Mitte) und trockenem Staubeintrag (rechts).} \label{fig:deposition}
+\end{figure}
+\subsection{Phytoplankton Reaktion}
 \subsection{Anpassungen nach der ersten Simulation}
 Die Ergebnisse der WRF-Simulation sollten in einem ersten Schritt durch eine grobe Übersicht auf Plausibilität, d.h. der wahrscheinlichen Abweichung von der Realität überprüft werden. Da ein relativ langer Zeitraum von 12 Tagen simuliert wird, sind auch größere Abweichungen wahrscheinlich. Ganz allgemein sind Wetterprognosen i.d.R. nur für die ersten Tage wirklich präzise. Die Wahrscheinlichkeit, dass das berechnete Wetter eintritt nimmt dann aufgrund des chaotischen Verhaltens der Atmosphäre und den beschränkt zur Verfügung stehenden diskreten Startwerten stark ab \textbf{(Quelle ergänzen)}. Beobachtungs- bzw. Reanalysedaten werden dem Modell zum Startzeitpunkt und an den Rändern geliefert. Die Zustände der zeitlich und räumlich dazwischen liegenden Gitterpunkte sind dann (ausschließlich) vom Modell simuliert (\textbf{Quelle Sven, nochmal checken}). Für den Großteil des untersuchten Gebietes liegen ohnehin keine Beobachtungsdaten vor. Der australische Kontinent ist relativ dünn mit Wetterstationen besetzt und Beobachtungen durch Satelliten sind hinsichtlich  zeitlicher und räumlicher Auflösung ebenfalls häufig relativ grob. Darüber hinaus können die interessanten Parameter meist nur indirekt ermittelt werden.
 \\

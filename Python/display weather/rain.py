@@ -10,56 +10,46 @@ import os
 import helperlies as mway
 
 #convert time steps to those in WRF-output
-tp = xr.open_dataset('D://thesisdata/weather_stuff/uv_t_msl_tp_slh.nc')
-tp = tp['tp']
-time=slice('2009-09-22T00','2009-09-22T00')
-tp = tp.sel(time=time)
-tp = tp.sum(dim='time')
-time = time.stop
-# tp = tp.sel(time=slice('2009-09-01T01','2009-09-30T21')).coarsen(time=3,
-#     keep_attrs=True).sum()
-# tp['time'] = pd.date_range("2009-09-01T03", freq="3H", periods=239)
-# #convert to mm:
-# tp.attrs['units'] = 'mm'
-# tp.attrs['long_name'] = 'Total precipitation (acc. last 3h)'
-# tp.values = tp*1000
+ds = xr.open_dataset('D://thesisdata/weather_stuff/uv_t_msl_tp_slh.nc')
+ds
+ds = ds['tp']
+time1=slice('2009-09-22T01','2009-09-22T12')
+time2=slice('2009-09-22T13','2009-09-23T00')
+time3=slice('2009-09-23T01','2009-09-24T00')
+times = [time1,time2,time3]
+tp = [None]*3
 
+for i in range(len(times)):
+    tp[i] = ds.sel(time=times[i]).sum(dim='time')
+    times[i] = times[i].start[8:]+' bis '+times[i].stop[8:] + ' UTC'
+    i+=1
 #%%
 
-fig = plt.figure(figsize=(5,3.2))
-gs = fig.add_gridspec(1,1,hspace=0.4)
-ax = fig.add_subplot(gs[0,0], projection=crs.Mercator(
-    central_longitude=150.0))
+fig = plt.figure(figsize=(12,3.5))
+gs = fig.add_gridspec(1,len(times),hspace=0.4,wspace=0.01)
 
-ax.coastlines(lw=.5, zorder=5)
-ax.add_feature(cfeature.BORDERS, lw=.5, zorder=1)
-ax.add_feature(cfeature.LAND, fc='lightgrey', zorder=0)
-ax.add_feature(cfeature.STATES,lw=.2, zorder=1)
+for i in range(len(times)):
+    ax = fig.add_subplot(gs[i], projection=crs.Mercator(
+        central_longitude=150.0))
 
-scale = 10
-levels = np.arange(0,85,5).tolist()
-LON, LAT = np.meshgrid(tp.longitude.values, tp.latitude.values)
-cont = ax.contourf(LON,LAT,tp*1000, transform=crs.PlateCarree(),
-    zorder=1,cmap='BuPu',alpha=1,levels=levels,vmin=1)
+    ax.coastlines(lw=.5, zorder=5)
+    ax.add_feature(cfeature.BORDERS, lw=.5, zorder=1)
+    ax.add_feature(cfeature.LAND, fc='lightgrey', zorder=0)
+    ax.add_feature(cfeature.STATES,lw=.2, zorder=1)
 
+    scale = 10
+    levels = np.arange(10,90,10).tolist()
+    levels.insert(0,1)
+    LON, LAT = np.meshgrid(tp[i].longitude.values, tp[i].latitude.values)
+    cont = ax.contourf(LON,LAT,tp[i]*1000, transform=crs.PlateCarree(),
+        zorder=1,cmap='Blues',alpha=1,levels=levels,vmin=1)
+    ax.contour(LON,LAT,tp[i]*1000, transform=crs.PlateCarree(),
+        zorder=1,colors='black',levels=levels,linewidths=.2)
 
-cb = plt.colorbar(cont, shrink=.98,format='%d')
-cb.set_label('Kumulierter Tagesniederschlag in mm',fontsize=8)
+    ax.set_extent([110,189,-9,-57],crs=crs.PlateCarree())
+    ax.set_title(times[i])
+    #ax.set_ylim(wrf.cartopy_ylim(var))
 
-ax.set_extent([110,189,-9,-57],crs=crs.PlateCarree())
-ax.set_title(time+'- ERA-5')
-#ax.set_ylim(wrf.cartopy_ylim(var))
-gl = ax.gridlines(
-    crs=crs.PlateCarree(),
-    draw_labels=True,
-    linewidth=1, color='gray', linestyle='dotted',
-    zorder=4)
-gl.top_labels = False
-gl.right_labels = False
-gl.xlocator = mticker.FixedLocator([120,135,150,165,180])
-gl.ylocator = mticker.FixedLocator([-10,-20,-30,-40,-50])
-gl.xformatter = LONGITUDE_FORMATTER
-gl.yformatter = LATITUDE_FORMATTER
 
 # cities = mway.loadcities()
 # for city in cities:
@@ -70,5 +60,10 @@ gl.yformatter = LATITUDE_FORMATTER
 #         zorder=7,transform=crs.PlateCarree(),
 #         marker='o',markersize=.2)
 
-fig.savefig('D://thesisdata/bilder/Python/era5/precipitation/'+time+'.png',
-    dpi=500)
+cbar_ax = fig.add_axes([.91, 0.15, 0.01, 0.7])
+cb = fig.colorbar(cont, format='%d',cax=cbar_ax)
+cb.set_label('Kumulierter Tagesniederschlag in mm',fontsize=8)
+plt.show()
+
+fig.savefig('D://thesisdata/bilder/Python/era5/precipitation/collage.png',
+dpi=500)

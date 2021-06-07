@@ -12,7 +12,7 @@ import helperlies as mway
 path, savepath = mway.gimmedirs()
 time = '2009-09-22T15'
 
-varname = 'DUSTLOAD_ACC_'
+varname = 'DUSTLOAD_ACC'
 savename = 'DUSTLOAD'
 var = [varname] * 5
 var = [var[i]+'_'+str(i+1) for i in range(5)]
@@ -72,4 +72,4 @@ gl.xformatter = LONGITUDE_FORMATTER
 gl.yformatter = LATITUDE_FORMATTER
 
 plt.show()
-fig.savefig(savepath+savename+'.png',dpi=500)
+#fig.savefig(savepath+savename+'.png',dpi=500)

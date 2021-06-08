@@ -176,8 +176,7 @@ Nicht jede Form von Eisen kann als Dünger dienen. Muss entsprechend gelöstes (
 \end{table}
 
 Hauptursache für die Deposition/Ablagerung von weit transportiertem Staub ist das \textit{Auswaschen} durch Regen \citep{Marx.2018}, Sekundärquelle. -
-Löslichkeit \citep{Boyd.2010}.
-
+Löslichkeit \citep{Boyd.2010}. Wird Staub über mehrere tausend Kilometer transportiert, verleiben i.d.R. nur Staubpartikel mit Größen von $<$20$\mu$m \citep{Marx.2018}, Sekundärquelle.
 
 \subsubsection{Beschreibung des Staubsturms im September 2009} \label{sec:reddawn}
 Bereits nach einer schnellen Analyse im Rahmen des DustWatch Reports \citep{Leys.2009} war klar, dass es sich bei \textit{Red Dawn} um einen enormen Staubsturm mit besonderen Merkmalen handelte. Den Namen \textit{Red Dawn} erhielt dieser aufgrund der spektakulären Bilder die er am Morgen (Lokalzeit) des 23. Septembers in Sydney verursachte. Die gesamte Stadt wurde für mehrere Stunden in orange-roten Nebel gehüllt. Tatsächlich fanden im September sowohl vor als auch nach dem hier im Fokus liegenden \textit{Red Dawn} gleich mehrere Staubereignisse statt. Im ariden Inland sind Staubstürme keine Seltenheit. Dieses war vermutlich allerdings (jedenfalls in Bezug auf die Sichtweitenreduzierung) das stärkste Staubevent welches Sydney seit Beginn verlässlicher Aufzeichnungen (1940) je getroffen hat \citep{Leys.2011}. Vorangegangen sind Monate und Jahre mit im Vergleich zum Durchschnitt höheren Temperaturen und unterdurchschnittlichem Niederschlag (vgl. Abbildung \ref{fig:reddawn}), wodurch die Vegetation schwächer ausgeprägt und die Erdböden allgemein trockener waren \citep{Leys.2011}. Aufgrund der hohen Intensität wurde dieser Zeitraum \textit{Millenium Drought} (Dürre des neuen Jahrtausends) getauft \citep{Deckker.2014}.
@@ -188,7 +187,7 @@ Bereits nach einer schnellen Analyse im Rahmen des DustWatch Reports \citep{Leys
 	\begin{minipage}[c]{0.49\textwidth}
 		\includegraphics[width=\textwidth]{bilder/reddawn/drought.png}
 	\end{minipage}\hfill
-	\caption{Links: Aufnahme der Sydney Harbour Bridge während des Red Dawn Events. Rechts: Regenfälle in Dezile für die letzten 4 Jahre vor Red Dawn. Dunkelrot: 90 \% der Vergleichszeiträume hatten mehr Regen in dieser Region, dunkelblau: 90 \% der Vergleichszeiträume hatten weniger Regen.} \label{fig:reddawn}
+	\caption{Links: Aufnahme der Sydney Harbour Bridge während des Red Dawn Events (https://en.wikipedia.org/wiki/2009_Australian_dust_storm). Rechts: Regenfälle in Dezile für die letzten 4 Jahre vor Red Dawn. Dunkelrot: 90 \% der Vergleichszeiträume hatten mehr Regen in dieser Region, dunkelblau: 90 \% der Vergleichszeiträume hatten weniger Regen.} \label{fig:reddawn}
 \end{figure}
 Diese Klima waren entsprechend günstige Bedingungen für die Entstehung eines Staubsturms. Auf Abbildung \ref{fig:bom_analysis} ist das Tiefdruckgebiet dargestellt welches mit den starken Emissionen in Verbindung gebracht wird. Einen Tag vor dem eigentlichen Ereignis befindet es sich direkt südlich von Südaustralien, bereits losgelöst von der südlichen Polarfront. Aus diesem und der zugehörigen Kaltfront (blau) resultieren Winde in Sturmstärke, die den Staub letztendlich in die Atmosphäre abtragen insbesondere in östliche Richtung weitertransportieren \citep{Leys.2011}.\citet{Leys.2011} schätzen, dass 2.54 Tg Staub über die Küste hinaus transportiert wurden.  Es wurden verschiedene Quellen identifiziert, welche im Rahmen des Ereignisses Staub emittiert haben sollen:
 
@@ -242,8 +241,7 @@ Mit dem Ereignis geht mäßiger bis moderater Niederschlag einher (sh. Abb.  \re
 \caption{Kumulierter Niederschlag im Zusammenhang mit \textit{Red Dawn} bzw. dem assozierten Tiefdruckgebiet mit der Kaltfront. Aus dem Reanalyse-Datensatz \textit{ERA5 hourly data on single levels from 1979 to present}, zur Verfügung gestellt über den Copernicus Climate Data Store (DOI: 10.24381/cds.adbb2d47) } \label{fig:rain}
 \end{figure}
 
-\subsubsection{Staubtransport}
-Wird Staub über mehrere tausend Kilometer transportiert, verleiben i.d.R. nur Staubpartikel mit Größen von $<$20$\mu$m \citep{Marx.2018}, Sekundärquelle.
+
 
 \section{Methoden und Daten} \label{sec:Methoden}
 Um testen zu können, ob ein extremes Staubereignis Auswirkungen auf die Phytoplanktonproduktion in einer bestimmten Region hat, ist eine geeignete Datenbasis erforderlich. Grundsätzlich müssen hierzu zwei Variablen räumlich und zeitlich quantifiziert werden: Staub- und Phytoplankton-Konzentrationen. In beiden Fällen ist die Auflösung in jeder dieser Dimensionen stark beschränkt. Speziell Ausdehnung und Trajektorien von Staubstürmen müssen aufgrund der spärlichen Beobachtungsdaten (siehe Kapitel  \ref{sec:reddawn}) größtenteils geschätzt werden. Simulationen leistungsfähiger Modelle können die Auswertungen deutlich verbessern. In Rahmen dieser Arbeit wird eine spezielle WRF-Simulation (sh. Kapitel \ref{sec:wrf}) verwendet, um genauere Aussagen über das Verhalten der Staubwolke treffen zu können. Die Konzentrationen des Phytoplanktons werden (wie üblich) aus satellitengestützten täglichen Messungen der Chlorophyll a Konzentrationen abgeleitet (sh. Kapitel \ref{sec:chla}). Für den finalen Test eines möglichen Zusammenhangs werden die in Kapitel \ref{sec:stats} vorgestellten statistischen Methoden angewendet.
@@ -335,12 +333,18 @@ Schätzungsweise 45-62 \% der gesamten Wärmezunahme zwischen 2005 und 2017 in d
 \end{enumerate}
 
 \section{Auswertung und Diskussion}
-In diesem Kapitel werden die Ergebnisse der WRF-Simulation verwendetet, um den möglicherweise düngenden Effekt von der Staubereignisse im September 2009 auf die Phytoplankton-Populationen zu untersuchen. Zunächst werden hierzu die Ergebnisse der Simulation präsentiert, um die Ausmaße des Staubsturms zu quantifizieren. Auf Abbildung \ref{fig:dustload} wird die räumlich Ausdehnung präsentiert. Es ist erkennbar, dass sich die Staubkonzentrationen auch über das Untersuchungsgebiet hinaus erstrecken. 
+In diesem Kapitel werden die Ergebnisse der WRF-Simulation verwendetet, um den möglicherweise düngenden Effekt von der Staubereignisse im September 2009 auf die Phytoplankton-Populationen zu untersuchen. Zunächst werden hierzu die Ergebnisse der Simulation präsentiert, um die Ausmaße des Staubsturms zu quantifizieren. 
+\subsection{Ergebnisse der WRF-Simulation}
+Auf Abbildung \ref{fig:dustload} werden die Ausdehnung und die Staubquellen täglich um 0 Uhr UTC präsentiert. Es ist erkennbar, dass sich die Staubkonzentrationen auch über das Untersuchungsgebiet hinaus erstrecken. Die Staubwolke stimmt in Ausmaß und Form gut mit den Beobachtungen aus den Satellitenbildern (Abb. \ref{fig:satellite}) überein. Es sind alle Hauptereignisse (gem. \cite{Leys.2009}) identifizierbar:. Das Event beginnt mit hohen Staubkonzentrationen über Canberra am 22.09., zeigt am 23.09. um 0 Uhr UTC zum Zeitpunkt des Red Dawn die sehr hohen Konzentrationen entlang der gesamten Ost-Nordost-Küste und auch der Folgesturm am 26.09. ist deutlich abgebildet. Ab dem 24.09. simuliert das WRF-Modell sehr hohe Staubkonzentrationen im Norden und Nordwesten Australiens. Diese sind anhand der Satellitenbilder nicht so deutlich ableitbar. Die Simulation präsentiert zwei Regionen, welche die wesentlichen Hauptquellen darstellen: 1) \textit{Channel Country} im Westen von Queensland und 2) große Teile des Lake Eyre Beckens in Südaustralien. Beide Quellen wurden in vorangegangenen Arbeiten ebenfalls ausgemacht (sh. Kapitel \ref{sec:reddawn}). Die weiteren mutmaßlichen Quellen (Bergbaugebiete um Cobar und Broken Hill und Weideland im Nordwesten von New South Wales) spielen in der Simulation allerdings keine Rolle. Darüber hinaus wird der Großteil des Staubes von nur einigen wenigen Gitterzellen emittiert. Die Gesamtemission beträgt 3.35 Millionen Tonnen (= 3.35 Tg). Davon werden allein 632 tausend Tonnen, also knapp 19 \% von nur einer Zelle (etwa 2462 Quadratkilometer) in Channel Country abgetragen. Im Modell wird die Landfläche Australiens durch 3226 Gitterpunkte abgebildet. Davon emittieren 186 Staub, wovon wiederum nur 6 etwa 50 \% der Gesamtemissionen ausmachen. 75 \% werden bereits von 20 Quellen repräsentiert, 42 sind für über 90 \% verantwortlich, sh. Abbildung \ref{fig:emissions}.
 \begin{figure}[ht]
 \includegraphics[width=\textwidth]{bilder/dustload.png}
 \caption{.} \label{fig:dustload}
 \end{figure}
-
+Text
+\begin{figure}[ht]
+\includegraphics[width=\textwidth]{bilder/emission_sections.png}
+\caption{.} \label{fig:emissions}
+\end{figure}
 \subsection{Eintrag von Staub und Eisen}
 \begin{figure}[ht]
 \includegraphics[width=\textwidth]{bilder/deposition.png}

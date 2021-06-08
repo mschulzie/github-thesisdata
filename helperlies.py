@@ -103,3 +103,26 @@ def calc_qm(xarray):
     QM = R**2 * (DIFFPHI *(np.cos(THETA-DIFFTHETA/2)-np.cos(THETA+DIFFTHETA/2)))
 
     return QM
+
+def argmax_array(array,N):
+    """
+    Returns array with N highest values, Rest as NaN
+    """
+    dummy = array.copy(deep=True)
+    mask = array.where(array<array.min())
+    for i in range(N):
+        value = dummy[dummy.argmax(dim=('lon','lat'))].values
+        if value != 0:
+            mask[dummy.argmax(dim=('lon','lat'))] = value
+            dummy[dummy.argmax(dim=('lon','lat'))] = 0
+    return array.where(mask.values==array.values)
+def argmax_n(array,n):
+    """
+    Returns n-th max values coordinates
+    """
+    dummy = array.copy(deep=True)
+    for i in range(n-1):
+        value = dummy[dummy.argmax(dim=('lon','lat'))].values
+        if value != 0:
+            dummy[dummy.argmax(dim=('lon','lat'))] = 0
+    return dummy.argmax(dim=('lon','lat'))

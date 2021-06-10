@@ -14,7 +14,7 @@ path, savepath = mway.gimmedirs()
 times = pd.date_range('2009-09-21T00','2009-09-29T00',freq='d')
 varname = 'DUSTLOAD_ACC'
 savename = 'DUSTLOAD'
-varname2 = 'EDUST'
+varname2 = 'DUST_EMIS_ACC'
 savename2 = 'DUST_EMIS'
 var = [varname] * 5
 var = [var[i]+'_'+str(i+1) for i in range(5)]
@@ -34,7 +34,6 @@ emis = emis.coarsen(time=8,boundary='exact',keep_attrs=True,coord_func='max').su
 emis.attrs['description'] = 'Total dust emisson'
 emis.attrs['units'] = 'Tonnen'
 emis.values[emis.values==0]= np.nan
-emis.max()
 #%%
 fig= plt.figure(figsize=(10,10))
 height_ratios=[3,3,3,2]
@@ -57,7 +56,8 @@ for i in range(len(times)):
         extend='max',norm=LogNorm(vmin=1,vmax=25e4),
         add_colorbar=False)
     ax.set_title('')
-    ax.text(112,-56,str(times[i]),fontsize=8,transform = crs.PlateCarree(),
+    ax.text(112,-56,str(times[i])[:10]+' 0 UTC - '+str(int(e.sum().values/1000))+' kt in 24h'
+        ,fontsize=8,transform = crs.PlateCarree(),
         bbox={'facecolor': 'white', 'alpha': 0.8, 'pad': 1})
     ax.set_extent([110,189,-10,-57],crs=crs.PlateCarree())
     gl = ax.gridlines(

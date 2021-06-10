@@ -1,7 +1,7 @@
 from netCDF4 import Dataset
 import numpy as np
 
-ncfile = Dataset("D://thesisdata/wrf_dust/wrfout_d01_2009-09-18_00_00_00")
+ncfile = Dataset("D://thesisdata/wrf_dust/2021-06-09/wrfout_d01_2009-09-18_00_00_00")
 vars = ncfile.variables
 
 # np.max(vars[var]) braucht viel Zeit!

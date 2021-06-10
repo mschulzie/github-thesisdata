@@ -126,3 +126,8 @@ def argmax_n(array,n):
         if value != 0:
             dummy[dummy.argmax(dim=('lon','lat'))] = 0
     return dummy.argmax(dim=('lon','lat'))
+
+def box_to_plot(box):
+    x = [box[0],box[1],box[1],box[0],box[0]]
+    y = [box[2],box[2],box[3],box[3],box[2]]
+    return x, y

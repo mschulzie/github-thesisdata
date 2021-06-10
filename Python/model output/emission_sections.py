@@ -13,17 +13,11 @@ import importlib
 importlib.reload(mway)
 path, savepath = mway.gimmedirs()
 times = pd.date_range('2009-09-21T00','2009-09-29T00',freq='d')
-varname = 'EDUST'
+varname = 'DUST_EMIS_ACC'
 savename = 'Emission sections'
 extent = [112,155,-10,-40]
 county_extent = [138,144,-22,-26]
 LEB_extent = [134.5,140.5,-26.5,-31]
-
-def box_to_plot(box):
-    x = [box[0],box[1],box[1],box[0],box[0]]
-    y = [box[2],box[2],box[3],box[3],box[2]]
-    return x, y
-
 
 var = [varname] * 5
 var = [var[i]+''+str(i+1) for i in range(5)]
@@ -33,17 +27,21 @@ data.load_var(var)
 data.sum_vars(var,varname)
 emis = data.get_var(varname).sel(lon=slice(extent[0],extent[1])
     ,lat=slice(extent[3],extent[2]))
+emis = emis.sel(time=slice('2009-09-18T00','2009-09-30T00'))
 emis.values = emis.values * 60*60*3 *1e-12
 emis.values = emis.values * mway.calc_qm(emis)
 emis = emis.sum('time')
 emis.attrs['description'] = 'Total dust emisson'
 emis.attrs['units'] = 'Tonnen'
+emis.sum()
 #%%
 county_sum = emis.sel(lon=slice(county_extent[0],county_extent[1]),
     lat=slice(county_extent[3],county_extent[2])).sum()
 LEB_sum = emis.sel(lon=slice(LEB_extent[0],LEB_extent[1]),
     lat=slice(LEB_extent[3],LEB_extent[2])).sum()
 maxvals = mway.argmax_array(emis,186)
+(emis[mway.argmax_n(emis,6)]/emis.sum()).values
+(mway.argmax_array(emis,42).sum()/emis.sum()).values
 #%%
 fig= plt.figure(figsize=(10,3))
 width_ratios = [6,4]
@@ -71,9 +69,9 @@ gl.xlocator = mticker.FixedLocator(np.arange(110,160,5).tolist())
 gl.ylocator = mticker.FixedLocator(np.arange(-45,-10,5).tolist())
 gl.xformatter = LONGITUDE_FORMATTER
 gl.yformatter = LATITUDE_FORMATTER
-ax.plot(box_to_plot(county_extent)[0],box_to_plot(county_extent)[1],
+ax.plot(mway.box_to_plot(county_extent)[0],mway.box_to_plot(county_extent)[1],
     'red',transform=crs.PlateCarree(),zorder=3)
-ax.plot(box_to_plot(LEB_extent)[0],box_to_plot(LEB_extent)[1],
+ax.plot(mway.box_to_plot(LEB_extent)[0],mway.box_to_plot(LEB_extent)[1],
     'purple',transform=crs.PlateCarree(),zorder=3)
 transform = crs.PlateCarree()._as_mpl_transform(ax)
 ax.annotate('{:,} Tonnen'.format(int(county_sum)).replace(',','.'),
@@ -111,4 +109,4 @@ ax3.set_ylim(0,1.1)
 ax3.set_ylabel('Anteil')
 ax3.set_yticks(np.arange(0,1.1,0.1))
 plt.show()
-fig.savefig('./Thesis/bilder/emission_sections.png',dpi=500)
+#fig.savefig('./Thesis/bilder/emission_sections.png',dpi=500)

@@ -85,11 +85,11 @@ class Warfy:
             stop = self._vars[v].time[-1]
         for v in self._vars:
             if (size != self._vars[v].time.size):
-                raise UserWarning('DataArrays have different number of timesteps')
+                raise UserWarning('DataArrays with different number of timesteps')
             if (start != self._vars[v].time[0]):
-                raise UserWarning('DataArrays have different starting points(time)')
+                raise UserWarning('DataArrays with different starting points(time)')
             if (stop != self._vars[v].time[-1] ):
-                raise UserWarning('DataArrays have different end points(time)')
+                raise UserWarning('DataArrays with different end points(time)')
             self.time = self._vars[v].time
 
     def get_var(self, var=None):

@@ -9,16 +9,8 @@ import matplotlib.ticker as mticker
 from matplotlib.colors import LogNorm
 import helperlies as mway
 
-wetdep = ['WETDEP_1','WETDEP_ACC_1','DUSTWDLOAD_1']
-drydep = ['DRYDEP_1','DRYDEP_ACC_1']
-graset = ['GRASET_ACC_1']
-fedep = ['WETDEP_SOILFE_1', 'DRYDEP_SOILFE_1','DUST_SOILFEDRYDEP_ACC_1',
-    'DUST_SOILFEWETDEP_ACC_1','GRASET_SOILFE_1','SOILFEWD_1',
-    'SOILFEWDLOAD_1']
-feconc = ['DUST_SOILFE_ACC_1','SOILFELOAD_1','SOILFE_1']
-
 options = ['WETDEP_ACC_','GRASET_ACC_','DRYDEP_ACC_',
-    'DUST_SOILFEWETDEP_ACC_','GRASET_SOILFE_','DUST_SOILFEDRYDEP_ACC_']
+    'DUST_SOILFEWETDEP_ACC_','DUST_SOILFEGRASET_ACC_','DUST_SOILFEDRYDEP_ACC_']
 nrows = 2
 ncols = 3
 fig = plt.figure(figsize=(4*ncols,3.2*nrows))
@@ -50,7 +42,7 @@ for var in options:
 
     cont = dep.plot(ax=ax,transform=crs.PlateCarree(),
         zorder=1,cmap=cmaps[count],alpha=1, extend='max',add_colorbar=False,
-        levels=50,norm=LogNorm(vmin=1e-11))
+        levels=10,norm=LogNorm(vmin=1e-11))
         #,vmin = -10 ,vmax=4)
 
     cb = plt.colorbar(cont, shrink=.98)

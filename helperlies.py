@@ -131,3 +131,8 @@ def box_to_plot(box):
     x = [box[0],box[1],box[1],box[0],box[0]]
     y = [box[2],box[2],box[3],box[3],box[2]]
     return x, y
+
+def nM_to_ug_per_qm(c,z=10):
+    M_Fe = 55.845 /1000 # in kg pro Mol
+    c = c*1e-9 * 1e3
+    return c * z * M_Fe * 1e9 # in ug pro qm

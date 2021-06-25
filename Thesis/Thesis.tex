@@ -292,7 +292,12 @@ Für die Zeitreihenanalyse werden alle Gitterzellen betrachtet, für die von der
 \begin{equation}
 \text{Fe}_{c} = \frac{\text{Fe}_{in}}{z_0 \cdot M_{\text{Fe}}} \Leftrightarrow \text{Fe}_{in} =  \text{Fe}_{c} \cdot z_0 \cdot M_{\text{Fe}}
 \end{equation}
-Um eine Erhöhung der Konzentrationen in der Größenordnung von mindestens 0.01 nM zu erreichen, müssen dementsprechend wenigstens etwa $5.6$ µg Eisen pro Quadratmeter eingetragen werden.
+Um eine Erhöhung der Konzentrationen in der Größenordnung von mindestens 0.01 nM zu erreichen, müssen dementsprechend wenigstens etwa $5.6$ µg Eisen pro Quadratmeter eingetragen werden. Zum Vergleich: In den \textit{Bottle Experiments} von \citet{Martin.1988} wurden in verschiedenen Behältern 1 nM, 5 nM und 10 nM hinzugefügt. Die Mengen waren dort also um mindestens zwei Größenordnungen höher als in dieser Annahme. Im SOIREE-Experiment für den südlichen Ozean \citep{Trull.2001} konnten Veränderungen ab einer Schwelle von etwa 0.2 nM Eisen beobachtet werden, was einer Verdopplung der dortigen regulären Konzentration von 0.1 nM entspricht \citep{Boyd.2010}. Auch im Vergleich dazu ist der hier verwendete Schwellenwert eher optimistisch, da heißt, die Depositionen reichen möglicherweise nicht aus, um eine Reaktion des Phytoplanktons zu bewirken. \\
+Da die chemischen Zusammensetzungen und Bedingungen für die Regionen unterschiedlich sein können (QUELLE ERGÄNZEN), sollen die anhand des Schwellenwertes identifizierten Zellen in verschiedene Sektoren eingruppiert werden, um diese jeweils separat zu analysieren. Für jeden Sektor $k$ wird anschließend für jeden verfügbaren Zeitpunkt der Mittelwert der Chlorophyll-a-Konzentrationen $C_i$ aus den $N_k$ dort betroffenen Zellen berechnet. Damit ergibt sich eine Zeitreihe für die Entwicklung des Phytoplanktons im gesamten Sektor$P_k(t)$:
+\begin{equation}
+P_{k}(t) = \frac{1}{N_k}\sum\limits_{i=1}^{N_k} C_i(t)
+\end{equation}
+Unter der Annahme, dass der Eintrag von Eisen einen Einfluss auf diese Zeitreihe nimmt, sollte diese nach dem Ereignis ansteigen. Dies wäre ein entsprechendes Indiz. Allerdings unterliegt die Entwicklung der Phytoplankton-Konzentrationen ohnehin (so auch im tasmanischen Meer \citep{Tilburg.2002}) einem jahreszeitlichen Gang sowie weiteren externen Einflüssen, die eine hohe Variabilität aufweisen können (vgl. Kapitel \ref{sec:nährstoffe}). Da der jahreszeitliche Trend aus den Klimadaten relativ gut bekannt ist, kann die Zeitreihe im Untersuchungszeitraum 2009 um diesen Effekt bereinigt werden. 
 
 \begin{figure}[ht]
 \includegraphics[width=\textwidth]{bilder/nutrient_iron.png}

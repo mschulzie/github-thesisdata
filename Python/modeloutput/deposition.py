@@ -69,12 +69,19 @@ ax = fig.add_subplot(gs[:,0], projection=crs.Mercator(
     central_longitude=150.0))
 ax.coastlines(lw=.5, zorder=5)
 ax.add_feature(cfeature.BORDERS, lw=.5, zorder=2)
-ax.add_feature(cfeature.LAND, fc='lightgrey', zorder=3,alpha=.8)
+ax.add_feature(cfeature.LAND, fc='lightgrey', zorder=3,alpha=.7)
 ax.add_feature(cfeature.STATES,lw=.2, zorder=2)
 im = total_tres.plot(ax=ax,norm=LogNorm(),zorder=1,transform=crs.PlateCarree(),
     add_colorbar=False,cmap='plasma')
 cb = plt.colorbar(im,shrink=.7)
 cb.set_label(r'Totale Eisendeposition in $\mu$g/m$^2$',fontsize=8)
+LON, LAT = np.meshgrid(total_sum.lon,total_sum.lat)
+# CONTOUR PLOT
+cs = ax.contour(LON,LAT,total_sum,transform=crs.PlateCarree(),zorder=5,
+    levels=[0.1,1,5.6],colors='#464646',linewidths=.5)
+ax.clabel(cs,cs.levels,inline=True,fontsize=6,fmt='%.1f',
+    colors='#ff49b1',inline_spacing=.1)
+#--
 ax.set_extent([110,189,-10,-57],crs=crs.PlateCarree())
 ax.set_title('Insgesamt {:5.0f}t'.format(
     (total_sum*mway.calc_qm(total)).sum(skipna=True).values*1e-12))
@@ -88,11 +95,11 @@ for section in sections:
     if (section != 'full'):
         ax.plot(mway.box_to_plot(sections[section])[0],
             mway.box_to_plot(sections[section])[1],
-            'red',transform=crs.PlateCarree(),zorder=3,lw=1)
+            'red',transform=crs.PlateCarree(),zorder=6,lw=1)
         ax.text(sections[section][0]+1,sections[section][3]+1,str(l),
             transform=crs.PlateCarree(),
             va='bottom',color='red',fontsize=8,zorder=6,
-            bbox={'facecolor': 'white', 'alpha': 0.8, 'pad': 1})
+            bbox={'facecolor': 'white', 'alpha': 0.9, 'pad': 1})
         l+=1
 
 #-----
@@ -116,7 +123,8 @@ for section in sections:
         dep_section.sum(dim=('lat','lon'),skipna=True).plot(
             ax=ax,label='{:}. {:} {:}t'.format(k,section,sum_dep),
             color='#3c3c3c')
-        ax.xaxis.set_major_formatter(mdates.DateFormatter('%d.%b'))
+        ax.set_xticks(pd.date_range('2009-09-18T00','2009-09-30T00',freq='1d'))
+        ax.xaxis.set_major_formatter(mdates.DateFormatter('%d.%m'))
         ax.tick_params(axis='x', labelrotation=45)
         if k!=5:
             ax.set_xticklabels('')

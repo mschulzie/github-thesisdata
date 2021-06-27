@@ -10,7 +10,7 @@ import cftime
 import seaborn as sns
 from cartopy.mpl.ticker import (LongitudeFormatter, LatitudeFormatter,
                                 LatitudeLocator)
-
+ds.coords
 ds = xr.open_mfdataset("D://thesisdata/plankton/marine_copernicus/climatology/*.nc")
 ds = ds.assign_coords(lon=(ds.lon % 360)).roll(lon=(ds.dims['lon'] // 2), roll_coords=True)
 ds = ds['CHL_standard_deviation']

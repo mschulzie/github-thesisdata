@@ -12,13 +12,6 @@ import matplotlib.dates as mdates
 import os
 import pandas as pd
 
-#options = ['WETDEP_ACC','GRASET_ACC','DRYDEP_ACC']
-options = ['DUST_SOILFEWETDEP_ACC','DUST_SOILFEGRASET_ACC','DUST_SOILFEDRYDEP_ACC']
-
-wet_name= options[0]
-gra_name= options[1]
-dry_name= options[2]
-
 tres = mway.nM_to_ug_per_qm(0.01,z=10) #treshold
 # AREAS:
 sections = {'Nordost':[110,140,-10,-30],
@@ -29,37 +22,11 @@ sections = {'Nordost':[110,140,-10,-30],
     'full':[110,179,-10,-57]}
 
 #%%
-liste = [wet_name,gra_name,dry_name]
-j = 0
-for var in liste:
-    var = [var]*5
-    var = [var[i]+'_'+str(i+1) for i in range(5)]
-    liste[j] = var
-    j+=1
-
-wet = warfy.Warfy()
-wet.load_var(liste[0])
-wet.sum_vars(liste[0],wet_name)
-wet = wet.get_var(wet_name)
-gra = warfy.Warfy()
-gra.load_var(liste[1])
-gra.sum_vars(liste[1],gra_name)
-gra = gra.get_var(gra_name)
-dry = warfy.Warfy()
-dry.load_var(liste[2])
-dry.sum_vars(liste[2],dry_name)
-dry = dry.get_var(dry_name)
 land = warfy.Warfy()
 land.load_var('LANDMASK')
 landmask = land.get_var('LANDMASK').isel(time=0)
 
-
-gra.values[gra.values<0] = gra.values[gra.values<0] * -1
-dry.values[dry.values<0] = dry.values[dry.values<0] * -1
-
-total = xr.DataArray(gra.values+wet.values+dry.values,
-    coords=wet.coords,dims=wet.dims,attrs=wet.attrs)
-total.attrs['description'] ='Total dust deposition rate all binsizes'
+total = mway.import_iron_dep()
 total_sum = total.sum(dim='time') * 60 * 60 * 3
 total_tres=total_sum.where(total_sum>tres)
 # %%

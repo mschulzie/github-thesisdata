@@ -2,12 +2,12 @@ import os
 import matplotlib.pyplot as plt
 from matplotlib.colors import LinearSegmentedColormap
 import numpy as np
-
-#just a comment
+from warfy import Warfy
+import xarray as xr
 
 def gimmedirs():
     """
-    Gibt Dir zwei Argumente zurück:
+    Gibt Dir zwei Argumente zurück:s
     return wrfout, savepic
     (Pfad der WRF-Datei auf deinem aktuellen Rechner
     und Pfad an dem die Bilder
@@ -136,3 +136,36 @@ def nM_to_ug_per_qm(c,z=10):
     M_Fe = 55.845 /1000 # in kg pro Mol
     c = c*1e-9 * 1e3
     return c * z * M_Fe * 1e9 # in ug pro qm
+
+def import_iron_dep():
+    #options = ['WETDEP_ACC','GRASET_ACC','DRYDEP_ACC']
+    options = ['DUST_SOILFEWETDEP_ACC','DUST_SOILFEGRASET_ACC','DUST_SOILFEDRYDEP_ACC']
+    wet_name= options[0]
+    gra_name= options[1]
+    dry_name= options[2]
+    liste = [wet_name,gra_name,dry_name]
+    j = 0
+    for var in liste:
+        var = [var]*5
+        var = [var[i]+'_'+str(i+1) for i in range(5)]
+        liste[j] = var
+        j+=1
+    wet = Warfy()
+    wet.load_var(liste[0])
+    wet.sum_vars(liste[0],wet_name)
+    wet = wet.get_var(wet_name)
+    gra = Warfy()
+    gra.load_var(liste[1])
+    gra.sum_vars(liste[1],gra_name)
+    gra = gra.get_var(gra_name)
+    dry = Warfy()
+    dry.load_var(liste[2])
+    dry.sum_vars(liste[2],dry_name)
+    dry = dry.get_var(dry_name)
+    gra.values[gra.values<0] = gra.values[gra.values<0] * -1
+    dry.values[dry.values<0] = dry.values[dry.values<0] * -1
+
+    total = xr.DataArray(gra.values+wet.values+dry.values,
+        coords=wet.coords,dims=wet.dims,attrs=wet.attrs)
+    total.attrs['description'] ='Total dust deposition rate all binsizes'
+    return total

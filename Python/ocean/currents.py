@@ -7,7 +7,7 @@ import cartopy.feature as cfeature
 import pandas as pd
 
 file = 'D://thesisdata/currents/global-reanalysis-phy-001-031-grepv2-mnstd-daily_1622467797293.nc'
-
+ds
 ds = xr.open_dataset(file)
 ds = ds.assign_coords(longitude=(ds.longitude % 360)).roll(longitude=(ds.dims['longitude'] // 2), roll_coords=True)
 ds = ds.rename(longitude='lon',latitude='lat')

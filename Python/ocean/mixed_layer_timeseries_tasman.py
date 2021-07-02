@@ -17,7 +17,7 @@ import matplotlib.dates as mdates
 ds = xr.open_dataset("D://thesisdata/mixed_layer/2009/global-reanalysis-phy-001-031-grepv2-mnstd-daily_1620410775145.nc")
 ds = ds.assign_coords(longitude=(ds.longitude % 360)).roll(longitude=(ds.dims['longitude'] // 2), roll_coords=True)
 ds = ds.rename(longitude='lon',latitude='lat')
-ds = ds.sel(lon=slice(145,179),lat=slice(-48,-30))
+ds = ds.sel(lon=slice(145,179),lat=slice(-45,-30))
 mn = ds['mlotst_mean']
 std = ds['mlotst_std']
 fig = plt.figure()

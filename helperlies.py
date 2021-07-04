@@ -137,7 +137,7 @@ def nM_to_ug_per_qm(c,z=10):
     c = c*1e-9 * 1e3
     return c * z * M_Fe * 1e9 # in ug pro qm
 
-def import_iron_dep():
+def import_iron_dep(landmask=True):
     #options = ['WETDEP_ACC','GRASET_ACC','DRYDEP_ACC']
     options = ['DUST_SOILFEWETDEP_ACC','DUST_SOILFEGRASET_ACC','DUST_SOILFEDRYDEP_ACC']
     wet_name= options[0]
@@ -168,4 +168,9 @@ def import_iron_dep():
     total = xr.DataArray(gra.values+wet.values+dry.values,
         coords=wet.coords,dims=wet.dims,attrs=wet.attrs)
     total.attrs['description'] ='Total dust deposition rate all binsizes'
+    if landmask == True:
+        land = Warfy()
+        land.load_var('LANDMASK')
+        mask = land.get_var('LANDMASK').isel(time=0)
+        total = total.where(mask==0)
     return total

@@ -312,20 +312,21 @@ Im Fall eines düngenden Effektes der Eisendpositionen sollte diese bereinigte Z
 \includegraphics[width=\textwidth]{bilder/nutrient_iron.png}
 \caption{Links: Die abgeleiteten Eisenkonzentrationen in der zu untersuchenden Region. Rechts: Histogramm für die Konzentrationen in den Gitterzellen. Erstellt aus dem Datensatz des Copernicus Marine Data Store, für weitere Informationen siehe https://resources.marine.copernicus.eu/documents/PUM/CMEMS-GLO-PUM-001-029.pdf} \label{fig:nutrient_iron}
 \end{figure}
+
 \subsubsection{Korrelationsanalyse}
-Um einen eindeutigeren Zusammenhang zwischen den Eisendepositionen $F_\text{Fe}$ und den Veränderungen in den Chlorophyll-a-Konzentrationen $\partial C / \partial t$ zu untersuchen, wird eine Korrelations-/Kovarianz-Analyse beider Zeitreihen gemacht. Hierzu werden zuerst die Koordinaten (d.h. die Gitterpunkte) der Chlorophyll-a-Daten auf die des Eisenflusses aus der WRF-Simulation angepasst.Anschließend werden nach dem expliziten Euler-Rückwärts-Verfahren die Ableitungen für die täglichen Chlorophyll-a-Daten ($\Delta t = 1d$) berechnet:
+Um einen räumlichen Zusammenhang zwischen den Eisendepositionen $F_\text{Fe}$ und den Veränderungen in den Chlorophyll-a-Konzentrationen $\partial C / \partial t$ zu untersuchen, wird eine Korrelationsanalyse beider Zeitreihen gemacht. Hierzu werden zuerst die Koordinaten (d.h. die Gitterpunkte) der Chlorophyll-a-Daten auf die des Eisenflusses aus der WRF-Simulation angepasst. Anschließend werden nach dem expliziten Euler-Rückwärts-Verfahren die Ableitungen für die täglichen Chlorophyll-a-Daten ($\Delta t = 1d$) berechnet:
 \begin{equation}
 \frac{\partial C_i}{\partial t} (t_{n}) \approx \frac{C_i(t_{n})-C_i(t_{n-1})}{\Delta t} =: \partial C_i(t_n)
 \end{equation}
-Danach werden analog zu Kapitel \ref{sec:timeseries} die Mittelwerte $\mu_{\partial C}(t)$, $\mu_{F_\text{Fe}}(t)$ für die der Unterteilung entsprechenden Sektoren gebildet und für diese die Kreuz-Korrelationsfunktionen berechnet um die Zeitverschiebung $\tau$ zu bestimmen, für welche die maximale Korrelation vorliegt:
+Danach werden für jeden Gitterpunkt die Kreuz-Korrelationen für verschiedene Zeitverschiebungen $\tau$ (in Tagen) bestimmt:
 \begin{equation}
-R(\tau)= \frac{1}{N_t}\sum\limits_{i=1}^{N_t} \mu_{F_\text{Fe}}(t_i) \cdot \mu_{\partial C}(t_i + \tau)
+R_i(\tau)= \frac{1}{N_t}\sum\limits_{n=1}^{N_t} F_{\text{Fe},i}(t_n) \cdot \partial C_i(t_n + \tau)
 \end{equation}
-Zur besseren Vergleichbarkeit kann daraus noch der auf das Intervall $[-1,1]$ beschränkte Korrelationskoeffizient $\rho (\tau)$ berechnen werden:
+Daraus kann noch der auf das Intervall $[-1,1]$ beschränkte Korrelationskoeffizient $\rho (\tau)$ berechnen werden:
 \begin{equation}
-\rho(\tau) = \frac{R(\tau)-\overline{\mu_{F_\text{Fe}}}\cdot \overline{\mu_{\partial C}}}{\sigma_{\partial C} \cdot \sigma_{F_\text{Fe}}}
+\rho_i(\tau) = \frac{R_i(\tau)-\overline{F_{\text{Fe}_i}} \cdot \overline{\partial C_i}}{\sigma_{\partial C_i} \cdot \sigma_{F_{\text{Fe},i}}}
 \end{equation}
- 
+
 \subsubsection{Maximum Kovarianz Analyse} \label{sec:mca}
 Durch die hohe Abhängigkeit von der chemischen Zusammensetzung und den Strömungsverhältnissen sind die Chlorophyll-a-Konzentrationen sehr heterogen verteilt. In Abbildung \ref{fig:chla} wird das turbulente Muster beispielhaft deutlich. Insbesondere die Vergleichbarkeit mit den Perzentilen (sh. Kapitel \ref{sec:timeseries}) ist dadurch vom eingrenzten Gebiet abhängig und somit eingeschränkt. Es wird angenommen, dass (besonders im tasmanischen Meer) ein Großteil der Gitterzellen innerhalb der Klimadaten sowohl Jahre mit hohen als auch solche mit niedrigen Konzentrationen repräsentiert hat, wohingegen \textit{benachbarte} Zellen, die bspw. einer anderen Strömungslinie folgen, völlig unterschiedliche Werte aufweisen können. \\
 Es soll der Zusammenhang zweier diskreter Variablen $E$ (Eiseneintrag) und $P$ (Chlorophyll-a-Konzentrationen untersucht werden). Voraussetzung für die Maximum Kovarianz Analyse ist, dass für beide gleich viele $N_t$ Zeitschritte vorliegen. Die Anzahlen der Gitterpunkte $N_E$ bzw. $N_P$ können voneinander abweichen. Der Zusammenhang der Variablen wird bei dieser statistischen Methode unabhängig von deren räumlicher Lokation untersucht. Das heißt, es ist auch ein Einfluss von weit voneinander entfernten Gitterpunkten aufeinander möglich. Dies ist bei den Staubdepositionen nicht unbedingt zu erwarten, da eine Reaktion des Phytoplanktons vermutlich in naher Umgebung zum Staubeintrag passiert. Allerdings \textit{befreit} diese Unabhängigkeit gleichzeitig von der Anforderung, für beide Variablen dieselben Koordinaten bzw. räumlichen Auflösungen zu verwenden und/oder etwaigen Transport durch die Oberflächenströmungen zu berücksichtigen. Werden die beiden räumlichen Dimensionen (Nord-Süd und Ost-West) auf nur eine räumliche Dimension (hier mit dem  Index $k$) reduziert, dann lassen sich die kompletten  Zeitreihen aller Gitterpunkte gleichzeitig in Form von Matrizen darstellen. Im folgenden meinen hoch gestellte Indizes die \textit{Spalte} und die unteren Indizes die \textit{Zeile} der jeweiligen Matrix. Die Matrizen in \ref{eq:E_and_P} enthalten $N_t$ Zeitschritte in den Zeilen und $N_E$ bzw. $N_P$ Gitterpunkte in den Spalten.

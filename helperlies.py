@@ -4,6 +4,7 @@ from matplotlib.colors import LinearSegmentedColormap
 import numpy as np
 from warfy import Warfy
 import xarray as xr
+import pandas as pd
 
 def gimmedirs():
     """
@@ -137,7 +138,7 @@ def nM_to_ug_per_qm(c,z=10):
     c = c*1e-9 * 1e3
     return c * z * M_Fe * 1e9 # in ug pro qm
 
-def import_iron_dep(landmask=True):
+def import_iron_dep(landmask=True,extend=['2009-09-18T00','2009-09-30T00']):
     #options = ['WETDEP_ACC','GRASET_ACC','DRYDEP_ACC']
     options = ['DUST_SOILFEWETDEP_ACC','DUST_SOILFEGRASET_ACC','DUST_SOILFEDRYDEP_ACC']
     wet_name= options[0]
@@ -164,13 +165,46 @@ def import_iron_dep(landmask=True):
     dry = dry.get_var(dry_name)
     gra.values[gra.values<0] = gra.values[gra.values<0] * -1
     dry.values[dry.values<0] = dry.values[dry.values<0] * -1
-
     total = xr.DataArray(gra.values+wet.values+dry.values,
         coords=wet.coords,dims=wet.dims,attrs=wet.attrs)
     total.attrs['description'] ='Total dust deposition rate all binsizes'
+    if extend!=['2009-09-18T00','2009-09-30T00']:
+        iron_add_start = xr.DataArray(np.zeros((pd.date_range(extend[0],
+            '2009-09-17T21',freq='3h').size,)+total.shape[1:]),dims=total.dims,
+            coords={'time':pd.date_range(extend[0],'2009-09-17T21',freq='3h'),
+            'lat':total.lat.values,'lon':total.lon.values})
+        iron_add_end = xr.DataArray(np.zeros((pd.date_range('2009-09-30T03',
+            extend[1],freq='3h').size,)+total.shape[1:]),dims=total.dims,
+            coords={'time':pd.date_range('2009-09-30T03',extend[1],freq='3h'),
+            'lat':total.lat.values,'lon':total.lon.values})
+        total = xr.concat((iron_add_start,total,iron_add_end),dim='time')
     if landmask == True:
         land = Warfy()
         land.load_var('LANDMASK')
         mask = land.get_var('LANDMASK').isel(time=0)
         total = total.where(mask==0)
     return total
+
+def filter_via_fft(signal,freq_max=None,freq_min=None):
+    """
+    returns filtered signal
+    freq_max and freq_min in multiples of given sample rate of signal!
+    (if daily data: freq_max=1/10 means eliminating all frequencies
+    higher then "every 10th day")
+    """
+    fhat = np.fft.fft(signal)
+    freq = np.fft.fftfreq(signal.size,1)
+    fhat_new = np.zeros(fhat.size,dtype='complex')
+    if ((freq_max!=None) & (freq_min!=None)):
+        fhat_new[(abs(freq)<=freq_max)&(abs(freq)>=freq_min)] = fhat[(abs(freq)<=freq_max)&(abs(freq)>=freq_min)]
+    elif (freq_max!=None):
+        fhat_new[abs(freq)<=freq_max] = fhat[abs(freq)<=freq_max]
+    elif freq_min!=None:
+        fhat_new[abs(freq)>=freq_min] = fhat[abs(freq)>=freq_min]
+    else:
+        fhat_new = fhat
+        print('Nothing happened... Damn.. Provide limits!!')
+
+    signal_filter = np.fft.ifft(fhat_new)
+    signal_filter = signal_filter.real
+    return signal_filter

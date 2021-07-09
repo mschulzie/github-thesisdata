@@ -13,13 +13,14 @@ sections = {key: sections[key] for key in which}
 iron = pd.read_csv('./Python/chlorophyll/csv/iron_section_means_timeseries.csv')
 chl = pd.read_csv('./Python/chlorophyll/csv/chl_section_means_timeseries.csv')
 
-add=''
+
 filter = True
 freq_min=0
-freq_max=1/5
+freq_max=1/10
 tres=5
 
 #%%
+add=''
 # if filter:
 #     for ort in sections:
 #         data[chl[ort] = mway.filter_via_fft(chl[ort],freq_max=freq_max,freq_min=freq_min)
@@ -65,10 +66,12 @@ for i,ort in enumerate(sections):
         va='top',bbox={'facecolor': 'white', 'alpha': .8, 'pad': 1})
     #RECHTE SEITE:
     chl_ano = chl[ort+';'+'CHL'+'_5']-chl[ort+';'+'CHL_mean'+'_5']
-    if filter:
-        chl_ano = mway.filter_via_fft(chl_ano,freq_max=freq_max,freq_min=freq_min)
     ax2[ort].plot(t,chl_ano,color='#ff2e00',
         label=r'$\Delta \mu_C (t)$')
+    if filter:
+        chl_ano = mway.filter_via_fft(chl_ano,freq_max=freq_max,freq_min=freq_min)
+        ax2[ort].plot(t,chl_ano,color='black',linestyle='dotted',linewidth=1,
+            label=r'$\Delta \mu_C (t)$ mit $f_{max}$='+str(freq_max)+'/day')
     ax2[ort].fill_between(t,chl[ort+';'+'CHL'+'_5']-chl[ort+';'+'CHL_mean'+'_5']-chl[ort+';'+'CHL_error'+'_5'],
         chl[ort+';'+'CHL'+'_5']-chl[ort+';'+'CHL_mean'+'_5']+chl[ort+';'+'CHL_error'+'_5'],
         color='#9d1c3f',facecolor='#fbe0f9',label=r'$\mu_{\Delta C}(t)$')
@@ -108,7 +111,7 @@ ax3['Korall'].annotate('13.10.',('2009-10-13T04',1e-8),
     arrowprops={'arrowstyle':'->','color':'blue'},ha='center',fontsize=7,color='b')
 
 plt.tight_layout()
-fig.savefig('./Thesis/bilder/timeseries_all_without_coast'+add+'.png'
+fig.savefig('D://thesisdata/bilder/Python/wrf_chla/timeseries_all_without_coast'+add+'.png'
         ,dpi=200,facecolor='white',
         bbox_inches = 'tight',pad_inches = 0.01)
 plt.show()

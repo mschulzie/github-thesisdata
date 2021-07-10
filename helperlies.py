@@ -8,41 +8,15 @@ import pandas as pd
 
 def gimmedirs():
     """
-    Gibt Dir zwei Argumente zurück:s
+    Gibt Dir zwei Argumente zurück:
     return wrfout, savepic
     (Pfad der WRF-Datei auf deinem aktuellen Rechner
     und Pfad an dem die Bilder
     gespeichert werden sollen.)
     """
-    #haboob (vergiss den Luder, der kannnix!):
-    if (os.getcwd()=='/home/mschulz/atom'):
-        print('Angemeldet auf haboob')
-        wrfout = '/work/sulbrich/WRF-4.1.2/run/wrfout_d01_2009-09-18_00:00:00'
-        savepic = '/home/mschulz/atom/pics/'
-        return wrfout, savepic
-
-    #Desktop-PC:
-    elif (os.getcwd()=='C:\\Users\\mschu\\Documents\\Studium\\Bachelorarbeit\\github-thesisdata'):
-        print('Angemeldet am Laptop')
-        wrfout = "D://thesisdata/wrf_dust/2021-06-09/wrfout_d01_2009-09-18_00_00_00"
-        savepic = 'D://thesisdata/bilder/'
-        return wrfout, savepic
-
-    #Dektop-PC aber SSH-Ordner:
-    elif (os.getcwd()=='Z:\\home\\mschulz\\github\\github-thesisdata'):
-        print('Angemeldet am Desktop-PC ABER im SSH-Ordner, nutze wrfout auf HDD..')
-        wrfout = "D://thesisdata/wrf_dust/wrfout_d01_2009-09-18_00_00_00"
-        savepic = 'Z:\\home\\mschulz\\atom\\pics'
-        return wrfout, savepic
-
-    #Laptop Julchen:
-    elif (os.getcwd()=='/home/julchen/github/github-thesisdata'):
-        print('Auf dem Laptop sind jetzt Daten du Troll!!!')
-        wrfout = "/home/julchen/Studium/wrfout_d01_2009-09-18_00_00_00"
-        savepic = '/home/julchen/Bilder/'
-        return wrfout, savepic
-    else:
-        print('Alter wo bist du denn? Am falschen PC?')
+    wrfout = "D://thesisdata/wrf_dust/2021-06-09/wrfout_d01_2009-09-18_00_00_00"
+    savepic = 'D://thesisdata/bilder/'
+    return wrfout, savepic
 
 def show_nan(data_array,time=slice('1990','2099')):
     """
@@ -102,8 +76,29 @@ def calc_qm(xarray):
     DIFFPHI,DIFFTHETA = np.meshgrid(diffphi,difftheta)
     R = 6378.137e3*(1-f*np.cos(DIFFTHETA)**2)
     QM = R**2 * (DIFFPHI *(np.cos(THETA-DIFFTHETA/2)-np.cos(THETA+DIFFTHETA/2)))
-
     return QM
+
+def grid_distances(xarray):
+    """
+    Return two xarrays lon_distance, lat_distance containing the distances
+    to the neighboured grid points for each grid point
+    """
+    f = (6378.137e3-6356.752314e3)/6378.137e3 # Abplattung
+    diffphi = np.radians(np.append(np.diff(xarray['lon'].values),np.diff(xarray['lon'].values)[-1]))
+    difftheta = np.radians(np.append(np.diff(xarray['lat'].values),np.diff(xarray['lat'].values)[-1]))
+
+    LON,LAT = np.meshgrid(xarray['lon'].values,xarray['lat'].values)
+    PHI = np.radians(LON)
+    THETA = np.radians((LAT - 90)*-1)
+    DIFFPHI,DIFFTHETA = np.meshgrid(diffphi,difftheta)
+    R = 6378.137e3*(1-f*np.cos(DIFFTHETA)**2)
+    lon_distance = R * DIFFPHI * np.sin(THETA)
+    lat_distance = R * DIFFTHETA
+    lon_distance = xr.DataArray(lon_distance,coords={'lat':xarray.lat.values,
+        'lon':xarray.lon.values},dims=['lat','lon'])
+    lat_distance = xr.DataArray(lat_distance,coords={'lat':xarray.lat.values,
+        'lon':xarray.lon.values},dims=['lat','lon'])
+    return lon_distance, lat_distance
 
 def argmax_array(array,N):
     """
@@ -133,10 +128,13 @@ def box_to_plot(box):
     y = [box[2],box[2],box[3],box[3],box[2]]
     return x, y
 
-def nM_to_ug_per_qm(c,z=10):
+def nM_to_ug_per_qm(c,z=1):
     M_Fe = 55.845 /1000 # in kg pro Mol
     c = c*1e-9 * 1e3
     return c * z * M_Fe * 1e9 # in ug pro qm
+def ug_per_qm_to_nM(F,z=1):
+    M_Fe = 55.845
+    return F/z*1e-9/M_Fe*1e9
 
 def import_iron_dep(landmask=True,extend=['2009-09-18T00','2009-09-30T00']):
     #options = ['WETDEP_ACC','GRASET_ACC','DRYDEP_ACC']

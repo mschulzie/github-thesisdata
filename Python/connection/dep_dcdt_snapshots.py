@@ -6,13 +6,14 @@ import xarray as xr
 import matplotlib.pyplot as plt
 import cartopy.crs as crs
 import cartopy.feature as cfeature
+import string
 
 path = 'D://thesisdata/plankton/marine_copernicus/2009_prep_corr_ana.nc'
 offset = 5
 extend = 4
-norm_std = False
+norm_std = True
 percent_dev = False
-minus_climate_mean = True
+minus_climate_mean = False
 chl_max = 3
 iron_min = 1e-6#iron.min().values
 norm = SymLogNorm(2e-1,base=10,vmin=-chl_max,vmax=chl_max)
@@ -63,12 +64,15 @@ def format_ax(ax,text=None):
     ax.coastlines(lw=.5, zorder=5)
     ax.add_feature(cfeature.BORDERS, lw=.5, zorder=2)
     ax.add_feature(cfeature.LAND, fc='lightgrey', zorder=4)
-    ax.add_feature(cfeature.STATES,lw=.2, zorder=2)
+    ax.add_feature(cfeature.STATES,lw=.2, zorder=5)
     ax.set_extent([110,189,-10,-57],crs=crs.PlateCarree())
     ax.set_title('')
     ax.set_xticks([])
     ax.set_xticklabels('')
     ax.set_xlabel('')
+def letter_label(ax,i):
+    ax.text(0., 1.02, string.ascii_uppercase[i], transform=ax.transAxes,
+            size=20, weight='bold')
 #%% PLOT
 
 fig = plt.figure(figsize=(9,12))
@@ -88,6 +92,8 @@ for i,j in enumerate(gs1):
         ,fontsize=8,transform = crs.PlateCarree(),
         bbox={'facecolor': 'white', 'alpha': 0.8, 'pad': 1})
     format_ax(ax)
+    if i ==0:
+        letter_label(ax,0)
 for i,j in enumerate(gs2):
     ax = fig.add_subplot(gs2[i],projection=crs.Mercator(central_longitude=150.0))
     im2 = chl_diff[i,...].plot(ax=ax,transform=crs.PlateCarree(),cmap='RdBu_r',
@@ -96,6 +102,8 @@ for i,j in enumerate(gs2):
         ,fontsize=8,transform = crs.PlateCarree(),
         bbox={'facecolor': 'white', 'alpha': 0.8, 'pad': 1})
     format_ax(ax)
+    if i ==0:
+        letter_label(ax,1)
 cb_ax1 = fig.add_subplot(gs1_cb)
 cb_ax2 = fig.add_subplot(gs2_cb)
 cb1 = fig.colorbar(im1,cax=cb_ax1)

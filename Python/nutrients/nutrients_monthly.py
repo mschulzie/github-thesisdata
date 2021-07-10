@@ -15,6 +15,8 @@ ds = ds.assign_coords(longitude=(ds.longitude % 360)).roll(
 ds = ds.rename(longitude='lon',latitude='lat')
 
 ds = ds['fe'].sel(time='2009-09',lon=slice(110,189),lat=slice(-57,-10))
+ds.values = ds.values*1e3
+ds.attrs['units'] = 'nM' # nanomole per litre
 #ds.plot(norm=LogNorm(vmax=0.001))
 
 fig = plt.figure(figsize=(10,3))
@@ -28,10 +30,10 @@ end = bins[np.argmax(n)+1]
 ax.set_xscale('log')
 #ax.set_xlabel('Eisenkonzentration in '+ds.attrs['units'])
 ax.set_ylabel('Anzahl der Gitterzellen')
-ax.plot([start,start],[0,3500],'r--',lw=.8)
-ax.plot([end,end],[0,3500],'r--',lw=.8)
-ax.text(start,3200,'von ca. {:.2} '.format(start),ha='right')
-ax.text(end,3200,' bis {:.2} mmol / m-3'.format(end),ha='left')
+ax.plot([start,start],[0,2800],'r--',lw=.8)
+ax.plot([end,end],[0,2800],'r--',lw=.8)
+ax.text(start,2500,'von ca. {:.2} '.format(start),ha='right')
+ax.text(end,2500,' bis {:.2} nM'.format(end),ha='left')
 ax.legend(loc=5,fontsize=8)
 
 ax2 = fig.add_subplot(gs[0], projection=crs.Mercator(
@@ -42,10 +44,12 @@ ax2.add_feature(cfeature.LAND, fc='lightgrey', zorder=0)
 ax2.add_feature(cfeature.STATES,lw=.2, zorder=2)
 
 cont = ds.plot(ax=ax2,transform=crs.PlateCarree(),
-    zorder=1,cmap='cividis',extend='max',add_colorbar=False,
-    levels=50,norm=LogNorm(vmin=1e-6))
+    zorder=1,cmap='cividis',extend='neither',add_colorbar=False,
+    norm=LogNorm(vmin=1e-3,vmax=10),levels=[1e-3,5e-3,1e-2,5e-2,1e-1,5e-1,
+    1,10])
     #,vmin = -10 ,vmax=4)
 cb = plt.colorbar(cont, shrink=.98)
+cb.set_ticks([1e-3,1e-2,1e-1,1,10])
 #cb.set_label('Eisenkonzentration in '+ds.attrs['units'],fontsize=8)
 
 ax2.set_extent([110,189,-10,-57],crs=crs.PlateCarree())
@@ -62,13 +66,7 @@ gl.ylocator = mticker.FixedLocator([-10,-20,-30,-40,-50])
 gl.xformatter = LONGITUDE_FORMATTER
 gl.yformatter = LATITUDE_FORMATTER
 
-fig.savefig('D://thesisdata/bilder/Python/nutrients/nutrient_iron.png',dpi=300)
+fig.savefig('D://thesisdata/bilder/Python/nutrients/nutrient_iron.png',dpi=200,facecolor='white',
+bbox_inches = 'tight',pad_inches = 0.01)
+
 #%%
-
-M = 55.845 / 1000 # SI-umrechnung von g/mol in kg/mol
-Fe_c = 0.01 * 1e-9 * 1e3# SI-umrechnung von nmol/l in mol/m3
-z_0 = 10 # in m
-☺
-Fe_in = M * Fe_c * z_0
-
-Fe_in

@@ -6,8 +6,7 @@ import cartopy.crs as crs
 import cartopy.feature as cfeature
 import pandas as pd
 import helperlies as mway
-import importlib
-importlib.reload(mway)
+import string
 
 file = 'D://thesisdata/currents/global-reanalysis-phy-001-031-grepv2-mnstd-daily_1622467797293.nc'
 ds = xr.open_dataset(file)
@@ -34,12 +33,22 @@ info2 = 'Max {:.2f} m/s'.format(
 
 #u.values = u.values/s
 
+
 # VORTICITY
 dx, dy = mway.grid_distances(u)
 dx = dx[:,1:] # first entry ist killed by diff()
 dy = dy[1:,:]
 vort = (v.diff('lon')/dx-u.diff('lat')/dy)
 
+#%% VORTICITY TIMESERIES
+# u_time = dt['uo_mean'].squeeze()
+# v_time = dt['vo_mean'].squeeze()
+# vort_time = (v_time.diff('lon')/dx-u_time.diff('lat')/dy)
+# for i in range(14):
+#     vort_time.diff('time').isel(time=i).plot(norm=SymLogNorm(1e-6,base=10))
+#     plt.show()
+# vort_time.sel(lon=slice(160,175),lat=slice(-48,-20)).mean(dim=('lon','lat')).plot()
+#%%
 
 def format_ax(ax):
     ax.coastlines(lw=.5, zorder=2)
@@ -64,6 +73,8 @@ ax.text(box[0]+1,box[2]+1,info,fontsize=8,transform = crs.PlateCarree(),
     bbox={'facecolor': 'white', 'alpha':1, 'pad': 1},zorder=7)
 format_ax(ax)
 ax.set_title('Mittlere Strömung 18.09. bis 02.10.2009')
+ax.text(-0.1, 0.9, string.ascii_uppercase[0], transform=ax.transAxes,
+        size=20, weight='bold')
 
 ax2 = fig.add_subplot(gs[1],projection=crs.Mercator(central_longitude=150.))
 im2 = vort.plot(ax=ax2,norm=SymLogNorm(3e-6,base=10),transform=crs.PlateCarree(),
@@ -72,8 +83,10 @@ cb2 =fig.colorbar(im2,shrink=.9,extend='max')
 cb2.set_label('Vortizität in 1/s')
 ax2.set_title(r'Mittlere Vortizität $\zeta$')
 format_ax(ax2)
+ax2.text(-0.1, .9, string.ascii_uppercase[1], transform=ax2.transAxes,
+        size=20, weight='bold')
 
-
-fig.savefig('D://thesisdata/bilder/Python/currents/mean.png',dpi=200,
+1.8e6/1 /(60*60*24)
+fig.savefig('D://thesisdata/bilder/Python/currents/currents_mean.png',dpi=200,
     facecolor='white',bbox_inches = 'tight',pad_inches = 0.01)
 #plt.close()

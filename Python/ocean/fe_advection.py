@@ -76,7 +76,6 @@ C_Fe.isel(time=137).plot(cmap='viridis',norm=LogNorm(1e-5),vmax=10)
     #plt.savefig('D://thesisdata/bilder/Python/currents/simulation/fe_current_{:}.png'.format(i))
     #plt.close()
 
-
 depo.sum('time').plot(norm=LogNorm(1e-5),vmax=10)
 #%%
 for t in pd.date_range('2009-09-18T03','2009-09-30T00',freq='6h'):

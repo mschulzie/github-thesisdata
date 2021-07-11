@@ -71,18 +71,3 @@ C_Fe = C_Fe.where(landmask==0)
 print('Maximum C_Fe is {:.2f}'.format(np.nanmax(C_Fe.values)))
 
 C_Fe.to_netcdf('D://thesisdata/wrf_dust/fe_dep_advection_land_source_{:}_nM.nc'.format(source))
-
-C_Fe.isel(time=137).plot(cmap='viridis',norm=LogNorm(1e-5),vmax=10)
-    #plt.savefig('D://thesisdata/bilder/Python/currents/simulation/fe_current_{:}.png'.format(i))
-    #plt.close()
-
-depo.sum('time').plot(norm=LogNorm(1e-5),vmax=10)
-#%%
-for t in pd.date_range('2009-09-18T03','2009-09-30T00',freq='6h'):
-    time = t
-    (C_Fe.sel(time=time)-depo.sel(time=slice('2009-09-18T00',time)).sum('time')
-        ).plot(norm=SymLogNorm(1e-5,base=10),vmax=1,levels=13)
-    plt.savefig('D://thesisdata/bilder/Python/currents/dep_vs_current/{:}.png'.format(str(time)[:13]),
-            dpi=150,facecolor='white',
-            bbox_inches = 'tight',pad_inches = 0.01)
-    plt.close()

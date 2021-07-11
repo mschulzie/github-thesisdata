@@ -12,51 +12,71 @@ from Python.modeloutput.deposition_iron import sections
 #%% SETTINGS:
 tau = np.arange(11)
 dcdt = True
-dfdt = True
 fe_log10 = False
 chl_log10 = False
 minus_climate_mean = False
 # For cb norm scroll down!
+shift = 10 # how many gridpoints left,right, up or down do find max. cov?
 cmap = 'RdBu_r'
 add = ''
 #%% Function needed:
-def corr_tau(x,y,tau):
+def corr_tau(x,y,tau,lat_shift=np.array([0]),lon_shift=np.array([0])):
     """
     Computes highest Correlation Coefficient of two xarrays with same spatial
-    shape and same timedelta. Returns 2 xarrays in same spatial shape and additional
-    dimension "tau" containing 1. Correlation and 2. Correlation Coeff for each tau
+    shape and same timesteps. Returns 3 xarrays in same spatial shape and additional
+    dimension "tau" containing 1. Correlation, 2.covariance and 3.
+    Correlation Coeff for each tau and spatial shift
 
     x: First xarray, has to be the one with limited time steps
     y: Second xarray has to have at least tau.max() additional time steps
     tau: np.array with all timeshifts to be computed
     """
-    N = x.time.size
-    rho_array = xr.DataArray(coords={'tau': tau,'lat':x.lat.values,
-        'lon':x.lon.values,},dims=['tau','lat','lon'])
-    R_array = xr.DataArray(coords={'tau': tau,'lat':x.lat.values,
-        'lon':x.lon.values,},dims=['tau','lat','lon'])
-    cov_array = xr.DataArray(coords={'tau': tau,'lat':x.lat.values,
-        'lon':x.lon.values,},dims=['tau','lat','lon'])
 
-    for t in tau:
-        start = pd.to_datetime(x.time[0].values)+pd.DateOffset(days=int(t))
-        stop = pd.to_datetime(x.time[-1].values)+pd.DateOffset(days=int(t))
-        y_shift = y.sel(time=slice(start,stop))
-        R = 1/N *np.sum(x.values * y_shift.values,axis=0)
-        R_array[t] = R
-        cov = (R-x.values.mean(axis=0)*y_shift.values.mean(axis=0))
-        cov_array[t] = cov
-        rho = ( cov /
-            (x.values.std(axis=0)*y_shift.values.std(axis=0)) )
-        rho_array[t] = rho
+    coords = {'tau':tau,'lat_shift':lat_shift,'lon_shift':lon_shift,
+        'lat':x.lat.values,'lon':x.lon.values}
+    dims = ['tau','lat_shift','lon_shift','lat','lon']
+    N = x.time.size
+    rho_array = xr.DataArray(coords=coords,dims=dims)
+    R_array = xr.DataArray(coords=coords,dims=dims)
+    cov_array = xr.DataArray(coords=coords,dims=dims)
+
+    for i in lat_shift:
+        for j in lon_shift:
+            for t in tau:
+                start = pd.to_datetime(x.time[0].values)+pd.DateOffset(days=int(t))
+                stop = pd.to_datetime(x.time[-1].values)+pd.DateOffset(days=int(t))
+                y_shift = y.sel(time=slice(start,stop))
+                temp = np.zeros(x.shape)
+                if (i>=0 and j >=0):
+                    temp[:,i:,j:] = y_shift.values[:,:x.lat.size-i,:x.lon.size-j]
+                elif (i<0) and (j<0):
+                    temp[:,:x.lat.size+i,:x.lon.size+j] = y_shift.values[:,-i:,-j:]
+                elif (i>=0) and (j<0):
+                    temp[:,i:,:x.lon.size+j]=y_shift.values[:,:x.lat.size-i,-j:]
+                elif (i<0) and (j>=0):
+                    temp[:,:x.lat.size+i,j:]=y_shift.values[:,-i:,:x.lon.size-j]
+                else:
+                    print('HÄÄÄÄÄÄÄÄÄÄ')
+                y_shift.values = temp
+                R = 1/N *np.sum(x.values * y_shift.values,axis=0)
+                R_array[t,i-lat_shift.min(),j-lon_shift.min()] = R
+                cov = (R-x.values.mean(axis=0)*y_shift.values.mean(axis=0))
+                cov_array[t,i,j] = cov
+                rho = ( cov /
+                    (x.values.std(axis=0)*y_shift.values.std(axis=0)) )
+                rho_array[t,i-lat_shift.min(),j-lon_shift.min()] = rho
+
     return R_array,cov_array,rho_array
+
+
 #%% PREPROCESS:
 path = 'D://thesisdata/plankton/marine_copernicus/2009_prep_corr_ana.nc'
 path_cli = path[:-3]+'_climate.nc'
 
-iron = xr.open_dataarray('D://thesisdata/wrf_dust/fe_dep_advection_land_source_0_nM.nc')
-iron = iron.sel(time=slice('2009-09-18T12','2009-10-01T12'))[::8] # MITTAGS!!!
-iron = iron.assign_coords(time=pd.date_range('2009-09-18','2009-10-01',freq='d'))
+iron = mway.import_iron_dep(landmask=True)[1:,...] # drop first timestep
+iron.lat.size
+iron = iron.coarsen(time=8,boundary='exact').mean(keep_attrs=True)
+iron = iron.assign_coords(time=pd.date_range('2009-09-18','2009-09-29',freq='d'))
 chl_raw = xr.open_dataset(path)['CHL']
 if minus_climate_mean:
     chl_raw_cli = xr.open_dataset(path_cli)['CHL_mean']
@@ -78,19 +98,21 @@ chl = chl_raw.interp(coords={'lat':iron.lat.values,'lon':iron.lon.values})
 if dcdt:
     chl = chl.diff('time')
     add+='_dcdt'
-if dfdt:
-    iron = iron.diff('time')
-    add+='_dfdt'
 #chl.values[chl.values<0]=0 # SET NEGATIVE CHANGES TO ZERO!
 #%%
-R,cov, rho = corr_tau(iron,chl,tau)
-R_idx = R.fillna(0).argmax('tau')
-rho_idx = rho.fillna(0).argmax('tau')
-cov_idx = cov.fillna(0).argmax('tau')
+R,cov, rho = corr_tau(iron,chl,tau,lat_shift=np.arange(-shift,shift+1),lon_shift=np.arange(-shift,shift+1))
+R_idx = R.fillna(0).argmax(dim=('tau','lon_shift','lat_shift'))
+rho_idx = rho.fillna(0).argmax(dim=('tau','lon_shift','lat_shift'))
+cov_idx = cov.fillna(0).argmax(dim=('tau','lon_shift','lat_shift'))
+R_tau = R.fillna(0).max(dim=('lon_shift','lat_shift')).argmax('tau')
+rho_tau = rho.fillna(0).max(dim=('lon_shift','lat_shift')).argmax('tau')
+cov_tau = cov.fillna(0).max(dim=('lon_shift','lat_shift')).argmax('tau')
+
 levels = np.append(tau,tau.max()+1)
 R_min, R_max = R.min().values, R.max().values
 cov_min, cov_max =  cov.min().values, cov.max().values
 norm = SymLogNorm(1e-8,vmin=cov_min,vmax=cov_max,base=10) #None
+
 #%% PLOTTING
 
 def format_ax(ax,text=None):
@@ -110,16 +132,16 @@ def format_ax(ax,text=None):
                 size=10)#, weight='bold')
 
 fig = plt.figure(figsize=(9,26))
-gs = fig.add_gridspec(len(tau)+2,3,wspace=.7)
+gs = fig.add_gridspec(len(tau)+2,3,wspace=.7,hspace=0)
 # PLOT INDEXES:
 ax1 = fig.add_subplot(gs[0,0],projection=crs.Mercator(central_longitude=150.0))
 ax2 = fig.add_subplot(gs[0,1],projection=crs.Mercator(central_longitude=150.0))
 ax3 = fig.add_subplot(gs[0,2],projection=crs.Mercator(central_longitude=150.0))
-R_idx.plot(ax=ax1,cmap='viridis',levels=levels,extend='neither',
+R_tau.plot(ax=ax1,cmap='viridis',levels=levels,extend='neither',
     transform=crs.PlateCarree())
-cov_idx.plot(ax=ax2,cmap='viridis',levels=levels,extend='neither',
+cov_tau.plot(ax=ax2,cmap='viridis',levels=levels,extend='neither',
     transform=crs.PlateCarree())
-rho_idx.plot(ax=ax3,cmap='viridis',levels=levels,extend='neither',
+rho_tau.plot(ax=ax3,cmap='viridis',levels=levels,extend='neither',
     transform=crs.PlateCarree())
 format_ax(ax1,'max\nR'), format_ax(ax2,'max\ncov'), format_ax(ax3,'max\n'+r'$\rho$')
 ax1.set_title(r'$\tau$'), ax2.set_title(r'$\tau$'), ax3.set_title(r'$\tau$')
@@ -147,13 +169,13 @@ for i,t in enumerate(tau):
     ax2 = fig.add_subplot(gs[i+2,1],projection=crs.Mercator(central_longitude=150.0))
     ax3 = fig.add_subplot(gs[i+2,2],projection=crs.Mercator(central_longitude=150.0))
 
-    R.sel(tau=t).plot(ax=ax1,extend='neither',transform=crs.PlateCarree(),
+    R.sel(tau=t).max(dim=('lon_shift','lat_shift')).plot(ax=ax1,extend='neither',transform=crs.PlateCarree(),
         cmap=cmap,add_colorbar=False,norm=norm)
         #,vmin=R_min,vmax=R_max
-    cov.sel(tau=t).plot(ax=ax2,extend='neither',
+    cov.sel(tau=t).max(dim=('lon_shift','lat_shift')).plot(ax=ax2,extend='neither',
         transform=crs.PlateCarree(),cmap=cmap,norm=norm,
         add_colorbar=False)
-    rho.sel(tau=t).plot(ax=ax3,extend='neither',vmin=-1,vmax=1,
+    rho.sel(tau=t).max(dim=('lon_shift','lat_shift')).plot(ax=ax3,extend='neither',vmin=-1,vmax=1,
         transform=crs.PlateCarree(),cmap=cmap,
         add_colorbar=False)
     format_ax(ax1,t), format_ax(ax2,t), format_ax(ax3,t)
@@ -163,28 +185,28 @@ line2 = plt.Line2D((.66,.66),(.13,.87), color="grey", linewidth=1,linestyle='--'
 fig.add_artist(line)
 fig.add_artist(line2)
 
-fig.savefig('D://thesisdata/bilder/Python/wrf_chla/correlation/correlation_C_Fe'+
-        add+'.png'
+fig.savefig('D://thesisdata/bilder/Python/wrf_chla/correlation/'
+        +'correlation_inkl_spatial_shift_'+str(shift)+add+'.png'
         ,dpi=200,facecolor='white',
         bbox_inches = 'tight',pad_inches = 0.01)
 #%% SECTIONS MEANS DEPENDENCY FROM TAU
-fig2 = plt.figure(figsize=(10,4))
-gs2 = fig2.add_gridspec(3,2,hspace=.2,wspace=.2)
-
-for i,ort in enumerate(sections):
-    ax = fig2.add_subplot(gs2[i])
-    ax.plot(tau,cov.sel(lon=slice(sections[ort][0],sections[ort][1]),
-        lat=slice(sections[ort][3],sections[ort][2])).mean(dim=('lon','lat')),
-        label=ort,color='black')
-    ax.set_xticks(tau)
-    ax.grid(axis='x')
-    ax.legend()
-    if i < 4:
-        ax.set_xticklabels('')
-    else:
-        ax.set_xlabel(r'$\tau$')
-fig2.suptitle('Mittlere Kovarianzen')
-fig2.savefig('D://thesisdata/bilder/Python/wrf_chla/correlation/section_correlation'+
-        add+'.png'
-        ,dpi=200,facecolor='white',
-        bbox_inches = 'tight',pad_inches = 0.01)
+# fig2 = plt.figure(figsize=(10,4))
+# gs2 = fig2.add_gridspec(3,2,hspace=.2,wspace=.2)
+#
+# for i,ort in enumerate(sections):
+#     ax = fig2.add_subplot(gs2[i])
+#     ax.plot(tau,cov.sel(lon=slice(sections[ort][0],sections[ort][1]),
+#         lat=slice(sections[ort][3],sections[ort][2])).mean(dim=('lon','lat')),
+#         label=ort,color='black')
+#     ax.set_xticks(tau)
+#     ax.grid(axis='x')
+#     ax.legend()
+#     if i < 4:
+#         ax.set_xticklabels('')
+#     else:
+#         ax.set_xlabel(r'$\tau$')
+# fig2.suptitle('Mittlere Kovarianzen')
+# fig2.savefig('D://thesisdata/bilder/Python/wrf_chla/correlation/section_correlation'+
+#         add+'.png'
+#         ,dpi=200,facecolor='white',
+#         bbox_inches = 'tight',pad_inches = 0.01)

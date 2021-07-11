@@ -1,5 +1,5 @@
 % Schnelles Übersetzen scheitert wegen µm in Titel Bach.2012!!
-\documentclass[12pt,a4paper,onecolumn]{scrartcl}
+\documentclass[12pt,a4paper,onecolumn,draft]{scrartcl}
 \usepackage[utf8]{inputenc}
 \usepackage{adjustbox}
 \usepackage{amsfonts}
@@ -297,100 +297,60 @@ C_\text{Fe} = \frac{m_\text{Fe}}{z_0 \cdot M_{\text{Fe}} \cdot A} \Leftrightarro
 Um eine Erhöhung der Konzentrationen in der Größenordnung von $C_\text{Fe}=$0.01 nM zu erreichen, müssen dementsprechend wenigstens etwa $5.6$ µg Eisen pro Quadratmeter eingetragen werden. Zum Vergleich: In den \textit{Bottle Experiments} von \citet{Martin.1988} wurden in verschiedenen Behältern 1 nM, 5 nM und 10 nM hinzugefügt. Die Mengen waren dort also um mindestens zwei Größenordnungen höher als in dieser Annahme. Im SOIREE-Experiment für den südlichen Ozean \citep{Trull.2001} konnten Veränderungen ab einer Schwelle von etwa 0.2 nM Eisen beobachtet werden, was einer Verdopplung der dortigen regulären Konzentration von 0.1 nM entspricht \citep{Boyd.2010}. Auch im Vergleich dazu ist der hier verwendete Schwellenwert eher optimistisch, da heißt, die Depositionen reichen möglicherweise nicht aus, um eine Reaktion des Phytoplanktons zu bewirken. \\
 Da die chemischen Zusammensetzungen und Bedingungen für die Regionen unterschiedlich sein können (QUELLE ERGÄNZEN), sollen die anhand des Schwellenwertes identifizierten Zellen in verschiedene Sektoren eingruppiert werden, um diese jeweils separat zu analysieren. Für jeden Sektor wird anschließend für jeden verfügbaren Zeitpunkt der Mittelwert der Chlorophyll-a-Konzentrationen $\text{C}_i$ aus den $N$ dort betroffenen Zellen berechnet. Damit ergibt sich eine Zeitreihe für die durchschnittliche Entwicklung des Phytoplanktons im gesamten Sektor $\mu(t)$:
 \begin{equation}
-\mu_C(t) = \frac{1}{N}\sum\limits_{i=1}^{N} \text{C}_i(t)
+\mu_C(t) = \frac{1}{N}\sum\limits_{i,j=1}^{N} \text{C}_{i,j}(t)
 \end{equation}
 Unter der Annahme, dass der Eintrag von Eisen einen Einfluss auf diese Zeitreihe nimmt, sollte diese nach dem Ereignis ansteigen. Allerdings unterliegt die Entwicklung der Phytoplankton-Konzentrationen ohnehin (so auch im tasmanischen Meer \citep{Tilburg.2002}) einem jahreszeitlichen Gang sowie weiteren externen Einflüssen, die eine hohe Variabilität aufweisen können (vgl. Kapitel \ref{sec:nährstoffe}). Da der jahreszeitliche Trend aus den Klimadaten relativ gut bekannt ist, kann die Zeitreihe im Untersuchungszeitraum 2009 um diesen Effekt bereinigt werden. Hierzu werden Datensätze des \textit{Marine Copernicus Service} verwendet, welche die nötigen täglichen Klimadaten bereits liefern. Neben dem Mittelwert der Chlorophyll-a-Konzentrationen des jeweiligen Tages für die Jahre 1998 bis 2018 kann außerdem aus der Standardabweichung und den 3\% und 97\% Perzentilen ($\sigma$,$q_{0.03}$,$q_{0.97}$,) die entsprechende Variabilität abgeleitet werden. Der Klima-Mittelwert $\text{C}_{cli,i}$ eines jeden Gitterpunktes wird ebenfalls über den gesamten jeweiligen Sektor gemittelt:
 \begin{equation}
-\mu_{C,cli}(t) = \frac{1}{N}\sum\limits_{i=1}^{N} \text{C}_{cli,i}(t)
+\mu_{C[cli]}(t) = \frac{1}{N}\sum\limits_{i,j=1}^{N} \text{C}_{i,j[cli]}(t)
 \end{equation}
 Dieser dient zur Entfernung eines möglichen Trends im zu untersuchenden Sektor, sodass ausschließlich die Abweichung/Anomalie $\Delta \mu(t)$ zum Klimamittel dargestellt wird:
 \begin{equation}
-\Delta \mu_C(t) = \mu_C(t) - \mu_{C,cli}(t) \label{eq:cli_anomalie}
+\Delta \mu_C(t) = \mu_C(t) - \mu_{C[cli]}(t) \label{eq:cli_anomalie}
 \end{equation} 
 Im Fall eines \textit{düngenden} Effektes der Eisendpositionen sollte diese bereinigte Zeitreihe nach den Depositionen einen steigenden Trend aufweisen. Um einzuschätzen, ob die Abweichungen überhaupt relevant sind, werden diese mit der Standardabweichung sowie den 3\% und 97\% Perzentilen verglichen. Liegt die Anomalie unter der durch die Standardabweichung gegebenen Schwelle, ist ein Zusammenhang eher unwahrscheinlich, die Abweichungen könnten aus der gewöhnlichen, Staub-unabhängigen Variabilität resultieren. Liegen diese im Gegensatz deutlich darüber oder erreichen sogar das 97 \% Perzentil, handelt es sich um sehr seltene Ereignisse (in 97\% der Fälle liegen die Konzentrationen/Abweichungen) unter diesem Wert), bei denen ein externer Einfluss wahrscheinlich ist. Kann dieser in unserem Fall in einen zeitlichen Zusammenhang mit den Staubeinträgen gebracht werden, wäre das ein deutlichen Indiz für einen Einfluss ebendieser. Sämtliche Werte des Klimadatensatzes liegen je Gitterzelle vor und es werden entsprechend für den jeweiligen Sektor die Mittelwerte $\mu_\sigma (t)$, $\mu_{q_{0.03}}(t)$, $\mu_{q_{0.97}}(t)$ gebildet. $\mu_{\Delta C}(t)$ ist der Mittelwert des für jeden Gitterpunkt geschätzten Fehlers $ \Delta C_i(t)$ der abgeleiteten Chlorophyll-a-Konzentrationen $C_i(t)$ (in 2009).
 \begin{figure}[ht]
 \includegraphics[width=\textwidth]{bilder/nutrient_iron.png}
 \caption{Links: Die abgeleiteten Eisenkonzentrationen in der zu untersuchenden Region. Rechts: Histogramm für die Konzentrationen in den Gitterzellen. Erstellt aus dem Datensatz des Copernicus Marine Data Store, für weitere Informationen siehe https://resources.marine.copernicus.eu/documents/PUM/CMEMS-GLO-PUM-001-029.pdf} \label{fig:nutrient_iron}
 \end{figure}
-
-\subsubsection{Korrelationsanalyse}
-Um einen räumlichen Zusammenhang zwischen den Eisendepositionen $F_\text{Fe}$ und den Veränderungen in den Chlorophyll-a-Konzentrationen $\partial C / \partial t$ zu untersuchen, wird eine Korrelationsanalyse beider Zeitreihen durchgeführt. Gemäß der Kontinuitätsgleichung \ref{eq:continuity} können sich die Chlorophyll-a-Konzentrationen an einem Ort nur durch Zu- und/oder Abfluss und aufgrund möglicher Quellen $S_C$ ändern. $\vec{v}$ ist die Geschwindigkeit der Ozeanströmung an der Oberfläche.
+\subsubsection{Eisentransport durch Advektionsgleichung} \label{sec:methods_advection}
+Da dank der WRF-Simulation und den gemäß \citet{Saulquin.2019} interpolierten Chlorophyll-a-Konzentrationen für die komplette Region räumlich vollständige Daten vorliegen, können diese Variablen zusätzlich zum zeitlichem Zusammenhang auch hinsichtlich etwaiger räumlicher Muster untersucht werden. Im einfachsten Fall würden exakt die Regionen mit erhöhten Chlorophyll-Konzentrationen reagieren, in denen vorher Eisen eingetragen wurde. Im Rahmen dieser Arbeit wird vereinfacht angenommen, dass die Eisenpartikel ausreichend lange im Oberflächenwasser verweilen (sh. auch \citet{Cropp.2013}), also nicht absinken und der Staubsturm grundsätzlich die einzige Eisenquelle bietet. Auch die weiteren (Wachstum-)begünstigenden oder abschwächenden Faktoren (Verfügbarkeit weiterer Nährstoffe, Wassertemperaturen, auf- und abströmen in (anti-)zyklonalen Wirbeln etc., Diffusion) werden mathematisch nicht berücksichtigt. Nichtsdestotrotz kann der laterale Transport des eingetragenen Eisens berücksichtigt werden. Die Eisenkonzentrationen $C_\text{Fe}$ an einem Ort können sich demnach gemäß der Kontinuitätsgleichung (\ref{eq:fe_continuity}) durch den Zu- oder Abfluss $\nabla . (C_\text{Fe} \vec{v})$ durch die Ozeanströmung $\vec{v} = (u,v,w)^T$  und dem Eintrag von eisenhaltigem Staub $F_\text{Fe}$ verändern, welcher sich in der Wassersäule der Höhe $z_0$ gleichmäßig verteilt:
 \begin{equation}
-\frac{\partial C}{\partial t} = - \nabla . (C \vec{v}) + S_C  \overset{\text{inkompressibel}}{=} - \vec{v}.\nabla C + S_C \label{eq:continuity}
+\frac{\partial C_\text{Fe}}{\partial t} = - \nabla . (C_\text{Fe} \ \vec{v}) + \frac{1}{z_0 \cdot M_\text{Fe}} \cdot F_\text{Fe} \label{eq:fe_continuity}
 \end{equation}
-Im Rahmen der Analyse wird der Fluss $\vec{v}.\nabla C$ zunächst vernachlässigt und die Veränderungen werden ausschließlich auf die mögliche Quelle (Wachstum nach Düngung durch Eisen $S_C \hat{=} F_\text{Fe}$) zurückgeführt. Im ersten Schritt werden zuerst die Koordinaten (d.h. die Gitterpunkte) der Chlorophyll-a-Daten auf die des Eisenflusses aus der WRF-Simulation angepasst. Anschließend werden nach dem expliziten Euler-Rückwärts-Verfahren die Ableitungen für die täglichen Chlorophyll-a-Daten ($\Delta t = 1d$) berechnet:
+Da Ozeanwasser praktisch inkompressibel ist ($\nabla . \vec{v}=0$) und die Vertikalgeschwindigkeit $w$ vernachlässigt werden soll, reduziert sich der Ausdruck auf die zweidimensionale Advektionsgleichung:
 \begin{equation}
-\frac{\partial C_i}{\partial t} (t_{n}) \approx \frac{C_i(t_{n})-C_i(t_{n-1})}{\Delta t} =: \partial C_i(t_n)
+\frac{\partial C_\text{Fe}}{\partial t} = - \vec{v} . \nabla_h  C_\text{Fe}  + \frac{1}{z_0 \cdot M_\text{Fe}} \cdot F_\text{Fe}
 \end{equation}
-Danach werden für jeden Gitterpunkt die Kreuz-Korrelationen für verschiedene Zeitverschiebungen $\tau$ (in Tagen) bestimmt:
+Diese wird nach dem Upwind-Schema diskretisiert, sodass sich anschließend die Eisenkonzentrationen am Gitterpunkt $i,j$ für die Zeitschritte $n$ mit $\Delta t$= 3 Stunden ergeben:
 \begin{equation}
-R_i(\tau)= \frac{1}{N_t}\sum\limits_{n=1}^{N_t} F_{\text{Fe},i}(t_n) \cdot \partial C_i(t_n + \tau)
+\begin{split}
+C_{i,j}^n = &\ C_{i,j}^{n-1} - u_{i,j}^{n-1} \cdot \frac{\Delta t}{\Delta x_{i,j}} \cdot (C_{i,j}^{n-1} - C_{i,j-1}^{n-1}) \\\\
+&- v_{i,j}^{n-1} \cdot \frac{\Delta t}{\Delta y_{i,j}} \cdot (C_{i,j}^{n-1} - C_{i-1,j}^{n-1})  \\\\
+&+ \frac{\Delta t}{z_0 \cdot M_\text{Fe}} \cdot F_\text{Fe} \text{ \qquad  \qquad \qquad für } u,v > 0 \\\\
+\end{split}
 \end{equation}
-Daraus kann noch der auf das Intervall $[-1,1]$ beschränkte Korrelationskoeffizient $\rho (\tau)$ berechnen werden:
+Die Courant-Zahl $c = u \cdot \Delta t / \Delta x$ bzw. $v \cdot \Delta t / \Delta y$ bleibt in diesem Fall bei den minimalen Gitterpunktabständen von knapp 30km (sh. Kapitel \ref{sec:wrf}) für Strömungskomponenten $u,v \ < 2.6$ (in unserem Fall überall gegeben) kleiner als 1, sodass das Schema gemäß der \textit{Courant-Friedrich-Lewy}-Bedingung stabil bleibt. Die Strömungsgeschwindigkeit auf den Landflächen beträgt Null. Als Randbedingungen können die Eisenkonzentrationen der Landflächen gleich Null oder auf einen festen Wert gesetzt werden. 
+\subsubsection{Korrelationsanalyse} \label{sec:methods_correlation}
+Um einen räumlichen Zusammenhang zwischen den Veränderungen der Eisenkonzentrationen $\partial C_\text{Fe} / \partial t$ und den Veränderungen in den Chlorophyll-a-Konzentrationen $\partial C / \partial t$ zu untersuchen, wird eine Korrelationsanalyse beider Zeitreihen durchgeführt. Gemäß der Kontinuitätsgleichung \ref{eq:continuity} können sich ebenso wie die Eisenkonzentrationen die Chlorophyll-a-Konzentrationen an einem Ort nur durch Zu- und/oder Abfluss und aufgrund möglicher Quellen $S_C$ ändern.
 \begin{equation}
-\rho_i(\tau) = \frac{R_i(\tau)-\overline{F_{\text{Fe}_i}} \cdot \overline{\partial C_i}}{\sigma_{\partial C_i} \cdot \sigma_{F_{\text{Fe},i}}}
+\frac{\partial C}{\partial t} = - \nabla . (C \ \vec{v}) + S_C  \overset{\text{inkompressibel}}{=} - \vec{v}.\nabla C + S_C \label{eq:continuity}
 \end{equation}
-
-\subsubsection{Maximum Kovarianz Analyse} \label{sec:mca}
-Durch die hohe Abhängigkeit von der chemischen Zusammensetzung und den Strömungsverhältnissen sind die Chlorophyll-a-Konzentrationen sehr heterogen verteilt. In Abbildung \ref{fig:chla} wird das turbulente Muster beispielhaft deutlich. Insbesondere die Vergleichbarkeit mit den Perzentilen (sh. Kapitel \ref{sec:timeseries}) ist dadurch vom eingrenzten Gebiet abhängig und somit eingeschränkt. Es wird angenommen, dass (besonders im tasmanischen Meer) ein Großteil der Gitterzellen innerhalb der Klimadaten sowohl Jahre mit hohen als auch solche mit niedrigen Konzentrationen repräsentiert hat, wohingegen \textit{benachbarte} Zellen, die bspw. einer anderen Strömungslinie folgen, völlig unterschiedliche Werte aufweisen können. \\
-Es soll der Zusammenhang zweier diskreter Variablen $E$ (Eiseneintrag) und $P$ (Chlorophyll-a-Konzentrationen untersucht werden). Voraussetzung für die Maximum Kovarianz Analyse ist, dass für beide gleich viele $N_t$ Zeitschritte vorliegen. Die Anzahlen der Gitterpunkte $N_E$ bzw. $N_P$ können voneinander abweichen. Der Zusammenhang der Variablen wird bei dieser statistischen Methode unabhängig von deren räumlicher Lokation untersucht. Das heißt, es ist auch ein Einfluss von weit voneinander entfernten Gitterpunkten aufeinander möglich. Dies ist bei den Staubdepositionen nicht unbedingt zu erwarten, da eine Reaktion des Phytoplanktons vermutlich in naher Umgebung zum Staubeintrag passiert. Allerdings \textit{befreit} diese Unabhängigkeit gleichzeitig von der Anforderung, für beide Variablen dieselben Koordinaten bzw. räumlichen Auflösungen zu verwenden und/oder etwaigen Transport durch die Oberflächenströmungen zu berücksichtigen. Werden die beiden räumlichen Dimensionen (Nord-Süd und Ost-West) auf nur eine räumliche Dimension (hier mit dem  Index $k$) reduziert, dann lassen sich die kompletten  Zeitreihen aller Gitterpunkte gleichzeitig in Form von Matrizen darstellen. Im folgenden meinen hoch gestellte Indizes die \textit{Spalte} und die unteren Indizes die \textit{Zeile} der jeweiligen Matrix. Die Matrizen in \ref{eq:E_and_P} enthalten $N_t$ Zeitschritte in den Zeilen und $N_E$ bzw. $N_P$ Gitterpunkte in den Spalten.
+Im Rahmen der Analyse wird der Fluss $\vec{v}.\nabla C$ hier jedoch vernachlässigt und die Veränderungen werden ausschließlich auf die mögliche Quelle (Wachstum nach Düngung durch zusätzlich verfügbarem Eisen) mit einer (hier unbekannten) Wachstumsfunktion $S_C = f(\partial C_\text{Fe} / \partial t)$ zurückgeführt. Falls ein (näherungsweise) linearer Zusammenhang besteht, hängt die Entwicklung der Chlorophyll-a-Konzentrationen dann direkt proportional von den verfügbaren bzw. veränderten Eisenkonzentrationen ab, sodass dieser Zusammenhang im Rahmen einer Korrelationsanalyse sichtbar werden sollte. Im ersten Schritt werden die Koordinaten (d.h. die Gitterpunkte) der Chlorophyll-a-Daten auf die des Eisenflusses aus der WRF-Simulation angepasst. Anschließend werden nach dem expliziten Euler-Rückwärts-Verfahren die Ableitungen für die täglichen Chlorophyll-a-Daten ($\Delta t = 1d$) berechnet:
 \begin{equation}
-\textbf{E} = \begin{pmatrix} E_{1}^1 & .. & E_{N_E}^1 \\ .. & .. & .. \\ E_{1}^{N_t} & .. & E_{N_E}^{N_t} \\ \end{pmatrix} \text{ und } \textbf{P} = \begin{pmatrix} P_{1}^1 & .. & P_{N_P}^1 \\ .. & .. & .. \\ P_{1}^{N_t} & .. & P_{N_P}^{N_t} \\ \end{pmatrix} \label{eq:E_and_P}
+\left[\frac{\partial C}{\partial t}\right]_{i,j}^{n} \approx \frac{C_{i,j}^n-C_{i,j}^{n-1}}{\Delta t}
 \end{equation}
-Da im Rahmen der Kovarianzanalyse \textit{Abweichungen}, also Varianzen von einem \textit{normalen} Zustand untersucht werden, wird jeder Eintrag $P_k^t$ (analog für $E_k^t$) normalerweise noch durch Subtraktion des zeitlichen Gitterpunkt-Mittelwertes für jede Zeitreihe als Anomalie von ebendiesem Mittelwert berechnet:
+Danach werden für jeden Gitterpunkt die Kreuz-Korrelationen für verschiedene Zeit- ($\tau$ in Tagen) und Gitterpunkt- ($\Delta i$,$\Delta j \in \mathbb{Z}$) Verschiebungen bestimmt:
 \begin{equation}
-P_{a,k}^t = P_k^t - \frac{1}{N_t} \sum\limits_{n=1}^{N_t} P_k^n = P_k^t - \overline{P_k}
+R_{i,j}(\tau,\Delta i, \Delta j)= \frac{1}{N_t}\sum\limits_{n=1}^{N_t} \left[\frac{\partial C_\text{Fe}}{\partial t}\right]_{i,j}^n \cdot \left[\frac{\partial C}{\partial t}\right]_{i+\Delta i ,j+\Delta j}^{n+\tau}
 \end{equation}
-Um einen möglichen Trend (sh. Kapitel \ref{sec:timeseries}) zu eliminieren, soll bei den Chlorophyll-a-Konzentrationen anstatt des Zeitserien-Mittelwertes allerdings der klimatische Mittelwert verwendet werden, sh. Gleichung \ref{eq:cli_anomalie}. Für die Eisendepositionen wird angenommen, dass der klimatische Mittelwert annähernd 0 beträgt, sodass alle Einträge als positive Anomalie betrachtet wird. Es erfolgt demnach keine Subtraktion. Allerdings wird das Gebiet räumlich auf den Ozean beschränkt, sodass Einträge auf Landflächen keinen Einfluss nehmen. Darüber hinaus können wie in Kapitel \ref{sec:timeseries} sowohl die Gitterpunkte von $\textbf{E}$ als auch von $\textbf{P}$ auf Regionen beschränkt werden, in denen die Eisendepositionen eine bestimmte Schwelle überschreiten. Anschließend werden alle Werte mithilfe der Standardabweichung $\sigma$ normiert, damit einige wenige Gitterpunkte mit sehr hohen Werten/Varianzen später keinen überproportionalen Einfluss auf das Gesamtergebnis nehmen:
+Daraus können noch durch Subtraktion der Zeitmittelwerte die Kovarianz und der durch Normierung um die zeitlichen Standardabweichung auf das Intervall $[-1,1]$ beschränkte Korrelationskoeffizient $\rho_{i,j}(\tau,\Delta i, \Delta j)$ berechnet werden:
 \begin{equation}
-\hat{E}_k^t =  \frac{1}{\sigma} \cdot E_k^t \text{ für } k = 1,..,N_E 
+\text{cov}_{i,j}(\tau,\Delta i, \Delta j) = R_{i,j}(\tau,\Delta i, \Delta j)-\left[\frac{\overline{\partial C_\text{Fe}}}{\partial t}\right]_{i,j} \cdot \left[\frac{\overline{\partial C}}{\partial t}\right]_{i+\Delta i,j+\Delta j}^{+\tau}
 \end{equation}
-mit der Varianz
 \begin{equation}
-\sigma^2 = \frac{1}{N_t} \sum\limits_{n=1}^{N_t-1}(E_k^n-\overline{E_k})^2
+\rho_{i,j}(\tau,\Delta i, \Delta j) = \frac{\text{cov}_{i,j}(\tau,\Delta i, \Delta j)}{\sigma \left(\left[\frac{\partial C_\text{Fe}}{\partial t}\right]_{i,j}\right) \cdot \sigma\left(\left[\frac{\partial C}{\partial t}\right]_{i+\Delta i ,j+\Delta j}^{+\tau}\right)}
 \end{equation}
-Nach diesen Vorarbeiten (Normierung analog für \textbf{P}$_a$) wird die Kovarianzmatrix \textbf{X}$\in \mathbb{R}^{N_E \times N_P}$ berechnet ($\textbf{\^{E}}^T$ meint die transponierte Matrix):
-\begin{equation}
-\textbf{X} = \frac{1}{N_t} \cdot \textbf{\^{E}}^T \cdot \hat{\textbf{P}}_a
-\end{equation}
-Diese enthält alle Informationen über die zeitlichen Kovarianzen aller möglichen Kombinationen eines jeden Gitterpunktes der einen Variable mit jedem Gitterpunkt der anderen Variable. Mithilfe der Singulärwertzerlegung lassen sich diese Informationen in Hauptkomponenten zerlegen.
-\begin{equation}
-\textbf{X} = \textbf{U} \cdot \textbf{S} \cdot \textbf{V}^T
-\end{equation}
-hierbei ist \textbf{S}$\in \mathbb{R}^{N_E \times N_P}$ eine Diagonalmatrix und enthält die $\min(N_E,N_P)$ Singulärwerte $S_k$ in dem Betrag nach \textit{absteigender} Reihenfolge. Dementsprechend enthalten i.d.R. die ersten Singulärwerte einen überproportional großen Informationsgehalt gegenüber den letzten, die möglicherweise (abhängig von den Anforderungen an die Genauigkeit) vernachlässigt werden können. Die Spalten der orthogonalen Matrizen \textbf{U}$\in \mathbb{R}^{N_E \times N_E}$ und \textbf{V}$\in \mathbb{R}^{N_P \times N_P}$ sind die linken, respektive rechten Singulärvektoren zur Kovarianzmatrix \textbf{X}. 
-\begin{equation}
-\hat{S_m}= \frac{1}{\sqrt{S_m\cdot N_t}}\textbf{ für } m=1,..,\min(N_E,N_P)
-\end{equation}
-Durch Matrixmultiplikation der ursprünglichen Matrizen mit den Singulärvektoren und -werten werden Zeitreihen der sogenannten \textit{Principal Components} erzeugt, welche in Form der Matrizen \textbf{PC}$_E\in \mathbb{R}^{N_t \times N_E}$ und \textbf{PC}$_P\in \mathbb{R}^{N_t \times N_P}$ gespeichert sind. Die jeweils $k$-te Spalte enthält die zum $k$-ten Singulärwert zugehörige Zeitreihe.
-\begin{align}
-\textbf{PC}_E &= \hat{\textbf{E}} \cdot \textbf{U} \cdot \hat{\textbf{S}}^T \\ \textbf{PC}_P &= \hat{\textbf{P}}_a \cdot \textbf{V} \cdot \hat{\textbf{S}}
-\end{align}
-Die Singulärvektoren selbst beschreiben das räumliche Muster zum zugehörigen Singulärwert und werden auch \textit{EOF} (Empirical Orthogonal Functions) genannt. Die so darstellbaren zeitlichen (PC's) und räumlichen (EOF) Strukturen werden auch als jeweiliger \textit{Modus} bezeichnet ($m$-ter Singulärwert und -vektor beschreiben $m$-ten Modus). Zur späteren übersichtlichen Darstellung in Kapitel \ref{sec:auswertung} werden die PC's und EOF's durch die Maximalwerte noch auf 1 normiert:
-\begin{align}
-\widehat{\text{PC}}_{E,m}^t &= \frac{\text{PC}_{E,m}^t}{\max\limits_n(|\text{PC}_{E,m}^n|)} \text{ für } m = 1,..,\min(N_E,N_P), t = 1,..,N_t \\
-\widehat{\text{PC}}_{P,m}^t &= \frac{\text{PC}_{P,m}^t}{\max\limits_n(|\text{PC}_{P,m}^n|)} \text{ für } m = 1,..,\min(N_E,N_P), t = 1,..,N_t
-\end{align}
-\begin{align}
-\widehat{\text{EOF}}_{E,k}^m &= \frac{\text{U}_{k}^m}{\max\limits_n(|\text{U}_{n}^m|)} \text{ für } m = 1,..,\min(N_E,N_P), k = 1,..,N_E \\
-\widehat{\text{EOF}}_{P,k}^m &= \frac{\text{V}_{k}^m}{\max\limits_n(|\text{V}_{n}^m|)} \text{ für } m = 1,..,\min(N_E,N_P), k = 1,..,N_P 
-\end{align}
-
-\section{Gabric.2016}
-
-\begin{itemize}
-\item Tasman Sea $25^\circ$ S bis $40^\circ$ S Untersuchungsareal
-\item data: Chl + aeorosol optical depth (AOD)
-\begin{itemize}
-\item chl data: daily + 8 day MODIS-AQUA
-\item AOD data: 550 nm, 4km resolution
-\end{itemize}
-\item divided into $5^\circ$ lattitude band
-\item DVR kumulativ
-\item Hovmoller Plots (x: zeit, y: latidude, longitude)
-\item cloud processing / wet deposition wichtig
-\item Response hauptsächlich südlich der tasmanischen Front ($\approx 32^\circ$ S)
-\item Staubdeposition weiter im Norden
-\end{itemize}
+Unter idealen Bedingungen sollten die Korrelationen bei einer Zeitverschiebung $\tau$ maximal sein, die genau der Reaktionszeit des Phytoplanktons entspricht. Eine mögliche zusätzliche Räumliche Verschiebung um $\Delta i$ und $\Delta j$ kann zusätzlichen Eisentransport (bspw. durch erhöhte/veränderte Windbedingungen und oder Ozeanströmungen) anzeigen, welcher durch die WRF-Simulation und die anschließend abgeschätzte Eisenverteilung mithilfe der Advektionsgleichung (sh. Kapitel \ref{sec:methods_advection}) nicht abgedeckt wurde.  
 
 \subsection{Der südliche Ozean}
 
@@ -474,10 +434,12 @@ Im vorangegangenen Kapitel \ref{sec:chla_zeitreihen} wird anschaulich gezeigt, d
 Wie man Abbildung \ref{fig:snapshot_fedep_chla} entnehmen kann, kann das jeweilige räumliche Muster der Eisendeposition (\ref{fig:snapshot_fedep_chla} A) jedoch nicht überall direkt demselben Muster positiver Werte bei den Chlorophyll-a-Veränderungen (\ref{fig:snapshot_fedep_chla} B) zugeordnet werden. Dies war zu erwarten, da die Entwicklung des Phytoplanktons bekanntermaßen von weiteren Faktoren abhängig ist, die Simulation der Depositionen nicht perfekt sein kann und auch der düngende Effekt des Eisens als Eintrag von Staubstürmen in einigen Regionen fraglich ist. Einige Muster sind allerdings auffällig, die hier beschrieben werden sollen. Im Korallenmeer folgt ein Muster positiver Veränderungen der Chlorophyll-a-Konzentrationen dem Muster des Eiseneintrags am Vortag oder sogar desselben Tages. Am 23. September (dem ersten Tag mit nennenswertem Eintrag nördlich des Tasmanischen Meeres) zeigen sich positive Veränderungen der Konzentrationen im küstennahen Gebiet direkt östlich der Staatengrenze Queensland / New South Wales. Analog zu den Eisendepositionen streckt sich dieses Muster bis zum 26. September in östliche Richtung und wandert nach Norden ab. Die maximalen Änderungen scheinen am 24. September aufzutreten, der höchste mittlere Eiseneintrag im küstennahen Gebiet erfolgt am 23. September. Eine ähnliche Entwicklung zeigt sich für das  zweite Staubereignis mit zusätzlichem Eintrag beginnend am 26. September. In diesem Fall sind sowohl der simulierte Eiseneintrag und mehr noch die positiven Veränderungen des Chlorophylls im gesamten Verlauf etwas südlicher. Darüber hinaus ist am 30. September südlich von Tasmanien eine hauptsächlich Nord-Süd ausgerichtete Struktur positiver Abweichungen zu erkennen, dessen Ausdehnung auffällig ähnlich zu den dortigen (allerdings vergleichsweise schwachen) mittleren Eisendepositionen am 28. September ist. \\
 
 Die markantesten und auffälligsten Veränderungen der Chlorophyll-a-Konzentrationen treten allerdings im Tasmanischen Meer auf (diese stechen aufgrund der Normalisierung in Abb. \ref{fig:snapshot_fedep_chla} B weniger deutlich heraus, vgl. stattdessen Abb. \ref{fig:chla_collage}). Am 1. Oktober sind die dortigen Veränderungen großflächig maximal, was auch in der Zeitreihe in Abb. \ref{fig:timeseries_full} deutlich wird. Nennenswerter Eintrag findet in dieser Region lt. WRF-Simulation allerdings fast ausschließlich am 23. September statt, mit einem kleinen Zusatzbeitrag im Laufe des 26.09., vgl. Abb. \ref{fig:iron_deposition_sections}. Demnach würde die Hauptreaktion erst 8 Tage nach dem Haupteintrag stattfinden, was sich nicht mit den weiter oben beschriebenen vermeintlich grob ähnlichen Mustern deckt, welche etwa 0-2 Tage aufeinander folgen. Eine mögliche Erklärung für diese verzögerte Reaktion und die lokale Beschränkung
-der hohen absoluten Änderungen auf das Tasmanische Meer könnte die Struktur der Oberflächenströmung des Ozeanwassers bieten. Diese wird im tasmanischen Meer vom aus Nordosten eintreffenden Ostaustralstrom dominiert, welcher dort zum Teil in die sogenannte hauptsächlich ostwärts strömende Tasmanische Front übergeht. Diese Struktur war auch zum Simulationszeitraum im September 2009 ausgeprägt. Auf Abbildung \ref{fig:tasman_current}
+der hohen absoluten Änderungen auf das Tasmanische Meer könnte die Struktur der Oberflächenströmung des Ozeanwassers bieten. Diese wird im tasmanischen Meer vom aus Nordosten eintreffenden Ostaustralstrom dominiert, welcher dort zum Teil in die sogenannte hauptsächlich ostwärts strömende Tasmanische Front übergeht. Diese Struktur war auch zum Simulationszeitraum im September 2009 ausgeprägt. Auf Abbildung \ref{fig:tasman_current} sind die mittleren Strömungsverhältnisse für den Zeitraum abgebildet. Aufgrund der Tasmanischen Front würden sowohl das eingetragene Eisen, als auch Phytoplankton ostwärts transportiert. Die Entfernung zwischen der Ostküste Australiens und Neuseeland beträgt grob 1.800 km. Bei einer angenommen mittleren östlichen Strömungsgeschwindigkeit von etwa 0.13 m/s würde der Transport mithilfe des Oberflächenwassers von Küste zu Küste demnach ca. 160 Tage dauern. Bei Annahme der maximalen Strömungsgeschwindigkeit von ca. 1 m/s würden immerhin nur knapp 21 Tage benötigt. Selbst unter diesen maximalen Strömungsbedingungen (die lt. Reanalyse-Daten nicht gegeben waren, sh. Abb. \ref{fig:tasman_current} A) wäre ein Transport der aufgrund des Staubsturms erhöhten Eisenkonzentrationen an der Küste von New South Wales und Queensland bis inmitten des Tasmanischen Meeres innerhalb von 8 Tagen unrealistisch. Es ist also anzunehmen, dass die hohen Chlorophyll-a-Konzentrationen westlich der Nordinsel Neuseelands am 1. Oktober (sh. Abb. \ref{fig:snapshot_fedep_chla} B) auch aus anderen Prozessen resultieren und/oder auch nennenswert Phytoplankton ostwärts transportiert wurde. Hierbei ist anzumerken, dass sowohl die Eisenkonzentrationen (sh. Abbildung \ref{fig:nutrient_iron}) als auch die Vortizität (sh. Abbildung \ref{fig:tasman_current} B) in der Region westlich von Neuseeland deutlich geringer beobachtet werden. Sowohl eine Erhöhung der Durchmischung (bzw. Vortizität) als auch hinzufügen des dort mangelhaft verfügbaren Eisens können leicht verbesserte Bedingungen für das Wachstum von Phytoplankton schaffen. \\
+
+Abbildung XXX zeigt die Eisenkonzentrationen im Ozean nach Ende des Simulationszeitraums, die mit den stark vereinfachten Annahmen zu Transport und Durchmischung (sh. Kapitel XXX) berechnet wurden. Wie in Abb. XXX B zu erkennen ist, weichen die so berechneten Konzentrationen kaum von der Verteilung ab, die man erhält, wenn noch einfacher die Staubdepositionen je Gitterpunkt zeitlich integriert werden. Dies bestätigt die Überschlagsrechnung von zuvor, dass der Transport aufgrund der Strömungsgeschwindigkeiten nur über recht kurze Distanzen passiert. Allerdings zeigt sich auch, dass die so berechneten Konzentrationen weiter östlich aufgrund der Strömung tatsächlich erhöht wurden.    
 \begin{figure}
-\includegraphics[width=\textwidth]{bilder/snapshot_normalized.png}
-\caption{} \label{fig:tasman_current}
+\includegraphics[width=\textwidth]{bilder/currents_mean.png}
+\caption{A) Mittlere Strömung für den Untersuchungszeitraum im tasmanischen Meer mit höheren Geschwindigkeiten innerhalb der Tasmanischen Front (rote Box). Der Teil des Südpazifik-Wirbels trifft aus Nordöstlicher Richtung auf die Küste Queenslands, wird dann südlich abgelenkt und löst sich schließlich wieder Richtung Osten ab und bildet die tasmanische Front. B) Vortizität in derselben Region. Bereiche mit negativer Vortizität (grün) kennzeichnen zyklonale Wirbel, in denen der Nährstofftransport aus tieferen Schichten gefördert wird. } \label{fig:tasman_current}
 \end{figure}
 \section{Anpassungen nach der ersten Simulation}
 Die Ergebnisse der WRF-Simulation sollten in einem ersten Schritt durch eine grobe Übersicht auf Plausibilität, d.h. der wahrscheinlichen Abweichung von der Realität überprüft werden. Da ein relativ langer Zeitraum von 12 Tagen simuliert wird, sind auch größere Abweichungen wahrscheinlich. Ganz allgemein sind Wetterprognosen i.d.R. nur für die ersten Tage wirklich präzise. Die Wahrscheinlichkeit, dass das berechnete Wetter eintritt nimmt dann aufgrund des chaotischen Verhaltens der Atmosphäre und den beschränkt zur Verfügung stehenden diskreten Startwerten stark ab \textbf{(Quelle ergänzen)}. Beobachtungs- bzw. Reanalysedaten werden dem Modell zum Startzeitpunkt und an den Rändern geliefert. Die Zustände der zeitlich und räumlich dazwischen liegenden Gitterpunkte sind dann (ausschließlich) vom Modell simuliert (\textbf{Quelle Sven, nochmal checken}). Für den Großteil des untersuchten Gebietes liegen ohnehin keine Beobachtungsdaten vor. Der australische Kontinent ist relativ dünn mit Wetterstationen besetzt und Beobachtungen durch Satelliten sind hinsichtlich  zeitlicher und räumlicher Auflösung ebenfalls häufig relativ grob. Darüber hinaus können die interessanten Parameter meist nur indirekt ermittelt werden.\\
@@ -557,6 +519,67 @@ Laut Modell enorm hohe Emissionen zwischen Diamantara Lakes und Boulia (western 
 \printbibliography
 \appendix
 \section{Anhang}
+\subsubsection{Maximum Kovarianz Analyse} \label{sec:mca}
+Durch die hohe Abhängigkeit von der chemischen Zusammensetzung und den Strömungsverhältnissen sind die Chlorophyll-a-Konzentrationen sehr heterogen verteilt. In Abbildung \ref{fig:chla} wird das turbulente Muster beispielhaft deutlich. Insbesondere die Vergleichbarkeit mit den Perzentilen (sh. Kapitel \ref{sec:timeseries}) ist dadurch vom eingrenzten Gebiet abhängig und somit eingeschränkt. Es wird angenommen, dass (besonders im tasmanischen Meer) ein Großteil der Gitterzellen innerhalb der Klimadaten sowohl Jahre mit hohen als auch solche mit niedrigen Konzentrationen repräsentiert hat, wohingegen \textit{benachbarte} Zellen, die bspw. einer anderen Strömungslinie folgen, völlig unterschiedliche Werte aufweisen können. \\
+Es soll der Zusammenhang zweier diskreter Variablen $E$ (Eiseneintrag) und $P$ (Chlorophyll-a-Konzentrationen untersucht werden). Voraussetzung für die Maximum Kovarianz Analyse ist, dass für beide gleich viele $N_t$ Zeitschritte vorliegen. Die Anzahlen der Gitterpunkte $N_E$ bzw. $N_P$ können voneinander abweichen. Der Zusammenhang der Variablen wird bei dieser statistischen Methode unabhängig von deren räumlicher Lokation untersucht. Das heißt, es ist auch ein Einfluss von weit voneinander entfernten Gitterpunkten aufeinander möglich. Dies ist bei den Staubdepositionen nicht unbedingt zu erwarten, da eine Reaktion des Phytoplanktons vermutlich in naher Umgebung zum Staubeintrag passiert. Allerdings \textit{befreit} diese Unabhängigkeit gleichzeitig von der Anforderung, für beide Variablen dieselben Koordinaten bzw. räumlichen Auflösungen zu verwenden und/oder etwaigen Transport durch die Oberflächenströmungen zu berücksichtigen. Werden die beiden räumlichen Dimensionen (Nord-Süd und Ost-West) auf nur eine räumliche Dimension (hier mit dem  Index $k$) reduziert, dann lassen sich die kompletten  Zeitreihen aller Gitterpunkte gleichzeitig in Form von Matrizen darstellen. Im folgenden meinen hoch gestellte Indizes die \textit{Spalte} und die unteren Indizes die \textit{Zeile} der jeweiligen Matrix. Die Matrizen in \ref{eq:E_and_P} enthalten $N_t$ Zeitschritte in den Zeilen und $N_E$ bzw. $N_P$ Gitterpunkte in den Spalten.
+\begin{equation}
+\textbf{E} = \begin{pmatrix} E_{1}^1 & .. & E_{N_E}^1 \\ .. & .. & .. \\ E_{1}^{N_t} & .. & E_{N_E}^{N_t} \\ \end{pmatrix} \text{ und } \textbf{P} = \begin{pmatrix} P_{1}^1 & .. & P_{N_P}^1 \\ .. & .. & .. \\ P_{1}^{N_t} & .. & P_{N_P}^{N_t} \\ \end{pmatrix} \label{eq:E_and_P}
+\end{equation}
+Da im Rahmen der Kovarianzanalyse \textit{Abweichungen}, also Varianzen von einem \textit{normalen} Zustand untersucht werden, wird jeder Eintrag $P_k^t$ (analog für $E_k^t$) normalerweise noch durch Subtraktion des zeitlichen Gitterpunkt-Mittelwertes für jede Zeitreihe als Anomalie von ebendiesem Mittelwert berechnet:
+\begin{equation}
+P_{a,k}^t = P_k^t - \frac{1}{N_t} \sum\limits_{n=1}^{N_t} P_k^n = P_k^t - \overline{P_k}
+\end{equation}
+Um einen möglichen Trend (sh. Kapitel \ref{sec:timeseries}) zu eliminieren, soll bei den Chlorophyll-a-Konzentrationen anstatt des Zeitserien-Mittelwertes allerdings der klimatische Mittelwert verwendet werden, sh. Gleichung \ref{eq:cli_anomalie}. Für die Eisendepositionen wird angenommen, dass der klimatische Mittelwert annähernd 0 beträgt, sodass alle Einträge als positive Anomalie betrachtet wird. Es erfolgt demnach keine Subtraktion. Allerdings wird das Gebiet räumlich auf den Ozean beschränkt, sodass Einträge auf Landflächen keinen Einfluss nehmen. Darüber hinaus können wie in Kapitel \ref{sec:timeseries} sowohl die Gitterpunkte von $\textbf{E}$ als auch von $\textbf{P}$ auf Regionen beschränkt werden, in denen die Eisendepositionen eine bestimmte Schwelle überschreiten. Anschließend werden alle Werte mithilfe der Standardabweichung $\sigma$ normiert, damit einige wenige Gitterpunkte mit sehr hohen Werten/Varianzen später keinen überproportionalen Einfluss auf das Gesamtergebnis nehmen:
+\begin{equation}
+\hat{E}_k^t =  \frac{1}{\sigma} \cdot E_k^t \text{ für } k = 1,..,N_E 
+\end{equation}
+mit der Varianz
+\begin{equation}
+\sigma^2 = \frac{1}{N_t} \sum\limits_{n=1}^{N_t-1}(E_k^n-\overline{E_k})^2
+\end{equation}
+Nach diesen Vorarbeiten (Normierung analog für \textbf{P}$_a$) wird die Kovarianzmatrix \textbf{X}$\in \mathbb{R}^{N_E \times N_P}$ berechnet ($\textbf{\^{E}}^T$ meint die transponierte Matrix):
+\begin{equation}
+\textbf{X} = \frac{1}{N_t} \cdot \textbf{\^{E}}^T \cdot \hat{\textbf{P}}_a
+\end{equation}
+Diese enthält alle Informationen über die zeitlichen Kovarianzen aller möglichen Kombinationen eines jeden Gitterpunktes der einen Variable mit jedem Gitterpunkt der anderen Variable. Mithilfe der Singulärwertzerlegung lassen sich diese Informationen in Hauptkomponenten zerlegen.
+\begin{equation}
+\textbf{X} = \textbf{U} \cdot \textbf{S} \cdot \textbf{V}^T
+\end{equation}
+hierbei ist \textbf{S}$\in \mathbb{R}^{N_E \times N_P}$ eine Diagonalmatrix und enthält die $\min(N_E,N_P)$ Singulärwerte $S_k$ in dem Betrag nach \textit{absteigender} Reihenfolge. Dementsprechend enthalten i.d.R. die ersten Singulärwerte einen überproportional großen Informationsgehalt gegenüber den letzten, die möglicherweise (abhängig von den Anforderungen an die Genauigkeit) vernachlässigt werden können. Die Spalten der orthogonalen Matrizen \textbf{U}$\in \mathbb{R}^{N_E \times N_E}$ und \textbf{V}$\in \mathbb{R}^{N_P \times N_P}$ sind die linken, respektive rechten Singulärvektoren zur Kovarianzmatrix \textbf{X}. 
+\begin{equation}
+\hat{S_m}= \frac{1}{\sqrt{S_m\cdot N_t}}\textbf{ für } m=1,..,\min(N_E,N_P)
+\end{equation}
+Durch Matrixmultiplikation der ursprünglichen Matrizen mit den Singulärvektoren und -werten werden Zeitreihen der sogenannten \textit{Principal Components} erzeugt, welche in Form der Matrizen \textbf{PC}$_E\in \mathbb{R}^{N_t \times N_E}$ und \textbf{PC}$_P\in \mathbb{R}^{N_t \times N_P}$ gespeichert sind. Die jeweils $k$-te Spalte enthält die zum $k$-ten Singulärwert zugehörige Zeitreihe.
+\begin{align}
+\textbf{PC}_E &= \hat{\textbf{E}} \cdot \textbf{U} \cdot \hat{\textbf{S}}^T \\ \textbf{PC}_P &= \hat{\textbf{P}}_a \cdot \textbf{V} \cdot \hat{\textbf{S}}
+\end{align}
+Die Singulärvektoren selbst beschreiben das räumliche Muster zum zugehörigen Singulärwert und werden auch \textit{EOF} (Empirical Orthogonal Functions) genannt. Die so darstellbaren zeitlichen (PC's) und räumlichen (EOF) Strukturen werden auch als jeweiliger \textit{Modus} bezeichnet ($m$-ter Singulärwert und -vektor beschreiben $m$-ten Modus). Zur späteren übersichtlichen Darstellung in Kapitel \ref{sec:auswertung} werden die PC's und EOF's durch die Maximalwerte noch auf 1 normiert:
+\begin{align}
+\widehat{\text{PC}}_{E,m}^t &= \frac{\text{PC}_{E,m}^t}{\max\limits_n(|\text{PC}_{E,m}^n|)} \text{ für } m = 1,..,\min(N_E,N_P), t = 1,..,N_t \\
+\widehat{\text{PC}}_{P,m}^t &= \frac{\text{PC}_{P,m}^t}{\max\limits_n(|\text{PC}_{P,m}^n|)} \text{ für } m = 1,..,\min(N_E,N_P), t = 1,..,N_t
+\end{align}
+\begin{align}
+\widehat{\text{EOF}}_{E,k}^m &= \frac{\text{U}_{k}^m}{\max\limits_n(|\text{U}_{n}^m|)} \text{ für } m = 1,..,\min(N_E,N_P), k = 1,..,N_E \\
+\widehat{\text{EOF}}_{P,k}^m &= \frac{\text{V}_{k}^m}{\max\limits_n(|\text{V}_{n}^m|)} \text{ für } m = 1,..,\min(N_E,N_P), k = 1,..,N_P 
+\end{align}
+
+\section{Gabric.2016}
+
+\begin{itemize}
+\item Tasman Sea $25^\circ$ S bis $40^\circ$ S Untersuchungsareal
+\item data: Chl + aeorosol optical depth (AOD)
+\begin{itemize}
+\item chl data: daily + 8 day MODIS-AQUA
+\item AOD data: 550 nm, 4km resolution
+\end{itemize}
+\item divided into $5^\circ$ lattitude band
+\item DVR kumulativ
+\item Hovmoller Plots (x: zeit, y: latidude, longitude)
+\item cloud processing / wet deposition wichtig
+\item Response hauptsächlich südlich der tasmanischen Front ($\approx 32^\circ$ S)
+\item Staubdeposition weiter im Norden
+\end{itemize}
+
 \addcontentsline{toc}{section}{Abbildungsverzeichnis}
 \listoffigures
 \addcontentsline{toc}{section}{Tabellenverzeichnis}

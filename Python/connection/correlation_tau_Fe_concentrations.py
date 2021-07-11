@@ -9,13 +9,14 @@ import cartopy.crs as crs
 import cartopy.feature as cfeature
 import string
 from Python.modeloutput.deposition_iron import sections
-#%% SETTINGS:
+#%% SETTINGS:f
 tau = np.arange(11)
 dcdt = True
+dfdt = True
 fe_log10 = False
 chl_log10 = False
-minus_climate_mean = True
-norm = SymLogNorm(1e-8,vmin=cov_min,vmax=cov_max,base=10) #None
+minus_climate_mean = False
+# For cb norm scroll down!
 cmap = 'RdBu_r'
 add = ''
 #%% Function needed:
@@ -53,8 +54,8 @@ def corr_tau(x,y,tau):
 path = 'D://thesisdata/plankton/marine_copernicus/2009_prep_corr_ana.nc'
 path_cli = path[:-3]+'_climate.nc'
 
-iron = mway.import_iron_dep(landmask=True)[1:,...] # drop first timestep
-iron = iron.coarsen(time=8,boundary='exact').mean(keep_attrs=True)
+iron = xr.open_dataarray('D://thesisdata/wrf_dust/fe_dep_advection_land_source_0_nM.nc')
+iron = iron.sel(time=slice('2009-09-19T00','2009-09-30T00'))[::8] # MITTAGS!!!
 iron = iron.assign_coords(time=pd.date_range('2009-09-18','2009-09-29',freq='d'))
 chl_raw = xr.open_dataset(path)['CHL']
 if minus_climate_mean:
@@ -77,6 +78,9 @@ chl = chl_raw.interp(coords={'lat':iron.lat.values,'lon':iron.lon.values})
 if dcdt:
     chl = chl.diff('time')
     add+='_dcdt'
+if dfdt:
+    iron = iron.diff('time')
+    add+='_dfdt'
 #chl.values[chl.values<0]=0 # SET NEGATIVE CHANGES TO ZERO!
 #%%
 R,cov, rho = corr_tau(iron,chl,tau)
@@ -86,6 +90,7 @@ cov_idx = cov.fillna(0).argmax('tau')
 levels = np.append(tau,tau.max()+1)
 R_min, R_max = R.min().values, R.max().values
 cov_min, cov_max =  cov.min().values, cov.max().values
+norm = SymLogNorm(1e-8,vmin=cov_min,vmax=cov_max,base=10) #None
 #%% PLOTTING
 
 def format_ax(ax,text=None):
@@ -158,7 +163,7 @@ line2 = plt.Line2D((.66,.66),(.13,.87), color="grey", linewidth=1,linestyle='--'
 fig.add_artist(line)
 fig.add_artist(line2)
 
-fig.savefig('D://thesisdata/bilder/Python/wrf_chla/correlation/correlation'+
+fig.savefig('D://thesisdata/bilder/Python/wrf_chla/correlation/correlation_C_Fe'+
         add+'.png'
         ,dpi=200,facecolor='white',
         bbox_inches = 'tight',pad_inches = 0.01)

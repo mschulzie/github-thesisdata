@@ -11,7 +11,8 @@ import helperlies as mway
 
 #convert time steps to those in WRF-output
 ds = xr.open_dataset('D://thesisdata/weather_stuff/uv_t_msl_tp_slh.nc')
-ds
+
+#%%
 ds = ds['tp']
 time1=slice('2009-09-22T01','2009-09-22T12')
 time2=slice('2009-09-22T13','2009-09-23T00')
@@ -21,8 +22,15 @@ tp = [None]*3
 
 for i in range(len(times)):
     tp[i] = ds.sel(time=times[i]).sum(dim='time')
-    times[i] = times[i].start[8:]+' bis '+times[i].stop[8:] + ' UTC'
-    i+=1
+    d_s = times[i].start[8:10]
+    d_e = times[i].stop[8:10]
+    m_s = times[i].start[5:7]
+    m_e = times[i].stop[5:7]
+    h_s = times[i].start[10:]
+    h_e = times[i].stop[10:]
+    times[i] = '{:}.{:}.{:} bis {:}.{:}.{:} UTC'.format(d_s,m_s,h_s,d_e,m_e,h_e)
+add=times[0][:9]+times[-1][9:]
+times[0]
 #%%
 
 fig = plt.figure(figsize=(12,3.5))
@@ -40,7 +48,7 @@ for i in range(len(times)):
     scale = 10
     levels = np.arange(10,90,10).tolist()
     levels.insert(0,1)
-    LON, LAT = np.meshgrid(tp[i].longitude.values, tp[i].latitude.values)
+    LON, LAT = np.meshgrid(tp[i].lon.values, tp[i].lat.values)
     cont = ax.contourf(LON,LAT,tp[i]*1000, transform=crs.PlateCarree(),
         zorder=1,cmap='Blues',alpha=1,levels=levels,vmin=1)
     ax.contour(LON,LAT,tp[i]*1000, transform=crs.PlateCarree(),
@@ -62,8 +70,8 @@ for i in range(len(times)):
 
 cbar_ax = fig.add_axes([.91, 0.15, 0.01, 0.7])
 cb = fig.colorbar(cont, format='%d',cax=cbar_ax)
-cb.set_label('Kumulierter Tagesniederschlag in mm',fontsize=8)
+cb.set_label('Kumulierter Niederschlag in mm',fontsize=8)
 plt.show()
 
-fig.savefig('D://thesisdata/bilder/Python/era5/precipitation/collage.png',
-dpi=500)
+fig.savefig('D://thesisdata/bilder/Python/era5/precipitation/collage_{:}.png'.format(
+    add),dpi=500,bbox_inches='tight',facecolor='white',pad_inches=0.01)

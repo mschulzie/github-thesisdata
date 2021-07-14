@@ -26,7 +26,7 @@ class Warfy:
         self.vars = self._vars.keys()
         self.check_dims()
 
-    def load_var(self, vars, file=file, slevel=0, zlevel='all'):
+    def load_var(self, vars, file=file, slevel=0, zlevel='all', dustbin_dim='all'):
         dataset = netCDF4.Dataset(file)
         if (type(vars)==str):
             vars = [vars]
@@ -44,7 +44,6 @@ class Warfy:
             try:
                 ds = ds.sel(bottom_top=zlevel)
                 attrs['description'] += ' at zlevel {:}'.format(zlevel)
-
             except ValueError:
                 pass
             except KeyError:
@@ -52,7 +51,18 @@ class Warfy:
                     raise KeyError('Select integer for zlevel or "all"')
                 dims.insert(1,'zlevel')
                 coords['zlevel'] = np.arange(0,ds.bottom_top.size)
-
+            # select a dustbin_dim:
+            try:
+                ds = ds.sel(dustbin_dim=dustbin_dim)
+                attrs['description'] += ' dustbin {:}'.format(dustbin_dim)
+            except ValueError:
+                pass
+            except KeyError:
+                if dustbin_dim != 'all':
+                    raise KeyError('Select integer for dustbin_dim or "all"')
+                dims.insert(1,'dustbin_dim')
+                coords['dustbin_dim'] = np.arange(0,ds.dustbin_dim.size)
+            # select soil layer:
             try:
                 ds = ds.sel(soil_layers_stag=slevel)
                 attrs['description'] += ' at slevel {:}'.format(slevel)

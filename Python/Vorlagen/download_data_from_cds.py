@@ -47,17 +47,17 @@ import cdsapi
 c = cdsapi.Client()
 
 c.retrieve(
-    'reanalysis-era5-land',
+    'reanalysis-era5-single-levels',
     {
-        'format': 'netcdf',
+        'product_type': 'reanalysis',
         'variable': [
-            'lake_shape_factor', 'leaf_area_index_high_vegetation', 'leaf_area_index_low_vegetation',
-            'skin_reservoir_content','volumetric_soil_water_layer_1','volumetric_soil_water_layer_2'
-            ,'volumetric_soil_water_layer_3','volumetric_soil_water_layer_4',
-            'skin_temperature'
+            '10m_u_component_of_wind', '10m_v_component_of_wind', '2m_temperature',
+            'mean_sea_level_pressure', 'total_precipitation',
         ],
         'year': '2009',
-        'month': '09',
+        'month': [
+            '09', '10',
+        ],
         'day': [
             '01', '02', '03',
             '04', '05', '06',
@@ -69,6 +69,7 @@ c.retrieve(
             '22', '23', '24',
             '25', '26', '27',
             '28', '29', '30',
+            '31',
         ],
         'time': [
             '00:00', '01:00', '02:00',
@@ -81,8 +82,9 @@ c.retrieve(
             '21:00', '22:00', '23:00',
         ],
         'area': [
-            -10, 112, -40,
-            155,
+            -10, -180, -60,
+            180,
         ],
+        'format': 'netcdf',
     },
-    'D://thesisdata/soil_moisture/ERA5-Land_hourly.nc')
+    'D://thesisdata/weather_stuff/uv_t_msl_tp_slh_SepOct.nc')

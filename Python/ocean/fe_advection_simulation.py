@@ -9,7 +9,7 @@ import helperlies as mway
 import importlib
 #%% SETTINGS:
 z_0 = 10 # thickness of ocean iron mixing
-source = 0 #SET arbitrary Fe concentration in nM for terrestric areas
+source = 0#SET arbitrary Fe concentration in nM for terrestric areas
 #%%
 file = 'D://thesisdata/currents/global-reanalysis-phy-001-031-grepv2-mnstd-daily_1622467797293.nc'
 ds = xr.open_dataset(file)
@@ -44,17 +44,13 @@ for t in range(1,139):
     for i in range(1,123):
         for j in range(1,163):
             if u[t-1,i,j]>0:
-                u_add = 0
-                u_sub = -1
+                u_add,u_sub = 0,-1
             else:
-                u_add = +1
-                u_sub = 0
+                u_add,u_sub = 1,0
             if v[t-1,i,j]>0:
-                v_add = 0
-                v_sub = -1
+                v_add,v_sub = 0,-1
             else:
-                v_add = +1
-                v_sub = 0
+                v_add,v_sub = 1,0
             C[t,i,j] =  (
                         C[t-1,i,j] + dt * iron[t-1,i,j]
                         -u[t-1,i,j] * dt/dx[t-1,i,j]*(C[t-1,i,j+u_add]-C[t-1,i,j+u_sub])

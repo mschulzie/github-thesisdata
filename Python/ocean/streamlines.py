@@ -10,45 +10,45 @@ file = 'D://thesisdata/currents/global-reanalysis-phy-001-031-grepv2-mnstd-daily
 ds = xr.open_dataset(file)
 ds = ds.assign_coords(longitude=(ds.longitude % 360)).roll(longitude=(ds.dims['longitude'] // 2), roll_coords=True)
 ds = ds.rename(longitude='lon',latitude='lat')
-ds = ds.sel(lon=slice(140,180),lat=slice(-50,-25))
+ds = ds.sel(lon=slice(150,165),lat=slice(-40,-33))
 chl = xr.open_mfdataset("D://thesisdata/plankton/marine_copernicus/2009/*.nc")
 chl = chl.assign_coords(lon=(chl.lon % 360)).roll(lon=(chl.dims['lon'] // 2), roll_coords=True)
-chl = chl.sel(lon=slice(140,180),lat=slice(-25,-50))
+chl = chl.sel(lon=slice(150,165),lat=slice(-33,-40))
 chl = chl['CHL']
 #%%
-r = 1
+
 extent = [ds.lon.min(),ds.lon.max(),ds.lat.min(),ds.lat.max()]
-LON, LAT = np.meshgrid(ds.lon.values[::r],ds.lat.values[::r])
+LON, LAT = np.meshgrid(ds.lon.values,ds.lat.values)
 
-for time in pd.date_range('2009-10-01','2009-10-01',freq='d'):
-    dt = ds.sel(time=time)
-    chla = chl.sel(time=time)
-    u = dt['uo_mean'].squeeze()
-    v = dt['vo_mean'].squeeze()
-    s = np.sqrt(u.values**2 + v.values**2)
-    # u.values = u.values/s
-    # v.values = v.values/s
-    speed = xr.DataArray(s,dims=u.dims,coords=u.coords,attrs=u.attrs)
-    speed.attrs['long_name'] = 'sea water velocity'
-    speed.attrs['standard_name'] = 'sea water velocity'
+time = '2009-10-02'
+dt = ds.sel(time=time)
+chla = chl.sel(time=time)
+u = dt['uo_mean'].squeeze()
+v = dt['vo_mean'].squeeze()
+s = np.sqrt(u.values**2 + v.values**2)
+# u.values = u.values/s
+# v.values = v.values/s
+speed = xr.DataArray(s,dims=u.dims,coords=u.coords,attrs=u.attrs)
+speed.attrs['long_name'] = 'sea water velocity'
+speed.attrs['standard_name'] = 'sea water velocity'
 
-    fig = plt.figure(figsize=(6,5))
-    ax = fig.add_subplot(111,projection=ccrs.Mercator(central_longitude=150.))
-    ax.coastlines(lw=.5, zorder=2)
-    ax.add_feature(cfeature.BORDERS, lw=.5, zorder=1)
-    ax.add_feature(cfeature.LAND, fc='lightgrey', zorder=1)
-    ax.set_extent(extent, crs=ccrs.PlateCarree())
-    gl = ax.gridlines(crs=ccrs.PlateCarree(), draw_labels=True,
-                linewidth=0.2, color='gray', linestyle='--')
-    gl.top_labels = False
-    gl.right_labels = False
-    im = chla.plot(ax=ax,transform=ccrs.PlateCarree(),add_colorbar=False,
-        vmax=1,extend='max',norm=LogNorm(),cmap='RdBu')
-    cb = plt.colorbar(im,shrink=0.8,extend='max')
-    cb.set_label('Chlorphyll-a Konzentration\n in '+chla.units)
-    ax.streamplot(LON,LAT,u.values[::r,::r],v.values[::r,::r],
-        transform=ccrs.PlateCarree(),density=1,color='purple',linewidth=2,
-        arrowsize=.5)
-    ax.set_title(str(time)[:13])
-    fig.savefig('D://thesisdata/bilder/Python/currents/'+str(time)[:13]+'.png',dpi=300)
-    #plt.close()
+fig = plt.figure(figsize=(4,3))
+gs = fig.add_gridspec(2,1,height_ratios=[20,1])
+ax = fig.add_subplot(gs[0],projection=ccrs.Mercator(central_longitude=150.))
+ax.coastlines(lw=.5, zorder=2)
+ax.add_feature(cfeature.BORDERS, lw=.5, zorder=1)
+ax.add_feature(cfeature.LAND, fc='lightgrey', zorder=1)
+ax.set_extent(extent, crs=ccrs.PlateCarree())
+im = chla.plot(ax=ax,transform=ccrs.PlateCarree(),add_colorbar=False,
+    vmax=3,extend='max',norm=LogNorm(),cmap='viridis')
+ax.streamplot(LON,LAT,u.values,v.values,
+    transform=ccrs.PlateCarree(),density=2,color='#f7e5fb',linewidth=1,
+    arrowsize=.5)
+ax.set_title(str(time)[:13])
+cax = fig.add_subplot(gs[1])
+cb = fig.colorbar(im,cax=cax,extend='max',orientation='horizontal',shrink=.1)
+cb.set_label('Chlorphyll-a Konzentration in mg/m3')
+cb.set_ticks([0.1,0.2,0.5,1,2,3])
+fig.savefig('D://thesisdata/bilder/Python/currents/'+str(time)[:13]+'.png',dpi=200,
+    bbox_inches='tight',pad_inches=0.01,facecolor='white')
+#plt.close()

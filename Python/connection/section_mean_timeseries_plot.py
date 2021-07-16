@@ -92,7 +92,7 @@ for i,ort in enumerate(sections):
 if filter:
     add+='_filter_{:}_{:}'.format(freq_min,freq_max)
 ax1[list(sections)[0]].set_title('Rohdaten uneingeschränkt')
-ax2[list(sections)[0]].set_title(r'Trend bereinigt und $m_{Fe}/A>$'+'{:.1f} ug/m2'.format(
+ax2[list(sections)[0]].set_title(r'Trend bereinigt und $\int F_{Fe} dt>$'+'{:.1f} ug/m2'.format(
     tres))
 ax1[list(sections)[len(sections)//2]].set_ylabel('CHL-a Konzentrationen in mg/m3',fontsize=12)
 ax1[list(sections)[-1]].xaxis.set_major_formatter(mdates.DateFormatter('1.%b'))

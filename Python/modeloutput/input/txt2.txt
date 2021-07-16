@@ -1,0 +1,33 @@
+Urbanes und bebautes Land
+Trockenes Ackerland und Weideland
+Bewässertes Ackerland und Weideland
+Gemischtes Trockenland/bewässertes Ackerland und Weideland
+Acker/Grünland-Mosaik
+Ackerland/Waldland-Mosaik
+Grünland
+Strauchland
+Gemischtes Strauchland/Grasland
+Savanne
+Laubwald/Breitblattwald
+Laubwald mit Nadelbäumen
+Immergrüner Laubwald
+Immergrüner Nadelbaumwald
+Gemischter Wald
+Wasserflächen
+Krautiges Feuchtgebiet
+Bewaldetes Feuchtgebiet
+Karge oder spärliche Vegetation
+Krautige Tundra
+Bewaldete Tundra
+Gemischte Tundra
+Nackter Boden Tundra
+Schnee oder Eis
+Spielplatz
+Lava
+Weißer Sand
+Nicht zugewiesen
+Nicht zugewiesen
+Nicht zugeordnet
+Wohngebiet niedriger Intensität
+Wohngebiet hoher Intensität
+Industrie oder Gewerbe

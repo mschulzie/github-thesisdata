@@ -1,0 +1,3 @@
+LU_INDEX 	- 	LANDUSE.TBL	(identisch mit IVGTYP!!)
+ISLTYP  	- 	SOILPARM.TBL
+IVGTYP		- 	VEGPARM.TBL 	(identisch mit LU_INDEX!!)

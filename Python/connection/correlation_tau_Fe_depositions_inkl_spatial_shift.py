@@ -12,14 +12,14 @@ import string
 #%% SETTINGS:
 tau = np.arange(11)
 dcdt = True
-dfdt = True
+dfdt = False
 fe_log10 = False
 chl_log10 = False
 minus_climate_mean = False
+without_advection = True
 # For cb norm scroll down!
 shift = 14 # how many gridpoints left,right, up or down do find max. cov?
-
-
+add= ''
 #%% Function needed:
 def corr_tau(x,y,tau,lat_shift=np.array([0]),lon_shift=np.array([0])):
     """
@@ -73,8 +73,14 @@ def corr_tau(x,y,tau,lat_shift=np.array([0]),lon_shift=np.array([0])):
 path = 'D://thesisdata/plankton/marine_copernicus/2009_prep_corr_ana.nc'
 path_cli = path[:-3]+'_climate.nc'
 
-iron_raw = xr.open_dataarray('D://thesisdata/wrf_dust/fe_dep_advection_land_source_0_Nm.nc')
-iron = iron_raw.sel(time=slice('2009-09-18T00','2009-10-02'))[::8]
+if without_advection:
+    add += 'without_advection'
+    iron_raw = mway.import_iron_dep()[1:]
+    iron = iron_raw.coarsen(time=8).mean(keep_attrs=True)
+    iron = iron.assign_coords(time=pd.date_range('2009-09-18T00','2009-09-29T00',freq='d'))
+else:
+    iron_raw = xr.open_dataarray('D://thesisdata/wrf_dust/fe_dep_advection_land_source_0_Nm.nc')
+    iron = iron_raw.sel(time=slice('2009-09-18T00','2009-10-02'))[::8]
 chl_raw = xr.open_dataset(path)['CHL']
 if minus_climate_mean:
     chl_raw_cli = xr.open_dataset(path_cli)['CHL_mean']
@@ -129,4 +135,4 @@ ds['rho'] = rho
 ds['R_s'] = R_s
 ds['cov_s'] = cov_s
 ds['rho_s'] = rho_s
-ds.to_netcdf('D://thesisdata/wrf_dust/correlation_coefficents_230909.nc')
+ds.to_netcdf('D://thesisdata/wrf_dust/correlation_coefficents_230909'+add+'.nc')

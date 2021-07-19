@@ -15,7 +15,7 @@ import pandas as pd
 #tres = mway.nM_to_ug_per_qm(0.01,z=10) #treshold
 tres = 5
 # AREAS:
-sections = {'Nordost':[110,142,-10,-30],
+sections = {'Nordwest':[110,142,-10,-30],
     'Korall':[142,175,-10,-30],
     'Tasman':[145,175,-30,-45],
     'Süden':[110,145,-30,-45],
@@ -108,4 +108,4 @@ for section in sections:
 plt.show()
 plt.tight_layout()
 fig.savefig('./Thesis/bilder/total_iron.png',
-    dpi=200,facecolor='white',bbox_inches = 'tight',pad_inches = 0.01)
+    dpi=200,bbox_inches = 'tight',pad_inches = 0.01)

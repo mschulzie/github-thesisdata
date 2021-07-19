@@ -106,7 +106,7 @@ fig.add_artist(line3)
 
 fig.savefig('D://thesisdata/bilder/Python/wrf_chla/correlation/'
         +'correlation_selection'+add+'.png'
-        ,dpi=200,facecolor='white',
+        ,dpi=300,
         bbox_inches = 'tight',pad_inches = 0.01)
 #%% SECTIONS MEANS DEPENDENCY FROM TAU
 from Python.modeloutput.deposition_iron import sections
@@ -151,5 +151,5 @@ fig2.add_artist(line)
 #fig2.suptitle('Kreuz-Korrelation/-Kovarianz gemittelt')
 fig2.savefig('D://thesisdata/bilder/Python/wrf_chla/correlation/section_crosscorr_noadv'+
         add+'.png'
-        ,dpi=200,facecolor='white',
+        ,dpi=200,
         bbox_inches = 'tight',pad_inches = 0.01)

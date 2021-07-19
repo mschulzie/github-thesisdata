@@ -96,5 +96,5 @@ fig2.add_artist(line)
 #fig2.suptitle('Kreuz-Korrelation/-Kovarianz gemittelt')
 fig2.savefig('D://thesisdata/bilder/Python/wrf_chla/correlation/section_means_crosscorr_noadv'
         +'.png'
-        ,dpi=200,facecolor='white',
+        ,dpi=200,
         bbox_inches = 'tight',pad_inches = 0.01)

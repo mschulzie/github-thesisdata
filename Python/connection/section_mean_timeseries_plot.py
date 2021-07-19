@@ -7,7 +7,7 @@ import matplotlib.dates as mdates
 from matplotlib.colors import LogNorm
 import string
 from Python.modeloutput.deposition_iron import sections
-which= ['Nordost','Korall','Tasman','Süden','Südozean']
+which= ['Nordwest','Korall','Tasman','Süden','Südozean']
 sections = {key: sections[key] for key in which}
 
 iron = pd.read_csv('./Python/chlorophyll/csv/iron_section_means_timeseries.csv')
@@ -112,6 +112,6 @@ ax3['Korall'].annotate('13.10.',('2009-10-13T04',1e-8),
 
 plt.tight_layout()
 fig.savefig('D://thesisdata/bilder/Python/wrf_chla/timeseries_all_without_coast'+add+'.png'
-        ,dpi=200,facecolor='white',
+        ,dpi=300,
         bbox_inches = 'tight',pad_inches = 0.01)
 plt.show()

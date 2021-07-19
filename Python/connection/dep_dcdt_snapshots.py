@@ -9,7 +9,7 @@ import cartopy.feature as cfeature
 import string
 
 path = 'D://thesisdata/plankton/marine_copernicus/2009_prep_corr_ana.nc'
-offset = 5
+offset = 4
 extend = 4
 norm_std = True
 percent_dev = False
@@ -111,10 +111,10 @@ cb2 = fig.colorbar(im2,cax=cb_ax2,format=cbformat)
 cb2.set_ticks(cbticks)
 cb1.set_label('Mittlerer Eiseneintrag in {:}'.format(iron.units))
 cb2.set_label(chl_label)
-
+2096/18900
 plt.show()
 
 
-fig.savefig('D://thesisdata/bilder/Python/wrf_chla/correlation/snapshot'+
-    add+'.png',dpi=200,facecolor='white',
+fig.savefig('./Thesis/bilder/snapshot'+
+    add+'.png',dpi=300,
     bbox_inches = 'tight',pad_inches = 0.01)

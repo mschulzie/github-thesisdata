@@ -7,7 +7,7 @@ import cartopy.feature as cfeature
 from cartopy.mpl.gridliner import LONGITUDE_FORMATTER, LATITUDE_FORMATTER
 import matplotlib.ticker as mticker
 import string
-ds2
+
 path = 'D://thesisdata/nutrients/'
 file = 'global-reanalysis-bio-001-029-monthly_1622729430962.nc'
 ds = xr.open_dataset(path+file)
@@ -103,6 +103,5 @@ for i,var in enumerate(vars):
     ax.text(-.1,1,string.ascii_uppercase[i],transform=ax.transAxes,
         weight='bold',fontsize=15)
 
-fig.savefig('D://thesisdata/bilder/Python/nutrients/factors_collage.png'
-    ,dpi=300,
+fig.savefig('./Thesis/bilder/factors_collage.png',dpi=300,
     facecolor='white',bbox_inches = 'tight',pad_inches = 0.01)

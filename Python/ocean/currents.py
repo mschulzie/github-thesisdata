@@ -90,5 +90,5 @@ for i in range(13):
 
     1.8e6/1 /(60*60*24)
     fig.savefig('D://thesisdata/bilder/Python/currents/currents_mean_{:}_m.png'.format(
-        depth),dpi=200,facecolor='white',bbox_inches = 'tight',pad_inches = 0.01)
+        depth),dpi=200,bbox_inches = 'tight',pad_inches = 0.01)
     #plt.close()

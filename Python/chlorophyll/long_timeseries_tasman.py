@@ -8,7 +8,6 @@ from scipy.stats import pearsonr
 #ENSO ??
 
 chl_path = 'D://thesisdata/plankton/marine_copernicus/*_tasman_only.nc'
-chl0
 chl0 = xr.open_mfdataset(chl_path).sel(time=slice('2000-01-01','2019-12-31'))
 chl0=chl0['CHL']
 #chl0.values = np.log10(chl0.values)
@@ -59,12 +58,13 @@ ticks = (['20{:}-09-01'.format(str(i).zfill(2)) for i in range(2,20)]+
     ['20{:}-09-01'.format(str(i).zfill(2)) for i in range(2,20)])
 ax.set_xticks(maxis)
 for label in ax.get_xticklabels():
-  label.set_rotation(90)
-  label.set_size(12)
+  label.set_rotation(45)
+  label.set_size(14)
+  label.set_horizontalalignment('right')
 ax.set_xlim(['2002-01-01','2019-31-12'])
 ax.legend(loc='upper right')
 ax.grid()
-ax.set_ylabel('Chlorphyll-a in mg/m3',fontsize=12)
+ax.set_ylabel('Chlorphyll-a in mg/m3',fontsize=14)
 plt.show()
 fig.savefig('./Thesis/bilder/long_timeseries_tasman.png',dpi=300,bbox_inches='tight',pad_inches=0.01)
 #%% NINO:

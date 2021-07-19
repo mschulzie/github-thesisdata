@@ -65,5 +65,5 @@ cax2 = fig.add_subplot(gs[3,:])
 cb2 = fig.colorbar(im2,cax=cax2,orientation='horizontal')
 
 
-fig.savefig('D://thesisdata/bilder/Python/currents/iron_transport.png',dpi=200,facecolor='white',
+fig.savefig('D://thesisdata/bilder/Python/currents/iron_transport.png',dpi=200,
     bbox_inches = 'tight',pad_inches = 0.01)

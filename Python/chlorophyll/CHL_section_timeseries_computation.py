@@ -11,10 +11,10 @@ from matplotlib.colors import LogNorm
 import os
 import string
 tres = 5
-kill_coast = False
+kill_coast = True
 
 from Python.modeloutput.deposition_iron import sections
-# which= ['Tasman']#['Nordost','Korall','Tasman','Süden','Südozean']
+# which= ['Tasman']#['Nordwest','Korall','Tasman','Süden','Südozean']
 # sections = {key: sections[key] for key in which}
 #%%load var_names:
 path = 'D://thesisdata/plankton/marine_copernicus/climatology/'

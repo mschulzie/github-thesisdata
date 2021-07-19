@@ -91,5 +91,5 @@ cb4 = fig.colorbar(im_fe)
 ticks4= np.arange(0,0.045,0.005)
 cb4.set_ticks(ticks4)
 cb4.set_ticklabels(['{:.1f}%'.format(i*100) for i in ticks4])
-fig.savefig('./Thesis/bilder/soil_type_iron.png',dpi=200,
+fig.savefig('./Thesis/bilder/soil_type_iron.png',dpi=300,
     facecolor='white',bbox_inches='tight',pad_inches=0.01)

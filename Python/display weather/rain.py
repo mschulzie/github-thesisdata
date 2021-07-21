@@ -11,7 +11,6 @@ import helperlies as mway
 
 #convert time steps to those in WRF-output
 ds = xr.open_dataset('D://thesisdata/weather_stuff/uv_t_msl_tp_slh.nc')
-
 #%%
 ds = ds['tp']
 time1=slice('2009-09-22T01','2009-09-22T12')

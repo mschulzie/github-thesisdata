@@ -101,17 +101,21 @@ ax3[list(sections)[-1]].xaxis.set_major_formatter(mdates.DateFormatter('1.%b'))
 ax3[list(sections)[-1]].tick_params(axis='x', labelrotation=0)
 # ADD QUALITY EVENTS (FROM SATELLITE IMAGES)
 ax3['Tasman'].annotate('12.09.',('2009-09-12T00',1e-8),
-    xytext=('2009-09-12T00',1e-4),textcoords='data',
+    xytext=('2009-09-12T00',1e-5),textcoords='data',
     arrowprops={'arrowstyle':'->','color':'blue'},ha='center',fontsize=7,color='b')
 ax3['Tasman'].annotate('13.10.',('2009-10-13T04',1e-8),
-    xytext=('2009-10-13T04',1e-4),textcoords='data',
+    xytext=('2009-10-13T04',1e-5),textcoords='data',
+    arrowprops={'arrowstyle':'->','color':'blue'},ha='center',fontsize=7,color='b')
+ax3['Tasman'].annotate('1.10.',('2009-10-01T12',1e-8),
+    xytext=('2009-10-01T12',2e-4),textcoords='data',
     arrowprops={'arrowstyle':'->','color':'blue'},ha='center',fontsize=7,color='b')
 ax3['Korall'].annotate('13.10.',('2009-10-13T04',1e-8),
     xytext=('2009-10-13T04',1e-4),textcoords='data',
     arrowprops={'arrowstyle':'->','color':'blue'},ha='center',fontsize=7,color='b')
 
+
 plt.tight_layout()
-fig.savefig('D://thesisdata/bilder/Python/wrf_chla/timeseries_all_without_coast'+add+'.png'
+fig.savefig('./Thesis/bilder/timeseries_all.png'
         ,dpi=300,
         bbox_inches = 'tight',pad_inches = 0.01)
 plt.show()

@@ -2,9 +2,9 @@ Urbanes und bebautes Land
 Trockenes Ackerland und Weideland
 Bewässertes Ackerland und Weideland
 Gemischtes Trockenland/bewässertes Ackerland und Weideland
-Acker/Grünland-Mosaik
+Acker/Grasland-Mosaik
 Ackerland/Waldland-Mosaik
-Grünland
+Grasland
 Strauchland
 Gemischtes Strauchland/Grasland
 Savanne
